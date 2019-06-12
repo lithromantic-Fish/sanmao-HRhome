@@ -1,0 +1,12 @@
+.color-column{
+  width:8rpx;
+  height:34rpx;
+  background:#4c89fb;
+  border-radius: 8rpx;
+  margin-right:14rpx;
+}
+.title{
+    /* background:#fff; */
+    font-size: 34rpx;
+    color: #333
+}

@@ -1,0 +1,88 @@
+swiper{
+    height:350rpx;
+  }
+search .search-input-box{
+  width:81%;
+}
+search .weizhi{
+  margin-left:8px;
+}
+.weizhi{
+  width:120rpx;
+}
+.search-box{
+  background:#F3F4F5!important;
+  height: auto!important;
+}
+.search-box .search{
+  padding: 20rpx 30rpx;
+}
+.search-input-box{
+  background:rgba(255,255,255,1)!important;
+  border-radius:8px!important;
+  border:1px solid rgba(220,221,227,1)!important;
+}
+.border{
+  border:none!important;
+}
+::-webkit-input-placeholder{
+  font-size:26rpx;
+}
+.iconfont{
+  font-size:20px!important;
+}
+.weizhi text{
+  margin-left:20rpx!important;
+  font-size:28rpx!important;
+}
+
+  .swiper-image{
+    width:100%;
+    height:100%;
+  }
+  empty{
+    margin-top:100rpx
+  }
+  search .size-1{
+    padding-top:10rpx;
+    padding-bottom:10rpx;
+  }
+  activityItem .price{
+    font-size: 30rpx
+  
+  }
+  
+  .row-box{
+      width:90%;
+
+  }
+  
+  .icon-section{
+      width: 50%;
+      position: relative;
+      
+  }
+  .icon-section image{
+      width:81rpx;
+      height:81rpx;
+      margin-bottom:10rpx;
+      background: #fff;
+  }
+  .icon-section text{
+    font-size:24rpx;
+    color:#666;
+  }
+  .icon-section:first-child{
+      border-right: 0.1rpx lightgray solid;
+  }
+  .activity-image {
+    width:210rpx!important;
+    height:225rpx!important;
+}
+.size-6{
+  padding: 22rpx 30rpx!important;
+}
+.column-1{
+  border-bottom:#DCDDE3 solid 1px;
+  padding-bottom:16rpx;
+}

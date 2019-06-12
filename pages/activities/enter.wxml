@@ -1,0 +1,72 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<view class="bt"> </view>
+<form bindsubmit="submit" report-submit='true'>
+  <!-- <title title='报名信息'></title> -->
+  <view class="row-between s-1 border m-30">
+    <view class="row">
+      <view class="title">我想成为
+        <text class="red">*</text>
+      </view>
+      <view class="row row-border" bindtap='choosePosition'>
+        <view>{{position}}</view>
+        <image src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/down.png' mode="aspectFit" class="down" />
+      </view>
+    </view>
+  </view>
+  <view class="row s-1 border m-30">
+    <view class="title">姓名
+      <text class="red">*</text>
+    </view>
+    <input placeholder='请输入姓名' max-length='15' name='name' value='{{userInfo.nickname}}' id='name' bindinput="getnameText"/>
+  </view>
+  <!-- <view class="row-between size-1 border">
+    <view class="type">电话</view>
+    <input name='phone' value="{{phone}}" placeholder='请输入电话' class="input-text"></input>
+  </view> -->
+  <view class="row s-1 border m-30">
+    <view class="title">电话
+      <text class="red">*</text>
+    </view>
+    <input placeholder='请输入电话' name='phone' value='{{userInfo.mobile}}' id='phone' bindinput="getPhoneText"/>
+  </view>
+  <view class="column s-1 m-30" wx:if="{{position==='参与者'}}">
+    <view class="title">应付金额</view>
+  </view>
+
+  <view class="pay column s-2" wx:if="{{position==='参与者'}}">
+    <view class="title">【{{activity.province}}{{activity.city}}】{{activity.name}}</view>
+   <view class="description">{{activity.starttime}}-{{activity.endtime}}</view>
+    <view class='description'>{{activity.address}}</view>
+    <!-- <view class="description">{{activity.desc}}</view> -->
+    <view class="row-between pay">
+      <view class="price">{{activity.price}}<text>人气值</text>
+      </view>
+      <view class="price">x1</view>
+      <!-- <i-panel>
+        <view style="padding: 16px">
+          <i-input-number value="{{num}}" min="1" max="99" bindchange="handleChange1" />
+        </view>
+      </i-panel> -->
+    </view>
+  </view>
+
+
+  <view class='fix-buttons' wx:if="{{position==='参与者' }}">
+    <button class="total-text">合计：
+      <text class='text-price'>{{activity.price}}</text>
+      <text>人气值</text>
+    </button>
+    <button form-type='submit' class="blue">下一步</button>
+  </view>
+  <view class="column s-1 m-30" wx:if="{{position==='讲师' || position==='赞助商'}}">
+    <view class="title">备注</view>
+  <view class="column card" style="margin-top:20rpx;">
+    <textarea value="{{description}}" placeholder="介绍一下自己，让主办方更了解你吧" bindinput="getText" name='description' value='{{description}}' id='description'>     
+    </textarea>
+    </view>
+  </view>
+  <view class="m-30 mt-60" wx:if="{{position==='讲师'|| position==='赞助商'}}">
+    <button class="button-hr" form-type='submit'>下一步</button>
+    <view class="gray tip" >提交申请后主办方会尽快与您联系，请保持手机畅通</view>
+  </view>
+</form>

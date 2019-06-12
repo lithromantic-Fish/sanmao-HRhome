@@ -1,0 +1,25 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<chooseNav items="{{tabs}}" bind:gotoLoad='changeStatus'></chooseNav>
+
+<view wx:if="{{selectedTab.title==='答主'}}"> 
+  <view class="section-spacing" wx:if="{{users.length!==0}}"></view>
+  <view class="column border-top" wx:if="{{users.length!==0}}" style="margin-top:20rpx">
+    <view wx:for="{{users}}" wx:key='name' class="border">
+      <cardListItem title='{{item.BusName}}' bus='{{item.BusStatus}}' description='{{item.BusCompany}} {{item.BusDuty}}' role='{{item.Anscount}}条问答'  pathUrl="/pages/questions/answerer?id={{item.OpenId}}" image="{{item.BusIcon}}" price="{{AskPrice}}" answer="true"></cardListItem>
+    </view>
+    <view class="load" wx:if="{{users.length>5}}">{{selectedTab.loadAll?'已加载全部':'上拉加载更多'}}</view>
+  </view>
+  <empty wx:if="{{users.length===0}}"></empty>
+</view>
+
+<view wx:if="{{selectedTab.title==='问题'}}">
+  <view class="section-spacing" wx:if="{{answers.length!==0}}"></view> 
+  <view class="column border-top " wx:if="{{answers.length!==0}}" style="margin-top:20rpx">
+    <view class="column border pd-30 bg"  hover-class='hover'  wx:for="{{answers}}" bindtap='gotoQuizDetail' data-id='{{item.QuizId}}'>
+      <view class="title-name">{{item.QuizContents}}</view>
+      <view class="subtitle gray">{{filter.formatDate(item.QuizTime,'YYYY-MM-DD')}} {{item.Anscount}}回答</view>
+    </view>
+  </view>
+      <!-- <view class="load" wx:if="{{answers.length>5}}">{{selectedTab.loadAll?'已加载全部':'上拉加载更多'}}</view> -->
+  <empty wx:if="{{answers.length===0}}"></empty>
+</view>

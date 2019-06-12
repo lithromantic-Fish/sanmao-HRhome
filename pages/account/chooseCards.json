@@ -1,0 +1,10 @@
+{
+    "navigationBarTitleText": "选择联系人",
+  "usingComponents": {
+    "group-item":"../../component/group-card/group-item",
+    "search":"../../component/search/search",
+    "empty":"../../component/empty/empty",
+    "i-checkbox-group": "../../dist/checkbox-group/index",
+    "i-checkbox": "../../dist/checkbox/index"
+  }
+}

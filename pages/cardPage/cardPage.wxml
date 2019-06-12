@@ -1,0 +1,95 @@
+<view style="overflow:hidden;width:100wv;position:relative">
+  <view class="card-box">
+    <view class="size-1 cloumn card card-1 sky_one">
+      <cardDetail class="sky_three" card="{{card}}" mine='true' style="width:100%"></cardDetail>
+      <view class="sky_two" wx:if="{{notify}}"></view>
+    </view>
+  </view> 
+  <view class='card-bg'></view>
+  <view style="height:488rpx"></view>
+  <view class="column size-1" style='padding: 30rpx 20rpx'>
+    <view class="button-row row-around" wx:if="{{card}}">
+      <view class="column-center">
+        <navigator url='myVisitor' hover-class="none">
+          <view class="column-center column-2" style='margin-right:30rpx;'>
+            <i-badge count="{{card.watch}}" overflow-count="100" i-class-alone='badge'>
+              <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_k.png" mode="aspectFill" class="icon-1"></image>
+            </i-badge>
+            <text style='color:#666666'>谁看过我</text>
+          </view>
+        </navigator>
+        <button style='width:230rpx;height:90rpx' class="button-item button-1" open-type='share'>分享名片</button>
+      </view>
+      <view class="column-center">
+        <navigator url='favorMe' hover-class="none">
+          <view class="column-center column-2" style='margin-right:40rpx'>
+            <i-badge count="{{card.farorite}}" overflow-count="100" i-class-alone='badge'>
+              <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_sc.png" mode="aspectFill" class="icon-1"></image>
+            </i-badge>
+            <text style='color:#666666'>谁收藏了我</text>
+          </view>
+        </navigator>
+        <!-- <view style='width:230rpx;height:90rpx;' class="button-item" bindtap='editor' bindtap='gotoEditor'>编辑名片</view> -->
+        <navigator url='/pages/cards/makeCard' style='width:169rpx;height:90rpx' class="button-item" hover-class="none">编辑名片</navigator>
+      </view>
+      <view class="column-center">
+        <navigator url='likeMe' hover-class="none">
+          <view class="column-center column-2" style='margin-right:25rpx;'>
+            <i-badge count="{{card.farour}}" overflow-count="100" i-class-alone='badge'>
+              <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_z.png" mode="aspectFill" class="icon-1"></image>
+            </i-badge>
+            <text style='color:#666666'>谁赞了我</text>
+          </view>
+        </navigator>
+        <!-- <view  style='width:169rpx;height:90rpx' class="button-item" bindtap='cardCode'>名片码</view> -->
+        <navigator url='/pages/account/cardCode' style='width:169rpx;height:90rpx' class="button-item" hover-class="none">名片码</navigator>
+      </view>
+    </view>
+
+    <navigator url='/pages/cards/makeCard' hover-class='none' wx:if="{{!card}}">
+      <button class="button-hr">制作我的名片</button>
+    </navigator>
+  </view>
+  <!-- <view wx:if="{{card.change_status===1}}"> -->
+  <title class="sky_6" title='猜你认识'></title>
+  <chooseNav 
+    class="sky_7" 
+    items='{{nav}}' 
+    bind:gotoLoad='changeTab'></chooseNav>
+  <view class="column" >
+    <cardListItem 
+      wx:for="{{cards}}"
+      wx:key='id' 
+      wx:if="{{cards.length>0}}"
+      title='{{item.nickname}}' 
+      description='{{item.company}}' 
+      role='{{item.duty}}' 
+      status='{{item.change_status}}' 
+      bus='{{item.v_status}}' 
+      pathUrl="/pages/cards/cardDetail?card_id={{item.id}}" 
+      image="{{item.photo}}" 
+      home="true" >
+    </cardListItem>
+    <!-- <view class="column" wx:if="{{cards.length>0}}">
+      <card-list-item 
+        wx:for="{{cards}}" 
+        wx:key='BusId' 
+        title='{{item.BusName}}' 
+        description='{{item.BusCompany}}' 
+        role='{{item.BusDuty}}' 
+        status='{{item.change_status}}' 
+        bus='{{item.BusStatus}}' 
+        pathUrl="/pages/cards/cardDetail?id={{item.OpenId}}&busid={{item.BusId}}" 
+        image="{{item.BusIcon}}" 
+        home="true" 
+        wx:if="{{loading}}">
+      </card-list-item> 
+    <!-- </view> -->
+    <empty wx:if="{{cards.length==0}}"></empty>
+  </view>
+  <view class="modal-box column-center" wx:if="{{!userInfo}}">
+  <authorize bind:getInfo='getInfo'></authorize>
+</view>
+<view class="mask" wx:if="{{!userInfo}}"></view>
+  <!-- </view> -->
+</view>

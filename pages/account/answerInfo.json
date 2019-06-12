@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "答主中心",
+    "usingComponents": {
+      "title":"/component/title/title"
+    }
+  }

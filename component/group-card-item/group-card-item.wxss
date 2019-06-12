@@ -1,0 +1,15 @@
+
+.i-swipeout-demo-button-group{
+    width:100%;
+    line-height:190rpx;
+    display:flex;
+  }
+  .i-swipeout-demo-button{
+    width:70px;
+    text-align: center;
+    background:#f71823;
+    color:#fff;
+  }
+  i-swipeout .i-swipeout-item{
+    padding:0
+}

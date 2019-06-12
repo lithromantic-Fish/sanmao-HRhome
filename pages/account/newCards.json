@@ -1,0 +1,8 @@
+{
+    "navigationBarTitleText": "新的申请",
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+      "cardListItem":"/component/cardListItem/cardListItem",
+      "empty":"/component/empty/empty"
+    }
+  }

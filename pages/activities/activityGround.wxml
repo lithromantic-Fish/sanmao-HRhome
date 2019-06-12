@@ -1,0 +1,47 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+
+<search chooseCity='true' type="2" ></search>
+
+<swiper autoplay circular indicator-dots indicator-color="#CCE3ED" indicator-active-color="#FFF">
+  <block wx:for="{{imgUrls}}" wx:key='BanId' >
+    <swiper-item bindtap='gotoWeb' data-image='{{item}}'>
+      <image src="{{filter.formatImage(item.img)}}" class="swiper-image" />
+    </swiper-item>
+  </block>
+</swiper>
+
+<view class="row-center size-1" style="background:#fff">
+  <view class="row-box row-between">
+    <view class="icon-section column-center" bindtap='gotoPage' data-path='create'>
+      <view class="image-box-button" hover-class="hover-none">
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/fbhd.png" mode="aspectFill" ></image>
+      </view>
+      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/fbhd2.png" mode="aspectFill" ></image>
+      <text>发布活动</text>
+    </view>
+
+    <view class="icon-section column-center">
+      <view class="image-box-button" hover-class="hover-none" bindtap='gotoPage' data-path='activities'>
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/jxhd.png" mode="aspectFill" ></image>
+      </view>
+      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/jxhd2.png" mode="aspectFill" ></image>
+      <text>精选活动</text>
+    </view>
+  </view>
+</view>
+
+<view class="column border-top" wx:if="{{activities.length!==0}}" style="margin-top:20rpx">
+  <view style='padding-top:20rpx;background:#FFF'></view>
+  <view class="border" wx:for='{{activities}}' wx:key='_id'>
+    <activityItem isactivity=""  activity="{{item}}"></activityItem>
+  </view>
+  <view class="load" wx:if="{{activities.length>4}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+</view>
+
+<empty wx:if="{{activities.length===0}}"></empty>
+
+<view class="modal-box column-center" wx:if="{{!userInfo}}" >
+  <authorize bind:getInfo='getInfo'></authorize>
+</view>
+
+<view class="mask"  wx:if="{{!userInfo}}"></view>

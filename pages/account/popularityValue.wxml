@@ -1,0 +1,25 @@
+<view class="popularity-top">{{rank}}</view>
+<view class="size-progress" style="background:#fff">
+  <view class="progress-box">
+    <view class="tooltip-bottom row">
+      <view style="position:relative;width:100%">
+        <view class="num num0" style='color:#999999'>{{level.min}}</view>
+        <view class="num num1" style='color:#999999' wx:if="{{level.middle}}">{{level.middle}}</view>
+        <view class="num num2" style='color:#999999'>{{level.max}}</view>
+      </view>
+
+    </view>
+    <view class="tooltip-top row">
+      <view style="position:relative;width:100%">
+        <view class="num num1" wx:if="{{level.middle}}">保级</view>
+        <view class="num text2">升级</view>
+      </view>
+    </view>
+    <i-progress percent="{{percent}}" hide-info></i-progress>
+  </view>
+</view>
+<view class="title-1">获取人气值方法</view>
+<chooseNav items="{{tabs}}" bind:gotoLoad='changeStatus'></chooseNav>
+<view class="column" wx:for="{{list}}" wx:key='icon'>
+  <popularity popularity='{{item}}'></popularity>
+</view>

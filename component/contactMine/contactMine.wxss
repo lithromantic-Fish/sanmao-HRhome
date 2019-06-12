@@ -1,0 +1,26 @@
+.contact-box{
+  background:#4c89fb;
+  border-radius: 15rpx;
+  padding:15rpx;
+  color:#fff;
+  font-weight: 500;
+  max-width:400rpx;
+  margin-right:-5rpx;
+  min-height:30rpx;
+  min-width:30rpx;
+
+}
+.row-end{
+  align-items: flex-start
+}
+.avatar{
+  width:100rpx;
+  height:100rpx;
+  border-radius: 50%;
+  margin-left:15rpx;
+}
+.tooltip-mine{
+  width:30rpx;
+  height: 30rpx;
+  margin-top:20rpx
+}

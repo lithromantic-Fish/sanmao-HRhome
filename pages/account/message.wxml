@@ -1,0 +1,34 @@
+<view style='border-top:1rpx solid #DCDDE3'>
+  <view class="column" style='padding:35rpx 30rpx' wx:if="{{messages.length>0}}">
+    <i-swipeout 
+      i-class="i-swipeout-demo-item" 
+      operateWidth="{{80}}" 
+      unclosable="{{true}}" 
+      toggle="{{toggle}}" 
+      wx:for="{{messages}}" 
+      wx:key='message' 
+      style="margin-bottom:35rpx">
+      <view 
+        class="message-box column" 
+        bindtap='handledot' 
+        data-index='{{index}}' 
+        slot="content">
+        <view class="row" style="margin-bottom:15rpx;">
+          <view class="dot" wx:if="{{item.red_status == 1}}"></view>
+          <text class="title">{{item.title}}</text>
+          <view style='flex:1;text-align:right'>{{item.hdate}}</view>
+        </view>
+        <view class="content">{{item.msg}}</view>
+      </view>
+      <view 
+        class="i-swipeout-demo-button" 
+        slot='button' 
+        bindtap='_delete' 
+        data-id="{{item.id}}"
+        data-message="{{item}}">删除</view>
+    </i-swipeout>
+  </view>
+  <view class="load" wx:if="{{messages.length>5}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+  <empty wx:if="{{!messages.length}}"></empty>
+
+</view>

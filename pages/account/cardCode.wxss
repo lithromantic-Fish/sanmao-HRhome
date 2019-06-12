@@ -1,0 +1,14 @@
+.code{
+  width:300rpx;
+  height:300rpx;
+  margin:50rpx 0
+}
+.title{
+  margin-bottom: 50rpx
+}
+.button-hr{
+  margin-top: 50rpx
+}
+page{
+  background:#fff
+}

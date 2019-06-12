@@ -1,0 +1,43 @@
+<view class="column size-2" style="display:fixed">
+  <view class="row">
+    <view class="input-view row">
+      <view class="iconfont icon-sousuo"></view>
+      <input 
+        style='width:100%' 
+        value="{{content}}" 
+        confirm-type="search" 
+        placeholder='搜索' 
+        name='content' 
+        placeholder-style="color:#888;font-size:26rpx" 
+        class="input-text" 
+        bindinput='getText' 
+        bindconfirm="getContacts"></input>
+      <view class="iconfont icon-shanchu" wx:if="{{delete}}" bindtap='clear'></view>
+    </view>
+    <!-- <button class='search-button' catchtap='searchMt'>搜索</button> -->
+  </view>
+</view>
+<!-- <view wx:if="{{!search}}"> -->
+  <view class="column" wx:if="{{cards.length>0}}" style="margin-top:10rpx;">
+    <group-card-item 
+      wx:for="{{cards}}" 
+      wx:for-index="index"
+      wx:key='id' 
+      card="{{item}}" 
+      catch:deletePeople='delete'>
+    </group-card-item>
+  </view>
+  <empty wx:if="{{!cards.length}}"></empty>
+<!-- </view> -->
+<!-- <view wx:if="{{search}}">
+  <view class="column" wx:if="{{searchList.length>0}}" style="margin-top:10rpx;">
+    <group-card-item wx:for="{{searchList}}" wx:key='BusId' card="{{item}}" catch:delete='delete'></group-card-item>
+</view>
+<empty wx:if="{{!searchList.length}}"></empty>
+</view> -->
+
+<form bind:submit='addContacts' report-submit='true'>
+  <view class="button-fix column-center" style="width:100%">
+    <button form-type='submit' class="button-hr">添加联系人</button>
+  </view>
+</form>

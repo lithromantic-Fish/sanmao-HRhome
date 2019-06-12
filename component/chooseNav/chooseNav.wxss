@@ -1,0 +1,22 @@
+.nav{
+    position: fixed;
+    padding:0 40rpx;
+    border-bottom: .1rpx solid #dcdde3;
+    display:flex;
+    /* height:100rpx; */
+    width:100%;
+    background: #fff;
+}
+.nav-item{
+    flex:1;
+    line-height: 100rpx;
+    text-align: center;
+}
+.choosed{
+    color:#4c89fb;
+    border-bottom:#4c89fb solid 2rpx;
+   
+}
+.place{
+  height:100rpx;
+}

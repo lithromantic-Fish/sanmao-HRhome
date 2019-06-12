@@ -1,0 +1,21 @@
+<!--component/search.wxml-->
+<view class="search-box border">
+  <view class="search size-1 row-between">
+    <navigator url='/pages/search/cities' hover-class='none' wx:if='{{chooseCity}}' >
+    <view class="row weizhi">
+          <view class="iconfont icon-weizhi"></view>
+          <text>{{choosedCity}}</text>
+    </view>
+
+    </navigator>
+    <view class="search-input-box " style="{{type==='question' || type==='studyLesson' ||type==='newSound' ||type === 'origin'?'width:100%':''}}" bindtap="gotoSearch">
+      <view class="iconfont icon-sousuo"></view>
+      <input value="{{content}}" placeholder='搜索' name='content' class="input-text" disabled='true'></input>
+    </view>
+    <navigator url='/pages/search/filter' hover-class='none' wx:if='{{fliter}}'>
+      <image class="icon-filter" src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/filter.png" mode="aspectFill"></image>
+    </navigator> 
+    <view class="search-button-1" wx:if="{{search}}">搜索</view>
+  </view>
+</view>
+<view class="fixed-box"></view>

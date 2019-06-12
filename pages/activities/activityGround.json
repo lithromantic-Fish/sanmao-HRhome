@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "HR活动社区",
+    "enablePullDownRefresh": true,
+  "usingComponents": {
+    "search":"/component/search/search",
+    "chooseNav":"/component/chooseNav/chooseNav",
+    "activityItem":"/component/activityItem/activityItem",
+    "empty": "/component/empty/empty",
+    "authorize": "/component/authorize/authorize"
+  }
+}

@@ -1,0 +1,19 @@
+.icon-success{
+    font-size:150rpx;
+    color:#95baff;
+}
+.column-center{
+    margin-top:200rpx;
+}
+.tip-text{
+    font-size: 38rpx;
+    font-weight: 600;
+    margin-top:60rpx;
+}
+.tip-second{
+    margin-top:20rpx;
+}
+.icon-tip{
+    font-size:150rpx;
+    color:#ffd35c;
+}

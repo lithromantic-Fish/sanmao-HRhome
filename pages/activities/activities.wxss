@@ -1,0 +1,43 @@
+
+/* .row-item{
+  padding:15rpx 0;
+} */
+empty{
+  margin-top:100rpx
+}
+search .size-1{
+  padding-top:10rpx;
+  padding-bottom:10rpx;
+}
+activityItem .price{
+  font-size: 30rpx
+
+}
+.search-box{
+  background-color: #F3F4F5!important;
+  height: auto!important;
+}
+.search{
+  padding: 20rpx 30rpx!important;
+}
+search .search-input-box{
+  width:81%;
+  background-color: #FFF;
+}
+search .weizhi{
+  margin-left:8px;
+}
+.nav .choosed{
+  font-size:34rpx;
+  font-weight:bold;
+  color:rgba(76,137,251,1);
+  border-bottom:#4c89fb solid 6rpx;
+}
+.nav-item{
+  font-size:30rpx;
+  margin-right: 80rpx;
+}
+.image-box .activity-image{
+  width:210rpx;
+  height: 225rpx;
+}

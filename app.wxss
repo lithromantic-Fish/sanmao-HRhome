@@ -1,0 +1,329 @@
+/**app.wxss**/
+@import '/assets/iconfont/iconfont.wxss';
+@import "/vendors/wxParse/wxParse.wxss";
+
+page {
+  font-size: 28rpx;
+  color: #3b434b;
+  background: #f3f4f5;
+  font-family: "PingFang SC", Helvetica, "Helvetica Neue", "微软雅黑", Tahoma, Arial, sans-serif;
+}
+
+.bt {
+  border-top: #e3e4e8 solid 0.1rpx;
+  width: 100%;
+  display: block;
+}
+
+.card {
+  box-sizing: border-box;
+  position: relative;
+}
+
+.card .title {
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.card .description {
+  font-size: 26rpx;
+  color: #8f9194;
+}
+
+/* 布局 */
+
+/* row */
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.row-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.row-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.row-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.row-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* column */
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.column-start {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.column-end {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.column-between {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 大小 */
+
+/* 卡片大小，边距 */
+
+.size-1 {
+  padding: 30rpx 40rpx;
+}
+
+.size-2 {
+  padding: 20rpx 30rpx;
+}
+
+.size-3 {
+  padding: 10rpx 20rpx;
+}
+
+.size-4 {
+  padding: 30rpx 20rpx;
+}
+
+.size-5 {
+  padding: 20rpx 10rpx;
+}
+
+.size-6 {
+  padding: 40rpx 30rpx;
+}
+
+/* 图标、头像、图片 大小 */
+
+.load {
+  font-size: 28rpx;
+  color: gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.title {
+  font-size: 38rpx;
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  /* -webkit-line-clamp: 1; */
+  overflow: hidden;
+}
+
+.line-gray {
+  background: #dcdde3;
+  height: 0.1rpx;
+}
+
+.row-item {
+  padding: 30rpx 0;
+}
+
+.section-spacing {
+  background: #f3f4f5;
+  width: 100%;
+  height: 20rpx;
+}
+
+button::before {
+  border: 0;
+}
+
+button::after {
+  border: 0;
+}
+
+.button-hr {
+  background: #4c89fb;
+  color: #fff;
+  font-weight: 500;
+  border: 0;
+  /* margin-top:50rpx; *//* width:100%; */
+  height: 90rpx;
+  width: 680rpx;
+  text-align: center;
+  line-height: 90rpx;
+}
+
+.border {
+  border-bottom: 0.1rpx #e3e4e8 solid;
+}
+
+.price {
+  font-size: 50rpx;
+  font-weight: 600;
+  color: #4c89fb;
+  margin-top: 15rpx;
+}
+
+.hidden {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.border-top {
+  border-top: 0.1rpx #dcdde3 solid;
+}
+
+.search-button {
+  /* width: 100rpx; */
+  flex-shrink: 0;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  margin-left: 10rpx;
+  background: #4c89fb;
+  color: #fff;
+}
+
+.hover {
+  background: #eaeaea;
+}
+
+.hover-image {
+  opacity: 0.8;
+}
+
+.modal-box {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.mask {
+  background: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  top: 0;
+  left: 0;
+}
+
+.fix-buttons {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  background: #fff;
+  height: 150rpx;
+}
+
+.fix-buttons button {
+  flex: 1;
+  padding: 0;
+  background: #fff;
+  line-height: 150rpx;
+  border-radius: 0;
+  width: 50%;
+  color: inherit;
+  border: 0.1rpx solid lightgray;
+  font-size: 30rpx;
+}
+
+.fix-buttons button:nth-child(2) {
+  background: #4c89fb;
+  color: #fff;
+}
+
+.gray {
+  color: #8f9194;
+}
+
+.subtitle {
+  font-size: 24rpx;
+  color: #8f9194;
+}
+
+.blue {
+  color: #4c89fb;
+}
+
+.pd-30 {
+  padding: 30rpx 0;
+}
+
+.time {
+  color: #8f9194;
+  font-size: 26rpx;
+}
+
+.hover-none {
+  display: none;
+}
+
+.image-box-button {
+  position: absolute;
+  z-index: 99;
+}
+
+.red {
+  color: red;
+}
+
+.down {
+  width: 20rpx;
+  height: 20rpx;
+  margin-left: 15rpx;
+}
+
+.row-border {
+  padding: 10rpx 15rpx;
+  border: 0.1rpx lightgray solid;
+  border-radius: 4rpx;
+  margin-left: 15rpx;
+}
+
+/*清除浮动*/
+.clearfix:after,
+.clearfix:before {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}

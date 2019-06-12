@@ -1,0 +1,17 @@
+<view class="column-center">
+  <view class="column-center size-1 margin" wx:if="{{card.BusStatus!=2}}">
+    <image class="empty-image" mode="aspectFill" src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/no-card.png'></image>
+  <text class="subtitle">您还没有申请加V,请先申请加V再申请成为答主</text>
+  <button class="button-hr" hover-class='hover-image' bindtap='gotoJiaV'>申请加V</button>
+  </view>
+  <view class="column-center size-1 margin" wx:if="{{card.BusStatus==2 && (user.Answerer==0 ||user.Answerer==3)}}">
+    <button class="button-hr" hover-class='hover-image' bindtap='tobeAns'>申请成为答主</button>
+  </view>
+  <view class="title title-2" wx:if="{{user.Answerer==2}}">恭喜您已经成为答主</view>
+    <view class="column-center size-1 margin" wx:if="{{user.Answerer==1}}">
+    <image class="empty-image" mode="aspectFill" src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/no-card.png'></image>
+  <text class="subtitle">您的申请正在处理中，请耐心等待</text>
+  <button class="button-hr disabled" >申请处理中</button>
+  </view>
+  <!-- <view classs="title" wx:if="{{user.answer}}">前往答主中心完善我的个人资料</view> -->
+</view>

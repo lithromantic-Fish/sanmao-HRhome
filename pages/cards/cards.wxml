@@ -1,0 +1,23 @@
+<search fliter="true" type="1"></search>
+<view class="column border-top" wx:if="{{cards}}" style="margin-top:20rpx">
+  <view wx:for="{{cards}}" wx:key='name'>
+    <cardListItem 
+      title='{{item.nickname}}'  
+      description='{{item.company}}' 
+      role='{{item.duty}}' 
+      status='{{item.change_status}}' 
+      bus='{{item.v_status}}' 
+      pathUrl="/pages/cards/cardDetail?card_id={{item.id}}" 
+      image="{{item.photo}}" 
+      openid="{{item.openid}}"
+      home="true"></cardListItem>
+  </view>
+  <view class="load" wx:if="{{cards.length>5}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+</view>
+<empty wx:if="{{cards.length==0}}"></empty>
+
+
+<view class="modal-box column-center" wx:if="{{!userInfo}}">
+  <authorize bind:getInfo='getInfo'></authorize>
+</view>
+<view class="mask" wx:if="{{!userInfo}}"></view>

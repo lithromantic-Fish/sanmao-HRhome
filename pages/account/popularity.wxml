@@ -1,0 +1,42 @@
+<!-- <view style="overflow:hidden;width:100wv;position:relative">
+  <view class="section-bg row size-1">
+    <view class="column">
+      <view class="row">
+        <view>我的人气值：</view>
+        <view class="total">{{total}}</view>
+      </view>
+      <view>我的称号：<text class="rank">{{rank}}</text></view>
+    </view>
+  </view>
+</view> -->
+<view class='bg-box column-center'>
+<view >{{total}}</view>
+<image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/popularityBg.png" mode='aspectFill' class="bg"></image>
+</view>
+
+<view class="row-between title-row">
+  <title title='积分记录'></title>
+  <view class='row' bindtap='choose'>
+  <text >{{type}}</text>
+  <view class="iconfont icon-xiajiantou"></view>
+  </view>
+</view>
+  
+<!-- <view class="section-spacing"></view> -->
+<view class="column border-top sky_3">
+  <view 
+    class="row-between size-1 item" 
+    wx:for="{{popularity}}" 
+    wx:key='Particulars' 
+    wx:if="{{popularity.length!=0}}">
+    <view class="column1">
+      <view class="title">{{item.event}}</view>
+      <view class="subtitle">{{item.dateline}}</view>
+    </view>
+    <view class="row popularity">
+      <!-- <view>{{tab.title==='支出的'?'-':'+'}}</view> -->
+      <text>{{item.popularity}}</text>
+    </view>
+  </view>
+</view>
+<empty wx:if="{{popularity.length==0 || !popularity}}"></empty>

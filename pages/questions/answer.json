@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "提问详情",
+  "usingComponents": {
+    "empty": "/component/empty/empty",
+    "answer": "/component/answer/answer",
+    "voice": "/component/voice/voice",
+    "i-toast": "../../dist/toast/index"
+  }
+}

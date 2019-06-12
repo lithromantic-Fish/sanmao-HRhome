@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "课程学习",
+  "enablePullDownRefresh":true,
+  "usingComponents": {
+    "search": "/component/search/search",
+    "empty": "/component/empty/empty",
+    "lesson":"/component/lesson/lesson",
+    "studyLesson":"/component/studyLesson/studyLesson"
+  }
+}

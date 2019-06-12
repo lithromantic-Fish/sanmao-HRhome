@@ -1,0 +1,147 @@
+<wxs src="../filter.wxs" module="filter" />
+<view>
+
+<view 
+  class="column size-2" style="width:93%; position:fixed;z-index:2; background:#F3F4F5;border-top:1rpx solid #ccc;font-family: PingFangSC-Regular, sans-serif;border-top:1rpx solid #ccc">
+  <view class="row">
+    <view class="input-view row">
+      <view class="iconfont icon-sousuo" style='color:#999999'></view>
+      <input 
+        style='width:100%' 
+        value="{{content}}" 
+        confirm-type="search" 
+        placeholder='搜索' 
+        name='content' 
+        maxlength='10'
+        placeholder-style="color:#888;font-size:26rpx" 
+        class="input-text" 
+        bindinput='getText' 
+        bindconfirm="getData"></input>
+      <view class="iconfont icon-shanchu" wx:if="{{delete}}" bindtap='clear'></view>
+    </view>
+    <!-- <button class='search-button' catchtap='searchMt'>搜索</button> -->
+  </view>
+</view>
+</view>
+
+<view>
+</view>
+<!-- 新的名片 -->
+<navigator url="/pages/account/newCards">
+  <view class="new-cards row-between size-1 border" hover-class="hover">
+    <view class="row">
+      <view class="iconfont icon-newcards"></view>
+      <view class="title" style="font-size:30rpx;margin-left:20rpx">新的名片</view>
+    </view>
+    <!-- 有没有新的名片申请 -->
+    <view class="tip" wx:if="{{newNum>0}}">{{newNum}}</view>
+  </view>
+</navigator>
+<!-- 我的分组 -->
+<navigator url="/pages/account/groups">
+  <view class="new-cards row-between size-1" hover-class="hover">
+    <view class="row">
+      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_wdfz.png" class='group' mode="aspectFill"></image>
+      <view class="title" style="font-size:30rpx;margin-left:20rpx;font-family: PingFangSC-Regular, sans-serif;">我的分组</view>
+    </view>
+  </view>
+</navigator>
+
+
+<view 
+  class="flex box box-lr" 
+  style="height:100%" 
+  wx:if="{{!empty}}">
+  <scroll-view class="flex groups box box-tb" scroll-y="true" scroll-into-view="{{scrollIntoView}}">
+    <block 
+      wx:for="{{groups}}" 
+      wx:for-item="group" 
+      wx:for-index="idx"
+      wx:key="i">
+      <view 
+      class="group-name" 
+      style='color:#999' 
+      id="{{idx}}">{{idx}}</view>
+
+      <view class="flex group-users">
+        <view 
+          style='border-bottom:1rpx solid #E3E4E8;' 
+          class="row size-2" 
+          hover-class="hover" 
+          wx:for="{{group}}" 
+          wx:key="gid"  
+          wx:for-item="user" 
+          wx:for-index="idxs" 
+          bindtap='gotoDetail' 
+          data-id="{{user.card_id}}" 
+          data-openid="{{user.openid}}">
+          <view class="user-avatar box box-lr box-pack-center box-align-center">
+            <image class="user-avatar-img" src="{{filter.formatAvatar(user.photo)}}" mode="aspectFill">
+            </image>
+          </view>
+          <view>
+            <view class='view_duty'>
+                <view class="flex user-name">{{user.nickname}}</view>
+                <view class='text_duty'>{{user.duty}} </view>
+            </view>
+            <view style='padding-left:21rpx'>{{user.company}} </view>
+          </view>
+
+          <view wx:if="{{user.mobile}}" class="iconfont icon-contract" catchtap='call' data-phone="{{user.mobile}}"></view>
+        </view>
+      </view>
+
+
+    </block>
+  </scroll-view>
+
+  <!-- 右侧快速滚动定位 -->
+  <view class="nav box box-tb" bindtouchmove="touchmove" bindtouchcancel="touchcancel" bindtouchend="touchend">
+    <view 
+      bindtap="tabLetter" 
+      wx:for="{{letters}}" 
+      wx:key="index" 
+      data-index="{{item}}" 
+      class="flex box box-align-center box-pack-center letter">
+      <view class="row">
+        <view 
+          class="tooltip row" 
+          wx:if="{{selected == item}}">
+          <view style="text-align:center;z-index:99">
+            <text class="tooltip-text">{{item}}</text>
+          </view>
+          <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/tooltip.png" mode="aspectFit"></image>
+        </view>
+        <text class="letter-text {{selected == item ? 'letter-actived' : ''}}">{{item}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<empty wx:if="{{groups.length==0 && content}}" title="没有搜索到结果"></empty>
+
+<!-- 搜索结果展示列表 -->
+<!-- <view class="column" wx:if="{{search}}">
+  <view class="section-spacing"></view>
+  <view class="flex group-users" wx:if="{{searchList.length!==0}}">
+    <view 
+      wx:for="{{searchList}}" 
+      wx:for-item="user" 
+      wx:for-index="idx" 
+      class="row size-2" 
+      hover-class="hover" 
+      bindtap='gotoDetail' 
+      data-id="{{user.card_id}}">
+      <view class="user-avatar box box-lr box-pack-center box-align-center">
+        <image class="user-avatar-img" src="{{filter.formatAvatar(user.BusIcon)}}" mode="aspectFill"></image>
+      </view>
+      <view class="flex user-name">{{user.BusName}}</view>
+      <view class="iconfont icon-contract" catchtap='call' data-phone="{{user.BusTel}}" hover-stop-propagation='true' hover-class='hover-image'></view>
+    </view>
+  </view>
+  <empty wx:if="{{searchList.length==0}}"></empty>
+</view> -->
+
+<!-- <view class="column-center">
+  <empty wx:if="{{searchList.length===0}}"></empty>
+</view> -->

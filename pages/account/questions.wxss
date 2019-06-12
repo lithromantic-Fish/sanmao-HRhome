@@ -1,0 +1,26 @@
+answer{
+  background:#fff;
+}
+chooseNav .nav{
+  padding:0;
+}
+.float-button{
+  position: fixed;
+  bottom:20rpx;
+  right:20rpx;
+  width:120rpx;
+  height:120rpx
+}
+.float-button-box{
+  width:120rpx;
+  height:120rpx;
+  text-align: center;
+  background: #4c89fb;
+  box-shadow:0 0 15rpx #4c89fb3a;
+  color:#fff;
+  font-size: 26rpx;
+  border-radius: 50%;
+}
+.iconfont{
+  font-size: 50rpx;
+}

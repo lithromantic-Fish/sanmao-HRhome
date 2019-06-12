@@ -1,0 +1,52 @@
+selectRow .size-1{
+  padding:30rpx;
+}
+page{
+  height: 100%;
+  background-color: #F3F4F5
+}
+title .title{
+  font-weight: normal !important
+}
+/* selectRow .type{
+  font-weight: normal !important
+} */
+.picker-text{
+  font-size: 28rpx;
+  color: #999;
+}
+.icon-right{
+  color: #999 !important;
+  font-size: 32rpx;
+  transform: scaleY(1.2)
+}
+
+selectRow{
+  padding: 0 30rpx;
+  background-color: #fff;
+  
+}
+selectRow .size-1{
+  padding: 30rpx 0;
+}
+selectRow:last-child .size-1{
+  border: none !important
+}
+
+.picker {
+  background-color: #fff;
+  border-bottom: solid 1rpx #eee;
+}
+
+.type {
+  font-size: 32rpx;
+  font-weight: 600
+}
+
+.text-right {
+  text-align: right;
+  color: gray;
+  font-size: 28rpx;
+}
+
+

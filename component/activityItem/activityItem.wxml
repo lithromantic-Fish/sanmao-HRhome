@@ -1,0 +1,136 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+
+<view 
+  wx:if="{{!isactivity}}" 
+  class="row activity-box size-6" 
+  data-id="{{activity.activity_id || activity.id}}" 
+  bindtap="gotoDetail" 
+  data-auth='{{activity.auth}}' 
+  hover-class='hover'>
+  <!-- <view class="row row-activity"> -->
+
+  <view class="image-box">
+    <image  class="activity-image" src="{{filter.formatImage(activity.activity_icon)}}" mode="aspectFill" lazy-load="false" />
+  </view>
+
+  <view class="column column-1" style="width:70%">
+
+    <view class="row-between ">
+      <view class="activity-title">【{{activity.province}}{{activity.city}}】{{activity.name}}</view>
+    </view>
+
+    <view class="column activity-ttimeitle" style='margin-top:10rpx;'>
+      <view>
+        <!-- <text>时间：</text> -->
+        <text>{{active.starttime}}</text>
+      </view>
+      <view>
+        <!-- <text>结束时间：</text> -->
+        <!-- <text>{{filter.formatDate(activity.ActivityETime,'YYYY年MM月DD日 HH:mm')}}</text> -->
+        <text>{{activity.starttime}}</text>
+      </view>
+    </view>
+
+    <view class="activity-address">
+      <!-- <text>地址：</text> -->
+      <text>{{activity.address}}</text>
+    </view>
+
+    <view class="row-between" >
+    <!-- 不是确认订单页,显示人气 -->
+      <view class="price" wx:if="{{!hidePay}}">{{activity.price}}人气值</view>
+    <!-- 是订单页,根据是否未个人显示人气 ,个人显示,非个人不显示 -->
+      <view class="price" wx:if="{{hidePay&&role==1}}">{{activity.price}}人气值</view>
+      <view class="price" wx:if="{{hidePay&&role!=1}}"></view>
+      <!-- 确认订单也隐藏状态 -->
+      <view class="status" wx:if="{{activity.status==0&&!hidePay}}">未开始</view>
+      <view class="status" wx:if="{{activity.status==1&&!hidePay}}">去签到</view>
+      <view class="status" wx:if="{{activity.status==2&&!hidePay}}">已结束</view>
+    </view>
+
+    <!-- <form class="row-end" wx:if="{{activity.OrderStatus===0 && !hidePay}}" report-submit='true' catch:submit='gotoPay'>
+      <button class="pay-button" hover-class="hover" hover-stop-propagation='true' form-type='submit'>立即支付</button>
+    </form>
+
+    <view class="row-between" wx:if='{{order && num}}'>
+      <view class="gray">门票：x {{num}}</view>
+      <view class="price">{{activity.ActivityPrice}}
+        <text>人气值</text>
+      </view>
+    </view> -->
+  </view>
+  <!-- </view> -->
+
+  <!-- <view class="row-end">
+    <view>支付超时</view>
+    <view class="pay-button">重新下单</view>
+  </view> -->
+</view>
+<!-- 我的活动页面点进来的 -->
+<view 
+  wx:if="{{isactivity}}" 
+  class="activity-box size-6" 
+  bindtap="gotoDetail" 
+  data-id="{{activity.activity_id || activity.id}}" 
+  bindtap="gotoDetail" 
+  data-auth='{{activity.auth}}' 
+  hover-class='hover'>
+  <view class="row-between ">
+      <view class="activity-title">
+        【{{activity.province}}{{activity.city}}】{{activity.name}}
+        <text class="status" wx:if="{{type == 2 && activity.status==0&&activity.time_status!=2}}">未发布</text>
+        <text class="status" wx:if="{{type == 2 && activity.status==1&&activity.time_status!=2}}">已发布</text>
+        <text class="status" wx:if="{{type == 2 && (activity.status==2||activity.time_status==2)}}">已结束</text>
+      </view>
+    </view>
+  <view class="act-info">
+    <view class="image-box">
+      <image class="activity-image" src="{{activity.activity_icon}}" mode="aspectFill" lazy-load="false" />
+    </view>
+    <view class="column column-1" style="width:70%">
+      <view class="column activity-ttimeitle" style='margin-top:10rpx;'>
+        <view>
+          <text>时间：</text>
+            <text>{{activity.starttime}}</text>
+        </view>
+        <!-- <view>
+          <text>结束时间：</text>
+          <text>{{filter.formatDate(activity.ActivityETime,'YYYY年MM月DD日 HH:mm')}}</text>
+        </view> -->
+      </view>
+      <view class="activity-address">
+        <text>地址：</text>
+        <text>{{activity.address}}</text>
+      </view>
+      <view class="row-between" wx:if='{{type == 1 || type == 3}}'>
+        <view class="price" wx:if="{{role==1}}">{{activity.price}}人气值</view>
+
+        <view class="status" wx:if="{{activity.time_status==0}}">未开始</view>
+        <view class="status" wx:if="{{activity.time_status==1}}">去签到</view>
+        <view class="status" wx:if="{{activity.time_status==2}}">已结束</view>
+      </view>
+      <view class="row-between" wx:elif='{{type == 2}}'>
+        <view class="price">{{activity.price}}人气值</view>
+        <view class="status" wx:if="{{activity.time_status==0}}">未开始</view>
+        <view class="status" wx:if="{{activity.time_status==1}}">去签到</view>
+        <view class="status" wx:if="{{activity.time_status==2}}">已结束</view>
+      </view>
+
+      <!-- <form class="row-end" wx:if="{{activity.OrderStatus===0 && !hidePay}}" report-submit='true' catch:submit='gotoPay'>
+        <button class="pay-button" hover-class="hover" hover-stop-propagation='true' form-type='submit'>立即支付</button>
+      </form>
+      <view class="row-between" wx:if='{{order && num}}'>
+        <view class="gray">门票：x {{num}}</view>
+        <view class="price">{{activity.ActivityPrice}}
+          <text>人气值</text>
+        </view>
+      </view> -->
+    </view>
+    <!-- </view> -->
+
+    <!-- <view class="row-end">
+    <view>支付超时</view>
+    <view class="pay-button">重新下单</view>
+    </view> -->
+  </view>
+</view>

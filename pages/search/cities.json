@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "定位",
+  "usingComponents": {
+    "title": "/component/title/title",
+    "component-tag-name": "/component/wx-index-list/wx-index-list"
+  }
+}

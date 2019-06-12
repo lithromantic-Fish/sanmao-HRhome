@@ -1,0 +1,12 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<view class="row-between pd-30">
+  <voice answer='{{answer}}'></voice>
+  <view class="column-end">
+    <view class="time">{{filter.formatDate(answer.AnsTime,'YYYY-MM-DD')}}</view>
+    <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_unlike.png" mode="aspectFit" wx:if="{{answer.isLike===0}}" class="like" bindtap='like'></image>
+    <view class="row" wx:if="{{answer.isLike===1}}" style="margin-top:15rpx">
+    <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_like.png" mode="aspectFit"  class="liked" bindtap='like'></image>
+    <text class="blue" >{{filter.formatNum(answer.likecount)}} </text>
+    </view>
+  </view>
+</view>

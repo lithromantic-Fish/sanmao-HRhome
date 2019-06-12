@@ -1,0 +1,40 @@
+.left-image{
+    width:210rpx;
+    height:170rpx;
+    border-radius: 5rpx;
+   
+}
+.favor-icon{
+    width:40rpx;
+    height:40rpx;
+    margin-right:8rpx;
+}
+.title{
+    font-size: 34rpx;
+  font-weight: 600;
+  display: -webkit-box;    
+  -webkit-box-orient: vertical;    
+  -webkit-line-clamp:2;    
+  overflow: hidden;
+  margin-bottom:15rpx;
+}
+.image-box{
+  width:35%;
+  margin-right:15rpx
+}
+.price{
+    font-size: 34rpx;
+    margin:0
+}
+.gray-line{
+  width:65%;
+  margin-left:auto;
+  height:0.1rpx;
+  background:#dcdde3;
+}
+.lesson-box{
+  background:#fff
+}
+.hover{
+  background:#eaeaea
+}

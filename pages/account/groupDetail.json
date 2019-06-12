@@ -1,0 +1,8 @@
+{
+    "navigationBarTitleText": "分组详情",
+  "usingComponents": {
+    "group-card-item":"../../component/group-card-item/group-card-item",
+    "search":"../../component/search/search",
+    "empty":"../../component/empty/empty"
+  }
+}

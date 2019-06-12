@@ -1,0 +1,18 @@
+<chooseNav items='{{navs}}'  bind:gotoLoad='changeStatus'></chooseNav>
+
+<view class="section-spacing"></view>
+<view>
+<view class="size-1 border" style="background:#fff" 
+  wx:for="{{cards}}" 
+  wx:key='idx' wx:if="{{cards.length}}">
+  <group-card  card='{{item}}'>
+    <view slot='time'>
+      <view class="column">
+        <view>{{item.hdate}}</view>
+        <view>{{item.friend_count}}位好友</view>
+      </view>
+    </view>
+  </group-card>
+</view>
+<empty wx:if="{{!cards.length}}"></empty>
+</view>

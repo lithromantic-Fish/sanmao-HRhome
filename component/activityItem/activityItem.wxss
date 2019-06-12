@@ -1,0 +1,78 @@
+.activity-box {
+  background: #fff;
+}
+
+.activity-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size: 28rpx;
+  font-weight: bold;
+  line-height: 40rpx;
+}
+
+.activity-ttimeitle, .activity-address {
+  font-size: 26rpx;
+  font-weight: 500;
+  line-height: 40rpx;
+  color: #666;
+}
+
+.activity-image {
+  width: 180rpx;
+  height: 220rpx;
+  /* border-radius: 10rpx; */
+}
+
+/* 
+.row-activity {
+  align-items: flex-start;
+  margin-top: 30rpx;
+} */
+
+.column-1 {
+  margin-left: 20rpx;
+  font-size: 28rpx;
+  line-height: 70rpx;
+}
+
+.status {
+  color: #4c89fb;
+  font-weight: 500;
+}
+
+.price {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #4c89fb;
+  margin-top: 10rpx;
+}
+
+.price text {
+  font-size: 26rpx;
+}
+
+.pay-button {
+  padding: 10rpx 20rpx;
+  border-radius: 40rpx;
+  border: 0.1rpx solid #dcdde3;
+  margin-left: 20rpx;
+  background: #fff;
+  color: inherit;
+  line-height: inherit;
+  font-size: 28rpx;
+}
+
+.hover {
+  background: #eaeaea;
+}
+
+.row {
+  align-items: flex-start;
+}
+
+.act-info {
+  display: flex;
+  flex-direction: row;
+}

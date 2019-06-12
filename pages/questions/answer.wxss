@@ -1,0 +1,93 @@
+.line{
+  height:2rpx;
+  background:lightgray;
+  width:33%
+}
+.line-text{
+  text-align: center;
+  width:33%;
+  font-size: 26rpx
+}
+.content{
+  line-height: 50rpx;
+}
+.voice{
+  padding:15rpx 10rpx;
+  background: #4c89fb;
+  border-radius: 30rpx;
+  width:400rpx;
+  box-sizing: border-box;
+  color:#fff;
+  margin-left: 20rpx;
+  margin:40rpx 0
+}
+.button-hr{
+  width:40%;
+  font-size: 32rpx;
+  font-weight: 500;
+  border-radius: 8rpx;
+}
+.unlock{
+  margin-left: 10rpx;
+}
+.bottom-title{
+  margin-top:25rpx;
+}
+.voice-text{
+  margin-left:auto;
+}
+.subtitle{
+  color:gray;
+}
+.avatar{
+  width:80rpx;
+  height:80rpx;
+  border-radius:50%;
+  margin-right:10rpx;
+}
+.title{
+  font-size: 30rpx
+}
+.content{
+  margin:25rpx 0;
+}
+.question{
+  color:#4c89fb;
+  border:1rpx #4c89fb solid ;
+  border-radius: 8rpx;
+  padding:15rpx 10rpx;
+}
+.box{
+  background: #fff;
+}
+.hover{
+  background:#eaeaea;
+}
+.voice{
+  margin:0
+}
+.avatar{
+  width:100rpx;
+  height:100rpx
+}
+.title-voice{
+  margin-left:15rpx;
+  font-size: 32rpx;
+}
+answer .row-between{
+  border-bottom: 0.1rpx solid #dcdde3
+}
+answer:last-child .row-between{
+  border-bottom: 0
+}
+.answer-num{
+  background:#eee;
+  color:#999;
+  padding:15rpx 30rpx;
+  border-radius: 8rpx;
+  margin-bottom:30rpx;
+  font-size: 26rpx;
+}
+.hover-button{
+  background:rgb(61, 110, 202);
+}

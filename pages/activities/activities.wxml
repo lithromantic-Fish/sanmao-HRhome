@@ -1,0 +1,15 @@
+<!--pages/activities/activities.wxml-->
+<search chooseCity='true' type="2" item="activities"></search>
+<chooseNav selectTab="{{selectTab}}" items="{{tabs}}" bind:gotoLoad='changeStatus'></chooseNav>
+<view class="section-spacing"></view>
+<view class="column border-top" wx:if="{{activities.length!==0}}">
+    <view class="border" wx:for='{{activities}}' wx:key='_id'>
+        <activityItem activity="{{item}}"></activityItem>
+    </view>
+    <view class="load" wx:if="{{activities.length>4}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+</view>
+<empty wx:if="{{activities.length===0}}"></empty>
+<view class="modal-box column-center" wx:if="{{!userInfo}}" >
+  <authorize bind:getInfo='getInfo'></authorize>
+</view>
+<view class="mask"  wx:if="{{!userInfo}}"></view>

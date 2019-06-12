@@ -1,0 +1,5 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<view class="nav">
+  <view class="nav-item {{selectedTab===item?'choosed':''}}" wx:for="{{items}}" wx:key='*this' data-tab='{{item}}' bindtap='changeTab'>{{item}}</view>
+</view>
+<view class="place"></view>

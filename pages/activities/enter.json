@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "活动报名",
+  "usingComponents": {
+    "title":"/component/title/title",
+    "i-input-number": "../../dist/input-number/index"
+  }
+}

@@ -1,0 +1,5 @@
+	<image-cropper id="image-cropper" limit_move="true" disable_rotate="true" width="{{width}}" height="{{height}}" imgSrc="{{src}}" bindload="cropperload" bindimageload="loadimage" bindtapcut="clickcut" bind:move='move'></image-cropper>
+  <view class="size-1"style="z-index:999;position:absolute;bottom:172rpx;">
+    <button class='button-hr' bindtap='confirm'>提交</button>
+  </view>
+

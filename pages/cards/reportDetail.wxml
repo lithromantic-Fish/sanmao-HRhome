@@ -1,0 +1,37 @@
+<view class="row size-1 border title">投诉内容（必填）</view>
+<view class="size-1">
+  <textarea maxlength='200' placeholder='请输入投诉内容' value="{{content}}" bindinput='getText'></textarea>
+  <view class="row-end gray">{{content.length}}/200</view>
+</view>
+<view class="section-spacing"></view>
+
+<view class="row-between size-1 border">
+  <text class="title">图片证据（选填）</text>
+  <text class='gray'>{{images.length}}/9张</text>
+</view>
+
+<view class="row row-photos size-1">
+
+  <view 
+    class="photo-item" 
+    wx:for="{{images}}" 
+    wx:for-key='item' 
+    wx:for-index='index'>
+    <icon 
+      type='clear' 
+      class="clear" 
+      bindtap='clearPhoto' 
+      data-index='{{index}}'></icon>
+    <image 
+      src="{{item}}" 
+      mode="aspectFit" 
+      class="photo"></image>
+  </view>
+  <image 
+    src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_tjzp.png" 
+    mode="aspectFill" 
+    class="photo" 
+    wx:if="{{images.length<9}}" 
+    bindtap='chooseImage'></image>
+</view>
+<button class="button-hr" style="margin-top:30rpx;" bindtap='submit'>提交</button>

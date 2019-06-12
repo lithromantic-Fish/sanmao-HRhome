@@ -1,0 +1,34 @@
+<view class="row size-1 border" style='border-top:1rpx solid #dcdde3'>
+  <image class="group-1" style='width:30rpx;height:30rpx' src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_cjfz.png" mode="aspectFill" bindtap="hidden"></image>
+  <text class="group-1-text" style='font-size:30rpx' bindtap="hidden">创建分组</text>
+</view>
+<view class="size-1" wx:if="{{groups.length==0}}">
+  <view class="column-center size-1" style="background:rgba(255,255,255,1);box-shadow:0px 1px 34px 0px rgba(52,104,201,0.25);border-radius:8px;;">
+    <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/no-data.png" style='width:119rpx;height:193rpx' mode="aspectFill" class="no-data"></image>
+    <text class="no-data-text">您还没有创建分组</text>
+    <view class="no-data-button" bindtap="hidden">创建分组</view>
+  </view>
+</view>
+<view wx:if="{{groups.length}}">
+  <view class="section-spacing"></view>
+  <view class="column">
+    <i-swipeout 
+      i-class="i-swipeout-demo-item" 
+      operateWidth="{{140}}" 
+      unclosable="true" 
+      toggle="{{toggle}}" 
+      wx:for="{{groups}}" 
+      wx:key='id'>
+      <view class="row-between border" slot="content" bindtap='gotoGroupDetail' data-item='{{item}}'>
+        <view class="title-1" style='font-size:32rpx;color:#333'>{{item.name}}（{{item.count}}）</view>
+        <view class="iconfont icon-right" style='font-size:38rpx;color:#ccc'></view>
+      </view>
+      <view slot="button" class="i-swipeout-demo-button-group">
+        <view class="i-swipeout-demo-button" bindtap="_editGroup" data-item='{{item}}'>编辑</view>
+        <view class="i-swipeout-demo-button" bindtap="_deleteGroup" data-item='{{item}}'>删除</view>
+      </view>
+    </i-swipeout>
+  </view>
+</view>
+<my-modal bind:cancel="hidden" bind:save='save' wx:if="{{showModal}}" groupName="{{groupName}}"></my-modal>
+<view class='mask-view' wx:if="{{showModal}}"></view>

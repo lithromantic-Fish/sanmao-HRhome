@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "i-swipeout": "../../dist/swipeout/index",
+    "group-card":"/component/group-card/group-item"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "申请加V",
+  "backgroundColor": "#FACDB2",
+  "navigationBarBackgroundColor": "#FACDB2",
+  "usingComponents": {
+      "title": "/component/title/title"
+  }
+}
+

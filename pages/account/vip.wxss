@@ -1,0 +1,183 @@
+.card-box {
+  position: absolute;
+  z-index: 99;
+  width: 100%;
+  overflow: hidden;
+}
+
+.card-1 {
+  width: 100%;
+  padding-top: 50rpx;
+  overflow: hidden;
+}
+
+page {
+  /* overflow: hidden; */
+  width: 100vw;
+  background: #fff;
+  position: relative;
+}
+
+.card-bg {
+  background: linear-gradient(#faceb3, #f3a071);
+  width: 1400rpx;
+  margin-left: -700rpx;
+  left: 50%;
+  height: 35vh;
+  border-radius: 0 0rpx 50% 50%;
+  position: absolute;
+}
+
+.v-title {
+  font-size: 50rpx;
+  font-weight: 600;
+  color: #9e5832;
+  text-shadow: 0 0 10rpx #df590b5b;
+}
+
+.icon-jiav, .icon-youxiansousuo, .icon-youxianxianshi {
+  font-size: 80rpx;
+  color: #be3803;
+}
+
+.row-title {
+  margin-top: -30rpx;
+}
+
+.item {
+  font-size: 26rpx;
+}
+
+title .color-column {
+  background: #fc5f05;
+}
+
+.approve {
+  background: #ffa977;
+}
+
+title {
+  margin-top: -20rpx;
+}
+
+/* .icon-add{
+  padding:30rpx;
+  border: dashed 1rpx #441503;
+  color:#441503;
+  font-size: 50rpx;
+} */
+
+.confirm-1 {
+  width: 300rpx;
+  height: 300rpx;
+  background: linear-gradient(#fde1c8, #fdc2a1);
+  border: 4rpx solid #ffcaac;
+  box-shadow: 0 0 15rpx #4415032c;
+}
+
+.confirm-2 {
+  width: 300rpx;
+  height: 300rpx;
+  background: linear-gradient(#fde1c8, #fdc2a1);
+  border: 4rpx solid #ffcaac;
+  box-shadow: 0 0 15rpx #4415032f;
+}
+
+.confirm-3 {
+  width: 100%;
+  height: 370rpx;
+  background: #fff;
+  /* border: 4rpx solid #ffcaac; */
+  box-shadow: 0 0 15rpx #4415032f;
+  overflow: hidden;
+}
+
+.preImage {
+  display: block;
+  width: calc(100% - 8rpx);
+  border: 4rpx solid #ffcaac;
+  border-radius: 4rpx !important;
+  overflow: hidden;
+}
+
+.square-1 {
+  width: 298rpx;
+  height: 298rpx;
+  vertical-align: middle;
+  display: table-cell;
+  border: 1rpx #ff8c49 solid;
+}
+
+.card {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  line-height: 1;
+  background-color: transparent;
+}
+
+.card .icon-add {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
+
+.card .icon-1 {
+  display: inline-block;
+  width: 76rpx;
+  height: 50rpx;
+  margin-top: 105rpx;
+  background: url('https://static.hrloo.com/hrloo56/hrhomeminiapp/img/cardPaper.png') no-repeat center center / 76rpx 50rpx;
+}
+
+.card .icon-2 {
+  display: inline-block;
+  width: 81rpx;
+  height: 110rpx;
+  margin: 55rpx 0 0 25rpx;
+  background: url('https://static.hrloo.com/hrloo56/hrhomeminiapp/img/gp.png') no-repeat center center / 81rpx 110rpx;
+}
+
+.card .tit {
+  color: #441503;
+  margin-top: 20rpx;
+  font-size: 26rpx;
+}
+
+.square-box {
+  display: flex;
+}
+
+.v-button {
+  background: linear-gradient(to right, #ffc19d, #fd9051);
+  width: 100%;
+  color: #9e5832;
+  /* border-radius: 0 */
+}
+
+.icon-v {
+  width: 103rpx;
+  height: 189rpx;
+}
+
+.disabled {
+  background: linear-gradient(to right, #fde1c8, #fdc2a1);
+  color: #fff;
+}
+
+.title {
+  color: #9e5832 !important;
+  font-weight: normal !important;
+}
+
+title .color-column {
+  /* background: #9E5832 */
+  width: 8rpx !important;
+  height: 34rpx !important;
+  background: rgba(158, 88, 50, 1) !important;
+  border-radius: 4rpx !important;
+}

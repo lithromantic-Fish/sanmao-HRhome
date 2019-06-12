@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "HR人脉圈",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#f3f4f5",
+  "usingComponents": {
+    "search": "/component/search/search",
+    "cardListItem":"/component/cardListItem/cardListItem",
+    "empty":"/component/empty/empty",
+    "authorize":"/component/authorize/authorize"
+  }
+}

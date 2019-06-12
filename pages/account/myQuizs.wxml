@@ -1,0 +1,11 @@
+<wxs src="../filter.wxs" module="filter" />
+<view class="column">
+    <view class="column border-top " wx:if="{{answers.length!==0}}" style="margin-top:20rpx;">
+    <view class="column border pd-30" hover-class='hover' wx:for="{{answers}}"  bindtap='gotoQuizDetail' data-id='{{item.QuizId}}'>
+        <view class="title-name">{{item.QuizContents}}</view>
+        <view class="subtitle gray">{{filter.formatDate(item.QuizTime,'YYYY-MM-DD')}} {{item.Anscount}}回答</view>
+    </view>
+        <view class="load" wx:if="{{answers.length>5}}">{{selectedTab.loadAll?'已加载全部':'上拉加载更多'}}</view>
+    </view>
+</view>
+<empty wx:if="{{answers.length===0 || !answers.length }}"></empty>

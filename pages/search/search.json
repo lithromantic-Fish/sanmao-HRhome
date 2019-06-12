@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "搜索",
+  "usingComponents": {
+        "cardListItem": "/component/cardListItem/cardListItem",
+        "empty": "/component/empty/empty",
+        "activityItem": "/component/activityItem/activityItem",
+        "studyLesson": "/component/studyLesson/studyLesson",
+        "lesson": "/component/lesson/lesson"
+  }
+}

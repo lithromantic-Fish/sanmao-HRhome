@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "课程列表",
+  "usingComponents": {
+    "empty": "/component/empty/empty",
+    "lesson":"/component/lesson/lesson"
+  }
+}

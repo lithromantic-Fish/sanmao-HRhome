@@ -1,0 +1,51 @@
+@import "../../utils/iconfont.wxss";
+.input-view{
+  background:#fff;
+  border-radius: 8rpx;
+  border:1rpx solid #DCDDE3;
+  padding:10rpx ;
+  width:100%;
+}
+.wrap{
+  flex-wrap: wrap;
+}
+
+.item{
+  background:#fff;
+  border-radius: 30rpx;
+  padding:15rpx 20rpx;
+  /* border:1rpx solid #dcdde3; */
+  margin:8rpx 10rpx;
+}
+.card .title{
+  font-size: 34rpx;
+  font-weight: 600
+}
+.icon-delete{
+  font-size:46rpx;
+}
+.icon-shanchu{
+  margin-left:auto;
+  opacity: .8;
+  color: #999999
+}
+cardListItem .card-item{
+  border-top:.1rpx #dcdde3 solid;
+}
+studyLesson .question-1{
+  margin-bottom: 20rpx;
+}
+empty .column-center{
+  margin-top:25% !important
+}
+
+.icon-sousuo {
+  margin-left:20rpx;
+  font-size:24rpx;
+  margin-right:8rpx;
+  color:#999999;
+}
+
+.history .item {
+  float: left
+}

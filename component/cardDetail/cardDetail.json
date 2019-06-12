@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "moreMenu":"../moreMenu/moreMenu",
+    "i-badge": "../../dist/badge/index"
+  }
+}

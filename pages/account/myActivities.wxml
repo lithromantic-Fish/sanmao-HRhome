@@ -1,0 +1,31 @@
+<view class="bt"> </view>
+<chooseNav items="{{tabs}}" bind:gotoLoad='changeStatus'></chooseNav>
+
+<view wx:if="{{activities.length!==0}}">
+  <view class="column">
+    <view 
+      class="border" 
+      wx:for='{{activities}}' 
+      wx:key='_id' 
+      style="position:relative">
+      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/supportTag1.png" class="tag" mode='aspectFill' wx:if="{{item.Role==2}}"></image>
+      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/teacherTag1.png" class="tag" mode='aspectFill' wx:if="{{item.Role==1}}"></image>
+      <activityItem 
+        isactivity="true" 
+        activity="{{item}}" 
+        type="{{type}}"
+        lookSign='{{lookSign}}' 
+        order='{{order}}'>
+      </activityItem>
+    </view>
+  </view>
+</view>
+
+<view class="load" wx:if="{{activities.length>5}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+<empty wx:if="{{activities.length==0 || activities==null}}"></empty>
+<view class="fix">  
+    <view class="back-button column-center" bindtap='goHome'>
+      <text>全部</text>
+      <text>活动</text>
+    </view>
+</view>

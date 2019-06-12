@@ -1,0 +1,5 @@
+.empty-title{
+    font-size: 30rpx;
+    color:#999;
+    margin-top:34rpx;
+}

@@ -1,0 +1,5 @@
+<!--component/empty/empty.wxml-->
+<view class="column-center" style="margin-top:221rpx;">
+    <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/no-data.png" mode='aspectFit' style="width:176rpx;height:341rpx"></image>
+    <view class="empty-title">{{title}}</view>
+</view>

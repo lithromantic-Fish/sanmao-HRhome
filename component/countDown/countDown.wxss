@@ -1,0 +1,18 @@
+/* component/countDown/countDown.wxss */
+.card-top3-time{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding:0 10rpx
+}
+.time-section{
+  border-radius: 10rpx;
+  background-color:#f1615c;
+  padding:10rpx 10rpx;
+  box-sizing: border-box;
+  color:#fff;
+}
+.time-section-aside{
+  color:#f1615c;
+  margin:0 6rpx;
+}

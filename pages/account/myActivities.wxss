@@ -1,0 +1,69 @@
+empty{
+  margin-top:100rpx
+}
+chooseNav .nav{
+  padding:0;
+  z-index:100
+}
+chooseNav .nav-item{
+  width:25%;
+}
+.back-button{
+  box-sizing: border-box;
+  padding:10rpx 0;
+  background: #fff;
+  border:1rpx solid #4c89fb;
+  box-shadow: 0 0 15rpx rgba(0,0,0,.1);
+  color:#4c89fb;
+  width:100rpx;
+  height:100rpx;
+  line-height: 40rpx;
+  text-align: center;
+  border-radius: 50%;
+}
+.fix{
+  position: fixed;
+  bottom:3vh;
+  right:5vw;
+}
+activityitem .size-1{
+  padding:50rpx 30rpx;
+}
+.tag{
+  position: absolute;
+  width:125rpx;
+  height:42rpx;
+  top:8rpx;
+  left:-15rpx;
+  z-index: 99
+}
+.nav .choosed{
+  font-size:34rpx;
+  font-weight:bold;
+  color:rgba(76,137,251,1);
+  border-bottom:#4c89fb solid 6rpx;
+}
+choosenav .nav-item {
+  font-size:30rpx;
+  margin:0;
+  line-height: normal;
+  padding: 14rpx 21rpx;
+}
+.border{
+  border:none;
+  margin:0rpx 30rpx 20rpx 30rpx;
+  border-radius: 6rpx;
+  box-shadow:0px 1px 20px 0px rgba(52,104,201,0.15);
+}
+.activity-box .activity-image{
+  width:170rpx;
+  height: 148rpx;
+}
+.activity-title{
+  margin-top:11rpx;
+  margin-bottom:20rpx;
+}
+activityitem .price{
+  font-size:30rpx;
+  font-weight: 500;
+}

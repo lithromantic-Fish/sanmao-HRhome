@@ -1,0 +1,14 @@
+<wxs src="../filter.wxs" module="filter" />
+<search  type="newSound" ></search>
+<!--<swiper autoplay circular>
+  <block wx:for="{{imgUrls}}" wx:key='*this' >
+    <swiper-item>
+      <image src="{{filter.formatImage(item)}}" class="swiper-image" mode='aspectFill'/>
+    </swiper-item>
+  </block>
+</swiper>-->
+
+<view style="margin-top:20rpx" wx:if="{{lessons.length}}">
+<lesson wx:for="{{lessons}}" lesson='{{item}}'  ></lesson>
+</view>
+<empty wx:if="{{!lessons.length}}"></empty>

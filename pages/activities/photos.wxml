@@ -1,0 +1,7 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<view class="column">
+<view class="row" wx:if="{{photos.length!== 0}}">
+  <image src="{{filter.formatImage(item)}}" wx:for="{{photos}}" wx:key='PhotoId' class="photos" bindtap='preImage' wx:for-index='index' data-index="{{index}}" mode='widthFix'></image>
+</view>
+<empty wx:if="{{photos.length === 0}}"></empty>
+</view>

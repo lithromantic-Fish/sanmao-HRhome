@@ -1,0 +1,519 @@
+const app = getApp()
+
+
+const {
+  ChangeCard,
+  CardDetail,
+  SaveFormID,
+  Card,
+  LikeCard,
+  FavCard,
+
+  Consent,
+  CNXH_All,
+  CNXH_City,
+  CNXH_Industry,
+  GetReferrals,
+  DeleteCards,
+  UnStar,
+  Star,
+  UnLikeCard,
+  LookCard,
+  AddRemark
+} = require('../../utils/Class.js')
+
+let aggress = false
+let likeLoading = false
+const navs = [{
+    title: '全部',
+    url: CNXH_All
+  },
+  {
+    title: '同城',
+    url: CNXH_City
+  },
+  {
+    title: '同行',
+    url: CNXH_Industry
+  },
+  {
+    title: '二度人脉',
+    url: GetReferrals
+  }
+
+]
+let selectedTab = navs[0]
+let myCard = ''
+let self = {}
+
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    card_id: null,
+    // nav: ['全部', '同行', '同城', '二度人脉'],
+    nav: ['全部', '同行', '同城'],
+    cards: '',
+    is_exchange: null,
+    liked: false,
+    card: null
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
+    self = this
+    // aggress = false
+    // console.log(options)
+
+    // if (options.from === 'aggress') {
+    //   aggress = true
+    // }
+    // card = null
+    console.log('1',wx.getStorageSync('card'))
+    console.log('2', app.globalData.card)
+
+
+ 
+
+    // myCard = wx.getStorageSync('card') || app.globalData.card
+    myCard = app.globalData.card
+
+    self.setData({
+      card_id: options.card_id ? options.card_id : ''
+    })
+    self.getCardInfo()
+
+  },
+  /**
+   * 获取名片信息
+   */
+  getCardInfo() {
+    let {
+      card_id
+    } = self.data
+
+    let params = {
+      card_id: card_id
+    }
+    CardDetail.find(params).then(res => {
+      if (res && res.result === 0) {
+    
+
+        if (res.data.myself) {
+          wx.redirectTo({
+            url: '/pages/account/myCardDetail',
+          })
+          return
+        }else{
+          if (res.data.card_info.change_status == 2) {
+            wx.setNavigationBarTitle({
+              title: res.data.card_info.nickname + '的名片'
+            })
+          } else {
+            wx.setNavigationBarTitle({
+              title: '活动详情'
+            })
+          }
+        }
+
+        let {
+          card_info,
+          is_exchange
+        } = res.data;
+        let card = card_info
+
+        let menuList = []
+        if (card.change_status == 2) {
+          menuList = [
+            // {
+            //   id: 1,
+            //   name: '名片分组',
+            //   path: '/pages/account/add?card_id=' + card.id
+            // },
+            {
+              id: 2,
+              name: '推荐该名片'
+            },
+            // {
+            // id: 3,
+            //   name: '屏蔽此人'
+            // },
+            {
+              id: 4,
+              name: '举报',
+              path: '/pages/cards/report?name=' + card.nickname + '&card_id=' + card.id
+            },
+            {
+              id: 5,
+              name: '删除该名片'
+            }
+          ]
+        } else {
+          menuList = [{
+            id: 4,
+            name: '举报',
+            path: '/pages/cards/report?name=' + card.nickname + '&card_id=' + card.id
+          }, ]
+        }
+        Object.assign(card, {
+          menuList
+        })
+        self.setData({
+          card: card,
+          is_exchange: is_exchange
+        })
+        if (card.change_status == 2) {
+          self.getMoreCards()
+        }
+      } else {
+        res.result != 100 && wx.showToast({
+          title: res.msg,
+          icon: 'none',
+          duration: 2000
+        }) && setTimeout(function() {
+          wx.navigateBack()
+        }, 2000)
+      }
+    })
+  },
+  /**
+   * 交换名片
+   */
+  ChangeCard(e) {
+
+    let {
+      card
+    } = self.data
+    //debug.log(e)
+    // let mycard = wx.getStorageSync('card')
+    // console.info(app.globalData)
+    // return
+    let formId = e.detail.formId
+    if (!myCard) {
+      self.isCreateCard()
+      return
+    } else {
+      // else {
+      // if (aggress) {
+      //   const query = {
+      //     formId: formId,
+      //     id: mycard.id
+      //   }
+      //   ChangeCard.create(query).then(res => {
+      //     conosle.info(res)
+      //   })
+      //   return
+      //   http.post(`/bus/consent/${app.globalData.openid}`, query).then(res => {
+      //     debug.log(res.data)
+      //     if (res.data.status) {
+      //       wx.showToast({
+      //         title: '已收入该名片',
+      //         duration: 2000,
+      //         icon: 'none'
+      //       })
+      //       let status = 'card.change_status'
+      //       this.setData({
+      //         [status]: 1
+      //       })
+      //     } else {
+      //       wx.showToast({
+      //         title: '同意失败，请稍后再试',
+      //         duration: 2000,
+      //         icon: 'none'
+      //       })
+      //     }
+      //   })
+      // } else {
+      // console.info('ChangeCard')
+      if (card.id === myCard.id) {
+        wx.showModal({
+          title: '提示',
+          content: '不能交换自己的名片',
+          showCancel: false,
+          confirmColor: '#4c89fb'
+        })
+      } else {
+        const data = {
+          card_id: card.id
+        }
+        // console.info(data)
+        ChangeCard.create(data).then(res => {
+          console.info(res)
+          if (res && res.result == 0) {
+            wx.showToast({
+              title: '申请成功',
+              icon: 'success',
+              duration: 2000
+            })
+            self.setData({
+              'card.change_status': 1
+            })
+            self.getMoreCards()
+          }
+        })
+        return
+
+        // http.post(`/bus/S/${app.globalData.card.id}/B/${card.id}`, data).then(res => {
+        //   debug.log(res)
+        //   if (res.data.status) {
+        //     wx.showToast({
+        //       title: '申请成功',
+        //       icon: 'success',
+        //       duration: 2000
+        //     })
+        //   }
+        //   const status = 'card.change_status'
+        //   this.setData({
+        //     [status]: 2
+        //   })
+        // })
+
+      }
+      // }
+    }
+  },
+  allowChange() {
+    wx.showModal({
+      title: '提示',
+      content: '名片已收入您的名片夹中',
+      showCancel: false,
+      confirmColor: '#4c89fb'
+    })
+  },
+  goHome() {
+    wx.switchTab({
+      url: 'cards',
+    })
+  },
+  onShareAppMessage: function(res) {
+
+    // console.info('触发分享了', res)
+    return {
+      title: '这是' + self.data.card.nickname + '的名片，请惠存',
+      path: '/pages/cards/cardDetail?card_id=' + self.data.card.id
+    }
+  },
+  addContact() {
+    wx.addPhoneContact({
+      firstName: this.data.card.nickname, //联系人姓名
+      mobilePhoneNumber: this.data.card.mobile, //联系人手机号
+    })
+  },
+  //获取 猜你认识 数据列表
+  getMoreCards(opts) {
+
+    let prams = {
+      rand: 1
+    }
+    let args = Object.assign(prams, opts)
+
+    Card.find(args).then(res => {
+      // console.info('Card-find', 'in', res)
+      if (res && res.result === 0 && res.data) {
+        let {
+          data
+        } = res.data
+        self.setData({
+          cards: data.data
+        })
+      }
+    })
+  },
+  //猜你认识 tab
+  changeTab(e) {
+
+    // debug.log('changeTab e ', e)
+    if (e.detail.tab !== selectedTab.title) {
+      let opts = {}
+      // console.info('e.detail.tab', e.detail.tab)
+      // console.info('self.data.nav', self.data.nav)
+      selectedTab = navs.find(item => {
+        return item.title === e.detail.tab
+      })
+      //同行
+      if (self.data.nav[1] == e.detail.tab) {
+        opts = {
+          industry: self.data.card.industry
+        }
+      }
+      //同城
+      else if (self.data.nav[2] == e.detail.tab) {
+        opts = {
+          city: self.data.card.city
+        }
+      }
+      self.getMoreCards(opts)
+    }
+  },
+  //备注
+  createTips(e) {
+    // console.log(e.detail)
+    const data = {
+      "CardRemark": e.detail.value,
+      "OpenId": app.globalData.openid,
+      "id": self.data.card.id
+    }
+    AddRemark.create(data).then(res => {
+      // debug.log(res)
+      wx.showToast({
+        title: '添加成功',
+        icon: 'success',
+        duration: 2000
+      })
+    })
+  },
+
+  //是否创建名片 没有创建提示区创建
+  isCreateCard() {
+    if (!myCard) {
+      wx.showModal({
+        title: '提示',
+        content: '您还没有名片，是否立即前往',
+        success: res => {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/cards/makeCard',
+            })
+          }
+        }
+      })
+    }
+  },
+
+
+  /**
+   * 收藏名片
+   */
+  _favCard() {
+    if (!myCard) {
+      self.isCreateCard();
+      return
+    }
+
+    let {
+      card,
+      is_exchange
+    } = self.data
+
+    // if (!is_exchange) {
+    //   wx.showToast({
+    //     title: '还未交换名片哦',
+    //     icon: 'none',
+    //     duration: 2000
+    //   })
+    // } else {
+    FavCard.create({
+      card_id: card.id
+    }).then(res => {
+      if (res && res.result === 0) {
+        res.data && self.setData({
+          'card.fav_status': res.data.status
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+    // let id = app.globalData.openid + '/' + this.data.card.id;
+    // let starStatus = 'card.CardStatus';
+    // if (this.data.card.CardStatus === 0) { // 未收藏 然后被收藏
+    //   Star.get(id).then(res => {
+    //     console.log(res)
+    //     // wx.showToast({
+    //     //   title:'取消成功',
+    //     //   icon:'success',
+    //     //   duration:2000
+    //     // })
+    //     this.setData({
+    //       [starStatus]: 1
+    //     })
+    //   })
+    // } else {
+    //   UnStar.get(id).then(res => { // 收藏 然后取消收藏
+    //     console.log(res)
+    //     // wx.showToast({
+    //     //   title:'操作成功',
+    //     //   icon:'success',
+    //     //   duration:2000
+    //     // })
+    //     this.setData({
+    //       [starStatus]: 0
+    //     })
+    //   })
+    // }
+
+    // }
+  },
+  // 点赞
+  like() {
+    console.log('mycard',myCard)
+    let self = this
+
+    if (!myCard) {
+      self.isCreateCard();
+      return
+    }
+
+    if (likeLoading) {
+      return
+    }
+    likeLoading = true
+
+    let farourStatus = 'card.zan_status'
+    let farour = 'card.zan_count'
+    // let card_id = this.data.card.id
+    let params = {
+      card_id: this.data.card.id
+    }
+    console.log(this.data.card.zan_status)
+    if (this.data.card.zan_status === false) { //未赞
+      LikeCard.find(params).then(res => {
+        likeLoading = false
+        this.setData({
+          [farourStatus]: !false,
+          [farour]: ++this.data.card.zan_count
+        })
+      })
+    } else {
+      LikeCard.find(params).then(res => {
+        likeLoading = false
+        console.log(res)
+        this.setData({
+          [farourStatus]: !true,
+          [farour]: --this.data.card.zan_count
+        })
+      })
+    }
+  },
+  /**
+   * 发送私信
+   */
+  gotoContact() {
+    let self = this
+    console.info(card)
+    if (self.data.card.blacklist) {
+      wx.showModal({
+        title: '提示',
+        content: '您已被人举报 暂时无法使用私信',
+        showCancel: false,
+        confirmColor: '#4c89fb'
+      })
+    } else {
+      wx.navigateTo({
+        url: 'contact?card_id=' + this.data.card.id
+      })
+    }
+  },
+  //收集用户formid
+  submitFormId(e) {
+    SaveFormID.create({
+      formid: e.detail.formId
+    })
+  }
+})

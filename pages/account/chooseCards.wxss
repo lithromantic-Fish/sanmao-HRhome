@@ -1,0 +1,29 @@
+@import 'myCards.wxss';
+@import "../../utils/iconfont.wxss";
+.i-cell-group i-checkbox .i-checkbox-title{
+    display: none;
+}
+
+.icon-sousuo {
+  margin-left:20rpx;
+  font-size:24rpx;
+  margin-right:8rpx;
+  color:#999999;
+}
+.sky_8 .nav{
+  width:30rpx !important
+}
+.sky_8 .title{
+  font-size: 32rpx !important;
+  color: #333 !important
+}
+.sky_8 .desc{
+  font-size: 28rpx !important;
+  color: #666 !important
+}
+.sky_8 group-item{
+  padding: 20rpx 30rpx 20rpx 0rpx !important;
+}
+.sky_8 .i-cell{
+  padding: 24rpx 10rpx 24rpx 30rpx!important;
+}

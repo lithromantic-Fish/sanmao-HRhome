@@ -1,0 +1,10 @@
+.photos{
+  height:240rpx;
+  width:240rpx;
+  margin: 5rpx;
+}
+.row{
+  flex-wrap: wrap;
+  width:auto;
+
+}

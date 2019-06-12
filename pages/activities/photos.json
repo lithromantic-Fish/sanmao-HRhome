@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "活动云相册",
+  "usingComponents": {
+    "empty": "/component/empty/empty"
+  }
+}

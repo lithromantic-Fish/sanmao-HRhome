@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "筛选",
+  "usingComponents": {
+    "row": "/component/row/row",
+    "empty": "/component/empty/empty",
+    "title": "/component/title/title",
+    "cardListItem": "/component/cardListItem/cardListItem",
+    "selectRow":"/component/selectRow/selectRow"
+  }
+}

@@ -1,0 +1,71 @@
+<wxs src="../filter.wxs" module="filter" />
+<view class="column size-2" style="display:fixed">
+  <view class="row">
+    <view class="input-view row">
+      <view class="iconfont icon-sousuo"></view>
+      <input style='width:100%' value="{{content}}" confirm-type="search" placeholder='搜索' name='content' placeholder-style="color:#888;font-size:26rpx" class="input-text" bindinput='getText' bindconfirm="getData"></input>
+      <view class="iconfont icon-shanchu" wx:if="{{delete}}" bindtap='clear'></view>
+    </view>
+    <!-- <button class='search-button' catchtap='searchMt'>搜索</button> -->
+  </view>
+</view>
+
+<form bind:submit='submit' report-submit='true' class='sky_8'>
+  <view class="flex box box-lr" style="height:100%">
+    <view wx:if="{{!empty}}">
+      <scroll-view class="flex groups box box-tb" scroll-y="true" scroll-into-view="{{scrollIntoView}}">
+        <block 
+          wx:for="{{groups}}" 
+          wx:key='i'
+          wx:for-index="index"
+          wx:for-item="group">
+          <view class="flex" 
+            wx:if="{{group.length>0}}">
+            <view 
+              class="group-name" 
+              style='color:#999999' 
+              id="{{index}}">{{index}}</view>
+            <view class="flex group-users ">
+              <i-checkbox-group current="{{current}}" bindchange="changeRadio">
+                <view class="row" 
+                  wx:for="{{group}}" 
+                  wx:key='card_id' 
+                  wx:for-item="user" 
+                  wx:for-index="idx">
+                  <i-checkbox value="{{user.card_id}}"></i-checkbox>
+                  <group-item card="{{user}}" call="false" class="row size-2" hover-class="hover"></group-item>
+                </view>
+              </i-checkbox-group>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+      <view class="nav box box-tb" bindtouchmove="touchmove" bindtouchcancel="touchcancel" bindtouchend="touchend">
+        <view bindtap="tabLetter" data-index="{{item}}" wx:for="{{letters}}" wx:key='*this' class="flex box box-align-center box-pack-center letter">
+          <view class="row">
+            <view class="tooltip row" wx:if="{{selected == item}}">
+              <view style="text-align:center;z-index:99">
+                <text class="tooltip-text">{{item}}</text>
+              </view>
+              <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/tooltip.png" mode="aspectFit"></image>
+            </view>
+            <text class="letter-text {{selected == item ? 'letter-actived' : ''}}">{{item}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <empty wx:else></empty>
+  </view>
+
+  <!-- <view class="column" wx:if="{{search}}">
+    <view class="section-spacing"></view>
+    <view class="flex group-users" wx:if="{{searchList.length!==0}}">
+      <group-item card="{{user}}" call="false" wx:for="{{searchList}}" wx:key='BusId' wx:for-item="user" wx:for-index="idx" class="row size-2" hover-class="hover"></group-item>
+    </view>
+    <empty wx:if="{{searchList.length===0}}"></empty>
+  </view> -->
+  <view class='fix-buttons' style='height:110rpx' wx:if="{{!groups.length}}">
+    <button style='line-height:110rpx;color:#4C89FB' data-back="1" form-type='submit'>取消</button>
+    <button style='line-height:110rpx' form-type='submit' class="blue">确定</button>
+  </view>
+</form>

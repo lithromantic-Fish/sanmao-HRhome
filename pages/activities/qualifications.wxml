@@ -1,0 +1,30 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<div class="bt"> </div>
+<view class="size-1 border" style="background:#fff">
+    <view class="title pd-30 border" style="padding-top:0;padding-bottom:30rpx" wx:if="{{type==='institution'}}">1.请上传机构的营业执照照片和机构证明照片，有盖章（公司章即可）</view>
+    <view class="title pd-30 border" style="padding-top:0;padding-bottom:30rpx" wx:if="{{type==='person'}}">1.请上传您的身份证</view>
+    <view class="pd-30" style="padding-top:60rpx">
+        <view class="row" >
+            <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_tjzp.png" mode="aspectFit" class="tjzp" wx:if="{{!photo1}}" bindtap='choosedImage' data-photo='photo1'></image>
+            <image src="{{filter.formatImage(photo1)}}" mode="aspectFill" class="image-photo" wx:if="{{photo1}}" bindtap='choosedImage' data-photo='photo1'></image>
+        </view>
+    </view>
+</view>
+<view class="size-1 border" style="background:#fff;margin-top:20rpx">
+<view class="column pd-30 border" style="padding-top:0;padding-bottom:30rpx"  wx:if="{{type==='institution'}}">
+    <view class="title ">2.请出示机构证明，证明文字如下</view>
+    <view class="gray" style='margin-top:20rpx'>兹证明"xxxxx"公司/机构，在贵方发布活动通知，活动真实有效，特此证明！（加盖公司章）</view>
+</view>
+<view class="title pd-30 border" style="padding-top:0;padding-bottom:30rpx"  wx:if="{{type==='person'}}">2.请手持身份证正面拍照并上传</view>
+   
+    <view class="pd-30" style="padding-top:60rpx"> 
+        <view class="row" >
+            <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_tjzp.png" mode="aspectFit" class="tjzp"  wx:if="{{!photo2}}" bindtap='choosedImage' data-photo='photo2'></image>
+            <image src="{{filter.formatImage(photo2)}}" mode="aspectFill" class="image-photo" wx:if="{{photo2}}" bindtap='choosedImage' data-photo='photo2'></image>
+        </view>
+    </view>
+</view>
+<view class="column-center" style='margin-top:60rpx;'>
+    <view class="button-hr" bindtap='submit'>提交</view>
+    <text class="gray" style="font-size:24rpx;margin-top:20rpx;text-align:center" wx:if="{{type==='institution'}}">以上材料二选一上传即可</text>
+</view>

@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "高人指路",
+  "enablePullDownRefresh":true,
+  "usingComponents": {
+    "search": "/component/search/search",
+    "chooseNav": "/component/chooseNav/chooseNav",
+    "cardListItem": "/component/cardListItem/cardListItem",
+    "empty": "/component/empty/empty",
+    "authorize": "/component/authorize/authorize",
+    "answer": "/component/answer/answer",
+    "lesson":"/component/lesson/lesson"
+  }
+}

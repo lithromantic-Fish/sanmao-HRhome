@@ -1,0 +1,7 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<i-swipeout  i-class="i-swipeout-demo-item" operateWidth="{{70}}" unclosable="{{true}}" toggle="{{toggle}}">
+  <group-card card="{{card}}" slot='content'></group-card>
+  <view slot="button" class="i-swipeout-demo-button-group">
+      <view class="i-swipeout-demo-button" catchtap='delete' >删除</view>
+  </view>
+</i-swipeout>

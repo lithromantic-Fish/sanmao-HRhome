@@ -1,0 +1,20 @@
+<view class="column-center size-1" style="position:relative; padding-top:80rpx;border-top:1rpx solid #DCDDE3">
+  <image src="/assets/images/tabs/hrLogo.png" mode="aspectFit" style="width:340rpx;height:144rpx;border-radius:16rpx;"></image>
+  <view class="size-1 column-center" >
+    <text class="about ab">{{title}}</text>
+    <text class="about" style='line-height:68rpx'>{{about}}</text>
+    <view class='flex'>
+
+
+    <text class="about ab">{{about1}}</text>
+
+    <text class="about ab">{{cont0}}</text>
+    <text class="about ab">{{cont1}}</text>
+    <text class="about ab">{{cont2}}</text>
+    <text class="about ab">{{cont3}}</text>
+    </view>
+    <view class="contract card size-1 column-center">
+      <text>联系方式:{{contract}}</text>
+    </view>
+  </view>
+</view>

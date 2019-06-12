@@ -1,0 +1,8 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<view class="row" style="  align-items: flex-start;margin-bottom:40rpx;" >
+  <image src="{{filter.formatImage(card.BusIcon)}}" mode="aspectFill" class="avatar"></image>
+<view class="row" style="margin-top:20rpx;">
+  <image src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/tooltip-others.png' class="tooltip-others" mode="aspectFit"></image>
+  <view class="contact-box-others">{{card.data}}</view>
+</view>
+</view>

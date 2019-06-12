@@ -1,0 +1,50 @@
+.title{
+    font-size: 34rpx;
+    font-weight: 600
+}
+.image-box{
+    width:35%;
+}
+.image-box image{
+    width:190rpx;
+    height:190rpx;
+}
+.lesson-title{
+    font-size:32rpx;
+    font-weight: 500;
+}
+.num{
+    color: #4c89fb;
+    margin-right: 10rpx;
+    font-weight: 500
+}
+.info{
+    padding:15rpx 0;
+}
+.lesson-desc{
+    width:100%;
+    margin:20rpx 0;
+    display: -webkit-box;    
+    -webkit-box-orient: vertical;    
+    -webkit-line-clamp:2;    
+    overflow: hidden; 
+}
+.subtitle{
+    width:100%;
+    display: -webkit-box;    
+    -webkit-box-orient: vertical;    
+    -webkit-line-clamp:2;    
+    overflow: hidden;  
+}
+.question-1{
+    box-shadow: 0 0 25rpx rgba(76, 137, 251,0.4);
+    border-radius: 5rpx;
+    background:#fff
+}
+.lesson-title{
+    width:100%;
+    display: -webkit-box;    
+    -webkit-box-orient: vertical;    
+    -webkit-line-clamp:1;    
+    overflow: hidden; 
+}

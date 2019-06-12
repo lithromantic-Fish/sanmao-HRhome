@@ -1,0 +1,10 @@
+<view class="column-center" style='overflow:hidden'>
+  <view style='height:380rpx;width:150%;background:#4c89fb;border-radius:0 0rpx 50% 50%;text-align:center'>
+    <image style='width:186rpx;height:186rpx;border-radius:50%;margin:60rpx 0 20rpx 0' src="{{shareImage}}" mode="aspectFill"></image>
+    <view style='color:#fff;font-size:40rpx'>{{card.nickname}}的名片码</view>
+  </view>
+
+  <view class="description" style='font-size:30rpx;color:#666;margin-top:100rpx;'>名片码可以印在纸质名片、宣传单上</view>
+  <view class="description" style='font-size:30rpx;color:#666'>他人用微信扫码，即可快速保存信息</view>
+  <button class="button-hr" style='font-size:32rpx;margin-top:130rpx;' bindtap="save">下载名片码</button>
+</view>

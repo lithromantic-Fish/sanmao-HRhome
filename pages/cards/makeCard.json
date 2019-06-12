@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "编辑名片",
+    "usingComponents": {
+      "row": "/component/row/row",
+      "selectRow":"/component/selectRow/selectRow"
+    }
+  }

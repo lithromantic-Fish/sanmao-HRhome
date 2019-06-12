@@ -1,0 +1,25 @@
+.row-between{
+    background: #fff;
+}
+.row-1{
+    align-items: flex-start;
+}
+.type{
+    font-weight:600;
+    width:20%
+}
+.subtitle{
+    color:gray
+}
+.price{
+    text-align: right;
+}
+.avatar{
+    width:80rpx;
+    height:80rpx;
+    border-radius: 50%
+}
+textarea{
+    color:gray;
+    line-height: 50rpx;
+}

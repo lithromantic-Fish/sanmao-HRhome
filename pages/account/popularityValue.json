@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "人气值",
+  "usingComponents": {
+    "i-progress": "../../dist/progress/index",
+    "chooseNav": "/component/chooseNav/chooseNav",
+    "popularity": "/component/popularity/popularity"
+
+  }
+}

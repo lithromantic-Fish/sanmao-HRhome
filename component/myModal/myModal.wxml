@@ -1,0 +1,12 @@
+<view class="fixed-container">
+  <view class="column-center fixed-box">
+    <view class="column size-1 box-1">
+      <view class="title">新建分组</view>
+      <input class="input" value="{{groupName}}" bindinput='getText' placeholder-class ='placeholder' placeholder='请输入分组名字，仅支持18个字符' maxlength='18' ></input>
+    </view>
+    <view class="row box-2" style="width:100%">
+      <view class="section" bindtap='cancel'>取消</view>
+      <view class="section blue" bindtap='save'>保存</view>
+    </view>
+  </view>
+</view>

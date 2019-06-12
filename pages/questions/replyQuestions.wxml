@@ -1,0 +1,33 @@
+<wxs src="../filter.wxs" module="filter" />
+<view class="column size-1 border" style='background:#fff'>
+  <view class="row-between">
+    <view class="row">
+      <image src="{{filter.formatAvatar(answer.busIcon)}}" mode="aspectFill" class="avatar" wx:if="{{answer.Anonymous!==1}}"></image>
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/default_Image.png" mode="aspectFill" class="avatar" wx:if="{{answer.Anonymous===1}}"></image>
+      <view class="title-quizzer" wx:if="{{answer.Anonymous!==1}}">{{answer.busName}}的提问</view>
+          <view class="title-quizzer" wx:if="{{answer.Anonymous===1}}">匿名用户的提问</view>
+      <view class="subtitle" style="margin-left:15rpx;">人气值:{{AnswerPrice}}</view>
+    </view>
+    <!-- <text class="time subtitle">{{filter.formatDate(answer.startAt,'YYYY-MM-DD')}}</text> -->
+  </view>
+  <view class="content border">{{answer.Issue}}</view>
+  <view class="column-center " style="padding-top:50rpx;height:300rpx;">
+  <view class="column-center"   wx:if="{{!file}}" >
+    <view class="iconfont icon-recode" hover-class="hover" bindtouchstart="touchStart" bindtouchend="touchEnd" bindlongtap="longTap"></view>
+     <view class="reset">长按录制</view>
+    <view class="reset">提示：最多录制60s</view>
+  </view>
+    <view wx:if="{{file}}" style="margin-top:60rpx;">
+    <audio src="{{file}}" id="myAudio" ></audio>
+      <view class="voice row"  bindtap='play'>
+        <view class="iconfont icon-voice"></view>
+        <view class="unlock ">点击播放</view>
+        <view class="voice-text">{{filter.formatFloat(tempFilePath.duration/1000,2)}}s</view>
+      </view>
+        <view class="column-center" >
+            <view class="reset" bindtap='reset' hover-class='hover-text'>重新录制</view>
+        </view>
+    </view>
+  </view>
+  <button class="button-hr {{file?'':'disabled'}}"  bindtap="submit">提交</button>
+</view>

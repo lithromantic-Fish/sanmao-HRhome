@@ -1,0 +1,2 @@
+
+<component-tag-name data="{{allCities}}" my-city="{{selectedCityInfo.city}}" binddetail="binddetail"></component-tag-name>

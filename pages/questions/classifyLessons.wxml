@@ -1,0 +1,5 @@
+<wxs src="../filter.wxs" module="filter" />
+<view style="margin-top:20rpx" wx:if="{{lessons.length}}">
+    <lesson wx:for="{{lessons}}" lesson='{{item}}' ></lesson>
+</view>
+<empty wx:if="{{!lessons.length}}"></empty>

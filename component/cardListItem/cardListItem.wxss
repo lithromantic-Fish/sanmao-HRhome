@@ -1,0 +1,123 @@
+.card-item{
+  background: #fff;
+  /* align-items: flex-start; */
+  border-bottom: 1rpx #E3E4E8 solid;
+  /* border-top:.1rpx #dcdde3 solid; */
+  text-align: left;
+  line-height: 1.5;
+}
+.avatar{
+  width:120rpx;
+  height:120rpx;
+  border-radius:50%;
+  /* background:gray; */
+}
+.card .title{
+  font-size:34rpx;
+  font-weight:bold;
+  color: #333333
+}
+.card-right{
+  width: calc( 100% - 165rpx);
+  margin-left:15rpx
+}
+
+.icon-confirm{
+  font-size: 50rpx;
+  padding:12rpx 45rpx;
+  border:1rpx #dcdde3 solid;
+  border-radius: 15rpx;
+  color:rgb(202, 202, 202);
+  background: rgb(250, 250, 250)
+}
+.card .description,.card .role{
+  font-size: 26rpx;
+  margin-top:10rpx;
+  color:gray;
+  display: -webkit-box;    
+  -webkit-box-orient: vertical;    
+  -webkit-line-clamp:1;    
+  overflow: hidden;
+  /* color: #666 */
+}
+.card .row{
+  font-size: 28rpx;
+  color:gray;
+}
+.allow{
+  padding:15rpx 30rpx;
+  background:#4c89fb;
+  color:#fff;
+  border-radius: 8rpx;
+  line-height: initial;
+  font-size: initial
+
+}
+.icon-button{
+  width:50rpx;
+  height:50rpx;
+  /* padding:12rpx 45rpx; */
+  padding:10rpx 38rpx;
+
+  border:1.5rpx #4c89fb solid;
+  border-radius: 15rpx;
+}
+.icon-button-re{
+   width:50rpx;
+  height:50rpx;
+  /* padding:12rpx 45rpx; */
+  padding:10rpx 38rpx;
+  border-radius: 15rpx;
+    border:1rpx #dcdde3 solid;
+  background: rgb(250, 250, 250)
+}
+.vip{
+  width:20rpx;
+  height:20rpx;
+  display: flex;
+  position: absolute;
+  right:0;
+  bottom:0
+}
+.image-box{
+  position: relative;
+}
+.icon-button-hover{
+  opacity:0.6;
+}
+.hover{
+  background:#eaeaea
+}
+.answer{
+  color:#4c89fb;
+  padding:10rpx;
+  border:1.5rpx #4c89fb solid;
+  border-radius: 8rpx;
+  min-width: 35%;
+}
+.answer text{
+  font-weight: 500;
+  font-size: 32rpx;
+}
+.disabled{
+  background:#ccc;
+  color:#fff;
+  margin-left:15rpx;
+}
+.none-button{
+  background: rgba(0,0,0,0);
+  padding:0;
+  margin: 0;
+  line-height: initial
+}
+.button-detail{
+  /* padding:20rpx 40rpx; */
+  background:#4c89fb;
+  color:#fff;
+  border-radius: 8rpx;
+  width:172rpx;
+  height:70rpx;
+  text-align:center;
+  line-height:70rpx;
+  font-size:32rpx;
+}

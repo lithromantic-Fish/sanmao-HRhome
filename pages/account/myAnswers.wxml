@@ -1,0 +1,4 @@
+<view class="column size-1" wx:if="{{answers.length}}" style="background:#fff">
+    <myAnswer wx:for="{{answers}}" answer = '{{item}}' card='{{card}}'></myAnswer>
+</view>
+<empty wx:if='{{!answers.length}}'></empty>

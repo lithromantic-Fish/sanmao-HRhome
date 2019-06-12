@@ -1,0 +1,6 @@
+/* pages/activities/crop.wxss */
+.button-hr{
+  background-color: #FFF;
+  color:#4C89FB;
+  font-size:32rpx;
+}

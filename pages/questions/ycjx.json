@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "原创精选",
+  "enablePullDownRefresh":true,
+  "usingComponents": {
+    "search": "/component/search/search",
+    "empty": "/component/empty/empty",
+    "lesson":"/component/lesson/lesson"
+  }
+}

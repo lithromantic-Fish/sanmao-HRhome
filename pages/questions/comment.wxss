@@ -1,0 +1,35 @@
+.fix-bottom{
+    width:100%;
+    position: fixed;
+    border-top:0.1rpx solid #DCDDE3;
+    background:rgb(255, 255, 255,0.5);
+    bottom:0;
+    box-sizing: border-box;
+    padding:20rpx 30rpx
+  }
+  input{
+    width:100%;
+    padding:0 20rpx;
+    box-sizing: border-box;
+    border-radius: 10rpx;
+    background:#fff;
+    height:90rpx;
+    line-height:90rpx;
+  
+  }
+  .title{
+    font-size: 34rpx;
+  }
+comment:last-child .border{
+    border-bottom:0
+}
+  page{
+    padding-bottom:100rpx;
+  }
+  comment .content{
+  padding:20rpx 0 0 0;
+}
+comment .avatar{
+  width:66rpx;
+  height: 66rpx;
+}

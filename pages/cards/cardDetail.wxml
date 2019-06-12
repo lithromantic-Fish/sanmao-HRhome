@@ -1,0 +1,100 @@
+<view class='sky_4'>
+  <wxs src="../../pages/filter.wxs" module="filter" />
+  <view style="width:100wv;position:relative">
+    <view class="card-box">
+      <view class="size-1 cloumn card card-1">
+        <cardDetail card="{{card}}" style="width:100%"></cardDetail>
+      </view>
+    </view>
+    <view class="bg-box">
+      <view style="position:relative">
+        <view class='card-bg'></view>
+      </view>
+
+    </view>
+
+    <view 
+      class="row-around size-1" 
+      wx:if="{{card}}" 
+      style="padding-top:0">
+      <view 
+        class="action-1" 
+        style="height:60rpx;width:180rpx;font-size:30rpx;color:#4C89FB;font-weight:bold">
+        人气：{{filter.formatNum(card.popularity)}}</view>
+
+      <form bindsubmit='submitFormId' report-submit='true'>
+        <button 
+          class="zan-btn {{card.zan_status?'action-1':'action-2'}}" 
+          bindtap='like' 
+          class='confirmbtn' 
+          form-type='submit' 
+          style="height:60rpx;width:180rpx;font-size:30rpx;color:#4C89FB;font-weight:bold;background:rgba(76,137,251,0.15);line-height: 60rpx;padding:0;text-align:center">{{card.zan_status?'已赞':'赞'}}：{{filter.formatNum(card.zan_count)}}</button>
+      </form>
+
+      <!-- <view class="{{card.zan_status == false?'action-2':'action-1'}}" bindtap='like' style="height:60rpx;width:180rpx;font-size:30rpx;color:#4C89FB;font-weight:bold;background:rgba(76,137,251,0.15);line-height: 60rpx;padding:0">{{card.zan_status !== false?'已赞':'赞'}}：{{filter.formatNum(card.zan_count)}}</view> -->
+
+      <view 
+        class="{{card.fav_status?'action-1':'action-2'}}" 
+        bindtap='_favCard' 
+        style="width:270rpx;font-size:32rpx;height70rpx;line-height:70rpx;padding:0;text-align:center">
+        {{card.fav_status?'取消收藏':'收藏好友'}}</view>
+    </view>
+
+    <view class="size-1 " style="padding-top:0" wx:if="{{card.change_status==2}}">
+      <view class="row input-desc">
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_bq.png" mode="aspecFit" class='bq'></image>
+        <input class="" placeholder='为这张名片写点备注' bindconfirm='createTips' value='{{card.CardRemark}}'></input>
+      </view>
+
+    </view>
+    <view class="column list sky-5">
+      <title style="border-bottom:1rpx solid #E3E4E8" title='其他信息'></title>
+
+      <row style="padding:0 30rpx" type="邮箱:" content="{{card.email}}"></row>
+      <row style="padding:0 30rpx" wx:if="{{card.industry_name}}" type="所在行业:" content="{{card.industry_name}}"></row>
+      <row style="padding:0 30rpx" wx:if="{{card.city}}" type="所在城市:" content="{{card.city}}"></row>
+    </view>
+    <form bindsubmit="ChangeCard" report-submit='true'>
+      <view class="column-center size-2" style='padding-top:0'>
+          <button class="change-button" form-type='submit' wx:if="{{card.change_status==0 }}">交换名片</button>
+          <button class="change-button disabled" wx:if="{{card.change_status==1}}">已申请，请等待对方同意</button>
+          <!-- <button class="change-button" form-type='submit' wx:if="{{card.change_status==1}}">同意申请</button> -->
+
+
+        <!-- <button class="change-button" form-type='submit' wx:if="{{card.change_status==0&&!aggress}}">交换名片</button>
+        <button class="change-button disabled" wx:if="{{card.change_status==1&&!aggress}}">已申请，请等待对方同意</button>
+        <button class="change-button" form-type='submit' wx:if="{{aggress&&card.change_status!==1}}">同意申请</button> -->
+      </view>
+    </form>
+    <text class="load" style='margin-top:-10rpx' wx:if="{{card.change_status==1}}">交换成功之后可查看完整联系方式</text>
+  </view>
+  <view wx:if="{{card.change_status==2}}" class='sky_6'>
+    <title title='猜你认识'></title>
+    <chooseNav items='{{nav}}' bind:gotoLoad='changeTab'></chooseNav>
+    <view class="column">
+      <cardListItem 
+        wx:for="{{cards}}"
+        wx:key='id'
+        title='{{item.nickname}}' 
+        description='{{item.company}}' 
+        role='{{item.duty}}' 
+        status='{{item.change_status}}' 
+        bus='{{item.v_status}}' 
+        pathUrl="/pages/cards/cardDetail?card_id={{item.id}}" 
+        image="{{item.photo}}" 
+        home="true" ></cardListItem>
+      <!-- <cardListItem title='{{item.nickname}}' description='{{item.company}}' role='{{item.duty}}' status='{{item.change_status}}' bus='{{item.v_status}}' pathUrl="/pages/cards/cardDetail?id={{item.OpenId}}&busid={{item.BusId}}" image="{{item.BusIcon}}" home="true" wx:for="{{cards}}" wx:key='BusId' ></cardListItem> -->
+    </view>
+  </view>
+
+  <view class="fix">
+    <view class="back-button" bindtap='goHome'>首页</view>
+  </view>
+
+
+  <view class='fix-buttons' wx:if="{{card.change_status==2}}">
+    <button bindtap='addContact'>同步到手机通讯录</button>
+    <!-- <button class="blue" bindtap='gotoContact'>发送私信</button> -->
+  </view>
+
+</view>

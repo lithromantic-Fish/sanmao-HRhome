@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "contactMine": "/component/contactMine/contactMine",
+    "contactOthers": "/component/contactOthers/contactOthers"
+  }
+}

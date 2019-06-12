@@ -1,0 +1,105 @@
+<view class="column size-2">
+  <form bindsubmit='searchMt'>
+    <view class="row wrap">
+      <view class="input-view row">
+        <view class="iconfont icon-sousuo"></view>
+        <input style='width:100%' value="{{content}}" confirm-type="search" placeholder='{{placeholder}}' name='content' placeholder-style="color:#888;font-size:26rpx" class="input-text" bindinput='getText' maxlength='10' bindconfirm="getSearchResult"></input>
+        <view class="iconfont icon-shanchu" wx:if="{{content != ''}}" bindtap='clear'></view>
+      </view>
+      <!-- <button class='search-button' form-type='submit'>搜索</button> -->
+    </view>
+  </form>
+</view>
+
+<view style="width:100%" wx:if="{{searchResult.length==0 && searchHistory.length != 0}}">
+  <view class="row-between size-1 card" style="width:100%">
+    <view class="title">搜索历史</view>
+    <view class="iconfont icon-delete" bindtap='_delSearch'></view>
+  </view>
+  <view class="column size-1" style="padding-top:0">
+    <view class="history clearfix">
+      <view class="item" wx:for="{{searchHistory}}" wx:for-index='index' wx:for-item="item" wx:key="idx" bindtap='searchItem' data-item="{{item.keyword}}">{{item.keyword}}</view>
+    </view>
+  </view>
+</view>
+
+<!-- <view style="width:100%" wx:if="{{hotSearch.length!==0}}">
+  <view class="row-between size-1 card" style="width:100%">
+    <view class="title">热门搜索</view>
+  </view>
+  <view class="column size-1" style="padding-top:0">
+    <view class="row">
+      <view class="item" wx:for="{{searchList}}" wx:key='*this'>{{item}}</view>
+    </view>
+  </view>
+</view> -->
+
+<!-- 搜索名片 -->
+<view class="column" wx:if="{{type==1}}">
+  <view wx:for="{{searchResult}}" wx:key='name' style="padding-top:0">
+    <cardListItem title='{{item.nickname}}' description='{{item.company}}' role='{{item.duty}}' status='{{item.change_status}}' bus='{{item.v_tatus}}' image='{{item.photo}}' pathUrl="/pages/cards/cardDetail?card_id={{item.id}}"></cardListItem>
+  </view>
+  <view class="load" wx:if="{{searchResult.length>5}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+  <empty wx:if="{{searchResult.length==0}}" title="{{searchResultNullTxt}}"></empty>
+</view>
+
+<!-- 搜索活动 -->
+<view class="column" wx:if="{{type==2}}">
+  <view class="border" wx:for='{{searchResult}}' wx:key='_id' style="position:relative">
+    <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/supportTag1.png" class="tag" mode='aspectFill' wx:if="{{item.Role==2}}"></image>
+    <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/teacherTag1.png" class="tag" mode='aspectFill' wx:if="{{item.Role==1}}"></image>
+    <activityItem isactivity="true" activity="{{item}}" type="{{1}}" lookSign='{{lookSign}}' order='{{order}}'>
+    </activityItem>
+  </view>
+  <view class="load" wx:if="{{searchResult.length>5}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+  <empty wx:if="{{searchResult.length==0 || !searchResult}}" title="{{searchResultNullTxt}}"></empty>
+</view>
+
+
+
+<!-- 搜索精选活动 -->
+<view class="column" wx:if="{{type==3}}">
+  <view class="border" wx:for='{{searchResult}}' wx:key='_id' style="position:relative">
+    <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/supportTag1.png" class="tag" mode='aspectFill' wx:if="{{item.Role==2}}"></image>
+    <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/teacherTag1.png" class="tag" mode='aspectFill' wx:if="{{item.Role==1}}"></image>
+    <activityItem isactivity="true" activity="{{item}}" type="{{1}}" lookSign='{{lookSign}}' order='{{order}}'>
+    </activityItem>
+  </view>
+  <view class="load" wx:if="{{searchResult.length>5}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+  <empty wx:if="{{searchResult.length==0 || !searchResult}}" title="{{searchResultNullTxt}}"></empty>
+</view>
+
+
+
+
+<!-- <view class="column" wx:if="{{type==='activity'}}">
+  <view wx:for="{{list}}" wx:key='name' style="padding-top:0">
+    <activityItem activity="{{item}}"></activityItem>
+  </view>
+  <view class="load" wx:if="{{list.length>5}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+  <empty wx:if="{{list.length===0}}"></empty>
+</view>
+
+<view class="column" wx:if="{{type==='lesson'||type==='newSound' ||type==='origin'}}">
+  <view wx:for="{{list}}" wx:key='name' style="padding-top:0">
+    <lesson lesson="{{item}}"></lesson>
+  </view>
+  <view class="load" wx:if="{{list.length>5}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+  <empty wx:if="{{list.length===0}}"></empty>
+</view>
+
+<view class="column" wx:if="{{type==='question'}}">
+  <view wx:for="{{list}}" wx:key='name' style="padding-top:0">
+    <activityItem activity="{{item}}"></activityItem>
+  </view>
+  <view class="load" wx:if="{{list.length>5}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+  <empty wx:if="{{list.length===0}}"></empty>
+</view>
+
+<view class="column size-1" wx:if="{{type==='studyLesson'}}">
+  <view wx:for="{{list}}" wx:key='name' style="padding-top:0">
+    <studyLesson lesson="{{item}}"></studyLesson>
+  </view>
+  <view class="load" wx:if="{{list.length>5}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+  <empty wx:if="{{list.length===0}}"></empty>
+</view> -->

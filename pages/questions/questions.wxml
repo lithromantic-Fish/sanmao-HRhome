@@ -1,0 +1,83 @@
+<wxs src="../filter.wxs" module="filter" />
+<!--<search  type="question" ></search>-->
+<swiper autoplay circular>
+  <block wx:for="{{imgUrls}}" wx:key='BanId' >
+    <swiper-item bindtap='gotoWeb' data-image='{{item}}'>
+      <image src="{{filter.formatImage(item.BanImage)}}" class="swiper-image" />
+    </swiper-item>
+  </block>
+</swiper>
+<view class="row border" style="background:#fff">
+  <navigator url='jstw' hover-class='none'>
+    <view class="button-section column-center">
+      <view class="button-box">
+        <view class="image-box-button" hover-class="hover-none">
+          <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_jstw01.png" mode="aspectFill" ></image>
+        </view>
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_jstw02.png" mode="aspectFill" ></image>
+      </view>
+      <text>举手提问</text>
+    </view>
+  </navigator>
+<navigator hover-class='none' url='rwxs'>
+  <view class="button-section column-center">
+    <view class="button-box">
+      <view class="image-box-button" hover-class="hover-none">
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_rwxs01.png" mode="aspectFill" ></image>
+      </view>
+      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_rwxs02.png" mode="aspectFill" ></image>
+    </view>
+    <text>人物新声</text>
+  </view>
+</navigator>
+<navigator url='kcxx' hover-class='none'>
+  <view class="button-section column-center">
+    <view class="button-box">
+      <view class="image-box-button" hover-class="hover-none">
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_kcxx01.png" mode="aspectFill" ></image>
+      </view>
+      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_kcxx02.png" mode="aspectFill" ></image>
+    </view>
+    <text>课程学习</text>
+  </view>
+</navigator>
+<navigator url='ycjx' hover-class='none'>
+  <view class="button-section column-center">
+    <view class="button-box">
+      <view class="image-box-button" hover-class="hover-none">
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_ycjx01.png" mode="aspectFill" ></image>
+      </view>
+      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_ycjx02.png" mode="aspectFill" ></image>
+    </view>
+    <text>原创精选</text>
+  </view>
+  </navigator>
+</view>
+
+<view style="margin-top:20rpx">
+<lesson wx:for="{{lessons}}" lesson='{{item}}' ></lesson>
+</view>
+
+<!-- <chooseNav items="{{tabs}}" bind:gotoLoad='changeStatus'></chooseNav>-->
+<!--<view wx:if="{{selectedTab.title==='答主'}}"> 
+  <view class="section-spacing" wx:if="{{cards.length!==0}}"></view>
+  <view class="column border-top" wx:if="{{users.length!==0}}" style="margin-top:20rpx">
+    <view wx:for="{{users}}" wx:key='name' class="border">
+      <cardListItem title='{{item.BusName}}' description='{{item.BusCompany}} {{item.BusDuty}}' role='{{item.num}}条问答'  pathUrl="/pages/questions/answerer?id={{item.ClientId}}" image="{{item.BusIcon}}" price="{{AskPrice}}" answer="true"></cardListItem>
+    </view>
+    <view class="load" wx:if="{{users.length>5}}">{{selectedTab.loadAll?'已加载全部':'上拉加载更多'}}</view>
+  </view>
+  <empty wx:if="{{users.length===0}}"></empty>
+</view>-->
+<!--<view wx:if="{{selectedTab.title==='问题'}}">-->
+  <!-- <view class="section-spacing" wx:if="{{answers.length!==0}}"></view> -->
+  <!--<view class="column border-top" wx:if="{{answers.length!==0}}" style="margin-top:20rpx">
+    <answer wx:for="{{answers}}" answer="{{item}}" ></answer>
+    <view class="load" wx:if="{{answers.length>5}}">{{selectedTab.loadAll?'已加载全部':'上拉加载更多'}}</view>
+  </view>
+  <empty wx:if="{{answers.length===0}}"></empty>
+</view>-->
+<view class="modal-box column-center" wx:if="{{!userInfo}}">
+  <authorize bind:getInfo='getInfo'></authorize>
+</view>
+<view class="mask" wx:if="{{!userInfo}}"></view>

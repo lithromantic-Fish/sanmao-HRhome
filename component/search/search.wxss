@@ -1,0 +1,60 @@
+@import "../../utils/iconfont.wxss";
+.search-box{
+  height:100rpx;
+  background:#fff;
+  position: fixed;
+  width:100%;
+  z-index:1000;
+}
+.fixed-box{
+  height: 100rpx;
+}
+.search-input-box{
+  background: #f3f4f5;
+  border-radius:8rpx;
+  width: 640rpx;
+  display: flex;
+  align-items: center;
+  height: 70rpx;
+  /* padding:5rpx 0; */
+  /* border: 0.2rpx solid rgb(196, 196, 196); */
+}
+.weizhi{
+  color:#4c89fb;
+  position: relative;
+  font-size: 26rpx;
+}
+.icon-weizhi{
+  position: absolute;
+  left:-27rpx;
+  top:0;
+
+}
+.search-input-box input{
+  margin-left: 5rpx;
+  font-size: 25rpx;
+  color: #888888;
+  height:100%;
+  line-height:70rpx;
+  box-sizing:border-box;
+}
+.icon-sousuo{
+  margin-left:20rpx;
+  font-size: 24rpx;
+  margin-right: 8rpx;
+  color: #999999
+}
+.icon-filter{
+  width:45rpx;
+  height:45rpx;
+  margin-left: 20rpx;
+  margin-top: 10rpx
+}
+.search-button-1{
+  color:#fff;
+  background: #4c89fb;
+  padding:15rpx 20rpx;
+  border-radius: 10rpx;
+
+
+}

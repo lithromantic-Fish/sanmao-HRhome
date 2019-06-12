@@ -1,0 +1,7 @@
+{
+      "navigationBarTitleText": "系统消息",
+  "usingComponents": {
+    "i-swipeout": "../../dist/swipeout/index",
+    "empty":"../../component/empty/empty"
+  }
+}

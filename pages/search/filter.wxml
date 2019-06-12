@@ -1,0 +1,59 @@
+<!-- <import src="../../component/template/index.wxml"/> -->
+<title title='筛选条件'></title>
+<view class="column">
+  <!-- <selectRow 
+    type="所在行业" 
+    picker="点击选择行业" 
+    pickerArr="{{roleArr}}" 
+    bind:change='change' 
+    data-mode='industry'>
+  </selectRow> -->
+  <picker 
+    class='picker'
+    bindchange="_change" 
+    range="{{professions}}"
+    value="{{industry}}" 
+    range-key="name" 
+    data-mode='industry'>
+      <view class="row-between size-2 section">
+        <view class="type" style="width:12%">行业</view>
+        <view class="row-end" style="width:89%">
+          <input 
+            name="industry" 
+            value="{{professionText}}" 
+            placeholder='{{professionText}}' 
+            class="text-right hidden" 
+            style="width:580rpx" 
+            disabled='true'></input>
+          <view class="iconfont icon-right"></view>
+        </view>
+      </view>
+    </picker>
+
+  <selectRow 
+    type="工作城市" 
+    picker="点击选择城市" 
+    mode="region" 
+    value="{{arrvalue}}" 
+    bind:change='_change' 
+    data-mode='city'>
+  </selectRow>
+</view>
+
+<view class="column" style="margin-top:20rpx;">
+  <view 
+    wx:for="{{cards}}" 
+    wx:key='BusId'>
+    <cardListItem 
+      title='{{item.nickname}}' 
+      description='{{item.company}}' 
+      image='{{item.photo}}' 
+      role='{{item.duty}}' 
+      bus='{{item.v_status}}' 
+      status='{{item.change_status}}' 
+      pathUrl="/pages/cards/cardDetail?card_id={{item.id}}">
+      </cardListItem>
+  </view>
+  <view class="load" wx:if="{{cards.length>5}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+  <empty wx:if="{{cards.length===0}}"></empty>
+</view>

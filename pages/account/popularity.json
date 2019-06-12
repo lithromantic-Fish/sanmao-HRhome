@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "人气值收支明细",
+  "navigationBarBackgroundColor": "#81BCFD", 
+  "backgroundColor": "#81BCFD",
+  "navigationBarTextStyle": "white",
+      "usingComponents": {
+        "empty": "/component/empty/empty",
+        "title": "/component/title/title"
+      }
+}

@@ -1,0 +1,68 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<view style="background:#fff">
+  <navigator url='myCardDetail' hover-class="none" wx:if="{{card}}">
+    <view style='padding:30rpx !important'>
+      <view class="row-between card-box-item" style='padding:30rpx 40rpx !important'>
+        <view class="row">
+          <image class="avatar" src="{{filter.formatImage(card.photo)}}" mode="aspectFill"></image>
+          <view class="column">
+            <view class="title" style='width:300rpx'>{{card.nickname}}</view>
+            <view class="gray">人气值：
+              <text class="num">{{card.popularity}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="row">
+          <view class="gray">我的名片</view>
+          <view class="iconfont icon-right" style='color:#999 !important;font-size:46rpx !important'></view>
+        </view>
+      </view>
+    </view>
+  </navigator>
+  <navigator url='/pages/cards/makeCard' hover-class="none" wx:else>
+    <view class="size-1">
+      <view class="row-between sky_2 card-box-item">
+        <view class="row">
+          <image class="avatar" src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/default.jpg" mode="aspectFill"></image>
+          <view class="column">
+            <view class="title title-none">点击创建电子卡片</view>
+            <view class="gray">人气值
+              <text class="num">0</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </navigator>
+  <!-- 
+  <view class="row size-1 border">
+    <view class="menu-section column-center" bindtap='gotoMyActivity'>
+      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_myActivity.png" mode="aspectFill" class="icon-menu"></image>
+      <view class="gray">我的活动</view>
+    </view>
+    <view class="menu-section column-center border-section" bindtap='gotoMyQuiz' >
+      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_myQuestion.png" mode="aspectFill" class="icon-menu"></image>
+      <view class="gray">我的提问</view>
+    </view>
+    <view class="menu-section column-center" bindtap='gotoMyAnswer'>
+      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_myAnswer.png" mode="aspectFill" class="icon-menu"></image>
+      <view class="gray">我的回答</view>
+    </view>
+  </view> -->
+</view>
+<view class="column-bottom sky_1" style="margin-top:20rpx;">
+  <row type='我的活动' icon='myActivities' pathUrl="/pages/account/myActivities" hover='hover'></row>
+  <row type='我的名片夹' icon='mpj' pathUrl="/pages/account/myCards" hover='hover'  isVip="{{isVip}}"></row>
+
+  <row type='加V特权' icon='v' pathUrl="/pages/account/vip" hover='hover'></row>
+  <!-- <row type='我的问答' icon='myAnswer' pathUrl="/pages/account/questions" hover='hover'></row> -->
+  <!-- <row type='申请成为答主' icon='apply' pathUrl="/pages/account/tobeAns" hover='hover'></row>  -->
+  <row type='人气值' icon='popularity' pathUrl="/pages/account/popularityValue" hover='hover'></row>
+  <row type='人气值收支明细' icon='details' pathUrl="/pages/account/popularity" hover='hover'></row>
+  <row type='关于我们' icon='hr' pathUrl="/pages/account/about" hover='hover'></row>
+</view>
+
+<view class="modal-box column-center" wx:if="{{!userInfo}}">
+  <authorize bind:getInfo='getInfo'></authorize>
+</view>
+<view class="mask" wx:if="{{!userInfo}}"></view>

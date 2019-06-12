@@ -1,0 +1,45 @@
+.dot{
+  width:20rpx;
+  height:20rpx;
+  border-radius: 50%;
+  background: red;
+  margin-right:15rpx;
+}
+.title{
+  font-size: 30rpx;
+  font-weight: 600;
+}
+.content{
+  color:gray;
+  width:100%
+}
+.message-box{
+  width:100%;
+}
+
+.i-swipeout-demo-item{
+  border:0.1rpx lightgray solid;
+  background: #fff;
+  border-radius: 10rpx;
+}
+.i-swipeout-demo-item .i-swipeout-content{
+  white-space: initial
+}
+.i-swipeout-demo-button{
+   width:80px;
+    text-align: center;
+    background:#f71823;
+    color:#fff;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center
+}
+
+i-swipeout .i-swipeout-demo-item{
+  border: 1rpx solid #DCDDE3 !important
+}
+.content{
+  padding-left: 35rpx;
+  box-sizing: border-box
+}

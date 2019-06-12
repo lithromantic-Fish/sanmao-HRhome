@@ -1,0 +1,25 @@
+.city-item {
+  background: #fff;
+  border-radius: 8rpx;
+  font-size: 34rpx;
+  width:20%;
+  height:75rpx;
+ line-height:75rpx;
+  margin:10rpx 15rpx
+}
+.selected{
+  background:#4c89fb;
+  color:#fff;
+}
+.row-line{
+  width:100%;
+  flex-wrap: wrap
+}
+page{
+  height:100%
+}
+.right-item.active{
+  padding: 0 !important;
+  width: 30rpx;
+  height: 30rpx
+}

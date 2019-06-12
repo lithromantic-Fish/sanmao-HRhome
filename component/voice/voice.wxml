@@ -1,0 +1,16 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<view class="row">
+<image src="{{filter.formatAvatar(answer.BusIcon)}}" class="avatar"></image>
+<view clas="coulmn">
+<view class="title-voice" wx:if="{{!hideName}}">{{answer.BusName}}</view>
+<view class="voice row" catchtap='pay'>
+    <view class="iconfont icon-voice" wx:if="{{!play}}"></view>
+    <image src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_voice.gif' mode="aspectFit" class='voice-icon' wx:if="{{play}}"></image>
+   <!-- <image src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_voice.gif' mode="aspectfit" class='voice-icon' ></image> -->
+    <view class="unlock " wx:if="{{answer.isCir!==1 && answer.OpenId !== openid && answer.QuizOpenId!==openid}}">{{AskPrice}}人气值 围观</view>
+    <view class="unlock " wx:if="{{answer.isCir===1 || answer.OpenId === openid || answer.QuizOpenId===openid}}">{{play?'':'点击播放'}}</view>
+    <audio src="{{filter.formatAudio(answer.AnsContents)}}" id="myAudio"></audio>
+    <view class="voice-text">{{answer.Duration}}s</view>
+</view>
+</view>
+</view>

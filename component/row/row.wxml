@@ -1,0 +1,9 @@
+<!--component/row/row.wxml-->
+<view class="row size-2 row-row" bindtap = "gotoPage" hover-class="{{hover}}" style='position:relative'>
+<image class="icon-account " src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/{{icon}}.png" wx:if="{{icon}}" mode="aspectFill"></image>
+    <!-- <view class="iconfont icon-{{icon}}" ></view> -->
+    <text class='redDos_row' wx:if="{{isVip}}">2</text>
+    <view class="type">{{type}}</view>
+    
+    <view class="content" wx:if="{{content}}">{{content}}</view>
+</view>

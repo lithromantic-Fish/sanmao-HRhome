@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "人物新声",
+  "enablePullDownRefresh":true,
+  "usingComponents": {
+    "search": "/component/search/search",
+    "empty": "/component/empty/empty",
+    "lesson":"/component/lesson/lesson"
+  }
+}

@@ -1,0 +1,24 @@
+.avatar{
+    width:120rpx;
+    height:120rpx;
+    border-radius: 50%;
+}
+.title{
+    font-size: 36rpx;
+    font-weight: 600
+}
+.position,.desc{
+    font-size: 30rpx;
+    font-weight: 500;
+    color:gray;
+}
+.position{
+    margin-left:15rpx
+}
+.desc{
+  margin-top:15rpx;  
+}
+.phone{
+    width:50rpx;
+    height:50rpx;
+}

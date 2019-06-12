@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "评论",
+  "usingComponents": {
+    "empty": "/component/empty/empty",
+    "comment": "/component/comment/comment"
+  }
+}

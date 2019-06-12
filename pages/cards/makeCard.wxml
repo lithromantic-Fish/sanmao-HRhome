@@ -1,0 +1,160 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<view class="section-spacing"></view>
+<view class="column" wx:if="{{!userInfo}}" hidden='{{true}}'>
+  <view class="row ">
+    <button 
+      class="get-info" 
+      open-type="getUserInfo" 
+      bindgetuserinfo="getInfo">
+      <text>获得微信授权</text>
+    </button>
+  </view>
+  <view class="section-spacing"></view>
+</view>
+
+<form bindsubmit="save" report-submit='true'>
+  <view class="column  size-2 border-top" style="padding-bottom:0">
+    <view class="row info-card">
+      <image 
+        src="{{filter.formatAvatar(photo)}}" 
+        mode="aspectFill" 
+        class="avatar" 
+        bindtap='changeAvatar'></image>
+      <view class="column title-column">
+        <view class="row size-row section" >
+          <input 
+            value="{{nickname}}" 
+            name="nickname" 
+            placeholder='请输入姓名' 
+            class="input-text"></input>
+            <text style='font-size:21rpx'>(请手动添加真实姓名)</text>
+        </view>
+        <view class="row  size-row section">
+          <input 
+            value="{{mobile}}" 
+            name="mobile" 
+            maxlength='11' 
+            placeholder='输入手机号码' 
+            type='number' 
+            class="input-text" 
+            bindinput='getPhone' 
+            style="width:{{mobile?'40':'63'}}%"></input>
+          <button 
+            open-type='getPhoneNumber' 
+            bindgetphonenumber="_getPhoneNumber" 
+            class="phone " 
+            style="width:50%">快速获取手机号</button>
+          <!-- <button 
+            bindtap='getCode' 
+            class="phone getcode" 
+            wx:if="{{mobile}}">获取验证码进行修改</button> -->
+        </view>
+      </view>
+    </view>
+    <!-- <view class="row-between size-row info-code" wx:if="{{bind}}">
+      <view class="type">验证码
+        <text>*</text>
+      </view>
+      <input 
+        name="code" 
+        value="{{code}}" 
+        placeholder='请输入收到的验证码' 
+        class="text-right" 
+        type="number" 
+        bindinput='getCodeNum'></input>
+      <view class="phone getcode2 {{confirm?confirm:''}}" bindtap="confirm">{{text}}</view>
+    </view> -->
+  </view>
+  <view class="middle">信息填写完整，可以帮助你获得更多人脉噢</view>
+
+  <view class="column">
+    <view class="row-between size-2 section">
+      <view class="type">性别
+        <text>*</text>
+      </view>
+      <picker 
+        bindchange="genderChange" 
+        value="{{gender}}" 
+        range="{{genderArr}}">
+        <view class="row">
+          <input 
+            value="{{genderArr[gender]}}" 
+            name='gender' 
+            class="text-right"></input>
+          <view class="iconfont icon-right"></view>
+        </view>
+      </picker>
+    </view>
+    <view class="row-between size-2 section">
+      <view class="type">公司
+        <text>*</text>
+      </view>
+      <input 
+        name="company" 
+        bindinput="bindKeyInput" 
+        value="{{company}}" 
+        placeholder='请输入公司名称' 
+        class="text-right"></input>
+    </view>
+    <view class="row-between size-2 section">
+      <view class="type">职位
+        <text>*</text>
+      </view>
+      <input 
+        name="duty" 
+        value="{{duty}}" 
+        placeholder='请输入职位' 
+        class="text-right"></input>
+    </view>
+    <view class="row-between size-2 section">
+      <view class="type">邮箱
+        <text>*</text>
+      </view>
+      <input 
+        name="email" 
+        value="{{email}}" 
+        placeholder='请输入邮箱' 
+        class="text-right"></input>
+    </view>
+    <picker 
+      bindchange="professionChange" 
+      range="{{professions}}"
+      value="{{industry}}" 
+      range-key="name">
+      <view class="row-between size-2 section">
+        <view class="type" style="width:12%">行业
+          <text>*</text>
+        </view>
+        <view class="row-end" style="width:89%">
+          <input 
+            name="industry" 
+            value="{{professionText}}" 
+            placeholder='{{professionText}}' 
+            class="text-right hidden" 
+            style="width:580rpx" 
+            disabled='true'></input>
+          <view class="iconfont icon-right"></view>
+        </view>
+      </view>
+    </picker>
+    <selectRow 
+      type="工作城市" 
+      mode="region" 
+      picker="{{regionText}}" 
+      necessary="true" 
+      bind:change="cityChange" 
+      class="section"></selectRow>
+    <view class="row-between size-2 card section " style="width:100%">
+      <view>是否在HR人脉圈上显示我的名片</view>
+      <switch 
+        checked="{{status == 2 ? true : false}}" 
+        type="switch" 
+        value="{{status}}" 
+        name="status"></switch>
+    </view>
+  </view>
+  <view class="size-1">
+    <button form-type='submit' class="button-hr">保存</button>
+  </view>
+
+</form>

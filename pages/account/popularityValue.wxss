@@ -1,0 +1,96 @@
+.popularity-top{
+  background:#4c89fb;
+  color:#fff;
+  height: 111rpx;
+  line-height: 111rpx;
+  padding-left: 40rpx;
+  font-size: 34rpx;
+  box-sizing: border-box
+}
+.progress-box{
+  position: relative;
+}
+.tooltip-top{
+ position: absolute;
+  top:-30rpx;
+  width:102%
+}
+.tooltip-bottom{
+  position: absolute;
+  bottom:-7rpx;
+  width:102%
+}
+.num{
+  position: absolute;
+}
+.num0{
+  left:0%
+}
+.num1{
+  left:20%;
+}
+.num2{
+  left:92%;
+}
+.text2{
+left:92%;
+}
+.size-progress{
+  padding:90rpx 30rpx
+}
+chooseNav .nav{
+  padding:0;
+  position:relative;
+}
+chooseNav .place{
+  display: none;
+}
+.nav{
+  display: flex;
+  justify-content: space-around
+}
+chooseNav .nav-item{
+  /* width:20%; */
+  font-weight: bold;
+  font-size: 34rpx;
+  width: auto !important;
+  
+}
+.choosed{
+    color:#4c89fb;
+    border-bottom:6rpx solid #4c89fb !important
+   
+}
+.title-1{
+  font-size:32rpx;
+  color: #333;
+  padding: 30rpx 0 20rpx 30rpx;
+  box-sizing: border-box
+}
+popularity .size-1{
+  padding:0 0 0 30rpx!important
+}
+
+/* .row-between{
+  display: flex
+} */
+popularity .column{
+  padding: 30rpx 0;
+  border-bottom:1rpx solid #DCDDE3;
+  padding-right: 90rpx
+}
+popularity .border{
+  border: none
+}
+
+popularity .blue{
+  position: absolute;
+  right: 0;
+  top: 50rpx
+}
+popularity .row{
+  width: 100% !important
+}
+popularity .row-between{
+  position: relative
+}

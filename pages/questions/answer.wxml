@@ -1,0 +1,45 @@
+<wxs src="../filter.wxs" module="filter" />
+<view class="column size-1 border" style='background:#fff'>
+  <view class="row-between">
+    <view class="row"> 
+      <image src="{{filter.formatAvatar(answer.bus.BusIcon)}}" mode="aspectFill" class="avatar" ></image>
+      <view class="title">{{answer.bus.BusName}}的提问</view>
+    </view>
+    <text class="time subtitle">{{filter.formatDate(answer.QuizTime,'YYYY-MM-DD')}}</text>
+  </view>
+  <view class="content" >{{answer.QuizContents}}</view>
+  <view class="column-center size-1 " style="margin-bottom:60rpx;" wx:if="{{answer.QuizOpenId !== openid}}">
+    <view class="button-hr" bindtouchstart="touchStart" bindtouchend="touchEnd" bindlongtap="longTap" hover-class='hover-button' touchmove='touchmove'>{{text}}</view>
+    <audio src="{{file}}" id="myAudio" ></audio>
+  </view>
+  <view class="row-end" wx:if="{{answer.QuizOpenId === openid}}">
+    <view class='answer-num'>{{answers.length}}个回答</view>
+  </view>
+  <view class="row-around" style="width:100%">
+    <view class="line row"></view>
+    <view class="line-text subtitle">以下为回答内容</view>
+    <view class="line row"></view>
+  </view>
+  <view class="column">
+    <answer answer='{{item}}' wx:for="{{answers}}" wx:if="{{answers.length>0}}"></answer>
+    <view wx:if="{{answers.length===0}}" class="gray" style='padding:50rpx 0;text-align:center'>暂时没有回答哦</view>
+  </view>
+</view>
+
+<view class="section-spacing"></view>
+
+<!--<view class="row-between border-top size-1 border box" bindtap='gotoAnswerer' hover-class="hover">
+  <view class="row">
+    <image src="{{filter.formatAvatar(answer.BusIcon)}}" class="avatar"></image>
+    <view class="column" style="margin-top:15rpx">
+      <text class="title">{{answer.BusName}}</text>
+      <view class="row subtitle">
+        <text>{{answer.sum}}个问答</text>
+        <text style="margin:0 10rpx"> | </text>
+        <text>{{answer.BusCompany}} {{answer.BusDuty}}</text>
+      </view>
+    </view>
+  </view>
+  
+</view>-->
+<i-toast id="toast" />

@@ -1,0 +1,50 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<view class="bt"> </view>
+<view class="row-between size-1 border">
+   <view class="type">报名信息：</view>
+   <view class="row info">
+      <!-- <!-- <view style='margin-right:30rpx;'>{{type==='role'?order.ApplyName:order.name}}</view> -->
+       <view style='width:280rpx; margin-right:30rpx; text-overflow:ellipsis;white-space:nowrap;overflow:hidden;'>{{name}}</view>
+      
+      <!-- <view class="blue">{{type==='role'?order.ApplyTel:order.phone}}</view> -->
+       <view class="blue">{{phone}}</view> 
+         </view>
+</view>
+<!-- <view class="row-between size-1 border">
+  <view class="type">姓名</view>
+  <input name='name' value="{{userInfo.nickName}}" placeholder='请输入姓名' class="input-text" disabled='true'></input>
+</view>
+<view class="row-between size-1 border">
+  <view class="type">电话</view>
+  <input name='name' value="{{order.phone}}" placeholder='请输入电话' class="input-text" disabled='true'></input>
+</view> -->
+<!-- <view class="column size-1 bg">
+  <view class="row">
+    <image class="activity-image" mode="aspectFill" src="{{filter.formatAvatar(activity.ActivityIcon)}}"></image>
+    <view class="column detail">
+      <view class="title">{{activity.ActivityName}}</view>
+      <view class="description">{{filter.formatDate(activity.ActivityATime,'YYYY年MM月DD日 HH:mm')}}-{{filter.formatDate(activity.ActivityETime,'HH:mm')}}</view>
+      <view class="row-between">
+        <view class="description">{{activity.ActivityParticular}}</view>
+      </view>
+    </view>
+  </view>
+<view class="row-between" style="width:100%;margin-top:20rpx;">
+  <view >门票</view>
+  <view class='num'>x{{order.num}}</view>
+</view>
+</view> -->
+<form bindsubmit="gotoPay" report-submit='true' data-activity='{{activity}}' data-userInfo='{{userInfo}}'>
+  <view class="column" style="margin-top:20rpx;">
+    <activityItem activity='{{activity}}' num='{{order.num}}' role='{{role}}' order='true' hidePay='true'></activityItem>
+  </view>
+  <!-- 两种情况 -->
+  <view class='fix-buttons' wx:if="{{role==1}}">
+  <button class="total-text">合计：
+  <text class='text-price'>{{activity.price}}</text>
+    <text>人气值</text>
+  </button>
+  <button form-type='submit' class="blue">下一步</button>
+  </view>
+  <button class="fix-button-blue" wx:if="{{role!=1}}"  form-type='submit' >确认申请</button>
+</form>

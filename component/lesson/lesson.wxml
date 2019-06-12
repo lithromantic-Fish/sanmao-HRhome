@@ -1,0 +1,20 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<view class="row size-1 lesson-box" bindtap='gotoDetail' hover-class='hover'>
+    <view class="image-box">
+        <image class="left-image" src="{{filter.formatImage(lesson.VideoImage)}}" mode="aspectFill" />
+    </view>
+    <view class="column" style="width:65%">
+        <view class="title">{{lesson.VideoTitle}}</view>
+        <view class="row">
+            <image class="favor-icon" src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_unfavor.png" mode="aspectFit"></image>
+            <text class="gray" style="margin-right:120rpx;">{{filter.formatNum(lesson.VideoLike)}}</text>
+            <image class="favor-icon"  src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_seen.png" mode="aspectFit"></image>
+            <text class="gray">{{filter.formatNum(lesson.VideoBrowse)}}</text>
+        </view>
+        <view class="row-between" style="margin-top:20rpx;">
+            <view class="time-text gray">{{filter.formatDate(lesson.VideoTime,'YYYY-MM-DD')}}</view>
+            <view class="price">{{!lesson.VideoPrice||lesson.VideoPrice===0?'免费':lesson.VideoPrice+'人气值'}}</view>
+        </view>
+    </view>    
+</view>
+<view class="gray-line"></view>

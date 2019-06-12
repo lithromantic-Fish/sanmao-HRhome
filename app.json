@@ -1,0 +1,111 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/cardPage/cardPage",
+    "pages/cards/cards",
+    "pages/activities/activities",
+    "pages/account/account",
+    "pages/cards/cardDetail",
+    "pages/activities/activityDetail",
+    "pages/account/myActivities",
+    "pages/cards/makeCard",
+    "pages/search/search",
+    "pages/search/filter",
+    "pages/activities/detail",
+    "pages/account/vip",
+    "pages/account/myCards",
+    "pages/search/cities",
+    "pages/activities/enter",
+    "pages/activities/confirm",
+    "pages/account/newCards",
+    "pages/account/about",
+    "pages/activities/allSign",
+    "pages/activities/photos",
+    "pages/activities/codeMessage",
+    "pages/index/wxAuthorize",
+    "pages/questions/questions",
+    "pages/questions/answerer",
+    "pages/questions/answer",
+    "pages/account/questions",
+    "pages/account/popularity",
+    "pages/questions/replyQuestions",
+    "pages/account/tobeAns",
+    "pages/account/answerInfo",
+    "pages/account/cardCode",
+    "pages/account/groups",
+    "pages/account/groupDetail",
+    "pages/account/chooseCards",
+    "pages/account/myVisitor",
+    "pages/account/favorMe",
+    "pages/account/likeMe",
+    "pages/account/add",
+    "pages/cards/report",
+    "pages/cards/reportDetail",
+    "pages/account/message",
+    "pages/cards/contact",
+    "pages/account/myCardDetail",
+    "pages/questions/jstw",
+    "pages/questions/rwxs",
+    "pages/questions/kcxx",
+    "pages/questions/ycjx",
+    "pages/questions/lessonDetail",
+    "pages/questions/myAnswer",
+    "pages/questions/comment",
+    "pages/webView/webview",
+    "pages/account/myQuizs",
+    "pages/account/myAnswers",
+    "pages/questions/classifyLessons",
+    "pages/activities/activityGround",
+    "pages/activities/create",
+    "pages/activities/qualifications",
+    "pages/activities/preview",
+    "pages/account/popularityValue",
+    "pages/activities/signDetail",
+    "pages/activities/crop",
+    "pages/activities/signView"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "tabBar": {
+    "color": "#707070",
+    "selectedColor": "#4c89fb",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/cardPage/cardPage",
+        "iconPath": "assets/images/tabs/mine01.png",
+        "selectedIconPath": "assets/images/tabs/mine02.png",
+        "text": "名片"
+      },
+      {
+        "pagePath": "pages/cards/cards",
+        "iconPath": "assets/images/tabs/cards01.png",
+        "selectedIconPath": "assets/images/tabs/cards02.png",
+        "text": "HR人脉圈"
+      },
+      {
+        "pagePath": "pages/activities/activityGround",
+        "iconPath": "assets/images/tabs/activity01.png",
+        "selectedIconPath": "assets/images/tabs/activity02.png",
+        "text": "HR活动社区"
+      },
+      {
+        "pagePath": "pages/account/account",
+        "iconPath": "assets/images/tabs/mine01.png",
+        "selectedIconPath": "assets/images/tabs/mine02.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

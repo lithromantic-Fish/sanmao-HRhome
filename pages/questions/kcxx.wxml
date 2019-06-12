@@ -1,0 +1,5 @@
+<search type="studyLesson" ></search>
+<view class="column size-1" wx:if="{{lessons.length}}">
+    <studyLesson wx:for="{{lessons}}" lesson="{{item}}"></studyLesson>
+</view>
+<empty wx:if="{{!lessons.length}}"></empty>

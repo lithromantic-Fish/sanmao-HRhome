@@ -1,0 +1,20 @@
+/* pages/activities/signView.wxss */
+.flex-de{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+}
+.qd{
+  width:500rpx;
+line-height:2;
+padding:40rpx 0;
+
+}
+.txt_sign{
+  font-weight: bold;
+  font-size: 30rpx
+}
+.button-hr{
+  margin-top: 50rpx
+}

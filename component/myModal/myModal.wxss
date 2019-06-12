@@ -1,0 +1,63 @@
+/* component/modal/modal.wxss */
+.fixed-container{
+  position: fixed;
+  top:30vh;
+  margin:0 auto;
+  z-index: 100;
+  left:50%;
+  margin-left: -35vw;
+}
+.column-center{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+.column{
+  display:flex;
+  flex-direction: column
+}
+.size-1{
+  padding:30rpx 40rpx;
+}
+.fixed-box{
+  background: #fff;
+  border-radius: 16rpx;
+  width:70vw;
+  height:300rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.title{
+  font-weight: 500;
+  padding-top:10rpx;
+  padding-bottom: 30rpx;
+}
+.input{
+  background: rgb(238, 238, 238);
+  border-radius: 5rpx;
+  padding:0 15rpx;
+  box-sizing: border-box;
+  text-align: left;
+}
+.placeholder{
+  font-size: 24rpx;
+  color:gray
+}
+.section{
+  width:50%;
+  border:0.1rpx solid lightgray;
+  text-align: center;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+.blue{
+  color:#4c89fb
+}
+.box-1{
+  text-align: center;
+  box-sizing: border-box;
+  width:100%
+}
+.box-2{
+  margin-top: auto
+}

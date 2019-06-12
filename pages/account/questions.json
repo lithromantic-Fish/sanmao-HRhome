@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "我的问答",
+  "usingComponents": {
+    "chooseNav": "/component/chooseNav/chooseNav",
+    "empty": "/component/empty/empty",
+    "answer":"/component/answer/answer"
+  }
+}

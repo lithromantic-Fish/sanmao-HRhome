@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "设置分组",
+  "usingComponents": {
+    "i-radio-group": "../../dist/radio-group/index",
+    "i-radio": "../../dist/radio/index",
+    "my-modal":"../../component/myModal/myModal"
+  }
+}

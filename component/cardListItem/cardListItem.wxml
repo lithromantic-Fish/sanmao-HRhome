@@ -1,0 +1,69 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+
+
+<form bind:submit='collectFormId'  wx:if="{{home}}" report-submit='true'>
+  <!-- <a class="card size-2 row  card-item" catchtap='onTap' hover-class="hover"> -->
+  <button form-type="submit" class="card size-2 row  card-item" hover-class="hover">
+    <view class="image-box">
+      <image src="{{filter.formatAvatar(image)}}" mode='aspectFill' class="avatar"></image>
+      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/jiaV.png" class="vip" wx:if="{{bus==3}}"></image>
+    </view>
+    <view class="row-between card-right">
+      <view class="column"  style='width:360rpx'>
+        <text class="title">{{title}}</text>
+        <text class="description">{{description}}</text>
+        <text class="role">{{role}}</text>
+      </view>
+
+      <button hover-class='icon-button-hover' hover-stop-propagation='true' class="none-button" wx:if="{{status!=2&& home}}">
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/switch.png" mode="aspectFill" class="icon-button"></image>
+      </button>
+      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/switched.png" mode="aspectFill" class="icon-button-re" wx:if="{{status==2 && home}}"></image>
+
+      <view wx:if="{{new}}" class="row">
+        <form catchsubmit="aggress" report-submit='true'>
+          <button class="allow" hover-class='hover-image' data-index="index" data-id="{{card.id}}" hover-stop-propagation='true' form-type='submit'>同意</button>
+        </form>
+        <!--<view class="allow disabled"  hover-class='hover-image' catchtap='reject'>拒绝</view>-->
+
+        <view class="answer" wx:if="{{answer}}" hover-class='hover-image' hover-stop-propagation='true'>{{price}}人气值
+          <text>提问</text>
+        </view>
+      </view>
+      <view class="button-detail" wx:if="{{roleValue==2||roleValue==3}}" catchtap='gotoDetail' hover-stop-propagation='true'>查看申请</view>
+    </view>
+  </button>
+  <!-- </a> -->
+</form>
+
+  <view  wx:if="{{!home}}" class="card size-2 row  card-item"  catchtap='onTap'>
+    <view class="image-box">
+      <image src="{{filter.formatAvatar(image)}}" mode='aspectFill' class="avatar"></image>
+      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/jiaV.png" class="vip" wx:if="{{bus==3}}"></image>
+    </view>
+    <view class="row-between card-right">
+      <view class="column" style='width:360rpx'>
+        <text class="title">{{title}}</text>
+        <!-- <text class="description">{{description}}</text> -->
+        <text class="description">{{mobile}}</text>
+        <text class="role">{{role}}</text>
+      </view>
+
+      <button hover-class='icon-button-hover' hover-stop-propagation='true' class="none-button" wx:if="{{status!=2&& home}}">
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/switch.png" mode="aspectFill" class="icon-button"></image>
+      </button>
+      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/switched.png" mode="aspectFill" class="icon-button-re" wx:if="{{status==2 && home}}"></image>
+
+      <view wx:if="{{new}}" class="row">
+        <form catchsubmit="aggress" report-submit='true'>
+          <button class="allow" hover-class='hover-image' data-index="index" data-id="{{card.id}}" hover-stop-propagation='true' form-type='submit'>同意</button>
+        </form>
+        <!--<view class="allow disabled"  hover-class='hover-image' catchtap='reject'>拒绝</view>-->
+
+        <view class="answer" wx:if="{{answer}}" hover-class='hover-image' hover-stop-propagation='true'>{{price}}人气值
+          <text>提问</text>
+        </view>
+      </view>
+      <view class="button-detail" wx:if="{{roleValue==2||roleValue==3}}" catchtap='gotoDetail' hover-stop-propagation='true'>查看申请</view>
+    </view>
+  </view>

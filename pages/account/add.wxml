@@ -1,0 +1,29 @@
+<view class="size-1 row border" style="background:#fff">
+  <view class="row">
+    <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_ssfz.png" mode='aspectFill' class="icon"></image>
+    <text class="blue-text">所属分组：</text>
+    <view class="groupsName">{{groupName}}</view>
+  </view>
+</view>
+<view class="section-spacing"></view>
+<view class="size-1" wx:if="{{groups.length===0}}">
+  <view class="column-center size-1" style="background:#fff;border-radius:15rpx;">
+    <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/no-data.png" mode="aspectFill" class="no-data"></image>
+    <text class="no-data-text">您还没有创建分组</text>
+    <view class="no-data-button" bindtap="hidden">创建分组</view>
+  </view>
+</view>
+<view class="column" wx:if="{{groups.length}}">
+     <i-radio-group current="{{current}}" bindchange="changeRadio" >
+        <view class="row border" wx:for="{{groups}}" wx:key= '*this'  style="background:#fff;width:100%">
+            <i-radio value="{{item.GrouId}}"></i-radio>
+           <text>{{item.GrouName}}（{{item.count}}）</text>
+        </view>
+      </i-radio-group>
+</view>
+<my-modal bind:cancel="hidden" bind:save='save'  wx:if="{{showModal}}" groupName="{{groupName}}"></my-modal>
+<view class='mask-view' wx:if="{{showModal}}"></view>
+<view class='fix-buttons'>
+    <button >取消</button>
+    <button bindtap='confirm' class="blue">确定</button>
+</view>

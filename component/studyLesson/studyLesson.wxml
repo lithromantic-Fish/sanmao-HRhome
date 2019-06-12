@@ -1,0 +1,18 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<view class="column-center size-1 question-1"bindtap='gotoDetail' hover-class='hover'>
+    <view class="title">{{lesson.Spreadhead}}</view>
+    <view class="gray row-start lesson-desc">{{lesson.SpreadContents}}</view>
+    <view class="row" style="width:100%">
+        <view class="image-box">
+            <image src='{{filter.formatImage(lesson.ClassifyImage)}}' mode='aspectFill' class="left-image"></image>
+        </view>
+        <view class="column" style="width:65%">
+            <view class="lesson-title">{{lesson.Subtitle}}</view>
+            <view class="row info">
+                <view class="desc" style="margin-right:20rpx;"><text class="num">{{lesson.ClassCount}}</text>节课</view>
+                <view class="desc"><text class="num">{{filter.formatNum(lesson.Duration,'2000')}}</text>时长</view>
+            </view>
+            <view class="subtitle gray">{{lesson.SubContents}}</view>
+        </view>
+    </view>
+</view>

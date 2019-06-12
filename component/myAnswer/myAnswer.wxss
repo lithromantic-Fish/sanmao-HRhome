@@ -1,0 +1,21 @@
+.delete{
+    width:40rpx;
+    height:40rpx;
+}
+.content{
+    padding:30rpx 0;
+
+}
+.pd-bottom-40{
+    padding-bottom:40rpx;
+    width:85%
+
+}
+.avatar{
+    width:80rpx;
+    height:80rpx;
+    border-radius: 50%;
+}
+.image-box{
+    width:15%
+}

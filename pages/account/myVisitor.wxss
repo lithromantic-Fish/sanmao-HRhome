@@ -1,0 +1,41 @@
+.nav {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-around;
+  border-top: 0.1rpx solid #dcdde3;
+  z-index: 3;
+}
+
+.nav .nav-item {
+  width: 20%;
+  color: #333;
+  font-size: 32rpx;
+  line-height: 90rpx;
+  z-index: 1;
+}
+
+.choosed {
+  color: #4c89fb;
+  border-bottom: #4c89fb solid 4rpx !important;
+  z-index: 1;
+}
+
+.title {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: bold;
+  z-index: 1;
+}
+
+.avatar {
+  width: 104rpx;
+  height: 104rpx;
+  border-radius: 50%;
+}
+
+.column .desc, .column .position {
+  color: #666;
+  font-size: 28rpx;
+  font-weight: normal;
+  z-index: 2;
+}

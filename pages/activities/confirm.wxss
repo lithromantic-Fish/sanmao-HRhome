@@ -1,0 +1,114 @@
+.input-text{
+  text-align: right
+}
+.row-between{
+  background: #fff;
+}
+.info{
+  font-size:30rpx;
+  font-weight:500;
+}
+.type{
+  font-size:30rpx;
+  color:#333333;
+}
+.bg{
+  background: #fff;
+  align-items: flex-start
+}
+.activity-image{
+  width:250rpx;
+  height:200rpx;
+}
+.detail{
+  margin-left:30rpx;
+}
+.description{
+  padding:10rpx 0;
+}
+.num{
+  color:#4c89fb;
+  font-size: 34rpx;
+  font-weight: 500
+}
+.fixed-section{
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width:100%;
+  height: 150rpx;
+  background: #fff;
+  line-height: 150rpx;
+  box-shadow: 0 0 15rpx #4c89fb38;
+}
+.total-section{
+  width:40%;
+  text-align: center;
+}
+.pay-section{
+  width:60%;
+  background: #4c89fb;
+  color:#fff;
+  font-size: 38rpx;
+  font-weight:600;
+   text-align: center;
+
+}
+.pay-section button{
+  background: #4c89fb;
+  color:#fff;
+    padding:0;
+   line-height: 150rpx;
+   margin:0;
+   border-radius: 0;
+}
+
+.total{
+  font-size:30rpx;
+  font-weight: 600;
+  color:#4c89fb;
+}
+.fix-buttons button:nth-child(1){
+  width:65%
+}
+.fix-buttons button:nth-child(2){
+  width:35%
+}
+.total-text{
+  font-size: 30rpx;
+  font-weight: 500;
+  font-family:PingFang-SC-Medium;
+  text-align: right;
+  color:#333;
+  padding-right: 30rpx!important;
+}
+.total-text text{
+  color:#4c89fb;
+  font-size: 26rpx;
+}
+.total-text text.text-price{
+  color:#4c89fb;
+  font-size: 34rpx;
+}
+.fix-button-blue{
+  position: fixed;
+  background: #4c89fb;
+  color:#fff;
+  font-weight: 500;
+  text-align: center;
+  height:120rpx;
+  line-height: 120rpx;
+  font-size:32rpx;
+  width:100%;
+  bottom: 0;
+  border-radius:0;
+}
+.fix-buttons{
+  height: 110rpx;
+}
+.fix-buttons button{
+  line-height: 110rpx;
+}
+.blue{
+  font-size:32rpx;
+}

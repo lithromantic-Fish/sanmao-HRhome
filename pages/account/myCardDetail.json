@@ -1,0 +1,17 @@
+{
+  "navigationBarTitleText": "我的名片",
+  "navigationBarBackgroundColor": "#4c89fb",
+  "enablePullDownRefresh": true,
+  "navigationBarTextStyle":"white",
+  "backgroundColor": "#4c89fb",
+  "usingComponents": {
+    "cardDetail":"/component/cardDetail/cardDetail",
+    "row":"/component/row/row",
+    "title": "/component/title/title",
+    "empty": "/component/empty/empty",
+    "cardListItem": "../../component/cardListItem/cardListItem",
+    "chooseNav": "/component/chooseNav/chooseNav",
+    "authorize":"/component/authorize/authorize",
+    "i-badge": "../../dist/badge/index"
+  }
+}

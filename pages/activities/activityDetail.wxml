@@ -1,0 +1,246 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<import src="../../vendors/wxParse/wxParse.wxml" />
+
+<image class="activity-cover" mode='aspectFill' src='{{activity.banner_img}}' style="height:375rpx"></image>
+
+<view class="column size-1 border" style="position:relative;padding:60rpx 30rpx 0 30rpx;">
+  <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/supportTag1.png" class="tag" mode='aspectFill' wx:if="{{isRole===2}}"></image>
+  <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/teacherTag1.png" class="tag" mode='aspectFill' wx:if="{{isRole===1}}"></image>
+
+<view style='display:flex;align-items:flex-end'>
+  
+  <view class="title" style='-webkit-line-clamp:0;padding-right: 20rpx'>【{{activity.province}}{{activity.city}}】{{activity.name}}</view>
+      <text catchtap='outSignExecl' style='font-size:26rpx;color:#4c89fb'>导出报名表</text>
+</view>
+
+
+  <view class="title-body">
+    <view class="row-between">
+      <view class="row">
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/time.png" mode="aspectFit" class="title-icon"></image>
+        <view class="time">{{activity.starttime}} - {{activity.endtime}}</view>
+      </view>
+      <view hover-class='hover-image' class="" bindtap='gotoPhoto'>
+        <view class="row images">
+          <view class="iconfont icon-image"></view>
+          <view vx:if="activity.imgs.length!=''">{{activity.imgs.length}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="row">
+      <view class="row">
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/location.png" mode="aspectFit" class="title-icon"></image>
+        <text class="time">{{activity.address}}</text>
+      </view>
+      <view class="iconfont icon-nav" bindtap='gotoMap'></view>
+    </view>
+
+    <view class="line-gray"></view>
+
+    <view class="row-between" style='padding-bottom:26rpx;'>
+      <!-- <view style='width:560rpx'>
+        <text>{{activity.name}}</text>
+        <text wx:if="{{activity.Identity==2}}">机构</text>
+      </view> -->
+      <view class="price">{{activity.price}}
+        <text>人气值</text>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+<view class="section-spacing"></view>
+
+<view class="column border-top size-1" style='padding:30rpx;'>
+  <!-- <view class="column row-item">
+    <view class="row-between">
+      <title title='活动状态'></title>
+      <view class="row">
+        <text style="color:#4c89fb">{{Status[status]}}</text>
+      </view>
+    </view>
+  </view> -->
+
+
+  <view>
+    <view class="column">
+      <title title='活动签到'></title>
+      <view class="column-center">
+        <view>
+          <view class='button-scan' bindtap='scan' wx:if="{{activity.status==1&&activity.sign_online==1&&activity.is_sign==0}}">扫一扫签到</view>
+          <view class='button-scan havSign' wx:if="{{activity.status==2&&activity.sign_online==1}}">活动已下线</view>
+          <view class='button-scan disabled' wx:if="{{activity.status==3&&activity.sign_online==1}}">活动未开始</view>
+          <view class='button-scan havSign' wx:if="{{activity.status==4&&activity.sign_online==1}}">活动已结束</view>
+          <view class='button-scan havSign' wx:if="{{activity.status==1&&activity.sign_online==1&&activity.is_sign==1}}">已签到</view>
+          <view class='button-scan havSign' wx:if="{{activity.sign_online==0}}">未开启</view>
+        </view>
+        <view wx:if='{{activity.SignStatus===0}}'>
+          <view class='button-scan disabled'>未开启线上签到</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="column">
+    <view class="row-between">
+      <title title='活动详情'></title>
+      <!-- <navigator url="detail?id={{activity.id}}"> -->
+      <view class="row" bindtap='toMore'>
+        <text class="gray">查看更多</text>
+        <view class="iconfont icon-right" style="color:gray"></view>
+      </view>
+      <!-- </navigator> -->
+    </view>
+    <view class="description desc">
+      <text class="description"> {{activity.desc}}</text>
+    </view>
+    <!-- <view vx:if="{{activity.imgs}}">
+      <image src="{{activity.imgs[0]}}"class="avatar"  mode='widthFix '></image>
+    </view> -->
+    <!-- <view wx:if="{{activity.DescImages}}">
+      <image src="{{filter.formatImage(item)}}" wx:for='{{activity.DescImages}}' wx:key='*this' wx:for-index='index' mode='widthFix' class='desc-image' bindtap='previewImage' data-index='{{index}}'></image>
+    </view> -->
+  </view>
+
+  <view class="column row-item">
+    <view class="row-between">
+      <title title='已报名'></title>
+    </view>
+    <view class="app-avatars row">
+      <image class="app-avatar" src="{{item.photo}}" mode="aspectFill" wx:for="{{applys}}" wx:key='*this' wx:for-index='index' wx:if="{{index<5}}"></image>
+      <navigator url="allSign?id={{activity.id}}" hover-class='none'>
+        <view class="iconfont icon-more" style="  color:#dcdde3;" wx:if="{{appAvatars.length>=5}}"></view>
+        <!-- <view class="iconfont icon-more" style="  color:#dcdde3;" ></view> -->
+      </navigator>
+    </view>
+  </view>
+</view>
+
+<!-- <view style="position:fixed" class="column"> -->
+<!-- <view class="chooesBox column" style="width:100%">
+    <view>分享给微信好友</view>
+    <view>分享至朋友圈</view>
+  </view> -->
+<view class="bottom-fix row">
+  <view class="row" style="width:70%">
+
+
+    <!-- 收藏活动 -->
+
+    <form class="icon-box icon-box-1 row-center" report-submit='true' bindsubmit='favor'>
+      <button class='css_btn' form-type='submit'>
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/collect.png" mode="aspectfit" wx:if="{{activity.is_collect==0}}"></image>
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/havcollect.png" mode="aspectfit" wx:if="{{activity.is_collect==1}}"></image>
+      </button>
+    </form>
+
+
+    <!-- 分享活动 -->
+    <form class="icon-box  icon-box-1 row-center " report-submit='true' bindsubmit='shareActivity'>
+      <button class='css_btn' form-type='submit'>
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_share.png" mode="aspectfit"></image>
+      </button>
+    </form>
+    <!-- 评论活动 -->
+    <form class="row-center  icon-box-2   icon-box" report-submit='true' bindsubmit='gotoComment'>
+      <view class='row-center'>
+        <button class='css_btn' form-type='submit'>
+          <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_uncomment.png" mode="aspectfit"></image>
+        </button>
+        <text class="gray" wx:if="{{activity.pl_count!=0&&activity.pl_count<999}}">{{activity.pl_count}}</text>
+        <text class="gray" wx:if="{{activity.pl_count!=0&&activity.pl_count>=999}}">999+</text>
+      </view>
+    </form>
+
+    <!-- 点赞活动 -->
+    <form class="row-center icon-box-2 icon-box" report-submit='true' bindsubmit='like'>
+
+      <!-- <view class="row-center icon-box-2 icon-box"> -->
+      <view class='row-center'>
+        <button class='css_btn' form-type='submit'>
+          <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_unfavor.png" mode="aspectfit" wx:if="{{activity.is_zan==0}}"></image>
+          <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_like.png" mode="aspectfit" wx:if="{{activity.is_zan==1}}"></image>
+        </button>
+
+        <text class="gray" wx:if="{{activity.zan_count<999}}">{{activity.zan_count}}</text>
+        <text class="gray" wx:if="{{activity.zan_count>999||activity.zan_count==999}}">999+</text>
+      </view>
+      <!-- </view> -->
+    </form>
+
+    <!-- <navigator url='' hover-class='none' > -->
+    <!-- <view class="column-center column-item" bindtap='gotoCards'>
+        <view class="iconfont icon-home"></view>
+        <view>主页</view>
+      </view> -->
+    <!-- </navigator> -->
+    <!-- <navigator url='/pages/cards/cards' hover-class='none' > -->
+    <!-- <view class="column-center column-item" bindtap='favor' wx:if="{{!favor}}">
+        <view class="iconfont icon-favor"></view>
+        <view>收藏</view>
+      </view> -->
+    <!-- <view class="column-center column-item" bindtap='favor' wx:if="{{favor}}">
+        <view class="iconfont icon-favorOn"></view>
+        <view>已收藏</view>
+      </view> -->
+    <!-- </navigator> -->
+    <!-- <navigator url='/pages/cards/cards' hover-class='none' > -->
+    <!-- <view class="column-center column-item" bindtap='shareActivity'>
+        <view class="iconfont icon-share"></view>
+        <view>分享</view> -->
+    <view class="tootip" wx:if="{{showShare}}">
+      <view class="column">
+        <button class="row row-button size-2 border" hover-class='none' open-type='share'>
+          <view class="iconfont icon-weixin"></view>
+          <view class="column-box-item   ">分享给微信好友</view>
+        </button>
+
+        <view class="column-box-item size-2 row" bindtap='sharePYQ'>
+          <view class="iconfont icon-pyq"></view>
+          <text>分享到微信朋友圈</text>
+        </view>
+      </view>
+    </view>
+    <view class="mask" catchtap='shareActivity' wx:if="{{showShare}}"></view>
+    <!-- </view> -->
+    <!-- <image src='{{shareImage}}'></image> -->
+    <!-- </navigator> -->
+  </view>
+
+  <view style="width:30%">
+    <view wx:if="{{activity.status==2}}">
+      <view class="sign-button disabled">活动已下线</view>
+    </view>
+    <view wx:if="{{activity.status==4}}">
+      <view class="sign-button disabled">活动已结束</view>
+    </view>
+
+    <form report-submit='true' bindsubmit='enter'>
+      <button class='css_btn' form-type='submit'>
+        <view wx:if="{{activity.status==1||activity.status==3}}">
+          <view class="sign-button" wx:if="{{activity.apply_status==0}}">立刻报名</view>
+          <!-- 参与者身份已报名 -->
+          <view class="sign-button disabled" wx:if="{{activity.apply_status==2&&activity.apply_identity==1}}">已报名</view>
+        </view>
+      </button>
+    </form>
+    <!-- 非参与者身份已报名 -->
+    <view class="sign-button" bindtap="canclEnter" wx:if="{{activity.apply_status==2&&activity.apply_identity!=1}}">取消报名</view>
+  </view>
+</view>
+ <view class="fix">
+    <view class="back-button" bindtap='goHome'>首页</view>
+  </view>
+<!-- </view> -->
+<view class="canvas-box column-center" wx:if="{{fullMask}}">
+  <image src='{{shareImage}}' class="preview-image"></image>
+  <view class="iconfont icon-shanchu icon-2" bindtap='close'></view>
+  <button class="save-image" bindtap='saveImage'>保存图片并分享</button>
+</view>
+<view class="fullMask" wx:if="{{fullMask}}" catchtouchmove='mask'></view>
+<view wx:if="{{fullMask}}">
+  <canvas style="width:750px;height:1334px;position:fixed;top:9999px" canvas-id="mycanvas" />
+  <canvas style="width:200px;height:200px;position:fixed;top:9999px" canvas-id="mycanvas2" />
+</view>

@@ -1,0 +1,12 @@
+ <view class="row">
+    <view class="time-section time-m">
+        <view>{{timeObj.min}}</view>
+    </view>
+
+    <view class="time-section-aside">:</view>
+
+    <view class="time-section time-s">
+        <view>{{timeObj.sec}}</view>
+    </view>
+  </view>
+

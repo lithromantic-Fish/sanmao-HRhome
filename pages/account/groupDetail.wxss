@@ -1,0 +1,20 @@
+@import 'myCards.wxss';
+@import "../../utils/iconfont.wxss";
+.button-fix{
+    position: fixed;
+    bottom: 100rpx;
+}
+page{
+  padding-bottom:100rpx;
+  background:rgba(243,244,245,1);
+}
+.button-hr{
+  font-size:32rpx !important;
+  font-weight: normal !important
+}
+.icon-sousuo {
+  margin-left:20rpx;
+  font-size:24rpx;
+  margin-right:8rpx;
+  color:#999999;
+}

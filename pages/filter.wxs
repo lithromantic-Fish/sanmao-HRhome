@@ -1,0 +1,104 @@
+//wxs文件中只能用var
+var url = 'https://www.hrloo.com' 
+// var url = 'http://www.chengp.top'
+
+function formatPhone(phone){ //格式化
+  var tel = phone.substring(0, 3) + '****' + phone.substring(7)
+  return tel
+}
+
+function formatEmail(email) { //格式化
+  if(email){
+    var strs = email.split('@');
+    return '*******@'+strs[1]
+  }
+}
+
+function formatDate(value, style) {//格式化日期
+  var it = {}
+  var time = getDate(value*1000)
+  var WEEK = ['周日','周一','周二','周三', '周四','周五','周六']
+  it.YYYY = time.getFullYear()
+  it.YY = it.YYYY % 100
+  it.M = time.getMonth() + 1
+  it.MM = it.M < 10 ? '0' + it.M : it.M
+  it.D = time.getDate()
+  it.DD = it.D < 10 ? '0' + it.D : it.D
+  it.H = time.getHours()
+  it.HH = it.H < 10 ? '0' + it.H : it.H
+  it.m = time.getMinutes()
+  it.mm = it.m < 10 ? '0' + it.m : it.m
+  it.s = time.getSeconds()
+  it.ss = it.s < 10 ? '0' + it.s : it.s
+  it.W = WEEK[time.getDay()]
+  var notations = ['YYYY', 'YY', 'MM', 'M', 'DD', 'D', 'HH', 'H', 'mm', 'm', 'ss', 's','W']
+  var i = 0,
+    len = notations.length,
+    sign, regex, result = style
+  for (; i < len; i++) {
+    sign = notations[i]
+    regex = getRegExp(sign, 'g')
+    result = result.replace(regex, it[sign])
+  }
+  return result
+}
+
+function formatAvatar(avatar) { //格式化头像
+  if(avatar){
+    // var fdStart = avatar.indexOf("https://wx.qlogo.cn/");
+    // var start = avatar.indexOf("wxfile://");
+    // var start2 = avatar.indexOf('http://tmp/')
+    // if (fdStart === 0 || start === 0 || start2===0) {
+    //   return avatar
+    // }
+    return  avatar
+  }else{
+    return 'https://static.hrloo.com/hrloo56/hrhomeminiapp/img/default.jpg'
+  }
+}
+function formaAudio(audio) { //格式化音频
+  // var fdStart = avatar.indexOf("https://wx.qlogo.cn/");
+  // var start = avatar.indexOf("wxfile://");
+  if (audio) {
+    return url + audio
+  }
+}
+function formatImage(image) { //格式化头像
+  if (image) {
+    // var fdStart = image.indexOf("https://wx.qlogo.cn/");
+    // var start = image.indexOf("http://tmp/");
+    // var start2 = image.indexOf("wxfile://");
+    // var startImage = image.indexOf("../../assets");
+
+    // if (fdStart === 0 || start === 0 || startImage === 0 || start2===0){
+    //   return image
+    // }
+    // else{
+    //   return url + image
+    // }
+    return image
+  } else {
+    return 'https://static.hrloo.com/hrloo56/hrhomeminiapp/img/default_Image.png'
+  }
+}
+function formatFloat(float,num) { //格式化小数
+  var f = parseFloat(float).toFixed(0)
+  return f
+}
+function formatNum(num,max=999){
+  if(num<=max){
+    return num
+  }else{
+    return max+'+'
+  }
+}
+module.exports = {
+    formatPhone:formatPhone,
+    formatDate:formatDate,
+    formatEmail: formatEmail,
+    formatAvatar: formatAvatar,
+    formatImage: formatImage,
+    formatFloat: formatFloat,
+    formaAudio: formaAudio,
+    formatNum:formatNum,
+}

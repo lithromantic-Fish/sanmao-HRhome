@@ -1,0 +1,25 @@
+
+  .size-1{
+    padding-top:10rpx;
+    padding-bottom: 10rpx
+  }
+
+  .title-name{
+    font-size: 30rpx;
+    font-weight: 600;
+    margin-bottom: 20rpx;
+    display: -webkit-box;    
+    -webkit-box-orient: vertical;    
+    -webkit-line-clamp:1;    
+    overflow: hidden;
+  }
+  .border:last-child{
+    border-bottom: 0;
+  }
+  .pd-30{
+    padding:30rpx;
+    background:#fff;
+  }
+  .hover{
+    background:#eaeaea;
+  }

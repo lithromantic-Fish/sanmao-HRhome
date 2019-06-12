@@ -1,0 +1,12 @@
+<!--component/moreMenu/moreMenu.wxml-->
+<view id='menu' class="more-menu">
+  <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_sz.png" mode='aspectFit' class="menu" bindtap="openMenu"></image>
+
+  <view class="{{isTop?'menu-box':'menu-box-bottom'}}" wx:if="{{showMask}}">
+    <view class="menu-box-1" wx:for="{{menuList}}" wx:key="{{item}}">
+      <button wx:if="{{item.id == 2}}" open-type='share' hover-class="none">{{item.name}}</button>
+      <button wx:else bindtap='goToMenuPath' data-item="{{item}}" hover-class="none">{{item.name}}</button>
+    </view>
+  </view>
+</view>
+<view class="mask-menu" catchtap="closeMenu" wx:if="{{showMask}}" catchtouchmove="myCatchTouch"></view>

@@ -1,0 +1,14 @@
+<wxs src="../filter.wxs" module="filter" />
+<chooseNav items="{{Tabs}}" bind:gotoLoad='changeStatus'></chooseNav>
+<view class="column border-top" wx:if="{{questions.length!==0}}" style="margin-top:20rpx;">
+  <answer answer="{{item}}" wx:for="{{questions}}" wx:key='QuizId' unAnswer='{{unAnswer}}'></answer>
+  <!--<view class="float-button row">
+    <view class="float-button-box column-center">
+        <view class="iconfont icon-weizhi"></view>
+        <view>答主中心</view>
+    </view>
+  </view>-->
+</view>
+<view class="column-center" wx:if="{{questions.length===0}}">
+  <empty></empty>
+</view>

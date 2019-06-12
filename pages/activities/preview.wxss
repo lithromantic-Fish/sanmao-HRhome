@@ -1,0 +1,73 @@
+@import 'activityDetail.wxss';
+page{
+  padding-bottom:200rpx
+}
+.icon-edit{
+  width:40rpx;
+  height:40rpx;
+  margin-left:15rpx;
+}
+.activity-cover{
+  height: 375rpx;
+}
+.title{
+  font-size:34rpx;
+}
+.row .title{
+  margin-left: 5rpx;
+}
+.size-1{
+  padding: 40rpx 30rpx;
+}
+.title-body{
+  margin-top:10rpx;
+  font-size:28rpx;
+  color:#333;
+  font-weight: 500;
+}
+.icon-image{
+  font-size:34rpx;
+}
+.images{
+  display:flex;
+flex-direction:row;
+justify-content:center;
+padding: 0rpx 25rpx;
+}
+.price{
+  font-size:40rpx;
+}
+.price text{
+  font-size:34rpx;
+  font-weight: 500;
+}
+.color-column{
+  width:8rpx;
+}
+.gray{
+  color:#999;
+  font-size:28rpx;
+}
+.fix-buttons{
+  height: 110rpx;
+ 
+}
+.fix-buttons button{
+ line-height: 110rpx;
+}
+.edit{
+  color:#4c89fb!important;
+}
+.button-scan{
+    padding:18rpx 20rpx;
+    width:191rpx;
+    border-radius: 10rpx;
+    background: #4c89fb;
+    color: #fff;
+    width:106px;
+
+}
+.flex-d{
+  display: flex;
+  justify-content: center
+}

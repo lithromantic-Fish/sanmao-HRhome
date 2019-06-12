@@ -1,0 +1,164 @@
+.bg{
+    background:rgba(76, 137, 251,0.1);
+    position: absolute;
+    border-radius: 8rpx;
+    width:100%;
+    height:100%
+}
+.column-bg{
+    width:100%;
+    height:100%;
+    position: relative;
+    color:#4c89fb;
+}
+.m-30,.row-picker{
+  margin:0 40rpx 0 30rpx;
+}
+.sky_9 .row-picker{
+  margin:0;
+}
+.sky_9 .necessary{
+  margin-left: 8rpx
+}
+.sky_9 .picker-text{
+  padding-left: 22rpx
+}
+.row-picker{
+  width:auto!important;
+}
+.type{
+font-size:30rpx!important;
+  display:-webkit-box;
+-webkit-box-orient:vertical;
+-webkit-line-clamp:1;
+overflow:hidden;
+
+}
+.photo-icon{
+    width:81rpx;
+    height:52rpx;
+    margin-bottom: 20rpx;
+}
+.size-1{
+  padding: 27rpx 40rpx;
+}
+.cover{
+    width:100%;
+    height:300rpx;
+    border-radius: 8rpx;
+}
+/* input{
+    max-width:77%
+} */
+
+
+.row-between{
+    background:#fff;
+}
+.blue-section{
+    color:#4c89fb;
+    padding:10rpx 30rpx;
+    border:1rpx #4c89fb solid;
+    border-radius: 6rpx;
+}
+.title{
+    font-size: 30rpx;
+    min-width:23%;
+    margin-right: 30rpx;
+}
+.time-section{
+    width:50rpx;
+    height:45rpx;
+    background:#f1f1f1;
+    border-radius: 8rpx;
+    text-align: center;
+    line-height: 45rpx;
+    color:gray;
+    font-size: 24rpx;
+}
+.middle{
+    margin:0 25rpx;
+}
+.year{
+    width:80rpx;
+}
+.time-line{
+    height:4rpx;
+    border-radius: 8rpx;
+    width:15rpx;
+    background: #4c89fb;
+    margin:0 15rpx;
+}
+.row-start{
+    background: #fff;
+}
+.timer{
+    width:50rpx;
+}
+.timer:first-child{
+    margin-left:50rpx;
+}
+.time-section-time{
+    margin:0 15rpx;
+    font-weight: 600;
+    color:#4c89fb;
+    font-size: 34rpx;
+}
+selectRow .row-between{
+    justify-content: flex-start
+}
+selectRow .necessary{
+    font-weight: 600;
+}
+selectRow .icon-right{
+    opacity: 0;
+}
+selectRow picker{
+    width:70%;
+}
+selectRow .row{
+    width:23%
+}
+
+page{
+    padding-bottom: 200rpx;
+    background:#fff;
+}
+.fix-buttons{
+    z-index:999;
+    height:110rpx;
+}
+.fix-buttons button{
+  line-height: 110rpx;
+}
+.preview{
+  color:#4c89fb!important;
+}
+.tjzp{
+    width:150rpx;
+    height:150rpx;
+}
+textarea{
+    border:0.1rpx #b1b1b1 solid;
+    background:#F9F9FA;
+    width:100%;
+    height:300rpx;
+    padding:20rpx;
+    box-sizing:border-box;
+
+}
+.wrap{
+    flex-wrap: wrap
+}
+.image-item{
+    margin:3rpx;
+    border-radius:5rpx;
+}
+.image-item image{
+    width:150rpx;
+    height:150rpx;
+    
+}
+selectRow .picker-text{
+  color:inherit;
+}

@@ -1,0 +1,71 @@
+<wxs src="../filter.wxs" module="filter" />
+<view style="overflow:hidden;width:100wv;position:relative">
+  <view class="card-box" style="overflow:hidden">
+    <view class="size-1 cloumn card card-1">
+      <view class="column-center">
+        <view class="v-title">- 加V特权 -</view>
+        <view class="row row-title">
+          <view class="item column-center">
+            <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/cardV.png" mode="aspectFit" class="icon-v"></image>
+            <view>名片加V显示</view>
+          </view>
+          <view class="item column-center" style="margin:80rpx 20rpx 0 20rpx;">
+            <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/cardsFrist.png" mode="aspectFit" class="icon-v"></image>
+            <view>名片广场优先显示</view>
+          </view>
+          <view class="item column-center">
+            <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/sousuo.png" mode="aspectFit" class="icon-v"></image>
+            <view>搜索优先显示</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='card-bg'></view>
+  <view style="height:35vh"></view>
+  <title title='请选择以下任一材料上传'></title>
+
+  <view class="row-between size-1" wx:if="{{!preImage}}">
+
+    <form class="confirm-1" catchsubmit='choosedImage' data-type="1" report-submit="true">
+      <view class="square-1 ">
+          <button form-type="submit" class="card" >
+            <view class='icon icon-1'></view>
+          <view class='tit'>纸质名片</view>
+          </button>
+      </view>
+    </form>
+
+    <form class="confirm-1" catchsubmit='choosedImage' data-type="2" report-submit="true">
+      <view class="square-1 ">
+          <button form-type="submit" class="card" >
+            <!-- <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/gp.png" class="icon-add icon-add2"></image> -->
+            <view class='icon icon-2'></view>
+          <view class='tit'>工牌</view>
+          </button>
+      </view>
+    </form>
+
+  </view>
+
+  <view wx:if="{{preImage}}" class="size-1">
+    <form class="confirm-3" catchsubmit='choosedImage' data-type="{{3}}">
+      <button form-type="submit" class="card" >
+        <image src="{{filter.formatImage(preImage)}}" mode="widthFix" class="preImage"></image>
+      </button>
+    </form>
+  </view>
+  <!-- <view class="row size-1">
+
+   <navigator url="tobeAns">
+    <view wx:if="{{status===2}}" >我要申请成为答主！</view>
+  </navigator>
+</view> -->
+
+  <form class="column size-1" bindsubmit='submit' report-submit='true'>
+    <button class="v-button {{preImage?'':'disabled'}}" hover-class='hover' wx:if="{{status==1}}" style='font-size:32rpx' form-type='submit'>提交申请</button>
+    <button class="v-button {{preImage?'':'disabled'}}" hover-class='hover' wx:if="{{status==4}}" style='font-size:32rpx' form-type='submit'>审核未通过，重新提交</button>
+    <button style='font-size:32rpx' class="v-button" wx:if="{{status==2}}" form-type='submit'>已提交</button>
+    <button style='font-size:32rpx' class="v-button approve"  wx:if="{{status==3}}" form-type='submit'>通过审核</button>
+  </form>
+</view>

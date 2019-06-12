@@ -1,0 +1,40 @@
+
+<wxs src="../../pages/filter.wxs" module="filter" />
+<title title="答主资料"></title>
+    <view class="column border-top">
+    <view class="row-between border size-1">
+        <view class="type">头像</view>
+        <image src="{{filter.formatAvatar(card.BusIcon)}}" mode="aspectFill" class="avatar"></image>
+    </view>
+    <view class="row-between size-1 border">
+        <view class="type">姓名</view>
+        <view class="subtitle">{{card.BusName}}</view>
+    </view>
+    <view class="row-between size-1 border">
+        <view class="type">性别</view>
+        <view class="subtitle">{{card.BusSex===2?'女':'男'}}</view>
+    </view>
+    <view class="row-between size-1 border">
+        <view class="type">公司</view>
+        <view class="subtitle">{{card.BusCompany}}</view>
+    </view>
+    <view class="row-between size-1 border">
+        <view class="type">职位</view>
+        <view class="subtitle">{{card.BusIndustry}}</view>
+    </view>
+    <view class="row-between row-1 size-1 border">
+        <view class="type">简介</view>
+        <textarea class="column">{{description}}</textarea>
+    </view>
+    
+    <view class="section-spacing"></view>
+
+    <view class="row-between size-1 border">
+        <view class="type">提问价格</view>
+        <input class="price" type='number' value='{{price}}' name='price'></input>
+    </view>
+</view>
+<view class="column size-1">
+    <button class="button-hr">保存提交</button>
+</view>
+  

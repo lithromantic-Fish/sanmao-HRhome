@@ -1,0 +1,12 @@
+.title{
+  font-size: 30rpx;
+  margin-bottom: 15rpx;
+}
+.description{
+  font-size: 28rpx;
+  color:#999;
+}
+.popuparity-icon{
+   width:92rpx !important;
+   height:92rpx !important;
+}

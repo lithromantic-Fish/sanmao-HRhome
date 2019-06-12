@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "确认订单",
+  "usingComponents": {
+    "title": "/component/title/title",
+    "activityItem": "/component/activityItem/activityItem"
+  }
+}

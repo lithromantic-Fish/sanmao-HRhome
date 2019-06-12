@@ -1,0 +1,17 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<import src="../../vendors/wxParse/wxParse.wxml"/>
+<view class="column size-1">
+<view>
+  <text>{{detail}}</text>
+  <!-- <image wx:for="imgs" src='item'></image> -->
+  <image wx:for="{{imgs}}" src="{{item}}" wx:key="index"  mode='widthFix' class="avatar" bindtap='preImage'></image>
+      <!-- <image wx:for="{{imgs}}" wx:key="index"  mode='widthFix' class='desc-image'></image> -->
+
+</view>
+   <!-- <template is="wxParse" data="{{wxParseData:article.nodes}}"  class="description desc"/>
+</view>
+   <view class="column" wx:if="{{images.length>0}}" style="margin-top:20rpx;">
+    <image src="{{filter.formatImage(item)}}" wx:for="{{images}}" wx:key='*this' class="descimage" wx:for-index='index' mode='widthFix' bindtap='previewImage' data-index='{{index}}'></image> -->
+   </view>
+
+

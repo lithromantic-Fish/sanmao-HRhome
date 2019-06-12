@@ -1,0 +1,15 @@
+<chooseNav items='{{navs}}' bind:gotoLoad='changeStatus'></chooseNav>
+<!-- <view class="section-spacing"></view> -->
+<view class="size-1 border" style="background:#fff" 
+  wx:for="{{cards}}" 
+  wx:if="{{cards.length}}" 
+  wx:key='BusId'>
+  <group-card  card='{{item}}'>
+     <view slot='time'>
+      <view class="column">
+        <view>{{item.hdate}}</view>
+      </view>
+    </view>
+  </group-card>
+</view>
+<empty wx:if="{{!cards.length}}"></empty>

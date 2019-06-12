@@ -1,0 +1,80 @@
+.card-detail{
+    background: #fff;
+    border-radius: 15rpx;
+    box-shadow: 0 0 20rpx rgba(52, 64, 87, 0.2)
+}
+.card-detail .avatar{
+    width:150rpx;
+    height:150rpx;
+    border-radius: 10rpx;
+}
+.card-detail .title{
+    font-size: 40rpx;
+    font-weight: bold;
+    margin-top:10rpx
+}
+/* .row-1{
+    align-items: flex-start;
+} */
+.column-bottom{
+    font-size:30rpx;
+    line-height: 56rpx;
+    color: #666666
+}
+.iconfont{
+    color:#4c89fb;
+    margin-right:10rpx;
+}
+.no-card{
+  width:380rpx;
+  height:180rpx;
+  margin-top:40rpx
+}
+.card-detail-nocard{
+ height:350rpx;
+ /* line-height: calc(350rpx - 200rpx); */
+  background: #fff;
+  border-radius: 15rpx;
+  box-shadow: 0 0 20rpx rgba(52, 64, 87, 0.2)
+}
+.card-detail-nocard view{
+  margin-top:60rpx;
+  color:#999;
+}
+.icon-cards-detail{
+  width:35rpx;
+  height:35rpx;
+  margin-right:26rpx;
+}
+.icon-male{
+  color:#4c89fb;
+  font-size:45rpx;
+  margin-top:10rpx;
+  margin-left:10rpx;
+}
+.icon-female{
+    color:#fa7b7b;
+    font-size:35rpx;
+    margin-top:10rpx;
+    margin-left:10rpx;
+}
+.menu{
+  width:40rpx;
+  height:40rpx;
+}
+.ic-xx{
+  width:40rpx;
+  height:40rpx;
+}
+.phone{
+  width:30rpx;
+  height:30rpx;
+  margin-left:10rpx;
+}
+.company_class{
+  width:500rpx;
+  overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+
+}

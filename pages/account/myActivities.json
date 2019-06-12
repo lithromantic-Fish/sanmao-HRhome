@@ -1,0 +1,8 @@
+{
+    "navigationBarTitleText": "我的活动",
+    "usingComponents": {
+      "chooseNav":"/component/chooseNav/chooseNav",
+      "activityItem":"/component/activityItem/activityItem",
+      "empty":"/component/empty/empty"
+    }
+  }

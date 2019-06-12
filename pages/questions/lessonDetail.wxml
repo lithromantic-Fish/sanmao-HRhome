@@ -1,0 +1,53 @@
+<wxs src="../filter.wxs" module="filter" />
+<import src="../../vendors/wxParse/wxParse.wxml"/>
+<cover-view class="cover" scroll-top="0" wx:if="{{lesson.isCir!==1 && lesson.VideoPrice>0}}" bindtap='play'></cover-view>
+<view class="video-box">
+    <video id='video' src='{{lesson.VideoSrc}}' controls ></video>
+    <!-- <view class="row size-1">
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_play.png" class="icon-play" mode="aspectFill"></image>
+        <view class="row" style="width:80%">
+            <view clas="now-text">{{nowText}}</view>
+            <view class="slider-box row">
+                <movable-area class="move-box">
+                    <movable-view class="tag"  direction="horizontal" x='{{x}}'></movable-view>
+                </movable-area>
+
+                <view class="timer" id ='timer'></view>
+            </view>
+            <view clas="total-time">{{total}}</view>
+        </view>
+    </view> -->
+</view>
+<view class="column size-1" style='background:#fff'>
+  <view class="title">{{lesson.VideoTitle}}</view>
+  <view class="row-between pd-30">
+    <text class="subtitle">详情</text>
+    <view class="row subtitle ">
+      <image class="icon icon-see" src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_seen.png" mode="aspectFill"></image>
+      <text class=''>{{filter.formatNum(lesson.VideoBrowse)}}</text>
+      <text class="subtitle time">{{filter.formatDate(lesson.VideoTime,'YYYY-MM-DD')}}</text>
+    </view>
+  </view>
+      <!--<view class="content">{{lesson.VideoContents}}</view>-->
+    <template is="wxParse" data="{{wxParseData:content.nodes}}"  />
+</view>
+
+<view class="fixed row">
+  <view class="section row" bindtap='gotoHome'>
+    <image class="icon" src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_home.png' mode="aspectFill"></image>
+    <view class='button-text blue'>首页</view>
+  </view>
+   <view class="section row">
+    <image class="icon" src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_share.png' mode="aspectFill"></image>
+    <button class='button-text' open-type='share' hover-class='none' >分享</button>
+  </view>
+  <view class="section row" bindtap='gotoComment'>
+    <image class="icon" src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_uncomment.png' mode="aspectFill"></image>
+    <view class='button-text'>{{filter.formatNum(lesson.VideoCom)}}</view>
+  </view>
+  <view class="section row">
+    <image class="icon" src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_unfavor.png' wx:if="{{lesson.isLike===0}}" mode="aspectFill" bindtap='changeLike'></image>
+    <image class="icon" src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_like.png' wx:if="{{lesson.isLike===1}}" mode="aspectFill"  bindtap='changeLike'></image>
+    <view class="button-text {{lesson.isLike===1?'blue':''}}">{{filter.formatNum(lesson.VideoLike)}}</view>
+  </view>
+</view>

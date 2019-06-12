@@ -1,0 +1,24 @@
+<view class="row-between row-picker size-1" wx:if="{{mode!=='region'}}">
+<view class="row">
+  <view class="type">{{type}}</view>
+  <text class="necessary" wx:if="{{necessary}}">*</text>
+</view>
+  <picker range="{{pickerArr}}" value="{{index}}" class="row-end" mode="{{mode}}" bindchange='change' >
+    <view class="row-end" style="width:100%">
+        <text class="picker-text">{{picker}}</text>
+        <view class="iconfont icon-right"></view>
+    </view>
+    </picker>
+</view>
+<view class="row-between row-picker size-1" wx:if="{{mode==='region'}}" >
+  <view class="row">
+    <view class="type">{{type}}</view>
+    <text class="necessary" wx:if="{{necessary}}">*</text>
+  </view>
+  <picker mode="multiSelector" bindchange="change" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+    <view class="row-end" style="width:100%">
+        <text class="picker-text">{{picker||placeholder}}</text>
+        <view class="iconfont icon-right"></view>
+    </view>
+    </picker>
+</view>

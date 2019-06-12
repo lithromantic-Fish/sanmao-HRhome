@@ -1,0 +1,34 @@
+/* component/row/row.wxss */
+.row-row{
+    border-bottom: .1rpx solid #dcdde3;
+    font-size: 28rpx;
+    background: #fff;
+}
+.size-2{
+    padding:30rpx 40rpx;
+}
+.content{
+    color:gray;
+    margin-left:30rpx;
+}
+.icon-account{
+  width:50rpx;
+  height:50rpx;
+  margin-right:15rpx
+}
+.hover{
+  background:#eaeaea;
+}
+.redDos_row{
+  width:32rpx;
+  height:32rpx;
+  background:rgba(251,76,77,1);
+  border-radius: 20rpx;
+  color: white;
+  font-family:PingFang-SC-Bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+ left: 250rpx
+}

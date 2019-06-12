@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "我的",
+  "navigationBarBackgroundColor": "#4c89fb",
+  "enablePullDownRefresh": true,
+  "navigationBarTextStyle":"white",
+  "backgroundColor": "#4c89fb",
+  "usingComponents": {
+    "cardDetail":"/component/cardDetail/cardDetail",
+    "row":"/component/row/row",
+    "authorize":"/component/authorize/authorize",
+    "i-badge": "../../dist/badge/index"
+  }
+}

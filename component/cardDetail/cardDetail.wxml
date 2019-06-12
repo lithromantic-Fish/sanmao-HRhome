@@ -1,0 +1,50 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<view class="column card-detail size-1" wx:if="{{card}}">
+  <view class="row-between">
+    <view class="row row-1">
+      <view class="title" style='max-width:300rpx;'>{{card.nickname}}</view>
+      <view class="iconfont icon-{{card.gender==2?'female':'male'}}"></view>
+    </view>
+    <image src='{{filter.formatAvatar(card.photo)}}' mode='aspectFill' class="avatar" bindtap='preImage'></image>
+  </view>
+  <view class="column column-bottom">
+    <view class="row">
+      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/phone.png" mode="aspectFill" class="icon-cards-detail"></image>
+      <view class="row" wx:if="{{card.change_status==2}}" bindtap='call'>
+        <view class="blue">{{card.mobile}}</view>
+        <image src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/call.png' class="phone" mode="aspectFit"></image>
+      </view>
+      <view wx:else>{{card.mobile}}</view>
+
+      <!-- <view wx:if="{{card.change_status==2}}">{{card.mobile}}</view> -->
+    </view>
+    <view class="row">
+      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/city.png" mode="aspectFill" class="icon-cards-detail"></image>
+      <view class='company_class'>{{card.company}}</view>
+    </view>
+    <view class="row">
+      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/job.png" mode="aspectFill" class="icon-cards-detail"></image>
+      <view  class='company_class'>{{card.duty}}</view>
+    </view>
+  </view>
+  <view class="row-end">
+    <moreMenu 
+      menuList='{{card.menuList}}' 
+      wx:if="{{!mine}}" 
+      bind:tapMenu='tapMenu'>
+    </moreMenu>
+    <i-badge dot wx:if="{{mine}}" count='{{card.system}}'>
+      <image 
+        src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_xx.png' 
+        mode="aspectFit" 
+        class='ic-xx' 
+        catchtap='gotoMessage'>
+      </image>
+    </i-badge>
+  </view>
+</view>
+
+<view class="column-center card-detail-nocard size-1" wx:if="{{!card}}">
+  <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/no-card.png" mode="aspectFill" class="no-card"></image>
+  <view>您还暂时没有名片哦</view>
+</view>

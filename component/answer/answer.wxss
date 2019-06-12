@@ -1,0 +1,48 @@
+.issue{
+  line-height: 50rpx;
+     display: -webkit-box;    
+  -webkit-box-orient: vertical;    
+  -webkit-line-clamp:3;    
+  overflow: hidden;
+}
+.title{
+  font-size: 30rpx;
+  font-weight:600;
+}
+
+.subtitle{
+  color:gray;
+  font-size: 26rpx;
+}
+.avatar{
+  width:80rpx;
+  height:80rpx;
+  border-radius: 50%;
+}
+.title-quizzer{
+  font-size: 28rpx; 
+  color:gray;
+  margin-left:15rpx;
+}
+.issue{
+  margin-top:15rpx;
+}
+.like{
+  width:45rpx;
+  height:45rpx;
+  margin-top:15rpx;
+}
+.liked{
+  width:45rpx;
+  height:45rpx;
+  margin-right:15rpx;
+}
+.blue{
+  font-size: 32rpx;
+}
+.column-end{
+  align-items: flex-end
+}
+.pd-30{
+  padding:30rpx 0;
+}

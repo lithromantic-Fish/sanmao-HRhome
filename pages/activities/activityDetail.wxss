@@ -1,0 +1,294 @@
+page{
+  background:#fff;
+}
+.activity-cover{
+    width:100%;
+    height:400rpx;
+}
+.icon-box{
+  border-right:0.1rpx lightgray solid;
+}
+.icon-box:last-child{
+  border-right:0
+}
+.title-body{
+    font-size: 30rpx;
+    line-height: 60rpx;
+    /* margin-bottom:40rpx; */
+}
+.iconfont{
+    font-size: 40rpx;
+}
+.icon-right{
+  color:gray
+}
+.icon-weizhi,.icon-date{
+    margin-right:15rpx;
+}
+title .size-1{
+  padding:0
+}
+.icon-box image{
+  width:36rpx;
+  height:36rpx;
+}
+.icon-box-1{
+  width:20%
+}
+.icon-box-2{
+  width:30%
+}
+.line-gray{
+    width:100%;
+    margin:20rpx 0;
+}
+.button-scan{
+    padding:18rpx 20rpx;
+    border-radius: 10rpx;
+    background: #4c89fb;
+    color: #fff;
+    width:106px;
+    display: flex;
+    justify-content: center;
+    align-items: center
+
+}
+.description{
+    display: -webkit-box;    
+    -webkit-box-orient: vertical;    
+    -webkit-line-clamp:3;    
+    overflow: hidden;
+    margin-top:20rpx;
+    line-height: 40rpx;
+}
+.icon-more{
+  margin:0 10rpx;
+  color:#dcdde3;
+  font-size: 80rpx;
+}
+.app-avatars{
+    margin-top:20rpx;
+}
+.app-avatar{
+    width:80rpx;
+    height:80rpx;
+    border-radius: 50%;
+    margin:0 10rpx;
+}
+.icon-box-2 image{
+  margin-right:10rpx;
+}
+
+.bottom-fix{
+    position: fixed;
+    bottom: 0;
+    background:#fff;
+    width:100%;
+    box-sizing: border-box;
+    height:98rpx;
+    box-shadow: 0 -5rpx 15rpx rgba(52, 64, 87, 0.2)
+}
+.column-item{
+    margin:0 15rpx;
+    font-size:26rpx;
+}
+.icon-home,.icon-favor,.icon-share,.icon-favorOn{
+    font-size: 50rpx;
+}
+.sign-button{
+    /* padding:15rpx 20rpx; */
+    background: #4c89fb;
+    height:98rpx;
+    line-height: 98rpx;
+    text-align: center;
+    font-size:32rpx;
+    /* border-radius: 50rpx; */
+    color:#fff;
+}
+.column-item{
+  width:80rpx;
+}
+page{
+    padding-bottom:150rpx;
+}
+.iconfont{
+  color:#4c89fb
+}
+
+.chooesBox{
+  position: absolute
+}
+.tootip{
+  width:400rpx;
+  left:50rpx;
+  position: absolute;
+  background:#fff;
+  top:-160rpx;
+  border-radius: 10rpx;
+  z-index:99;
+  overflow:unset;
+  box-shadow: 0 0 15rpx lightgray;
+} 
+
+
+.column-box-item{
+  font-size: 32rpx;
+  text-align: center;
+}
+.row-button{
+  /* padding:0; */
+  border-radius: 0;
+  background:#fff;
+  line-height: inherit;
+  margin:0;
+  z-index:99
+}
+.icon-weixin,.icon-pyq{
+  margin-right:10rpx;
+}
+.mask{
+  position: fixed;
+  top:0;
+  left: 0;
+  z-index: 10;
+  background:rgba(0, 0, 0, 0);
+  overflow:unset;
+  
+}
+.images{
+  border-radius: 4rpx;
+  /* border:1rpx solid #4c89fb; */
+  color:#fff;
+  padding:0rpx 10rpx;
+  background:rgba(76, 137, 251,0.3);
+}
+.icon-image{
+  font-size:34rpx;
+  margin-right:13rpx;
+  color:#fff;
+}
+.icon-nav{
+  font-size: 28rpx;
+  margin-left:15rpx;
+}
+.title-icon{
+  width:30rpx;
+  height:30rpx;
+  margin-right:15rpx;
+}
+.fullMask{
+    width:100%;
+    height:100%;
+    position: fixed;
+    left:0;
+    top:0;
+    background:rgba(0,0,0,.2);
+}
+.canvas-box{
+  position: fixed;
+  left:0;
+  width:100%;
+  height:100%;
+  top:0;
+  z-index:999
+}
+.save-image{
+  display: block;
+  width: 80%;
+  height: 80rpx;
+  padding: 0;
+  line-height: 80rpx;
+  text-align: center;
+  background: #4c89fb;
+ margin-top:24rpx;
+ margin-bottom:30rpx;
+  color: #fff;
+  font-size: 32rpx;
+  border-radius: 44rpx;
+}
+.icon-2{
+ font-size: 80rpx;
+ color:rgba(128, 128, 128, 0.596);
+}
+.preview-image{
+   width:550rpx;
+  height:980rpx;
+  margin:0  auto;
+   margin-top:30rpx;
+ margin-bottom:30rpx;
+  z-index: 10;
+}
+.disabled{
+  background:rgb(197, 197, 197);
+}
+.havSign{
+  background:#94b9fd;
+}
+.price{
+  font-size:40rpx
+}
+.price text{
+    font-size:26rpx
+}
+.desc{
+  margin-top:30rpx;
+  margin-bottom: 20rpx;
+}
+.time{
+  font-size: 26rpx;
+  color:gray;
+}
+.tag{
+  position: absolute;
+  width:125rpx;
+  height:42rpx;
+  top:0;
+  left:-15rpx;
+  z-index: 99
+}
+.desc-image{
+  width:100%;
+  height:auto;
+  vertical-align:middle;
+}
+.title{
+  font-size:34rpx;
+
+}
+title .title{
+  font-weight: 500;
+}
+.form_dz{
+  background-color:rgba(0,0,0,0);
+margin-top:7px;
+padding:0;
+margin-left:44rpx;
+font-size:28rpx;
+
+}
+.css_btn{
+  background-color: rgba(0, 0, 0, 0);
+  padding:0;
+  line-height: 1rpx;
+  border: none;
+  font-size: 28rpx;
+  overflow:unset;
+
+}
+.fix{
+  position: fixed;
+  bottom:10vh;
+  right:5vw;
+}
+.back-button{
+  background: #fff;
+  border:1rpx solid #4c89fb;
+  box-shadow: 0 0 15rpx rgba(0,0,0,.1);
+  color:#4c89fb;
+  width:80rpx;
+  height:80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 50%;
+  opacity: .8
+}

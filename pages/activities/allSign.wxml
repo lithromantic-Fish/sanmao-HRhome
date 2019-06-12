@@ -1,0 +1,9 @@
+<view class="column" wx:if="{{cards.length}}" style="margin-top:21rpx;">
+  <view class="card-box" wx:for="{{cards}}" wx:key='*this'>
+    <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/supportTag1.png" class="tag" mode='aspectFill' wx:if="{{item.identity==3}}"></image>
+    <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/teacherTag1.png" class="tag" mode='aspectFill' wx:if="{{item.identity==2}}"></image>
+    <cardListItem  mobile='{{item.mobile}}' title='{{item.nickname}}' description='{{item.compan11y}}' role='{{item.duty}}' image='{{item.photo}}' sign="{{lookSign?true:false}}" card="{{item.res}}" roleValue="{{item.identity}}" actId="{{item.ActivityId}}" applyId="{{item.apply_id}}"
+      openid="{{item.OpenId}}" pathUrl="/pages/cards/cardDetail?id={{item.res.OpenId}}&busid={{item.res.BusId}}" pathUrl="/pages/cards/cardDetail?id={{item.res.OpenId}}&busid={{item.res.BusId}}"></cardListItem>
+  </view>
+</view>
+<empty wx:if="{{!cards.length}}"></empty>

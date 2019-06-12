@@ -1,0 +1,60 @@
+.avatar{
+  width:80rpx;
+  height:80rpx;
+  border-radius:50%;
+  margin-right:10rpx;
+}
+.content{
+  line-height: 50rpx;
+}
+.subtitle{
+  color:gray;
+}
+.content{
+  padding:25rpx 0;
+}
+.icon-recode{
+  color:#fff;
+  width:150rpx;
+  height:150rpx;
+  line-height: 150rpx;
+  text-align: center;
+  border-radius: 50%;
+  background: #4c89fb;
+  font-size: 75rpx;
+  margin-top:20rpx;
+}
+.hover{
+  background:#3e74d8;
+}
+.voice{
+  padding:15rpx 10rpx;
+  background: #4c89fb;
+  border-radius: 30rpx;
+  width:350rpx;
+  box-sizing: border-box;
+  color:#fff;
+  margin-left: 20rpx;
+}
+.unlock{
+  margin-left: 10rpx;
+
+}
+.bottom-title{
+  margin-top:25rpx;
+}
+.voice-text{
+  margin-left:auto;
+}
+.reset{
+  color:gray;
+  font-size: 26rpx;
+  margin-top:20rpx;
+}
+.hover-text{
+  background:#eaeaea;
+}
+.disabled{
+  background:#eaeaea;
+  color:gray
+}

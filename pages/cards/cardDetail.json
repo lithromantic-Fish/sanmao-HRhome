@@ -1,0 +1,13 @@
+{
+    "navigationBarTitleText": "名片详情",
+    "navigationBarBackgroundColor": "#4c89fb",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#4c89fb",
+    "usingComponents": {
+      "cardDetail":"/component/cardDetail/cardDetail",
+      "cardListItem": "/component/cardListItem/cardListItem",
+      "row":"/component/row/row",
+      "title":"/component/title/title",
+      "chooseNav":"/component/chooseNav/chooseNav"
+    }
+  }

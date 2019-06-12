@@ -1,0 +1,10 @@
+<view class="column-center" wx:if="{{status}}">
+  <view class="iconfont icon-success"></view>
+  <text class="tip-text">签到成功</text>
+  <text class="tip-second">{{seconds}}秒后回到活动详情页面</text> 
+</view>
+<view class="column-center" wx:if="{{!status}}">
+  <view class="iconfont icon-tip"></view>
+  <text class="tip-text">您还没有购票，马上报名吧~</text>
+  <text class="tip-second">{{seconds}}秒后回到活动详情页面</text> 
+</view>

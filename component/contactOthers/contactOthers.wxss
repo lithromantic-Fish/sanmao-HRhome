@@ -1,0 +1,24 @@
+.contact-box-others{
+  background:#fff;
+  border-radius: 15rpx;
+  padding:15rpx;
+  font-weight: 500;
+  max-width:400rpx;
+  margin-left:-5rpx;
+  min-height:30rpx;
+  min-width:30rpx;
+}
+.row-end{
+  align-items: flex-start
+}
+.avatar{
+  width:100rpx;
+  height:100rpx;
+  border-radius: 50%;
+  margin-right:20rpx;
+}
+.tooltip-others{
+    width:30rpx;
+    height: 30rpx;
+      margin-top:10rpx
+}

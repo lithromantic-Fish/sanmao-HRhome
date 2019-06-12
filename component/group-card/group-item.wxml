@@ -1,0 +1,15 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<view class="row-between"  style="box-sizing:border-box" bindtap='gotoDetail'>
+    <view class="row">
+        <image class="avatar" src="{{filter.formatImage(card.photo)}}" mode="aspectFill"></image>
+        <view class="column" style="margin-left:22rpx;">
+            <view class="row">
+                <view class="title">{{card.nickname}}</view>
+                <view class="position">{{card.duty}}</view>
+            </view>
+            <view class="desc">{{card.company}}</view>
+        </view>
+    </view>
+    <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/call.png" wx:if="{{call==='true'}}" class="phone" mode="aspectFill" catchtap="makePhone"></image>
+    <slot name='time'></slot>
+</view>

@@ -1,0 +1,4 @@
+@import '../myAnswer/myAnswer.wxss';
+.pd-30{
+    padding:30rpx 0
+}

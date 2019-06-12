@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "我的问题",
+  "usingComponents": {
+    "empty": "/component/empty/empty"
+  }
+}

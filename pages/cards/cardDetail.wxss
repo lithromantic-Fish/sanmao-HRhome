@@ -1,0 +1,174 @@
+/* .list{
+   
+} */
+.card-box{
+  position: absolute;
+  z-index:99;
+ width:100%;
+}
+.card-1{
+  width:100%;
+  padding-top:20rpx;
+}
+page{
+  /* overflow: hidden; */
+  background: #fff;
+  padding-bottom: 150rpx;
+}
+.bq{
+  width:30rpx;
+  height:30rpx;
+  margin-right:10rpx;
+}
+.bg-box{
+  overflow:hidden;
+  width:100wv;
+  position:aboslute;
+  top:0;
+  left:0;
+  height:500rpx;
+}
+.input-desc{
+  border-radius: 5rpx;
+ border: solid  0.1rpx lightgray;
+ padding:10rpx 20rpx;
+}
+.card-bg{
+  background:#4c89fb;
+  width:1000rpx;
+  margin-left:-500rpx;
+  left:50%;
+  height:35vh;
+  border-radius: 0 0rpx 50% 50%;
+  position: absolute;
+}
+.title{
+    /* background:#fff; */
+    font-size: 34rpx;
+    font-weight: normal;
+}
+.change-button{
+    background: #4c89fb;
+    color: #fff;
+    font-weight:500;
+    border:0;
+    margin-top:20rpx;
+    width:100%;
+    line-height:80rpx;
+    font-size:32rpx;
+
+}
+button::before{
+    border:0;
+}
+button::after{
+    border:0;
+}
+.load{
+    font-size: 26rpx;
+
+}
+row .type{
+  width:20%;
+  font-weight:600;
+  color: #333;
+  font-size: 30rpx
+}
+row .row{
+  justify-content: space-between
+}
+.disabled{
+    background: #ccc;
+    color:#fff;
+}
+.allowed{
+  background:#7eabff;
+}
+.back-button{
+  background: #fff;
+  border:1rpx solid #4c89fb;
+  box-shadow: 0 0 15rpx rgba(0,0,0,.1);
+  color:#4c89fb;
+  width:80rpx;
+  height:80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 50%;
+  opacity: .8
+}
+.fix{
+  position: fixed;
+  bottom:15vh;
+  right:5vw;
+}
+.action-1{
+  line-height: 60rpx;
+  background:rgba(76,137,251,0.15);
+  color:#4C89FB;
+  border-radius: 10rpx;
+        text-align: center;
+              box-sizing: border-box
+}
+.action-2{
+  padding:20rpx 15rpx;
+  background:#4c89fb;
+  color:#fff;
+    width:33%;
+      border-radius: 10rpx;
+      text-align: center;
+      box-sizing: border-box
+}
+chooseNav .nav{
+  position: initial;
+  padding:0
+}
+chooseNav .place{
+ height:0
+}
+.fix-buttons{
+  height:120rpx;
+}
+.fix-buttons button {
+    line-height: 120rpx;
+    flex: 1;
+}
+.sky_4 .size-1{
+  padding: 30rpx !important
+}
+.sky_4 .size-2{
+  padding: 30rpx !important
+}
+.sky-5 .size-2{
+  padding: 30rpx 0 !important;
+  border-bottom:1rpx solid #E3E4E8 !important
+}
+
+
+.sky_6 .size-1{
+  background:rgba(243,244,245,1);
+}
+.sky_6 .nav{
+  display: flex;
+  justify-content: space-around
+}
+.sky_6 .nav-item{
+  width: auto
+}
+.sky_6 .choosed{
+  border-bottom: #4C89FB solid 6rpx;
+  font-size: 34rpx;
+  font-weight: bold
+}
+
+.zan-btn {
+  display: inline-block!important;
+  height:60rpx;
+  width:180rpx;
+  font-size:30rpx;
+  color:#4C89FB;
+  font-weight:bold;
+  background:rgba(76,137,251,0.15);
+  line-height: 60rpx;
+  padding:0;
+  text-align: center;
+}

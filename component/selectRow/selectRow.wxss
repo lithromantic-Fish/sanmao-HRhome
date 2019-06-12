@@ -1,0 +1,26 @@
+.row-picker{
+  width:100%;
+  box-sizing: border-box;
+  background: #fff;
+  border-bottom: 0.1rpx #dcdde3 solid;
+}
+.picker-text{
+  color:gray;
+}
+.type{
+  font-weight: 600;
+  font-size:32rpx;
+  /* width:20%; */
+}
+/* picker{
+  width:80%
+} */
+.picker-text{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width:100%;
+}
+.necessary{
+  color:#fa2453
+}

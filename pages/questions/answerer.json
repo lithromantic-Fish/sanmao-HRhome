@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "答主详情",
+  "usingComponents": {
+    "empty": "/component/empty/empty",
+    "answer": "/component/answer/answer",
+    "voice": "/component/voice/voice"
+  }
+}

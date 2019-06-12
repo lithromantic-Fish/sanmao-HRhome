@@ -1,0 +1,109 @@
+.card{
+  background:#fff;
+}
+.avatar{
+  width:80rpx;
+  height:80rpx;
+  border-radius: 50%
+}
+.icon-tiwen{
+  width:40rpx;
+  height:40rpx;
+  margin-right:20rpx;
+}
+.question-title{
+  font-size: 34rpx;
+  font-weight: 600;
+}
+.ask-price{
+  color:#4C89FB;
+}
+.time{
+  font-size: 24rpx;
+}
+.title-issue{
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 20rpx;
+  display: -webkit-box;    
+  -webkit-box-orient: vertical;    
+  -webkit-line-clamp:1;    
+  overflow: hidden;
+}
+textarea{
+  border:1rpx rgba(227, 228, 232, 1) solid;
+  width:100%;
+  margin:40rpx 0;
+  box-sizing: border-box;
+  padding:20rpx;
+  line-height: 60rpx;
+  height:400rpx;
+  color:rgba(153, 153, 153, 1);
+  background:rgba(249, 249, 250, 1);
+}
+.icon-add{
+  width:150rpx;
+  height:150rpx;
+  line-height: 150rpx;
+  text-align: center;
+  color:gray;
+  /* border:1rpx gray solid; */
+  background:rgb(245, 245, 245);
+}
+.image-item{
+  width:150rpx;
+  height:150rpx;
+  position: relative;
+  margin:0 10rpx;
+}
+.image-item:nth-child(1){
+  margin-left: 0
+}
+.image-item image{
+  width:150rpx;
+  height:150rpx;
+}
+.icon-shanchu{
+  position: absolute;
+  right:0;
+  top:0
+}
+
+.description{
+  margin-top:20rpx;
+}
+.title-name{
+  font-size:30rpx;
+  font-weight:600;
+  margin-bottom:15rpx;
+}
+.text-box{
+  position: relative;
+}
+.tip{
+  position: absolute;
+  color:gray;
+  bottom:45rpx;
+  right:10rpx;
+}
+.subTitle{
+  color:gray;
+  
+}
+.button-hr{
+  width:400rpx;
+}
+page{
+  padding-bottom:100rpx;
+  background:#fff
+}
+.avatar-1{
+  width:100rpx;
+  height:100rpx
+}
+.questions-box{
+  background: #fff;
+  padding:50rpx 0;
+  color:gray
+
+}

@@ -1,0 +1,81 @@
+@import "../../utils/iconfont.wxss";
+page{
+  background: #fff
+}
+.bg{
+  width:100%;
+  height:542rpx;
+  position: absolute;
+}
+.bg-box{
+  width:100%;
+  height:542rpx;
+  position: relative;
+
+}
+.bg-box view{
+  z-index: 100;
+  line-height: 542rpx;
+  font-size: 62rpx;
+  color:#fff
+
+}
+.title-row{
+  padding-right:30rpx;
+  background: #fff;
+
+}
+.section-bg{
+  width:100%;
+  height:300rpx;
+  background:#4c89fb;
+  color:#fff;
+}
+.total{
+  font-size: 65rpx;
+  font-weight: 600;
+}
+.rank{
+  font-size: 40rpx;
+  font-weight: 600
+}
+.item{
+  background: #fff;
+}
+.popularity{
+  color: #4C89FB;
+  font-weight: bold;
+  font-size: 28rpx;
+}
+
+.popularity text:nth-child(1){
+  font-size: 45rpx;
+  font-weight: 550
+}
+.title{
+  font-weight: 500;
+  margin-left: 10rpx
+}
+.sky_3 .title{
+  font-size: 30rpx;
+  font-weight: 500;
+  margin-left: 0rpx
+}
+.subtitle{
+  color:gray;
+  font-size: 26rpx;
+  margin-top: 15rpx;
+}
+.sky_3 .size-1{
+  padding: 30rpx 0 !important;
+  border-bottom:.1rpx #E3E4E8 solid;
+}
+.column{
+  padding: 0 30rpx;
+  background-color: #fff
+}
+.icon-xiajiantou{
+  font-size: 36rpx;
+  color: #999;
+  margin-left: 11rpx
+}

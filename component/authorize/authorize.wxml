@@ -1,0 +1,9 @@
+ <view class="modal column-center size-1">
+    <view class="modal-title title">需要您的授权</view>
+    <view class="modal-text column-center">
+      <view>为了提供更好的服务</view>
+      <view>请在稍后的提示框中点击"允许"</view>
+    </view>
+    <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/authorize.png" mode="aspectFit" class="authorize"></image>
+    <button class="button-hr" open-type="getUserInfo"  bindgetuserinfo="onGotUserInfo" style="width:100%">我知道了</button>
+</view>

@@ -1,0 +1,4 @@
+<title title='选择举报原因'></title>
+<view class="column">
+  <view class="row-center border size-1" wx:for="{{reasons}}" wx:key='index' bindtap='gotoReportDetail' data-reason='{{item}}' hover-class='hover' style="background:#Fff">{{item}}</view>
+</view>

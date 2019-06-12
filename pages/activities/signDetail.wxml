@@ -1,0 +1,16 @@
+<view class="column-center size-1 " style="padding:30rpx 30rpx 0 30rpx;">
+  <view class="column size-1 signDetail" style="padding:0 50rpx 60rpx 50rpx;">
+    <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/teacherTag1.png" mode="aspectFill" class="tag" wx:if="{{card.Role===1}}" />
+    <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/supportTag1.png" mode="aspectFill" class="tag" wx:if="{{card.Role===2}}" />
+    <cardDetail card="{{card}}" phone='true' class="border" style="padding-bottom:50rpx;font-size:30rpx;"></cardDetail>
+    <view class='column-center' style='margin-top:40rpx;'>
+      <!-- <view class="line-gray"></view> -->
+      <view class="column" style="width:100%">
+        <view class="column-title">我的介绍</view>
+        <view class="content">{{card.intro}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="blue" style="margin-top:30rpx;font-size:26rpx;">觉得对方合适，主动打电话跟对方聊聊吧</view>

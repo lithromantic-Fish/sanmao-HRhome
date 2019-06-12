@@ -1,0 +1,27 @@
+page{
+  background:#fff;
+}
+.about{
+  font-size: 28rpx ;
+  color:#777;
+  line-height: 68rpx;
+  margin-top: 30rpx;
+  text-indent: 30px;
+}
+.contract{
+  color:#999;
+  position: absolute;
+  bottom:0;
+  left:0;
+  width:100%
+
+}
+.ab{
+  text-indent: 0
+}
+.flex{
+  display: flex;
+  flex-direction: column;
+  padding-bottom:100rpx;
+
+}

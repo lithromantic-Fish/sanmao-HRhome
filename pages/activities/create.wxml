@@ -1,0 +1,211 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<view class="bt"> </view>
+
+<!-- 1, 上传活动图片 banner_img -->
+<view class="size-1 column border" style="padding:30rpx;height:300rpx;background:#fff">
+  <!-- 已上传 banner_img -->
+  <image 
+    class="cover" 
+    src='{{filter.formatImage(banner_img)}}' 
+    wx:if="{{banner_img}}" 
+    bindtap='chooseCover'
+    mode="aspectFill" 
+    data-type='1'></image>
+  <!-- 还未上传 banner_img -->
+  <view 
+    class="column-center column-bg" 
+    bindtap='chooseCover'
+    wx:else 
+    data-type='1'>
+    <view class="row-center" style="height:100%">
+      <view class="column-center">
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/takePhoto.png" mode="aspectFit" class="photo-icon"></image>
+        <view>上传活动页面的顶部海报，尺寸为690*345</view>
+      </view>
+    </view>
+    <view class="bg"></view>
+  </view>
+</view>
+
+<form bind:submit='confirm' report-submit='true'>
+  <!-- 2, 我的发布身份 -->
+  <view class="row-between size-1 border">
+    <view class="row">
+      <view class="title">我的发布身份
+        <text class="red">*</text>
+      </view>
+      <!-- 选择身份 -->
+      <view class="row row-border" bindtap='choosePosition'>
+        <view>{{position}}</view>
+        <image src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/down.png' mode="aspectFit" class="down" />
+      </view>
+    </view>
+    <!-- 上传资质 -->
+    <view class="blue-section" bindtap='gotoQualication'>上传资质</view>
+  </view>
+  <!-- 3, 发布身份名称 -->
+  <view class="row-start size-1 border">
+    <view class="title" style="min-width:32%">发布身份名称
+      <text class="red">*</text>
+    </view>
+    <!-- 输入真实的个人姓名或机构名称input -->
+    <input 
+      placeholder='输入真实的个人姓名或机构名称' 
+       maxlength='20'
+      name='username' 
+      value='{{username}}' 
+      data-type="username" 
+      bindinput="getText" 
+      style='width:75%' />
+  </view>
+  <!-- 4,活动标题 -->
+  <view class="row-start size-1 border">
+    <view class="title">活动标题
+      <text class="red">*</text>
+    </view>
+    <input 
+      style='width:100%' 
+      placeholder='请输入5-30字标题' 
+      maxlength='30' 
+      name='name' 
+      value='{{name}}' 
+      data-type='name' 
+      bindinput="getText" />
+  </view>
+  <!-- 5,开始时间 -->
+  <view class="row-start size-1 border">
+    <view class="title">开始时间
+      <text class="red">*</text>
+    </view>
+    <view></view>
+    <picker mode="date" value="{{value}}" bindchange="bindPickerChange" data-type='date' data-mode='Start'>
+      <view class="row">
+        <view class="time-section year">{{Start.year}}</view>
+        <view class="time-section middle">{{Start.month}}</view>
+        <view class="time-section">{{Start.day}}</view>
+      </view>
+    </picker>
+    <picker mode="time" value="{{value}}" bindchange="bindPickerChange" data-type='time' data-mode='Start'>
+      <view class="row">
+        <view class="time-section timer">{{Start.hour}}</view>
+        <view class="time-section-time">:</view>
+        <view class="time-section timer">{{Start.minute}}</view>
+      </view>
+    </picker>
+  </view>
+  <!-- 6,结束时间 -->
+  <view class="row-start size-1 border">
+    <view class="title">结束时间
+      <text class="red">*</text>
+    </view>
+    <view></view>
+    <picker mode="date" value="{{value}}" data-type='date' data-mode='End' bindchange="bindPickerChange">
+      <view class="row">
+        <view class="time-section year">{{End.year}}</view>
+        <view class="time-section middle">{{End.month}}</view>
+        <view class="time-section">{{End.day}}</view>
+      </view>
+    </picker>
+    <picker mode="time" value="{{value}}" data-type='time' data-mode='End' bindchange="bindPickerChange">
+      <view class="row">
+        <view class="time-section timer">{{End.hour}}</view>
+        <view class="time-section-time">:</view>
+        <view class="time-section timer">{{End.minute}}</view>
+      </view>
+    </picker>
+  </view>
+  <!-- 7,活动城市 -->
+  <selectRow type="活动城市" placeholder="{{city}}" mode="region" picker="{{regionText}}" necessary="true" bind:change="cityChange" class="section sky_9"></selectRow>
+  <!-- 8,详细地址 -->
+  <view class="row-between size-1 border">
+    <view class="row-start " style="width:95%">
+      <view class="title">详细地址
+        <text class="red">*</text>
+      </view>
+      <input 
+        placeholder='请填写详细地址，例如xx酒楼xx宴会厅' 
+        style="width:75%;" 
+        bindinput="getText" 
+        value='{{address}}' 
+        name='address' 
+        disabled="{{diasbled}}" 
+        bindtap='gotoMap' 
+        data-type='address' />
+    </view>
+    <view class="iconfont icon-right" bindtap='gotoMap' style="width:5%"></view>
+  </view>
+  <!-- 9,活动价格 -->
+  <view class="row-start size-1 border">
+    <view class="title">活动价格
+      <text class="red">*</text>
+    </view>
+    <input placeholder='设置人气值' name='price' value='{{price}}' bindinput="getText" id='price' type='number' disabled/>
+  </view>
+  <!-- 10,上传活动图片 -->
+  <view class="column  size-1">
+    <view class="row-start">
+      <view class="title">上传活动图片(尺寸为210*225)
+        <text class="red">*</text>
+      </view>
+    </view>
+    <view class="column" style="margin-top:20rpx;">
+      <view class="row wrap">
+        <view class="image-item" wx:if="{{activity_icon}}">
+          <image 
+            src='{{filter.formatImage(activity_icon)}}' 
+            mode="aspectFill" 
+            bindlongtap='delete' 
+            id='activity_icon' 
+            data-type='2'></image>
+        </view>
+        <view class="image-item" wx:else>
+          <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_tjzp.png" mode="aspectFit" bindtap='chooseCover' data-type='2' wx:if="{{activity_icon.length<20}}"></image>
+        </view>
+      </view>
+
+      <view class="gray" style="margin-top:20rpx;font-size:28rpx;">温馨提示：长按可以删除图片哦～</view>
+
+    </view>
+  </view>
+  <!-- 11,活动详情介绍 -->
+  <view class="column  size-1">
+    <view class="row-start">
+      <view class="title">活动详情介绍
+        <text class="red">*</text>
+      </view>
+    </view>
+    <view class="column card" style="margin-top:20rpx;">
+      <textarea value="{{desc}}" placeholder="请填写活动详情（必填）" bindinput="getText" name='desc' value='{{desc}}' data-type='desc'>
+      </textarea>
+    </view>
+  </view>
+  <!-- 12,活动详情图片 -->
+  <view class="column  size-1">
+    <view class="row-start">
+      <view class="title">活动详情图片<text>({{imgs.length}}/20张)</text></view>
+    </view>
+    <view class="column" style="margin-top:20rpx;">
+      <view class="row wrap">
+        <view 
+          class="image-item" 
+          wx:for="{{imgs}}" 
+          wx:key='*this' 
+          wx:for-index='index'>
+          <image src='{{filter.formatImage(item)}}' mode="aspectFill" bindlongtap='delete' data-index='{{index}}' data-type='3'></image>
+        </view>
+        <view class="image-item">
+          <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_tjzp.png" mode="aspectFit" bindtap='chooseCover' data-type='3' wx:if="{{imgs.length<20}}"></image>
+        </view>
+      </view>
+
+      <view class="gray" style="margin-top:20rpx;font-size:28rpx;">长按可以删除图片哦~</view>
+
+    </view>
+  </view>
+  
+  <cover-view class='fix-buttons'>
+    <!-- <button class="preview" bindtap='previewAct'>预览</button> -->
+    <button form-type='submit' class="preview" data-btn_type="preview">预览</button>
+    <button form-type='submit' class="blue">{{options.update ? '确认修改' : '发布'}}</button>
+  </cover-view>
+</form>

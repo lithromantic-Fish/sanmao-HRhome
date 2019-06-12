@@ -1,0 +1,8 @@
+<!--pages/activities/signView.wxml-->
+<view class='flex-de'>
+ <image style='width:186rpx;height:186rpx;border-radius:50%;margin:60rpx 0 20rpx 0' src="{{signImage}}" mode="aspectFill"></image>
+  <text class='txt_sign'>签到码</text>
+  <view class='qd'>签到码可以印在纸质名片、宣传单上他人用微信扫码，活动当天即可签到</view>
+
+    <button class="button-hr" style='font-size:32rpx;margin-top:130rpx;' bindtap="save">下载签到码</button>
+</view>

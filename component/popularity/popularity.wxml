@@ -1,0 +1,12 @@
+<view class="size-1 row-between border" style="background:#fff">
+  <view class="row" style="width:90%">
+  <view style="width:20%">
+  <image src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/{{popularity.icon}}.png' mode="aspectFit" class="popuparity-icon"></image>
+  </view> 
+    <view class="column" style="width:80%">
+      <view class="title">{{popularity.title}}</view>
+      <view class="description">{{popularity.description}}</view>
+    </view>
+  </view>
+  <view class="blue"  style="width:10%;font-weight:500">+{{popularity.score}}</view>
+</view>

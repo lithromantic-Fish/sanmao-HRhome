@@ -1,0 +1,28 @@
+.voice{
+  padding:15rpx 10rpx;
+  background: rgba(76, 137, 251,0.1);
+  border-radius: 30rpx;
+  width:350rpx;
+  box-sizing: border-box;
+  color:#4c89fb;
+  margin-left: 20rpx;
+}
+.unlock{
+  margin-left: 10rpx;
+
+}
+.title-voice{
+    font-size: 30rpx;
+    font-weight:500;
+    margin-bottom:15rpx;
+}
+.bottom-title{
+  margin-top:25rpx;
+}
+.voice-text{
+  margin-left:auto;
+}
+.voice-icon{
+  width: 30rpx;
+  height:30rpx;
+}

@@ -1,0 +1,84 @@
+@import '/pages/account/account.wxss';
+page{
+  background:#fff;
+}
+chooseNav .nav{
+  position: initial;
+  padding:0
+}
+chooseNav .place{
+ height:0
+}
+.size-2{
+ /* padding:20rpx 30rpx; */
+padding-top:20rpx;
+padding-bottom: 20rpx;
+}
+
+.title {
+  margin-bottom:5rpx;
+  font-weight: normal !important
+}
+.card-detail{
+  background: transparent !important;
+  background-image: url("https://static.hrloo.com/hrloo56/hrhomeminiapp/img/card_bg.png") !important;
+  background-size: 110% 120% !important;
+  z-index: 999;
+  background-position: center !important
+}
+.row-end i-badge{
+  position:relative;
+  bottom: -22rpx;
+  right: -12rpx
+}
+
+.sky_6 .size-1{
+  background:rgba(243,244,245,1);
+}
+.sky_7 .nav{
+  display: flex;
+  justify-content: space-around
+}
+.sky_7 .nav-item{
+  width: auto
+}
+.sky_7 .choosed{
+  border-bottom: #4C89FB solid 6rpx;
+  font-size: 34rpx;
+  font-weight: bold
+}
+.redDos{
+  width:32rpx;
+  height:32rpx;
+  background:rgba(251,76,77,1);
+  border-radius: 20rpx;
+  color: white;
+  font-family:PingFang-SC-Bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 11rpx;
+  top: -8rpx
+}
+
+.sky_two{
+  position:absolute;
+bottom:70rpx;
+right:36rpx;
+width:20rpx;
+height:20rpx;
+border-radius:50%;
+background:red;
+z-index:9999999999;
+
+}
+
+.sky_one{
+  position: relative
+}
+
+.sky_three .sky_four{
+  background: #fff !important;
+  z-index: 99999999
+}

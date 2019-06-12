@@ -1,0 +1,53 @@
+.card-box{
+  position: relative;
+  overflow: hidden;
+}
+.tag{
+  position: absolute;
+  width:120rpx;
+  height:40rpx;
+  text-align: center;
+  top:0;
+  left:0;
+  z-index: 99;
+  font-size:26rpx;
+}
+cardListItem .size-2{
+  padding:40rpx 30rpx 
+}
+.image-box .avatar{
+  width:104rpx;
+  height: 104rpx;
+}
+cardListItem .size-2{
+  padding:0 0 0 31rpx;
+}
+cardListItem .card-item{
+  border:none;
+}
+.card-right{
+  width:100%!important;
+}
+.card-item .card-right,.card-item .button {
+  border-bottom:#DCDDE3 solid 1rpx;
+  padding:31rpx 0;
+}
+.card .title{
+  font-size:32rpx;
+}
+.card-item .card-right{
+  margin-left: 20rpx;
+}
+.card-right .description{
+  margin-top:10rpx!important;
+}
+.card-right .description,.card-right .role{
+  font-size:28rpx!important;
+  color:#666!important;
+}
+.card-right .role{
+  margin-top:6rpx!important;
+}
+.card-right .button-detail{
+  margin-right: 30rpx;
+}

@@ -1,0 +1,8 @@
+{
+    "navigationBarTitleText": "谁收藏了我",
+  "usingComponents": {
+    "chooseNav":"../../component/chooseNav/chooseNav",
+    "group-card":"../../component/group-card/group-item",
+        "empty": "../../component/empty/empty"
+  }
+}

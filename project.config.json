@@ -1,0 +1,356 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"enhance": false,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.6.5",
+	"appid": "wx24f542bf38a21c3a",
+	"projectname": "HR%E4%B9%8B%E5%AE%B6",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 42,
+			"list": [
+				{
+					"id": 0,
+					"name": "account我的",
+					"pathName": "pages/account/account",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "favorMe谁收藏了我",
+					"pathName": "pages/account/favorMe",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "makeCard编辑名片",
+					"pathName": "pages/cards/makeCard",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "cardDetail名片详情",
+					"pathName": "pages/cards/cardDetail",
+					"query": "card_id=30",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "search搜索",
+					"pathName": "pages/search/search",
+					"query": "type=2",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "filter筛选",
+					"pathName": "pages/search/filter",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "likeMe谁赞了我",
+					"pathName": "pages/account/likeMe",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 7,
+					"name": "message系统消息",
+					"pathName": "pages/account/message",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 8,
+					"name": "myActivities我的活动",
+					"pathName": "pages/account/myActivities",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 9,
+					"name": "myCards我的名片夹",
+					"pathName": "pages/account/myCards",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 10,
+					"name": "newCards我的交换申请列表",
+					"pathName": "pages/account/newCards",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 11,
+					"name": "cardCode名片码",
+					"pathName": "pages/account/cardCode",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 12,
+					"name": "wxAuthorize登录授权",
+					"pathName": "pages/index/wxAuthorize",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 13,
+					"name": "groups分组列表",
+					"pathName": "pages/account/groups",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 14,
+					"name": "groupDetail分组详情页",
+					"pathName": "pages/account/groupDetail",
+					"query": "id=16",
+					"scene": null
+				},
+				{
+					"id": 15,
+					"name": "chooseCards选择添加联系人页面",
+					"pathName": "pages/account/chooseCards",
+					"query": "id=16",
+					"scene": null
+				},
+				{
+					"id": 16,
+					"name": "popularity我的人气收支明细",
+					"pathName": "pages/account/popularity",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 17,
+					"name": "myActivities我的活动",
+					"pathName": "pages/account/myActivities",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 18,
+					"name": "activityGround活动首页",
+					"pathName": "pages/activities/activityGround",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 19,
+					"name": "vip加v特权",
+					"pathName": "pages/account/vip",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 20,
+					"name": "人气值",
+					"pathName": "pages/account/popularityValue",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "chooseCards",
+					"pathName": "pages/account/chooseCards",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 22,
+					"name": "Visitor谁看过我",
+					"pathName": "pages/account/myVisitor",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 23,
+					"name": "activityGround活动社区",
+					"pathName": "pages/activities/activityGround",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 24,
+					"name": "create发布活动",
+					"pathName": "pages/activities/create",
+					"query": "update=1&id=84",
+					"scene": null
+				},
+				{
+					"id": 25,
+					"name": "preview预览",
+					"pathName": "pages/activities/preview",
+					"query": "id=78",
+					"scene": null
+				},
+				{
+					"id": 26,
+					"name": "add名片分组",
+					"pathName": "pages/account/add",
+					"query": "card_id=30",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "myAnswer",
+					"pathName": "pages/questions/myAnswer",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "comment",
+					"pathName": "pages/questions/comment",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "activityGround",
+					"pathName": "pages/activities/activityGround",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "create",
+					"pathName": "pages/activities/create",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "qualifications",
+					"pathName": "pages/activities/qualifications",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 32,
+					"name": "preview",
+					"pathName": "pages/activities/preview",
+					"query": "id=78",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "confirm",
+					"pathName": "pages/activities/confirm",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "popularityValue",
+					"pathName": "pages/account/popularityValue",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 35,
+					"name": "signDetail",
+					"pathName": "pages/activities/signDetail",
+					"query": "apply_id=14",
+					"scene": null
+				},
+				{
+					"id": 36,
+					"name": "cardDetail名片详情",
+					"pathName": "pages/cards/cardDetail",
+					"query": "card_id=10",
+					"scene": null
+				},
+				{
+					"id": 37,
+					"name": "myCardDetail我的名片",
+					"pathName": "pages/account/myCardDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "account",
+					"pathName": "pages/account/account",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 39,
+					"name": "reportDetail举报",
+					"pathName": "pages/cards/reportDetail",
+					"query": "reason=欺诈&name=一枝梅-独秀&card_id=10",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "活动详情",
+					"pathName": "pages/activities/activityDetail",
+					"query": "id=14",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "f3gre",
+					"pathName": "pages/cards/makeCard",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "421421",
+					"pathName": "pages/account/myCardDetail",
+					"scene": null
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,8 @@
+<view class="bt"> </view>
+<view class="column size-1" style="background:#fff;padding:0 30rpx;" wx:if="{{comments.length}}">
+  <comment wx:for="{{comments}}"  data-index="index" wx-key="index" comment='{{item}}' bindlongpress="delete" data-item='{{item}}'></comment>
+</view>
+<empty wx:if="{{!comments.length}}"></empty>
+<view class="fix-bottom ">
+  <input placeholder='写几句评价吧～' value='{{content}}' focus='{true}' cursor-spacing='20' style="bottom:{{bottom}}rpx" bindinput='getContent' bindconfirm='addComment'></input>
+</view>

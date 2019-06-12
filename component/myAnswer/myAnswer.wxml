@@ -1,0 +1,17 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+<view class="row" style="background:#fff;align-items: flex-start;margin-bottom:40rpx;">
+    <view class="image-box">
+        <image class="avatar" src="{{filter.formatAvatar(answer.bus.BusIcon)}}"></image>
+    </view>
+    <view class="column pd-bottom-40 border">
+        <view class="row-between">
+            <view class="title">{{answer.bus.BusName}}</view>
+            <view class="time">{{filter.formatDate(answer.quiz.QuizTime,'YYYY-MM-DD')}}</view>
+        </view>
+        <view class="content">{{answer.quiz.QuizContents}}</view>
+        <view class="row-between">
+            <voice hideName='true' answer='{{answer}}'></voice>
+            <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_delete.png" class="delete" mode="aspectFit" bindtap='delete'></image>
+        </view>
+    </view>
+</view>

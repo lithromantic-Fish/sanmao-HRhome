@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "我的名片",
+      "usingComponents": {
+        "empty": "/component/empty/empty"
+      }
+}

@@ -1,0 +1,21 @@
+module.exports = {
+  cards: require('/cards'),
+  card: require('./cardDetail'),
+  activities: require('./activities'),
+  activityDetail: require('./activityDetail'),
+  appAvatars: require('./appAvatars'),
+  photos: require('./photos'),
+  users: require('./user.js'),
+  answers: require('./answers.js'),
+  answer: require('./answerDetail.js'),
+  popularity: require('./popularity.js'),
+  answerer: require('./answerer.js'),
+  userData: require('./userData.js'),
+  groupDetail: require('./groupDetail.js'),
+  message: require('./message.js'),
+  lesson: require('./lesson.js'),
+  studyLessons: require('./studyLessons.js'),
+  banners: require('./banners.js'),
+  popularityIn: require('./popularityIn.js'),
+  popularityOut: require('./popularityOut.js')
+}

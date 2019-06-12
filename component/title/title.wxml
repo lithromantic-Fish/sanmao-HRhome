@@ -1,0 +1,4 @@
+  <view class="row  size-1">
+      <view class="color-column"></view>
+      <view class='title'>{{title}}</view>
+  </view>

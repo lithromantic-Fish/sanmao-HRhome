@@ -1,0 +1,17 @@
+@import 'groups.wxss';
+.icon{
+  width:30rpx;
+  height:30rpx;
+  margin-right:15rpx;
+}
+.blue-text{
+  font-weight: 600;
+  color:#4c89fb;
+  font-size: 30rpx;
+}
+.groupsName{
+  color:gray;
+}
+.column{
+  width:100%
+}

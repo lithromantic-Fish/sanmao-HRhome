@@ -1,0 +1,89 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+
+<image class="activity-cover" mode='aspectFill' src='{{filter.formatImage(activity.banner_img)}}' style="height:{{width/1.875}}px">
+</image>
+
+<view class="column size-1 border">
+  <view class="row">
+    <view class="title">【{{activity.city}}】{{activity.name}}</view>
+    <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/edit.png" mode="aspectFit" class="icon-edit" wx:if="{{activity.Check===0}}" bindtap='edit' />
+  </view>
+
+  <view class="title-body border">
+    <view class="row-between">
+      <view class="row">
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/time.png" mode="aspectFit" class="title-icon"></image>
+        <view class="time">{{activity.starttime}}-{{activity.endtime}}</view>
+      </view>
+      <view hover-class='hover-image' class="" wx:if="{{!preview}}" bindtap='preview'>
+        <view class="row images">
+          <view class="iconfont icon-image"></view>
+          <view>{{activity.imgs.length}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="row" style='padding-bottom:30rpx;'>
+      <view class="row">
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/location.png" mode="aspectFit" class="title-icon"></image>
+        <text class="gray">{{activity.address}}</text>
+      </view>
+      <view class="iconfont icon-nav" wx:if="{{!preview}}" bindtap='gotoMap'></view>
+    </view>
+    <!-- <view class="line-gray"></view> -->
+  </view>
+
+  <!-- 当前活动是否审核中 -->
+  <view class="row-between">
+    <!-- <view wx:if="{{!activity.preview}}">主办方：
+      <text>{{activity.name}}</text>
+      <text wx:if="{{activity.identity===2}}">机构</text>
+    </view> -->
+    <!-- to do -->
+    <view class="red" style='color:#FB4C4D;font-size:34rpx;font-weight:bold' wx:if="{{activity.Check===0}}">审核中</view>
+    <view class="price">{{activity.price}}
+      <text>人气值</text>
+    </view>
+  </view>
+  <view class='flex-d'>
+    <view class='button-scan' bindtap='signImage' data-item='{{activity}}' wx:if="{{activity.status !=0}}">签到二维码查看</view>
+  </view>
+</view>
+
+<view class="section-spacing"></view>
+
+<view class="column border-top size-1">
+  <view class="column">
+    <view class="row-between">
+      <title title='活动详情'></title>
+      <view bindtap='detail' wx:if="{{!preview}}">
+        <view class="row">
+          <text class="gray">查看更多</text>
+          <view class="iconfont icon-right" style="margin-left:20rpx;color:gray"></view>
+        </view>
+      </view>
+    </view>
+    <view class="description desc">
+      <text>{{activity.desc}}</text>
+    </view>
+    <!-- <view wx:if="{{activity.imgs}}">
+      <image src="{{filter.formatImage(item)}}" wx:for='{{activity.imgs}}' wx:key='*this' mode='widthFix' class='desc-image'></image>
+    </view> -->
+  </view>
+</view>
+
+<form bindsubmit='submit' report-submit='true' wx:if="{{!id && preview}}">
+  <view class='fix-buttons'>
+    <button bindtap='edit' class='edit'>编辑</button>
+    <button class="blue" form-type='submit'>发布</button>
+  </view>
+</form>
+
+<form bindsubmit='signDetail' report-submit='true' wx:if="{{id && activity.auth ==1}}">
+  <view class='fix-buttons' wx:if="{{activity.status !=0}}">
+    <button class='edit'>已有{{activity.apply_count}}人报名</button>
+    <button class="blue" form-type='submit'>报名申请查看</button>
+  </view>
+  <view class='fix-buttons' wx:else>
+    <button bindtap='update'  class='edit'>重新编辑</button>
+  </view>
+</form>

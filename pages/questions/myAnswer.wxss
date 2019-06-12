@@ -1,0 +1,5 @@
+myAnswer .avatar{
+    width:80rpx;
+    height:80rpx;
+    border-radius: 50%
+}

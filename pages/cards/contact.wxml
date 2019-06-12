@@ -1,0 +1,42 @@
+<view class="fix" style="height:10vh">
+  <view class="row">
+    <view class="row row-item-button row-center" bindtap='pb'>
+      <image class="icon" src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_pb.png" mode='aspectFit'></image>
+      <text>{{card.Shield===1?'取消屏蔽':'屏蔽此人'}}</text>
+    </view>
+      <view class="row row-item-button row-center" bindtap='call'>
+      <image class="icon" src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_bddh.png" mode='aspectFit'></image>
+      <text>拨打电话</text>
+    </view>
+  </view>
+</view>
+<view class="place" style="height:10vh"></view>
+<scroll-view scroll-y scroll-with-animation="true"  style="height:80vh" scroll-top='{{scrollTop}}' >
+  <view class="column size-2" id="content">
+  <view wx:for="{{list}}">
+    <contactMine card="{{item}}" wx:if="{{item.MOpenId === openid}}"></contactMine>
+    <contactOthers card="{{item}}" wx:if="{{item.YOpenId === openid}}"></contactOthers>
+    <view class="row-center row" style="padding:10rpx 0" wx:if="{{item.type==='time'}}"> 
+        <view class="time-1">{{item.time}}</view>
+    </view>
+     <view class="row-center row"  style="padding:10rpx 0" wx:if="{{item.type == 'shield'}}">
+        <view class="time-2">您已屏蔽{{card.BusName}}</view>
+    </view>
+    <view class="row-center row"  style="padding:10rpx 0" wx:if="{{item.type == 'upshield'}}">
+        <view class="time-2">您已取消屏蔽{{card.BusName}}</view>
+    </view>
+  </view>
+   
+     
+    <!-- <view class="time">{{filter.formatDate( ,'HH:mm')}}</view> -->
+    <!--<view class="row-center row" style="padding:10rpx 0">
+        <view class="time-1">14:20</view>
+    </view>
+    <view class="row-center row"  style="margin:10rpx 0" wx:if="{{showPb}}">
+        <view class="time-2">您已屏蔽xxx</view>
+    </view>-->
+  </view>
+</scroll-view>
+<view class="fix-bottom " style="height:10vh">
+  <input placeholder='友善发言是沟通的第一步~' type='text' confirm-type='send' value='{{content}}' bindconfirm='sendMessage' bindinput='getContent' cursor-spacing='20'bindfocus='changebottom' bindblur='dowbbottom'></input>
+</view>

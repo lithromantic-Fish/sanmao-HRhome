@@ -1,0 +1,8 @@
+{
+    "navigationBarTitleText": "分组列表",
+  "usingComponents": {
+    "i-swipeout": "../../dist/swipeout/index",
+    "i-action-sheet":"../../dist/action-sheet/index",
+    "my-modal":"../../component/myModal/myModal"
+}
+}
