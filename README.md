@@ -27,7 +27,7 @@
 + 后期将加入私信，视频播放等功能，敬请期待
 ....
 
-### 项目预览(此环境为开发环境，数据以线上为准)
+### 项目预览
 ![img](https://github.com/lithromantic-Fish/sanmao-HRhome/blob/master/images/7.gif)
 
 
