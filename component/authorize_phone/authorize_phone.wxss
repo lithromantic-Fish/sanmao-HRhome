@@ -1,0 +1,23 @@
+/* page{ */
+    /* position:relative; */
+  /* overflow: hidden */
+/* } */
+
+.modal{
+  background:#fff;
+  border-radius: 15rpx;
+  width:70vw;
+  height:60vh;
+  margin-top:20vh;
+  /* padding:20rpx 30rpx; */
+  box-sizing: border-box;
+  justify-content: space-around
+}
+.authorize{
+  width:80%;
+  height:57%;
+}
+.modal-text{
+  margin-top:20rpx;
+  margin-bottom:20rpx;
+}

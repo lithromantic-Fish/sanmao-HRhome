@@ -498,6 +498,7 @@ Page({
       // debug.log(res)
       if (res && res.result === 0) {
         app.globalData.card = data
+        console.log("app.globalData.card", app.globalData.card)
         wx.setStorageSync('card', data)
         wx.showToast({
           title: '保存成功',

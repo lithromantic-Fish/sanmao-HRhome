@@ -43,9 +43,9 @@
     </view>
     <view class="row-between card-right">
       <view class="column" style='width:360rpx'>
-        <text class="title">{{title}}</text>
-        <!-- <text class="description">{{description}}</text> -->
-        <text class="description">{{mobile}}</text>
+        <text class="title">{{title}}</text> 
+        <text class="description">{{description}}</text>
+        <!-- <text class="description">{{mobile}}</text> -->
         <text class="role">{{role}}</text>
       </view>
 

@@ -48,7 +48,7 @@ Page({
         }else{
           this.setData({
             // activity: JSON.parse(options.activity),
-            userInfo: JSON.parse(options.userinfo),
+            // userInfo: JSON.parse(options.userinfo),
             name: options.name,
             phone: options.phone,
             role: options.role

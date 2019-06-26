@@ -14,17 +14,19 @@
   <view class="row-box row-between">
     <view class="icon-section column-center" bindtap='gotoPage' data-path='create'>
       <view class="image-box-button" hover-class="hover-none">
-        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/fbhd.png" mode="aspectFill" ></image>
+        <!-- <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/fbhd.png" mode="aspectFill" ></image> -->
       </view>
-      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/fbhd2.png" mode="aspectFill" ></image>
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/fbhd.png" mode="aspectFill" ></image>
+      <!-- <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/fbhd2.png" mode="aspectFill" ></image> -->
       <text>发布活动</text>
     </view>
 
-    <view class="icon-section column-center">
-      <view class="image-box-button" hover-class="hover-none" bindtap='gotoPage' data-path='activities'>
-        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/jxhd.png" mode="aspectFill" ></image>
+    <view class="icon-section column-center" bindtap='gotoPage' data-path='activities'>
+      <view class="image-box-button" hover-class="hover-none" >
+        <!-- <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/jxhd.png" mode="aspectFill" ></image> -->
       </view>
-      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/jxhd2.png" mode="aspectFill" ></image>
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/jxhd.png"  mode="aspectFill" ></image>
+      <!-- <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/jxhd2.png" mode="aspectFill" ></image> -->
       <text>精选活动</text>
     </view>
   </view>

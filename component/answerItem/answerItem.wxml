@@ -1,0 +1,25 @@
+<view class="wrap">
+  <view wx:for="{{answerList}}" data-item='{{item}}' class='allcontent' wx:key="{{index}}" >
+    <view class='con_wrap '>
+      <view class='flex'>
+        <image class='avator' src='{{item.photo}}'></image>
+        <view class='redDos'wx:if="{{item.status==1}}"></view>
+      </view>
+      <view style='padding-left:20rpx; width:100%'>
+        <view class='up_v'>
+          <text class='nickname'>{{item.nickname}}</text>
+          <text class='duty'>{{item.duty}}</text>
+        </view>
+        <view class='flex-dec'>
+        <view class='view_flex'>
+          <text class='time'>{{item.company}}</text>
+          <button class='btn_question' data-item='{{item}}' catchtap='toPublish'>提问吧</button>
+        </view>
+          <text class='content'>{{item.post_count}}条回答</text>
+        </view>
+      </view>
+    </view>
+  </view>
+<!-- <empty wx:if="{{!followList}}"></empty> -->
+
+</view>

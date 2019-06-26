@@ -24,29 +24,59 @@
 
       <form bindsubmit='submitFormId' report-submit='true'>
         <button 
+          wx:if="{{isLogin}}"
           class="zan-btn {{card.zan_status?'action-1':'action-2'}}" 
           bindtap='like' 
           class='confirmbtn' 
           form-type='submit' 
           style="height:60rpx;width:180rpx;font-size:30rpx;color:#4C89FB;font-weight:bold;background:rgba(76,137,251,0.15);line-height: 60rpx;padding:0;text-align:center">{{card.zan_status?'已赞':'赞'}}：{{filter.formatNum(card.zan_count)}}</button>
+        <button 
+          wx:if="{{!isLogin}}"
+          class="zan-btn {{card.zan_status?'action-1':'action-2'}}" 
+          class='confirmbtn' 
+          open-type='getPhoneNumber' bindgetphonenumber="_getPhoneNumber"
+          style="height:60rpx;width:180rpx;font-size:30rpx;color:#4C89FB;font-weight:bold;background:rgba(76,137,251,0.15);line-height: 60rpx;padding:0;text-align:center">{{card.zan_status?'已赞':'赞'}}：{{filter.formatNum(card.zan_count)}}</button>
+          
       </form>
 
       <!-- <view class="{{card.zan_status == false?'action-2':'action-1'}}" bindtap='like' style="height:60rpx;width:180rpx;font-size:30rpx;color:#4C89FB;font-weight:bold;background:rgba(76,137,251,0.15);line-height: 60rpx;padding:0">{{card.zan_status !== false?'已赞':'赞'}}：{{filter.formatNum(card.zan_count)}}</view> -->
 
       <view 
+         wx:if="{{isLogin}}"
         class="{{card.fav_status?'action-1':'action-2'}}" 
         bindtap='_favCard' 
         style="width:270rpx;font-size:32rpx;height70rpx;line-height:70rpx;padding:0;text-align:center">
         {{card.fav_status?'取消收藏':'收藏好友'}}</view>
+    <button wx:if="{{!isLogin}}"  open-type='getPhoneNumber' bindgetphonenumber="_getPhoneNumber">
+       <view 
+        class="{{card.fav_status?'action-1':'action-2'}}" 
+        style="width:270rpx;font-size:32rpx;height70rpx;line-height:70rpx;padding:0;text-align:center">
+        {{card.fav_status?'取消收藏':'收藏好友'}}</view>
+    </button>
     </view>
 
-    <view class="size-1 " style="padding-top:0" wx:if="{{card.change_status==2}}">
+
+    
+
+
+
+    <view class="size-1 " style="padding-top:0" wx:if="{{card.change_status==2&&!card.remark}}">
       <view class="row input-desc">
         <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_bq.png" mode="aspecFit" class='bq'></image>
         <input class="" placeholder='为这张名片写点备注' bindconfirm='createTips' value='{{card.CardRemark}}'></input>
       </view>
-
     </view>
+
+     <view class="size-1 " style="padding-top:0" wx:if="{{card.change_status==2&&card.remark}}">
+      <!-- <view class="row input-desc"> -->
+        <!-- <text>备注名：{{card.remark}}</text> -->
+         <view class="row input-desc">
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_bq.png" mode="aspecFit" class='bq'></image>
+        <input class=""  bindconfirm='createTips' value='{{card.remark}}'></input>
+      </view>
+      <!-- </view> -->
+    </view>
+
     <view class="column list sky-5">
       <title style="border-bottom:1rpx solid #E3E4E8" title='其他信息'></title>
 
@@ -56,8 +86,10 @@
     </view>
     <form bindsubmit="ChangeCard" report-submit='true'>
       <view class="column-center size-2" style='padding-top:0'>
-          <button class="change-button" form-type='submit' wx:if="{{card.change_status==0 }}">交换名片</button>
+          <button class="change-button" form-type='submit' wx:if="{{card.change_status==0&&isLogin}}">交换名片</button>
+          <button class="change-button" wx:if="{{card.change_status==0&&!isLogin}}" open-type='getPhoneNumber' bindgetphonenumber="_getPhoneNumber">交换名片</button>
           <button class="change-button disabled" wx:if="{{card.change_status==1}}">已申请，请等待对方同意</button>
+     
           <!-- <button class="change-button" form-type='submit' wx:if="{{card.change_status==1}}">同意申请</button> -->
 
 

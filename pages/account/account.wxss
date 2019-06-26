@@ -15,7 +15,7 @@
 }
 .column-1 text{
   line-height: 30rpx;
-}
+} 
 .column-2{
   margin-bottom:20rpx
 }
@@ -35,6 +35,17 @@
   top:-18rpx  !important;
   right:-10rpx  !important;
 }
+.vip{
+  width:20rpx;
+  height:20rpx;
+  display: flex;
+  position: absolute;
+  right:0;
+  bottom:0
+}
+.image-box{
+  position: relative;
+}
 .redDos{
   width:32rpx;
   height:32rpx;
@@ -46,8 +57,8 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  right: 11rpx;
-  top: -8rpx
+  right: 80rpx;
+  top: -10rpx
 }
 
 .button-1{
@@ -56,6 +67,27 @@
     font-size: 28rpx;
     margin:0
 
+}
+.navBack{
+    background: url('https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_backimg.png') no-repeat;
+    background-size: 100% 45%;
+    padding-bottom: 40rpx
+}
+.tab_title image{
+  width: 48rpx;
+  height: 48rpx;
+}
+.tab_title{
+  display: flex;
+  padding-top: 15rpx;
+}
+.mytab{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  position: relative;
 }
 .card-box{
   position: absolute;
@@ -105,7 +137,7 @@ page{
 }
 .title{
   margin-bottom:15rpx;
-  font-size: 34rpx !important
+  font-size: 33rpx !important
 }
 .num{
   font-size: 34rpx !important
@@ -166,7 +198,7 @@ row .type:after {
 }
 
 row:last-child .type{
-  border: none !important
+  /* border: none !important */
 }
 .sky_1{
   border-top: 1rpx solid #E3E4E8 !important;

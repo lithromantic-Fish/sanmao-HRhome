@@ -1,0 +1,24 @@
+<view class='wrap'>
+    <view class='tabs'>
+      <view class='answer'>
+        <text class='{{selectTab==1?"actived_text":"default_text"}}' data-tab='1' catchtap='changeTabs'>答主</text>
+      </view>
+      <view class='question'>
+        <text class='{{selectTab==2?"actived_text":"default_text"}}' data-tab='2' catchtap='changeTabs'>问题</text>
+      </view>
+    </view>
+    <view class='applyArea' wx:if="{{selectTab==1&&master.status!=2}}">
+      <!-- 1.审核中 2.已申请 -->
+      <button class='applyAnswer' catchtap='applyAnswer' wx:if="{{master.status!=1}}">申请答主</button>
+      <button class='applyAnswer' style='background-color:#ccc;color:white'  wx:if="{{master.status==1}}">审核中</button>
+      <text>现在申请答主还有积分奖励哦~</text>
+    </view>
+    <!-- 答主 -->
+    <answerItem wx:if="{{selectTab==1}}" answerList="{{answerList}}"></answerItem>
+    <empty wx:if="{{(answerList.length==0||!answerList)&&selectTab==1}}" title="暂时还没有答主"></empty>
+  <view class="load" wx:if="{{answerList&&answerList.length>5&&selectTab==1}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+  <!-- 问题 -->
+    <questionItem wx:if="{{selectTab==2}}" questList="{{questList}}"></questionItem>
+    <empty wx:if="{{(questList.length==0||!questList)&&selectTab==2}}" title="暂时还没有问题"></empty>
+  <view class="load" wx:if="{{questList&&questList.length>7&&selectTab==2}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+</view>

@@ -7,8 +7,7 @@
   wx:key='idx' wx:if="{{cards.length}}">
   <group-card  card='{{item}}'>
     <view slot='time'>
-      <view class="column">
-        <view>{{item.hdate}}</view>
+      <view class="column" style='position:absolute;right:40rpx'>
         <view>{{item.friend_count}}位好友</view>
       </view>
     </view>

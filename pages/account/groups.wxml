@@ -1,6 +1,6 @@
-<view class="row size-1 border" style='border-top:1rpx solid #dcdde3'>
-  <image class="group-1" style='width:30rpx;height:30rpx' src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_cjfz.png" mode="aspectFill" bindtap="hidden"></image>
-  <text class="group-1-text" style='font-size:30rpx' bindtap="hidden">创建分组</text>
+<view class="row size-1 border" style='border-top:1rpx solid #dcdde3'  bindtap="hidden">
+  <image class="group-1" style='width:30rpx;height:30rpx' src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_cjfz.png" mode="aspectFill"></image>
+  <text class="group-1-text" style='font-size:30rpx' >创建分组</text>
 </view>
 <view class="size-1" wx:if="{{groups.length==0}}">
   <view class="column-center size-1" style="background:rgba(255,255,255,1);box-shadow:0px 1px 34px 0px rgba(52,104,201,0.25);border-radius:8px;;">

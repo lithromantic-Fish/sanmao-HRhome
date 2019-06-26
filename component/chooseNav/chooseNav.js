@@ -21,19 +21,15 @@ Component({
 
   },
   ready() {
-    console.log(this.data.items)
-    console.log(this.data.selectTab)
     // wx.hideShareMenu()
     //如果是精选活动
     if (this.data.selectTab){
 
       if (this.data.selectTab == 1) {
-        console.log('1')
         this.setData({
           selectedTab: this.data.items[0]
         })
       } else {
-        console.log('2')
         this.setData({
           selectedTab: this.data.items[1]
         })

@@ -1,5 +1,5 @@
 <wxs src="../../pages/filter.wxs" module="filter" />
-
+<!-- hr活动社区点进来的 -->
 <view 
   wx:if="{{!isactivity}}" 
   class="row activity-box size-6" 
@@ -111,9 +111,18 @@
       </view>
       <view class="row-between" wx:elif='{{type == 2}}'>
         <view class="price">{{activity.price}}人气值</view>
-        <view class="status" wx:if="{{activity.time_status==0}}">未开始</view>
-        <view class="status" wx:if="{{activity.time_status==1}}">去签到</view>
-        <view class="status" wx:if="{{activity.time_status==2}}">已结束</view>
+        <!-- <view class='status' wx:if="{{type == 2 && activity.status==1&&activity.time_status!=2}}">未开始</view> -->
+      <!-- 已发布正常显示 -->
+        <view class="status" wx:if="{{activity.time_status==0&&activity.status==1}}">未开始</view>
+        <view class="status" wx:if="{{activity.time_status==1&&activity.status==1}}">去签到</view>
+        <view class="status" wx:if="{{activity.time_status==2&&activity.status==1}}">已结束</view>
+      <!-- 未发布统一显示-> 未开始 -->
+        <view class="status" wx:if="{{activity.status==0||activity.status==2}}">未开始</view>
+        
+
+
+<!-- activity.time_status==2 已结束-->
+        <!-- <view class="status" wx:if="{{activity.time_status==2&&(activity.status==0||activity.status==2)}}">未开始</view> -->
       </view>
 
       <!-- <form class="row-end" wx:if="{{activity.OrderStatus===0 && !hidePay}}" report-submit='true' catch:submit='gotoPay'>

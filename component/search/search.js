@@ -22,6 +22,10 @@ Component({
       type: String,
       value:'card' ,
     },
+    isRecomend:{
+      type:Boolean,
+      value:false
+    }
 
   },
   data: {
@@ -35,9 +39,15 @@ Component({
   },
   methods: {
     gotoSearch(){
-      wx.navigateTo({
-        url:'/pages/search/search?type='+this.data.type
-      })
+      if (this.data.isRecomend){
+        wx.navigateTo({
+          url: "/pages/searchRecommend/searchRecommend",
+        })
+      }else{
+        wx.navigateTo({
+          url: '/pages/search/search?type=' + this.data.type + '&isRecomend=' + this.data.isRecomend
+        })
+      }
     },
     changeCity(city){
       this.setData({

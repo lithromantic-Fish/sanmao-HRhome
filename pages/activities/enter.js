@@ -152,10 +152,8 @@ getEnterInfo(id){
     if (phone !== '' && name !== '') {
       if (this.data.position === '参与者') {
         wx.navigateTo({
-          url: 'confirm?userinfo=' + JSON.stringify(this.data.userInfo) + '&phone=' + phone + '&name=' + name + '&activity=' + JSON.stringify(this.data.activity) + '&role=' + 1 + "&id=" + this.data.activity.id
+          url: 'confirm?phone=' + phone + '&name=' + name + '&role=' + 1 + "&id=" + this.data.activity.id
         })
-
-
         //   http.get(`/act/apply/${app.globalData.openid}/${activity.ActivityId}`).then(res => {
         //     debug.log(res)
         //     // if (res.data.status){

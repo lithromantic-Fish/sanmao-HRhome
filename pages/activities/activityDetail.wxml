@@ -10,7 +10,7 @@
 <view style='display:flex;align-items:flex-end'>
   
   <view class="title" style='-webkit-line-clamp:0;padding-right: 20rpx'>【{{activity.province}}{{activity.city}}】{{activity.name}}</view>
-      <text catchtap='outSignExecl' style='font-size:26rpx;color:#4c89fb'>导出报名表</text>
+      <!-- <text catchtap='outSignExecl' style='font-size:26rpx;color:#4c89fb'>导出报名表</text> -->
 </view>
 
 
@@ -130,7 +130,11 @@
     <!-- 收藏活动 -->
 
     <form class="icon-box icon-box-1 row-center" report-submit='true' bindsubmit='favor'>
-      <button class='css_btn' form-type='submit'>
+      <button class='css_btn' form-type='submit' wx:if="{{isLogin}}">
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/collect.png" mode="aspectfit" wx:if="{{activity.is_collect==0}}"></image>
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/havcollect.png" mode="aspectfit" wx:if="{{activity.is_collect==1}}"></image>
+      </button>
+      <button class='css_btn' wx:if="{{!isLogin}}" open-type='getPhoneNumber' bindgetphonenumber="_getPhoneNumber">
         <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/collect.png" mode="aspectfit" wx:if="{{activity.is_collect==0}}"></image>
         <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/havcollect.png" mode="aspectfit" wx:if="{{activity.is_collect==1}}"></image>
       </button>
@@ -139,14 +143,20 @@
 
     <!-- 分享活动 -->
     <form class="icon-box  icon-box-1 row-center " report-submit='true' bindsubmit='shareActivity'>
-      <button class='css_btn' form-type='submit'>
+      <button class='css_btn' form-type='submit' wx:if="{{isLogin}}">
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_share.png" mode="aspectfit"></image>
+      </button>
+      <button class='css_btn'  wx:if="{{!isLogin}}" open-type='getPhoneNumber' bindgetphonenumber="_getPhoneNumber">
         <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_share.png" mode="aspectfit"></image>
       </button>
     </form>
     <!-- 评论活动 -->
     <form class="row-center  icon-box-2   icon-box" report-submit='true' bindsubmit='gotoComment'>
       <view class='row-center'>
-        <button class='css_btn' form-type='submit'>
+        <button class='css_btn' form-type='submit' wx:if="{{isLogin}}">
+          <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_uncomment.png" mode="aspectfit"></image>
+        </button>
+        <button class='css_btn'  wx:if="{{!isLogin}}" open-type='getPhoneNumber' bindgetphonenumber="_getPhoneNumber">
           <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_uncomment.png" mode="aspectfit"></image>
         </button>
         <text class="gray" wx:if="{{activity.pl_count!=0&&activity.pl_count<999}}">{{activity.pl_count}}</text>
@@ -159,7 +169,11 @@
 
       <!-- <view class="row-center icon-box-2 icon-box"> -->
       <view class='row-center'>
-        <button class='css_btn' form-type='submit'>
+        <button class='css_btn' form-type='submit' wx:if="{{isLogin}}">
+          <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_unfavor.png" mode="aspectfit" wx:if="{{activity.is_zan==0}}"></image>
+          <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_like.png" mode="aspectfit" wx:if="{{activity.is_zan==1}}"></image>
+        </button>
+        <button class='css_btn'  wx:if="{{!isLogin}}" open-type='getPhoneNumber' bindgetphonenumber="_getPhoneNumber">
           <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_unfavor.png" mode="aspectfit" wx:if="{{activity.is_zan==0}}"></image>
           <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_like.png" mode="aspectfit" wx:if="{{activity.is_zan==1}}"></image>
         </button>
@@ -218,7 +232,14 @@
     </view>
 
     <form report-submit='true' bindsubmit='enter'>
-      <button class='css_btn' form-type='submit'>
+      <button class='css_btn' form-type='submit' wx:if="{{isLogin}}">
+        <view wx:if="{{activity.status==1||activity.status==3}}">
+          <view class="sign-button" wx:if="{{activity.apply_status==0}}">立刻报名</view>
+          <!-- 参与者身份已报名 -->
+          <view class="sign-button disabled" wx:if="{{activity.apply_status==2&&activity.apply_identity==1}}">已报名</view>
+        </view>
+      </button>
+      <button class='css_btn'  wx:if="{{!isLogin}}" open-type='getPhoneNumber' bindgetphonenumber="_getPhoneNumber">
         <view wx:if="{{activity.status==1||activity.status==3}}">
           <view class="sign-button" wx:if="{{activity.apply_status==0}}">立刻报名</view>
           <!-- 参与者身份已报名 -->

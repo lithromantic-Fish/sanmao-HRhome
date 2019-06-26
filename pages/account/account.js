@@ -1,6 +1,7 @@
 // const account = require('../../mock/index')
 // const debug = require('../../utils/debug.js')
-
+let util = require('../../utils/util_wenda');
+let config = require('../../config');
 const login = require('../../utils/login.js')
 const app = getApp()
 const {
@@ -21,7 +22,12 @@ Page({
   data: {
     userInfo: userInfo,
     card: [],
-    isVip:true
+    isVip:true,
+    red_point:'',
+    isLogin: false,
+    allData:{},
+    master_status:null
+
   },
 
   /**
@@ -38,7 +44,9 @@ Page({
     let userinfo = wx.getStorageSync('userInfo')
     if (userinfo) {
       this.setData({
-        userInfo: userinfo
+        userInfo: userinfo,
+        isLogin: util._getStorageSync('isLogin') == 1 ? true : false
+
       })
     }
   },
@@ -55,15 +63,44 @@ Page({
   getMyCardInfo(){
     MyCard.find().then(res => {
       if (res && res.result === 0) {
+        console.log('我的名片信息',res)
+        self.setData({
+          master_status: res.data.master_status,
+          allData:res.data
+        })
+
         let {
           data
         } = res.data
+        console.log("data.red_point", data)
         self.setData({
-          card: data
+          card: data,
+          red_point: res.data.red_point,
         })
       }
     })
 
+  },
+  tocard(){
+    wx.navigateTo({
+      url: '/pages/account/myCardDetail',
+    })
+  },
+  toactive(){
+    wx.navigateTo({
+      url: '/pages/account/myActivities',
+    })
+  },
+  toanswer(){
+    wx.navigateTo({
+      url: '/pages/account/questions',
+    })
+  },
+  //申请加v
+  getVip(){
+    wx.navigateTo({
+      url: '/pages/account/vip',
+    })
   },
   //获取用户信息
   getInfo(e) {
@@ -84,7 +121,62 @@ Page({
         })
       }
     })
-  }
+  },  
+    //拉起手机授权
+_getPhoneNumber: function (res) {
+    console.log(res.detail.encryptedData)
+    console.log(res.detail.iv)
+    let data = res.detail
+    if (data.encryptedData && data.iv) {
+      this._confirmEvent(data)
+
+
+    } else {
+      util.gotoPage({
+        url: '/pages/login/login'
+      })
+    }
+    },
+  /**
+* 获取手机号码回调
+*/
+  _confirmEvent: function (opts) {
+    console.log(opts)
+    let self = this
+    let data = {}
+
+    if (opts.currentTarget) {
+      data = arguments[0].detail.getPhoneNumberData
+    } else {
+      data = opts
+    }
+    // console.info('opts', opts)
+
+    util.request({
+      url: config.apiUrl + '/hr/special/wxapp/autoRegister',
+      data: data,
+      method: "POST",
+      withSessionKey: true
+    }).then(res => {
+
+      if (res.result == 0) {
+        console.log("res",res)
+        util._setStorageSync('isLogin', 1)
+        self.setData({
+          ['isLogin']: true
+        })
+
+        // util.runFn(self.getInitData)
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+
+    })
+  },
+
   // // 编辑资料
   // gotoEditor() {
   //   wx.navigateTo({

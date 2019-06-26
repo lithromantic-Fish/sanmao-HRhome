@@ -1,0 +1,30 @@
+    <view>
+      <!-- 热门标签 -->
+      <view class='wrap'>
+        <view class='flex title_tips'>
+          <text>我的标签</text>
+        </view>
+        <!-- 标签 -->
+        <view class='labels-layout'>
+          <!-- <view class='tt'>标签</view> -->
+          <view class='ct'>
+            <view class='{{item.id==44?"text_fin":"text"}}' wx:for="{{answerInfo.cate_name}}" wx:key="id" data-id='{{item.id}}' data-index="{{index}}" data-name='{{item}}' bindtap='_label'>
+              <view class='{{item.isSelect?"seled":"none"}}'>{{item}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='intro'>
+        <text class="text_intro">个人介绍</text>
+        <text class='text_context'>{{answerInfo.intro}}</text>
+      </view>
+      <view class='wrap_btn'>
+        <view class="{{answerInfo.status!=0?'btn_applyStatus':'btn_applyStatus_toApply'}}">
+          <text wx:if="{{answerInfo.status==0}}" catchtap='toApply'>去申请</text>
+          <text wx:if="{{answerInfo.status==1}}" catchtap='giveUp'>放弃申请</text>
+          <text wx:if="{{answerInfo.status==2}}">申请成功</text>
+          <text wx:if="{{answerInfo.status==3}}" catchtap='toApply'>申请失败，再次申请？</text>
+        </view>
+      </view>
+
+    </view>

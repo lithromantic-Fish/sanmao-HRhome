@@ -1,14 +1,19 @@
-<wxs src="../filter.wxs" module="filter" />
-<chooseNav items="{{Tabs}}" bind:gotoLoad='changeStatus'></chooseNav>
-<view class="column border-top" wx:if="{{questions.length!==0}}" style="margin-top:20rpx;">
-  <answer answer="{{item}}" wx:for="{{questions}}" wx:key='QuizId' unAnswer='{{unAnswer}}'></answer>
-  <!--<view class="float-button row">
-    <view class="float-button-box column-center">
-        <view class="iconfont icon-weizhi"></view>
-        <view>答主中心</view>
+<view class='wrap'>
+    <view class='tabs'>
+      <view class='answer'>
+        <text class='{{selectTab==1?"actived_text":"default_text"}}' data-tab='1' catchtap='changeTabs'>我的回答</text>
+      </view>
+      <view class='question'>
+        <text class='{{selectTab==2?"actived_text":"default_text"}}' data-tab='2' catchtap='changeTabs'>我的问题</text>
+      </view>
     </view>
-  </view>-->
-</view>
-<view class="column-center" wx:if="{{questions.length===0}}">
-  <empty></empty>
+    <!-- 我的回答 -->
+    <questionItem wx:if="{{selectTab==1}}" questList="{{answerList}}"></questionItem>
+    <view class="load" wx:if="{{selectTab==1&&answerList.length>7}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+    <empty title="暂无数据" wx:if="{{selectTab==1&&!answerList}}"></empty>
+    <!-- 我的提问 -->
+    <questionItem wx:if="{{selectTab==2}}" questList="{{answerList}}"></questionItem>
+    <view class="load" wx:if="{{selectTab==2&&answerList.length>7}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+    <empty title="暂无数据" wx:if="{{selectTab==2&&!answerList}}"></empty>
+
 </view>

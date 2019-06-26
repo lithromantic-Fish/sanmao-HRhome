@@ -83,8 +83,14 @@ function parseQueryString(url) {
 }
 
 
+// 999  调用login.login
+// 100  调用autoRegister
 function get(url, params = {}) {
   params.hrhome_token = wx.getStorageSync('hrhome_token') || ''
+  params.session_key = wx.getStorageSync('hrhome_token') || ''
+  params.mintype = 5
+  params.is_mina = 1
+
   return new Promise((resolve, reject) => {
     wx.request({
       url: getUrl(url, params),
@@ -92,7 +98,16 @@ function get(url, params = {}) {
       data: params,
       header: getHeader(params),
       success: function(res) {
+        if (res.data.result == 999 || res.data.result == 100 ) {
+          console.log("get等于999了，token过期返回expired为true")
+          wx.setStorageSync('expired', true)
+        }
+        //  else if (res.data.result == 100){
+        //   console.log("http检测没有登录")
+        //   wx.setStorageSync('isLogin', false)
+        // }
         resolve(wrap(res, params))
+
         // debug.log(res)
       },
       fail: function(err) {
@@ -103,6 +118,8 @@ function get(url, params = {}) {
   })
 }
 
+// 999  调用login.login
+// 100  调用autoRegister
 function post(url, data, params = {}) {
   // debug.log('url',url)
   // debug.log('params', params)
@@ -110,7 +127,11 @@ function post(url, data, params = {}) {
   let _data = data || {};
   // console.info(typeof (_data))
   Object.assign(_data, {
-    'hrhome_token': wx.getStorageSync('hrhome_token') || ''
+    'hrhome_token': wx.getStorageSync('hrhome_token') || '',
+     session_key :wx.getStorageSync('hrhome_token') || '',
+     mintype : 5,
+     is_mina : 1
+  
   });
   // data.hrhome_token = wx.getStorageSync('hrhome_token') || ''
   return new Promise((resolve, reject) => {
@@ -121,6 +142,14 @@ function post(url, data, params = {}) {
       data: _data,
       header: getHeader(params),
       success: function(res) {
+        if (res.data.result == 999 || res.data.result == 100){
+          console.log("post等于999了，token过期返回expired为true")
+          wx.setStorageSync('expired',true)
+        }
+        //  else if (res.data.result == 100) {
+        //   console.log("http检测没有登录")
+        //   wx.setStorageSync('isLogin', false)
+        // }
         resolve(wrap(res, params))
         // debug.log('res', res)
       },

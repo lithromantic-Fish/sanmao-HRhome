@@ -1,0 +1,87 @@
+<wxs src="../../pages/filter.wxs" module="filter" />
+
+<search chooseCity='true' type="1" isRecomend="true"></search>
+
+<swiper autoplay circular indicator-dots indicator-color="#CCE3ED" indicator-active-color="#FFF">
+  <block wx:for="{{imgUrls}}" wx:key='BanId' >
+    <swiper-item bindtap='gotoWeb' data-image='{{item}}'>
+      <image src="{{filter.formatImage(item.img)}}" class="swiper-image" />
+    </swiper-item>
+  </block>
+</swiper>
+
+<view class="row-center size-1" style="background:#fff">
+  <view class="row-box row-between">
+
+    <view class="icon-section column-center" bindtap='gotoPage' data-path='cards' wx:if="{{isLogin}}">
+      <view class="image-box-button">
+      </view>
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_tabHr.png" mode="aspectFill" ></image>
+      <!-- <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_tabHr_sel.png" mode="aspectFill" ></image> -->
+      <text>HR人脉圈</text>
+    </view>
+
+
+
+        <button style='line-height:1.38; padding:0; background-color:white;border-radius:unset' class="icon-section column-center"  data-path='cards'  wx:if="{{!isLogin}}" open-type='getPhoneNumber' bindgetphonenumber="_getPhoneNumber">
+        <view class="image-box-button">
+        </view>
+          <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_tabHr.png" mode="aspectFill" ></image>
+        <!-- <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_tabHr_sel.png" mode="aspectFill" ></image> -->
+        <text>HR人脉圈</text>
+      </button>
+  
+    <view class="icon-section column-center" style='border-right:0.1rpx lightgray solid' bindtap='gotoPage' data-path='answer' wx:if="{{isLogin}}">
+      <view class="image-box-button">
+      </view>
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_tabAnswer.png" mode="aspectFill" ></image>
+      <!-- <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_tabAnswersel.png" mode="aspectFill" ></image> -->
+      <text>你问我答</text>
+    </view>
+
+    <button style='line-height:1.38; padding:0; background-color:white;border-radius:unset;border-right:0.1rpx lightgray solid' class="icon-section column-center" data-path='answer'   wx:if="{{!isLogin}}" open-type='getPhoneNumber' bindgetphonenumber="_getPhoneNumber">
+      <view class="image-box-button">
+      </view>
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_tabAnswer.png" mode="aspectFill" ></image>
+      <!-- <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_tabAnswersel.png" mode="aspectFill" ></image> -->
+      <text>你问我答</text>
+    </button>
+
+    <view class="icon-section column-center" wx:if="{{isLogin}}"  data-path='activities' bindtap='gotoPage'>
+      <view class="image-box-button" >
+      </view>
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/jxhd.png" mode="aspectFill" ></image>
+      <!-- <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/jxhd2.png" mode="aspectFill" ></image> -->
+      <text>HR活动圈</text>
+    </view>
+
+    <button class="icon-section column-center" style='line-height:1.38; padding:0; background-color:white;border-radius:unset;' wx:if="{{!isLogin}}" open-type='getPhoneNumber' bindgetphonenumber="_getPhoneNumber">
+      <view class="image-box-button" data-path='activities'>
+      </view>
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/jxhd.png" mode="aspectFill" ></image>
+      <!-- <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/jxhd2.png" mode="aspectFill" ></image> -->
+      <text>HR活动圈</text>
+    </button>
+
+
+
+  </view>
+</view>
+<title title="强力推荐"></title>
+<!-- <view class="column border-top" wx:if="{{activities.length!==0}}" style="margin-top:20rpx">
+  <view style='padding-top:20rpx;background:#FFF'></view>
+  <view class="border" wx:for='{{activities}}' wx:key='_id'>
+    <activityItem isactivity=""  activity="{{item}}"></activityItem>
+  </view>
+  <view class="load" wx:if="{{activities.length>4}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+</view> -->
+  <gridItem class="component_grid" recommendList="{{recommendList}}"></gridItem>
+
+<empty wx:if="{{recommendList.length===0}}"></empty>
+<view class="load" wx:if="{{recommendList.length>2}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+
+<view class="modal-box column-center" wx:if="{{!userInfo}}" >
+  <authorize bind:getInfo='getInfo'></authorize>
+</view>
+
+<view class="mask"  wx:if="{{!userInfo}}"></view>

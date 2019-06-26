@@ -85,7 +85,7 @@ Page({
     if (!myCard) {
       wx.showModal({
         title: '提示',
-        content: '您还没有名片，是否立即前往',
+        content: '您还没有名片，是否立即前往',  //已埋登录
         success: res => {
           if (res.confirm) {
             wx.navigateTo({

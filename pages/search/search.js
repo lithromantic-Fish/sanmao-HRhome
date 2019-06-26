@@ -26,7 +26,7 @@ Page({
     searchResult: [], //搜索结果
     searchHistory: [], //搜索历史
     loadAll: false, //是否加载了全部
-    page: 1 //分页默认page
+    page: 1,//分页默认page
   },
 
   /**
@@ -36,13 +36,13 @@ Page({
     self = this
 
     let {
-      type
+      type,
     } = options
     let _placeholder = ''
     let _searchResultNullTxt = ''
-
+    console.log('options', options)
     self.setData({
-      type: type
+      type: type,
     })
 
     //type区别不同搜索, 1,搜索名片, 2搜索活动
@@ -82,7 +82,7 @@ Page({
       content,
       loadAll
     } = self.data
-
+    console.log('loadAll', loadAll)
     if (loadAll) return
 
     let prams = {
@@ -93,11 +93,14 @@ Page({
     //搜索名片
     type == 1 && Card.find(prams).then(res => {
       if (res && res.result === 0) {
+        console.log("ressss", res)
+
         let {
           data,
           pages_num,
           search
         } = res.data
+        console.log("datadatadata", data)
 
         if (!content) {
           //页面默认加载获取搜索历史记录
@@ -114,6 +117,7 @@ Page({
           }
 
           if (pages_num == 1) {
+            console.log('1111111',res.data)
             //执行搜索获取结果
             self.setData({
               searchResult: data.data,
@@ -125,6 +129,7 @@ Page({
               searchResult: [...self.data.searchResult, ...data.data],
               searchHistory: search
             })
+          
           }
           //结果为空更改提示语
           if (data.count == 0) {

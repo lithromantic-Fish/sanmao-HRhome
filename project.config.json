@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 42,
+			"current": 56,
 			"list": [
 				{
 					"id": 0,
@@ -348,6 +348,105 @@
 					"id": -1,
 					"name": "421421",
 					"pathName": "pages/account/myCardDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "5464",
+					"pathName": "pages/account/myVisitor",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "5464",
+					"pathName": "pages/account/myCards",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "推荐页",
+					"pathName": "pages/recommend/recommend",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 46,
+					"name": "你问我答",
+					"pathName": "pages/applyAnswer/applyAnswer",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "搜索",
+					"pathName": "pages/searchRecommend/searchRecommend",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "你问我答",
+					"pathName": "pages/answerQuestion/answerQuestion",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的",
+					"pathName": "pages/account/account",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的问答",
+					"pathName": "pages/account/questions",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "问答详情页",
+					"pathName": "pages/questionDetail/questionDetail",
+					"query": "id=4824842",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "搜索",
+					"pathName": "pages/searchRecommend/searchRecommend",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "答主申请",
+					"pathName": "pages/applyAnswer/applyAnswer",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "答主页面",
+					"pathName": "pages/answerPage/answerPage",
+					"query": "openid=oPu_H5V723az8d10wTUMMYazSORg",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "答主申请",
+					"pathName": "pages/account/applyAnswer",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的名片",
+					"pathName": "pages/account/myCards",
+					"query": "",
 					"scene": null
 				}
 			]

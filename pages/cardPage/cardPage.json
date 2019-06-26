@@ -12,6 +12,7 @@
     "cardListItem": "../../component/cardListItem/cardListItem",
     "chooseNav": "/component/chooseNav/chooseNav",
     "authorize": "/component/authorize/authorize",
+    "authorizePhone": "/component/authorize_phone/authorize_phone",
     "i-badge": "../../dist/badge/index"
   }
 }

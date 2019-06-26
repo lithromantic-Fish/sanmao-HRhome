@@ -1,0 +1,65 @@
+<view class="column size-2">
+  <form bindsubmit='searchMt'>
+    <view class="row wrap">
+      <view class="input-view row">
+        <view class="iconfont icon-sousuo"></view>
+        <input style='width:100%' value="{{content}}" confirm-type="search" placeholder='{{placeholder}}' name='content' placeholder-style="color:#888;font-size:26rpx" class="input-text" bindinput='getText' maxlength='10' bindconfirm="getSearchResult"></input>
+        <view class="iconfont icon-shanchu" wx:if="{{content != ''}}" bindtap='clear'></view>
+      </view>
+    <view class="flex column" style='width:100%'  wx:if="{{!content}}">
+      <view class='flex search_keyword'>
+        <text style='padding-left:190rpx'  catchtap='changeType' data-type='4'>答主</text>
+        <text style='padding-right:190rpx' catchtap='changeType' data-type='1'>联系人</text>
+      </view>
+
+      <!-- 热门标签 -->
+      <view wx:if="{{type==5}}">
+        <view class='flex title_tips'>
+          <text>热门标签</text>
+        </view>
+
+        <!-- 标签 -->
+        <view class='labels-layout' wx:if="{{!inputVal && (!searchResult || !searchResult.length)}}">
+          <!-- <view class='tt'>标签</view> -->
+          <view class='ct'>
+            <view class='{{item.id==44?"text_fin":"text"}}' wx:for="{{labels}}" wx:key="id" data-id='{{item.id}}' data-index="{{index}}" data-name='{{item.name}}' bindtap='_label'>
+              <view class='{{item.isSelect?"seled":"none"}}'>{{item.name}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      
+    </view>
+    </view>
+  </form>
+</view>
+
+
+<!-- 搜索名片 -->
+<view class="column" wx:if="{{type==1}}">
+  <view wx:for="{{searchResult}}" wx:key='name' style="padding-top:0">
+    <cardListItem title='{{item.nickname}}' description='{{item.company}}' role='{{item.duty}}' status='{{item.change_status}}' bus='{{item.v_tatus}}' image='{{item.photo}}' pathUrl="/pages/cards/cardDetail?card_id={{item.id}}"></cardListItem>
+  </view>
+  <view class="load" wx:if="{{searchResult.length>5}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+   <empty wx:if="{{noResult}}" title="{{searchResultNullTxt}}"></empty>
+</view>
+
+
+<!-- 搜索答主 -->
+<view class="column" wx:if="{{type==4}}">
+  <view  style='margin-bottom:20rpx;'>
+    <answerItem  answerList="{{answerList}}"></answerItem>
+         <empty wx:if="{{answerList.length==0&&noResult}}" title="{{searchResultNullTxt}}"></empty>
+      <view class="load" wx:if="{{answerList&&answerList.length>5&&selectTab==1}}">{{loadAll?'已加载全部':'上拉加载更多'}}</view>
+  </view>
+   
+</view>
+
+<!-- 搜索问答 -->
+<view class="column" wx:if="{{type==5}}">
+    <view  style='margin-bottom:20rpx;'>
+        <qaList qaList="{{qaList}}" isSearch="true"></qaList>
+         <empty wx:if="{{qaList.length==0&&noResult}}" title="{{searchResultNullTxt}}"></empty>
+    </view>
+</view>

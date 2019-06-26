@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "empty": "/component/empty/empty",
+    "qListDetail": "/component/qListDetail/qListDetail"
+  }
+}

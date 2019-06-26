@@ -5,11 +5,14 @@ const http = require('../../utils/http')
 const moment = require('../../vendors/moment.min.js')
 const QR = require('../../utils/qrcode.js')
 const base64src = require('../../utils/base64src .js')
+let util = require('../../utils/util_wenda');
+let config = require('../../config');
 const {
   ActivityDetailData,
   CheckApply,
   CancelApply,
   SaveFormID,
+  ExportApplylist,
   ActivityQbcode
 } = require('../../utils/Class')
 const {
@@ -72,11 +75,13 @@ Page({
     applys: [],
     like: 0,
     activityId: null,
+    isLogin:false,
     Status: {
       "0": "未开始",
       "1": "进行中",
       "2": "已结束",
-    }
+    },
+    card:{}
   },
   onLoad: function(options) {
     // console.log(options)
@@ -88,7 +93,8 @@ Page({
     this.setData({
       width: wx.getSystemInfoSync().windowWidth,
       activityId: options.id,
-      sign: options.sign || ''
+      sign: options.sign || '',
+      card: wx.getStorageSync('card') || app.globalData.card
       // activity:data.activityDetail
     })
 
@@ -107,14 +113,110 @@ Page({
     } else {
       this.getActivity();
     }
+    
+    console.log("card", this.data.card)
+    console.log("card", wx.getStorageSync('card'))
+    console.log("card", app.globalData.card)
+  },
 
+
+  //没有名片
+  noCard(){
+    wx.showModal({
+      title: '提示',
+      content: '您还没有名片，是否立即前往',//已埋登录
+      success: res => {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: '../cards/makeCard',
+          })
+        }
+      }
+    })
   },
   onShow() {
+    this.setData({
+      isLogin: util._getStorageSync('isLogin') == 1 ? true : false
+    })
     // this.getActivity();
   },
+
+  //拉起手机授权
+  _getPhoneNumber: function (res) {
+    console.log(res.detail.encryptedData)
+    console.log(res.detail.iv)
+    let data = res.detail
+    if (data.encryptedData && data.iv) {
+      this._confirmEvent(data)
+    } else {
+      util.gotoPage({
+        url: '/pages/login/login'
+      })
+    }
+
+  },
+
+  /**
+   * 获取手机号码回调
+   */
+  _confirmEvent: function (opts) {
+    console.log(opts)
+    let self = this
+    let data = {}
+
+    if (opts.currentTarget) {
+      data = arguments[0].detail.getPhoneNumberData
+    } else {
+      data = {
+        encryptedData: opts.encryptedData,
+        iv: opts.iv
+      }
+    }
+    // console.info('opts', opts)
+
+    util.request({
+      url: config.apiUrl + '/hr/special/wxapp/autoRegister',
+      data: data,
+      autoHideLoading: false,
+
+      method: "POST",
+      withSessionKey: true
+    }).then(res => {
+
+      if (res.result == 0) {
+        util._setStorageSync('isLogin', 1)
+        self.setData({
+          ['isLogin']: true
+        })
+        //授权后重新获取详情页数据
+        this.getCommentList();
+        this.getIndexData();
+        util.runFn(self.getInitData)
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+
+    })
+  },
+
   //导出报名表
   outSignExecl(){
-    
+    if (!this.data.card) {
+      this.noCard()
+    } else {
+      const parms = {
+        activity_id: this.data.activityId
+      }
+      ExportApplylist.create(parms).then(res => {
+        console.log(res)
+        if (res.result == 0) {
+        
+        }
+      })
+    }
   },
   close() {
     this.setData({
@@ -172,7 +274,7 @@ Page({
     console.log("111111111111111", this.data)
     console.log(this.data.activity.imgs)
     wx.navigateTo({
-      url: 'detail?activeContent=' + JSON.stringify(this.data.activity.desc) + '&images=' + JSON.stringify(this.data.activity.imgs) + '&id=' + this.data.activity.id
+      url: 'detail?images=' + JSON.stringify(this.data.activity.imgs) + '&id=' + this.data.activity.id
     })
   },
   // getActivity(id){
@@ -225,7 +327,7 @@ Page({
   // },
 
   scan() {
-    if (app.globalData.card) {
+    if (this.data.card) {
       wx.scanCode({
         onlyFromCamera: true,
         success: res => {
@@ -239,17 +341,7 @@ Page({
         }
       })
     } else {
-      wx.showModal({
-        title: '提示',
-        content: '您还没有名片，是否立即前往',
-        success: res => {
-          if (res.confirm) {
-            wx.navigateTo({
-              url: '../cards/makeCard',
-            })
-          }
-        }
-      })
+      this.noCard()
     }
   },
   gotoMap() {
@@ -286,7 +378,7 @@ Page({
     // }
     // likeLoading=true
     const that = this
-    if (app.globalData.card) {
+    if (this.data.card) {
       console.log(this.data.activity)
       const parms = {
         activity_id: this.data.activity.id
@@ -322,33 +414,13 @@ Page({
       // }
     } else {
       likeLoading = false
-      wx.showModal({
-        title: '提示',
-        content: '您还没有名片，是否立即前往',
-        success: res => {
-          if (res.confirm) {
-            wx.navigateTo({
-              url: '../cards/makeCard',
-            })
-          }
-        }
-      })
+      this.noCard()
     }
   },
 
   shareActivity(e) {
-    if (!app.globalData.card) {
-      wx.showModal({
-        title: '提示',
-        content: '您还没有名片，是否立即前往',
-        success: res => {
-          if (res.confirm) {
-            wx.navigateTo({
-              url: '../cards/makeCard',
-            })
-          }
-        }
-      })
+    if (!this.data.card) {
+      this.noCard()
     } else {
 
       console.log('thisdarastaus', this.data.activity.status)
@@ -437,7 +509,7 @@ Page({
     const canvas = wx.createCanvasContext('mycanvas');
     let temp1 = formatAvatar(activity.ActivityPhoto)
     let temp2 = formatAvatar(activity.ActivityIcon)
-    let temp3 = formatAvatar(app.globalData.card.BusIcon)
+    let temp3 = formatAvatar(this.data.card.BusIcon)
     let path_bg = null
     let avatar = null
     let image = null
@@ -451,7 +523,7 @@ Page({
           debug.log(res3)
           avatar = res3.tempFilePath
           debug.log(path_bg, image, avatar)
-          const nickName = app.globalData.card.BusName
+          const nickName = this.data.card.BusName
           const title = `【${activity.ActivitySite}】${activity.ActivityName}`;
           canvas.setFillStyle("#fff")
           canvas.fillRect(0, 0, 750, 1334)
@@ -519,7 +591,7 @@ Page({
 
   },
   like(e) {
-    if (app.globalData.card) {
+    if (this.data.card) {
 
 
       const that = this
@@ -555,23 +627,13 @@ Page({
       //   })
       // }
     } else {
-      wx.showModal({
-        title: '提示',
-        content: '您还没有名片，是否立即前往',
-        success: res => {
-          if (res.confirm) {
-            wx.navigateTo({
-              url: '../cards/makeCard',
-            })
-          }
-        }
-      })
+      this.noCard()
     }
 
   },
   goHome() {
     wx.switchTab({
-      url: '/pages/cards/cards',
+      url: '/pages/cardPage/cardPage',
     })
   },
   saveImage() {
@@ -644,18 +706,8 @@ Page({
   },
   //立即报名
   enter(e) {
-    if (!app.globalData.card) {
-      wx.showModal({
-        title: '提示',
-        content: '您还没有名片，是否立即前往',
-        success: res => {
-          if (res.confirm) {
-            wx.navigateTo({
-              url: '../cards/makeCard',
-            })
-          }
-        }
-      })
+    if (!this.data.card) {
+      this.noCard()
     } else {
       const parms = {
         // identity: this.data.activity.identity,
@@ -676,7 +728,7 @@ Page({
           }
           console.log('this.data.activity.id', this.data.activity.id)
           wx.navigateTo({
-            url: 'enter?activity=' + JSON.stringify(obj) + '&id='+this.data.activity.id,
+            url: 'enter?id='+this.data.activity.id,
           })
           console.log('obj', obj)
         } else {
@@ -696,18 +748,8 @@ Page({
   },
   //取消报名
   canclEnter() {
-    if (!app.globalData.card) {
-      wx.showModal({
-        title: '提示',
-        content: '您还没有名片，是否立即前往',
-        success: res => {
-          if (res.confirm) {
-            wx.navigateTo({
-              url: '../cards/makeCard',
-            })
-          }
-        }
-      })
+    if (!this.data.card) {
+      this.noCard()
     } else {
       const parms = {
         activity_id: this.data.activity.id
@@ -732,7 +774,7 @@ Page({
 
   },
   gotoComment(e) {
-    if (app.globalData.card) {
+    if (this.data.card) {
       if (e.detail.formId) {
         this.collectFormID(e.detail.formId)
 
@@ -741,17 +783,7 @@ Page({
         url: '../questions/comment?type=activity&id=' + this.data.activity.id,
       })
     } else {
-      wx.showModal({
-        title: '提示',
-        content: '您还没有名片，是否立即前往',
-        success: res => {
-          if (res.confirm) {
-            wx.navigateTo({
-              url: '../cards/makeCard',
-            })
-          }
-        }
-      })
+      this.noCard()
     }
 
   },

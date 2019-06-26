@@ -10,9 +10,9 @@
     wx:for-key='id'>
     <group-card  card='{{item}}'>
       <view slot='time'>
-        <view class="column">
-          <view>{{item.hdate}}</view>
-          <view style='color:#999;margin-top:20rpx;'>{{item.friend_count}}位好友</view>
+        <view class="column" style='position:absolute;right:40rpx'>
+          <!-- <view>{{item.hdate}}</view> -->
+          <view style='color:#999;'>{{item.friend_count}}位好友</view>
         </view>
       </view>
     </group-card>

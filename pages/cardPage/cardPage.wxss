@@ -48,6 +48,20 @@ padding-bottom: 20rpx;
   font-weight: bold
 }
 
+.redDos{
+  width:32rpx;
+  height:32rpx;
+  background:rgba(251,76,77,1);
+  border-radius: 20rpx;
+  color: white;
+  font-family:PingFang-SC-Bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 11rpx;
+  top: -8rpx
+}
 
 .sky_two{
   position:absolute;

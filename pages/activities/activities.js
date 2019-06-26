@@ -7,7 +7,7 @@ const notice = require('../../vendors/WxNotificationCenter.js')
 const {
   Activity,
   ActivityNearBy,
-  HotActivity
+  HotActivity,
 } = require('../../utils/Class')
 let code = null
 let userInfo = null;
@@ -174,7 +174,6 @@ onShow(){
   //获取活动列表 ------全部活动/附近的活动
   getActivity(tabNum,city,name){   //一个tab参数，一个搜索名称
     debug.log('用户位置=', app.globalData.selectedCityInfo)
-    console.log('进')
         const parms = {
           tab: tabNum,
           city: city,
@@ -202,8 +201,6 @@ onShow(){
                 activities: [...this.data.activities, ...activeList]
               })
             }
-
-     
           }else{
             this.setData({
               activities: []
@@ -235,6 +232,7 @@ onShow(){
         loadAll: false
       })
     }
+    console.log("thuis,data,datacity",this.data.city)
     var name = ''
     this.getActivity(this.data.selectTab, this.data.city, name)
       wx.hideNavigationBarLoading()
@@ -371,6 +369,7 @@ changeCities(city){
   code = city.data.result.ad_info.adcode
   // this.getActivities(code)
   const name =''
+  app.globalData.selectedCityInfo.city = city.city
   this.getActivity(this.data.selectTab, city.city, name)
 },
 getNewCities(city){

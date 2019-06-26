@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "活动广场",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "search": "/component/search/search",
+    "chooseNav": "/component/chooseNav/chooseNav",
+    "activityItem": "/component/activityItem/activityItem",
+    "gridItem":"/component/gridItem/gridItem",
+    "empty": "/component/empty/empty",
+    "authorize": "/component/authorize/authorize",
+     "title": "/component/title/title"
+  }
+}

@@ -16,7 +16,7 @@
               <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_k.png" mode="aspectFill" class="icon-1"></image>
             </i-badge>
             <text style='color:#666666'>谁看过我</text>
-            <text class='redDos'>{{2}}</text>
+            <text class='redDos'  wx:if="{{view_point!=0}}">{{view_point}}</text>
           </view>
         </navigator>
         <button style='width:230rpx;height:90rpx' class="button-item button-1" open-type='share'>分享名片</button>
@@ -28,7 +28,7 @@
               <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_sc.png" mode="aspectFill" class="icon-1"></image>
             </i-badge>
             <text style='color:#666666'>谁收藏了我</text>
-             <text class='redDos'>{{2}}</text>
+             <text class='redDos' wx:if="{{fav_point!=0}}">{{fav_point}}</text>
           </view>
         </navigator>
         <!-- <view style='width:230rpx;height:90rpx;' class="button-item" bindtap='editor' bindtap='gotoEditor'>编辑名片</view> -->
@@ -41,7 +41,7 @@
               <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_z.png" mode="aspectFill" class="icon-1"></image>
             </i-badge>
             <text style='color:#666666'>谁赞了我</text>
-             <text class='redDos'>{{2}}</text>
+             <text class='redDos'  wx:if="{{zan_point!=0}}">{{zan_point}}</text>
           </view>
         </navigator>
         <!-- <view  style='width:169rpx;height:90rpx' class="button-item" bindtap='cardCode'>名片码</view> -->

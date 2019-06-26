@@ -1,15 +1,28 @@
 <wxs src="../../pages/filter.wxs" module="filter" />
 <view style="background:#fff">
-  <navigator url='myCardDetail' hover-class="none" wx:if="{{card}}">
+  <navigator url='myCardDetail' hover-class="none" wx:if="{{card}}" class='navBack'>
     <view style='padding:30rpx !important'>
       <view class="row-between card-box-item" style='padding:30rpx 40rpx !important'>
-        <view class="row">
+        <view class="row" >
+        
+        <view class="image-box">
           <image class="avatar" src="{{filter.formatImage(card.photo)}}" mode="aspectFill"></image>
+          <image  wx:if="{{card.v_status!=3}}" class="vip" src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/jiaV.png" ></image>
+        </view>
+
+
           <view class="column">
-            <view class="title" style='width:300rpx'>{{card.nickname}}</view>
+            <view class="title" style='white-space:nowrap'>{{card.nickname}}</view>
             <view class="gray">人气值：
               <text class="num">{{card.popularity}}</text>
             </view>
+            <!-- vip状态  -->
+            <view style='display:flex; align-items:center' wx:if="{{card.v_status==3}}">
+            
+              <image style='width:26rpx;height:26rpx;padding-right:6rpx;' src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/apply_vip.png"></image>
+              <text style='font-size:26rpx;color:#fb4c4d'  catchtap='getVip'>申请成为加V用户</text>
+            </view>
+
           </view>
         </view>
         <view class="row">
@@ -18,8 +31,25 @@
         </view>
       </view>
     </view>
+    <view class='tab_title'>
+        <view class='mytab' catchtap='tocard'>
+          <view class='redDos' wx:if="{{red_point!=0}}">{{red_point}}</view>
+          <image src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/mycard.png'></image>
+          <text>我的名片</text>
+        </view>
+        <view class='mytab' catchtap='toactive'>
+          <view class='redDos' wx:if="{{allData.activity_red!=0}}">{{allData.activity_red}}</view>
+          <image src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/myActivite.png'></image>
+          <text>我的活动</text>
+        </view>
+        <view class='mytab' catchtap='toanswer'>
+          <!-- <view class='redDos'>{{allData.}}</view> -->
+          <image src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_myQuestion.png'></image>
+          <text>我的问答</text>
+        </view>
+    </view>
   </navigator>
-  <navigator url='/pages/cards/makeCard' hover-class="none" wx:else>
+  <navigator url='/pages/cards/makeCard' hover-class="none" wx:if="{{!card&&isLogin}}">
     <view class="size-1">
       <view class="row-between sky_2 card-box-item">
         <view class="row">
@@ -34,6 +64,22 @@
       </view>
     </view>
   </navigator>
+  
+   <button  open-type='getPhoneNumber' bindgetphonenumber="_getPhoneNumber" url='/pages/cards/makeCard' hover-class="none" wx:if="{{!card&&!isLogin}}">
+    <view class="size-1">
+      <view class="row-between sky_2 card-box-item">
+        <view class="row">
+          <image class="avatar" src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/default.jpg" mode="aspectFill"></image>
+          <view class="column">
+            <view class="title title-none">点击创建电子卡片</view>
+            <view class="gray" style='display:flex'>人气值
+              <text class="num">0</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </button>
   <!-- 
   <view class="row size-1 border">
     <view class="menu-section column-center" bindtap='gotoMyActivity'>
@@ -50,14 +96,35 @@
     </view>
   </view> -->
 </view>
-<view class="column-bottom sky_1" style="margin-top:20rpx;">
-  <row type='我的活动' icon='myActivities' pathUrl="/pages/account/myActivities" hover='hover'></row>
-  <row type='我的名片夹' icon='mpj' pathUrl="/pages/account/myCards" hover='hover'  isVip="{{isVip}}"></row>
+<view class="column-bottom sky_1" style="margin-top:20rpx;" wx:if="{{!isLogin}}">
 
+<button style='text-align:left' open-type='getPhoneNumber' bindgetphonenumber="_getPhoneNumber" >
+  <row type='消息'  red_point="{{allData.msgCount}}" icon='msg' pathUrl="/pages/account/myMessage" hover='hover'></row>
+  <row wx:if="{{master_status==0}}" type='答主申请' icon='ic_answerApply' pathUrl="/pages/applyAnswer/applyAnswer" hover='hover'></row>
+  <row wx:if="{{master_status==1}}" type='答主申请' icon='ic_answerApply' pathUrl="/pages/account/applyAnswer" hover='hover'></row>
+  <!-- <row type='我的活动' icon='myActivities' pathUrl="/pages/account/myActivities" hover='hover'></row> -->
+  <row type='我的名片夹' red_point="{{red_point}}" icon='mpj' pathUrl="/pages/account/myCards" hover='hover'  isVip="{{isVip}}"></row>
   <row type='加V特权' icon='v' pathUrl="/pages/account/vip" hover='hover'></row>
   <!-- <row type='我的问答' icon='myAnswer' pathUrl="/pages/account/questions" hover='hover'></row> -->
-  <!-- <row type='申请成为答主' icon='apply' pathUrl="/pages/account/tobeAns" hover='hover'></row>  -->
   <row type='人气值' icon='popularity' pathUrl="/pages/account/popularityValue" hover='hover'></row>
+  <!-- <row type='注册' icon='ic_tabLogin' pathUrl="/pages/login/login" hover='hover'></row> -->
+</button>
+
+  <row type='人气值收支明细' icon='details' pathUrl="/pages/account/popularity" hover='hover'></row>
+  <row type='关于我们' icon='hr' pathUrl="/pages/account/about" hover='hover'></row>
+</view>
+
+<view class="column-bottom sky_1" style="margin-top:20rpx;" wx:if="{{isLogin}}">
+  <row type='消息' icon='msg' pathUrl="/pages/account/myMessage" hover='hover'></row>
+  <row wx:if="{{master_status==0}}" type='答主申请' icon='ic_answerApply' pathUrl="/pages/applyAnswer/applyAnswer" hover='hover'></row>
+  <row wx:if="{{master_status==1}}" type='答主申请' icon='ic_answerApply' pathUrl="/pages/account/applyAnswer" hover='hover'></row>
+
+  <!-- <row type='我的活动' icon='myActivities' pathUrl="/pages/account/myActivities" hover='hover'></row> -->
+  <row type='我的名片夹' red_point="{{red_point}}" icon='mpj' pathUrl="/pages/account/myCards" hover='hover'  isVip="{{isVip}}"></row>
+  <row type='加V特权' icon='v' pathUrl="/pages/account/vip" hover='hover'></row>
+  <!-- <row type='我的问答' icon='ic_myQuestion' pathUrl="/pages/account/questions" hover='hover'></row> -->
+  <row type='人气值' icon='popularity' pathUrl="/pages/account/popularityValue" hover='hover'></row>
+  <!-- <row  type='切换账号' icon='ic_tabLogin' pathUrl="/pages/login/login" hover='hover'></row> -->
   <row type='人气值收支明细' icon='details' pathUrl="/pages/account/popularity" hover='hover'></row>
   <row type='关于我们' icon='hr' pathUrl="/pages/account/about" hover='hover'></row>
 </view>

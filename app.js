@@ -21,7 +21,6 @@ const wssUrl = "wss://www.hrloo.com"
 
 App({
   onLaunch: function(options) {
-    console.log('app.js的options',options)
     const that = this;
     wx.getSystemInfo({
       success: res => {
@@ -36,7 +35,6 @@ App({
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
               // debug.log('app===', this.globalData.userInfo)
-
               wx.setStorageSync('userInfo', res.userInfo)
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
@@ -49,9 +47,11 @@ App({
           // wx.redirectTo({
           //   url: '/pages/index/wxAuthorize',
           // })
-          wx.switchTab({
-            url: '/pages/cards/cards',
-          })
+          setTimeout(()=>{
+            wx.switchTab({
+              url: '/pages/cardPage/cardPage',
+            })
+          },3000)
         }
       }
     })

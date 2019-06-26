@@ -1,67 +1,178 @@
-const data = require('../../mock/index.js')
-const debug = require('../../utils/debug.js')
-const app =getApp()
-const { MyQuiz, DoAnswerer, Answered, MyOnlooker} = require('../../utils/Class.js')
-let tabs = [
-  { title: '我的提问', url: MyQuiz,},
-  { title: '我的围观', url: MyOnlooker, },
-  { title: '已回答', url: Answered, },
-  { title: '待回答', url: DoAnswerer, },
-]
-let Tabs = ['我的提问','我的围观']
-let selectedTab = tabs[0]
-let questions= []
+// pages/answerQuestion/answerQuestion.js
+let util = require('../../utils/util_wenda');
+let config = require('../../config');
 Page({
 
+  /**
+   * 页面的初始数据
+   */
   data: {
-    Tabs: Tabs ,
-    selectedTab :selectedTab,
-    unAnswer:'other'
+    loadAll: false,//是否加载全部
+    pages: null,        //分页的总数
+    page: 1,
+    answerList: [    //我的回答列表
+    ],
+    questionList:[],      //我的问题列表
+    selectTab: 1   //1为答主，2为问题
   },
 
+  /**
+   * 生命周期函数--监听页面加载
+   */
   onLoad: function (options) {
-    selectedTab = tabs[0]
-    questions = []
-    if(app.globalData.user.Answerer==2){
-      Tabs = ['我的提问', '我的围观','已回答','待回答']
+    if (this.data.pages == 1 || this.data.pages == this.data.page) {
+      this.setData({
+        loadAll: true
+      })
     }
-    if(selectedTab.title==='待回答'){
-      this.setData({ unAnswer:'unAnswer'})
-    }
-    this.setData({
-      selectedTab,
-      questions:[],
-      Tabs
-    })
-    this.getQuiz()
-    // this.setData({answers:data.answers})
-  },
-  getQuiz(){
-    selectedTab.url.get(app.globalData.openid).then(res=>{
-      debug.log(selectedTab.title,'=====',res)
-      let list =res.res
-      if (selectedTab.title==='我的围观'){
-        list=list.map(item=>{
-          return Object.assign(item,{status:true})
+    if(options.tab)
+    {
+      if (options.tab==2){
+        this.setData({
+          selectTab:2
         })
       }
-      debug.log(list)
-      this.setData({ questions:list})
+    }
+  },
+
+  //切换tab
+  changeTabs(e) {
+    console.log('1', e)
+    let tab = e.currentTarget.dataset.tab
+    if (tab == 1) {
+      this.setData({
+        selectTab: 1,
+        loadAll: false
+      })
+      this.getPageData()
+    } else {
+      this.setData({
+        selectTab: 2,
+        loadAll: false
+      })
+      this.getPageData()
+    }
+  },
+
+  //跳转问答详情页面
+  toQuession(e) {
+    let d = e.currentTarget.dataset.item
+    wx.navigateTo({
+      url: '/pages/questionDetail/questionDetail?id=' + d.tid,
     })
   },
-  changeStatus(e){
-    debug.log(e.detail.tab)
-    const { tab } = e.detail
-    if (tab !== selectedTab.title) {
-      selectedTab = tabs.find(item => {
-        return item.title === tab
-      })
-      if (selectedTab.title==='待回答'){
-        this.setData({ unAnswer: 'unAnswer'})
-      }
-      questions = []
-      this.setData({ questions, loadAll: false })
-      this.getQuiz()
+  //我的回答
+  getPageData: util.debounce(function () {
+    wx.showLoading({
+      title: '加载中...',
+    })
+    let tab = null
+    if (this.data.selectTab==1){
+        tab = 4
+    }else{
+        tab = 2
     }
+    let that = this
+    util.request({
+      url: config.apiUrl + '/hr/group/question/mythreads',
+      method: "POST",
+      withSessionKey: true,
+      data: {
+        tab: tab,
+        page: that.data.page
+      }
+    }).then(res => {
+      wx.hideLoading()
+      let data = res.data.data
+      console.log('data', data)
+      if (res.result == 0) {
+        if (that.data.page > 1) {
+          that.setData({
+            answerList: this.data.answerList.concat(data),
+            pages: res.data.pages,
+            loadAll:false
+          })
+        } else {
+          that.setData({
+            answerList: data,
+            pages: res.data.pages,
+            loadAll: true
+
+          })
+        }
+      }
+    })
+  }, 500),
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    this.getPageData()
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    // 下拉刷新，回到第一页
+    // this.setData({
+    //   page: 1
+    // })
+    // this.getPageData();
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    console.log(111111111111)
+    let addPage = this.data.page
+    if (addPage == this.data.pages) {
+    this.setData({
+      loadAll: true
+    })
+      // wx.showToast({
+      //   title: '已加载全部'
+      // })
+      return
+    }
+    else {
+      ++addPage
+      this.setData({
+        page: addPage,
+        loadAll: false
+      })
+    }
+    this.getPageData();
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
   }
 })

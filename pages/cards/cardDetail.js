@@ -19,8 +19,11 @@ const {
   Star,
   UnLikeCard,
   LookCard,
-  AddRemark
+  AddRemark,
+  Remake 
 } = require('../../utils/Class.js')
+let util = require('../../utils/util_wenda');
+let config = require('../../config');
 
 let aggress = false
 let likeLoading = false
@@ -58,7 +61,8 @@ Page({
     cards: '',
     is_exchange: null,
     liked: false,
-    card: null
+    card: null,
+    isLogin:false
   },
 
   /**
@@ -76,18 +80,79 @@ Page({
     console.log('1',wx.getStorageSync('card'))
     console.log('2', app.globalData.card)
 
-
- 
-
-    // myCard = wx.getStorageSync('card') || app.globalData.card
-    myCard = app.globalData.card
-
+    myCard = wx.getStorageSync('card') || app.globalData.card
+    // myCard = app.globalData.card
+    console.log("myCard",myCard)
     self.setData({
-      card_id: options.card_id ? options.card_id : ''
+      card_id: options.card_id ? options.card_id : '',
+      isLogin: util._getStorageSync('isLogin') == 1 ? true : false
+
     })
     self.getCardInfo()
 
   },
+
+  //拉起手机授权
+  _getPhoneNumber: function (res) {
+    console.log(res.detail.encryptedData)
+    console.log(res.detail.iv)
+    let data = res.detail
+    if (data.encryptedData && data.iv) {
+      this._confirmEvent(data)
+    } else {
+      util.gotoPage({
+        url: '/pages/login/login'
+      })
+    }
+
+  },
+
+  /**
+   * 获取手机号码回调
+   */
+  _confirmEvent: function (opts) {
+    console.log(opts)
+    let self = this
+    let data = {}
+
+    if (opts.currentTarget) {
+      data = arguments[0].detail.getPhoneNumberData
+    } else {
+      data = {
+        encryptedData: opts.encryptedData,
+        iv: opts.iv
+      }
+    }
+    // console.info('opts', opts)
+
+    util.request({
+      url: config.apiUrl + '/hr/special/wxapp/autoRegister',
+      data: data,
+      autoHideLoading: false,
+
+      method: "POST",
+      withSessionKey: true
+    }).then(res => {
+
+      if (res.result == 0) {
+        util._setStorageSync('isLogin', 1)
+        self.setData({
+          ['isLogin']: true
+        })
+        //授权后重新获取详情页数据
+        this.getCommentList();
+        this.getIndexData();
+        util.runFn(self.getInitData)
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+
+    })
+  },
+
   /**
    * 获取名片信息
    */
@@ -115,7 +180,7 @@ Page({
             })
           } else {
             wx.setNavigationBarTitle({
-              title: '活动详情'
+              title: '名片详情'
             })
           }
         }
@@ -166,6 +231,7 @@ Page({
           card: card,
           is_exchange: is_exchange
         })
+        console.log("1111111",this.data.card)
         if (card.change_status == 2) {
           self.getMoreCards()
         }
@@ -286,7 +352,7 @@ Page({
   },
   goHome() {
     wx.switchTab({
-      url: 'cards',
+      url: '/pages/cardPage/cardPage',
     })
   },
   onShareAppMessage: function(res) {
@@ -353,17 +419,24 @@ Page({
   createTips(e) {
     // console.log(e.detail)
     const data = {
-      "CardRemark": e.detail.value,
-      "OpenId": app.globalData.openid,
-      "id": self.data.card.id
+      "remark": e.detail.value,
+      "bopenid": this.data.card.openid,
     }
-    AddRemark.create(data).then(res => {
+    Remake.create(data).then(res => {
       // debug.log(res)
-      wx.showToast({
-        title: '添加成功',
-        icon: 'success',
-        duration: 2000
-      })
+      if(res.result==0){
+        wx.showToast({
+          title: '添加成功',
+          icon: 'success',
+          duration: 2000
+        })
+      }else{
+        wx.showToast({
+          title: res.msg,
+          icon:'none'
+        })
+      }
+
     })
   },
 
@@ -372,7 +445,7 @@ Page({
     if (!myCard) {
       wx.showModal({
         title: '提示',
-        content: '您还没有名片，是否立即前往',
+        content: '您还没有名片，是否立即前往',//已埋登录
         success: res => {
           if (res.confirm) {
             wx.navigateTo({
@@ -513,7 +586,7 @@ Page({
   //收集用户formid
   submitFormId(e) {
     SaveFormID.create({
-      formid: e.detail.formId
+      formId: e.detail.formId
     })
   }
 })

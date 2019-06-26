@@ -6,6 +6,7 @@ const {
   SaveFormID,
   ActivityDetailData,
   AddActivity,
+  ExportApplylist,
   // ActDelLike,
 } = require('../../utils/Class.js')
 
@@ -21,6 +22,7 @@ Page({
     userInfo: '',
     preview: false, //是否预览
     activity: {}, //获取的活动数据
+    applyList:[],
     id: ''
   },
 
@@ -64,9 +66,11 @@ Page({
         let {
           activity
         } = res.data
+        console.log("activity",res.data)
         // console.info(activity)
         self.setData({
-          activity: activity
+          activity: activity,
+          applyList: res.data.applys
         })
       } else {
         wx.showToast({
@@ -87,6 +91,38 @@ Page({
     wx.navigateTo({
       url: '/pages/activities/signView?id=' + e.currentTarget.dataset.item.id,
     })
+  },
+  //导出报名表
+  outSignExecl() {
+    console.log("1111", wx.getStorageSync('hrhome_token')) 
+    const  hrToken = wx.getStorageSync('hrhome_token')
+    const parms = {
+      activity_id: this.data.activity.id
+    }
+    ExportApplylist.create(parms).then(res=>{
+    let url = res.data
+    wx.downloadFile({
+      url: url,
+      success(res) {
+        // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
+        if (res.statusCode === 200) {
+          console.log('tempFilePaths', res.tempFilePath)
+              const tempFilePaths = res.tempFilePath
+              wx.openDocument({
+                filePath: tempFilePaths,
+                fileType:'xlsx',
+                success: function (res) {
+                  console.log('打开文档成功')
+                },
+                fail:function(err){
+                  console.log(err)
+                }
+              })
+        }
+      }
+    })
+    })
+
   },
   //重新编辑活动
   update(){

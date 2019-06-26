@@ -34,6 +34,10 @@ Page({
     card: [], //我的名片
     cards: [], //猜你认识的人
     notify: false, //是否有未读系统消息
+    cardAllInfo:{},
+     view_point:"",
+          fav_point:"",
+          zan_point:"",
   },
 
   /**
@@ -117,16 +121,19 @@ Page({
         console.info(res.data)
         self.setData({
           card: card_info,
-          notify: notify
+          notify: notify,
+          view_point: res.data.view_point,
+          fav_point: res.data.fav_point,
+          zan_point: res.data.zan_point
         })
       }
     })
   },
   //下拉刷新页面
   onPullDownRefresh: function() {
-    this.getMyCardDetail().then(res => {
-      wx.hideNavigationBarLoading()
-      wx.stopPullDownRefresh()
-    })
+    // this.getMyCardDetail().then(res => {
+    //   wx.hideNavigationBarLoading()
+    //   wx.stopPullDownRefresh()
+    // })
   },
 })

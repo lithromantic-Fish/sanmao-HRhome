@@ -88,6 +88,17 @@ const GroupListById = new Feathers('hr/hrhome/hrcard/group_detail') // 分组详
 const DelGroupPeople = new Feathers('hr/hrhome/hrcard/dep_group_member') //删除分组下成员 联系人列表 分组group_id 成员member_id
 const MyEvent = new Feathers('hr/hrhome/hractivity/my_event') //获取人气流水记录 status-0表示获取全部 1表示收到的 2代表获取支出
 const VipStatus = new Feathers('hr/hrhome/hrcard/v_ajax') //申请加v dosubmit 为真则是提交 否则则是获取
+const Remake = new Feathers('hr/hrhome/hrcard/remark') //名片添加备注信息
+const ExportApplylist = new Feathers('hr/hrhome/hractivity/export_applylist') //导出活动报名表
+const Master_list = new Feathers('hr/hrhome/hrthread/master_list') //答主列表
+const Quest_list = new Feathers('hr/hrhome/hrthread/questions') //问题列表
+const Payfor_answer = new Feathers('hr/hrhome/hrthread/payfor_answer') //支付人气值查看回答
+const Master_apply = new Feathers('hr/hrhome/hrthread/master_apply') //答主申请
+const RecommendList = new Feathers('hr/hrhome/hractivity/home_recommend_activitys') //强力推荐
+const Master_page = new Feathers('hr/hrhome/hrthread/master_page') //答主提问
+const ApplyInfo = new Feathers('hr/hrhome/hrthread/apply_info') //申请答主信息
+const Give_up_apply = new Feathers('hr/hrhome/hrthread/give_up_apply') //放弃答主申请
+
 
 
 
@@ -258,11 +269,16 @@ module.exports = {
   GetPageUrl,
   SignImg,
   DetailContext,
-
-
-
-
-
+  ExportApplylist,
+  Remake,
+  Master_list,
+  Quest_list,
+  Payfor_answer,
+  Master_apply,
+  RecommendList,
+  Master_page,
+  ApplyInfo,
+  Give_up_apply,
 
 
 

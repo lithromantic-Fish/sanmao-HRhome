@@ -1,4 +1,6 @@
 //登陆封装
+let util = require('/util_wenda');
+let config = require('../config');
 const {
   Login,
   MyCardDetail
@@ -20,6 +22,9 @@ function login(code, userinfo) {
     // console.log('=22222')
     // console.log('11111',res)
     // openid = res.result.openid
+    console.log("用户登录状态 0 未登录，1 已登录======",res.data.isLogin)
+    util._setStorageSync('isLogin', res.data.isLogin)
+
     hrhome_token = res.data.hrhome_token
     app.globalData.hrhome_token = res.data.hrhome_token
     // console.log(app.globalData.hrhome_toekn)

@@ -32,16 +32,17 @@ Page({
       scene: this.data.sceneValue
     }
     GetPageUrl.find(parms).then(res => {
-      console.log('res', res)
       wx.redirectTo({
         url: '/' + res.data.path
       })
     })
   },
   login() {
-    if (app.globalData.userInfo) {
-      console.log("有登录信息")
 
+
+
+    const userInfo = wx.setStorageSync("userInfo")
+    if (app.globalData.userInfo) {
       wx.login({
         success: res => {
           // debug.log('code==',res.code)
@@ -73,7 +74,6 @@ Page({
       })
     }
     else {
-      console.log("无登录信息")
       setTimeout(()=>{
         wx.switchTab({
           url: '../cardPage/cardPage'

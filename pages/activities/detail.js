@@ -16,21 +16,7 @@ Page({
   onLoad: function (options) {
     console.log(options)
     console.log("app.globalData.card", app.globalData.card)
-    if (app.globalData.card) {
       this.getContext(options.id)
-    } else {
-      wx.showModal({
-        title: '提示',
-        content: '您还没有名片，是否立即前往',
-        success: res => {
-          if (res.confirm) {
-            wx.navigateTo({
-              url: '../cards/makeCard',
-            })
-          }
-        }
-      })
-    }
     // var str = options.activeContent.substring(1,options.activeContent.length-1)
     // console.log('str',str)
     // var a = str.replace(/\n/g,"1")

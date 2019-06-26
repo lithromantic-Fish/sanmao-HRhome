@@ -62,7 +62,19 @@
     "pages/account/popularityValue",
     "pages/activities/signDetail",
     "pages/activities/crop",
-    "pages/activities/signView"
+    "pages/activities/signView",
+    "pages/recommend/recommend",
+    "pages/applyAnswer/applyAnswer",
+    "pages/searchRecommend/searchRecommend",
+    "pages/login/login",
+    "pages/answerPage/answerPage",
+    "pages/questionDetail/questionDetail",
+    "pages/answerQuesionText/answerQuesionText",
+    "pages/answerQuestion/answerQuestion",
+    "pages/answerQuesion/answerQuesion",
+    "pages/replay/replay",
+    "pages/account/myMessage",
+    "pages/account/applyAnswer"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -83,21 +95,15 @@
     "list": [
       {
         "pagePath": "pages/cardPage/cardPage",
-        "iconPath": "assets/images/tabs/mine01.png",
-        "selectedIconPath": "assets/images/tabs/mine02.png",
+        "iconPath": "assets/images/tabs/cardPage01.png",
+        "selectedIconPath": "assets/images/tabs/cardPage02.png",
         "text": "名片"
       },
       {
-        "pagePath": "pages/cards/cards",
-        "iconPath": "assets/images/tabs/cards01.png",
-        "selectedIconPath": "assets/images/tabs/cards02.png",
-        "text": "HR人脉圈"
-      },
-      {
-        "pagePath": "pages/activities/activityGround",
-        "iconPath": "assets/images/tabs/activity01.png",
-        "selectedIconPath": "assets/images/tabs/activity02.png",
-        "text": "HR活动社区"
+        "pagePath": "pages/recommend/recommend",
+        "iconPath": "assets/images/tabs/ic_Recomond.png",
+        "selectedIconPath": "assets/images/tabs/ic_RecomondSel.png",
+        "text": "推荐"
       },
       {
         "pagePath": "pages/account/account",
@@ -107,5 +113,11 @@
       }
     ]
   },
+  "navigateToMiniProgramAppIdList": [
+    "wxef50a246a3e8c480",
+    "wx1caca67f44e12c37",
+    "wx3f49a6726fbb5a6c",
+    "wx5a3a7366fd07e119"
+  ],
   "sitemapLocation": "sitemap.json"
 }

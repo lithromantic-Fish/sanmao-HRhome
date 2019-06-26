@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "你问我答",
+  "usingComponents": {
+    "answerItem": "/component/answerItem/answerItem",
+    "questionItem":"/component/questionItem/questionItem",
+    "empty": "/component/empty/empty"
+    
+  }
+}

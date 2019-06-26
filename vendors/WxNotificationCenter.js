@@ -25,7 +25,6 @@ function addNotification(name, selector, observer) {
         if(!observer){
             console.log("addNotification Warning: no observer will can't remove notice");
         }
-        console.log("addNotification:" + name);
         var newNotice = {
             name: name,
             selector: selector,

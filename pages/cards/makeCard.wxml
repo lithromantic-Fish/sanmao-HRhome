@@ -23,8 +23,10 @@
       <view class="column title-column">
         <view class="row size-row section" >
           <input 
+            style='width:300rpx;'
             value="{{nickname}}" 
             name="nickname" 
+            maxlength='10'
             placeholder='请输入姓名' 
             class="input-text"></input>
             <text style='font-size:21rpx'>(请手动添加真实姓名)</text>
@@ -90,6 +92,7 @@
         <text>*</text>
       </view>
       <input 
+        maxlength='20'
         name="company" 
         bindinput="bindKeyInput" 
         value="{{company}}" 
@@ -101,6 +104,7 @@
         <text>*</text>
       </view>
       <input 
+        maxlength='20'
         name="duty" 
         value="{{duty}}" 
         placeholder='请输入职位' 

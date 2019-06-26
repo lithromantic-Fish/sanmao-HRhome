@@ -1,5 +1,5 @@
 .color-column{
-  width:8rpx;
+  width:6rpx;
   height:34rpx;
   background:#4c89fb;
   border-radius: 8rpx;

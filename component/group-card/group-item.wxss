@@ -4,8 +4,20 @@
     border-radius: 50%;
 }
 .title{
+   /* width: 200rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+     */
     font-size: 36rpx;
     font-weight: 600
+}
+.right_content{
+    width: 150rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block!important
 }
 .position,.desc{
     font-size: 30rpx;
@@ -16,7 +28,11 @@
     margin-left:15rpx
 }
 .desc{
-  margin-top:15rpx;  
+    margin-top:15rpx;  
+    width: 400rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .phone{
     width:50rpx;

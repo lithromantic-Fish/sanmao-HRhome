@@ -69,9 +69,6 @@
   <empty wx:if="{{searchResult.length==0 || !searchResult}}" title="{{searchResultNullTxt}}"></empty>
 </view>
 
-
-
-
 <!-- <view class="column" wx:if="{{type==='activity'}}">
   <view wx:for="{{list}}" wx:key='name' style="padding-top:0">
     <activityItem activity="{{item}}"></activityItem>

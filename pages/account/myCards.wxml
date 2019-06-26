@@ -27,7 +27,17 @@
 <view>
 </view>
 <!-- 新的名片 -->
-<navigator url="/pages/account/newCards">
+<view style='height:65rpx'>
+  <!-- <view class="new-cards row-between size-1 border" hover-class="hover">
+    <view class="row">
+      <view class="iconfont icon-newcards"></view>
+      <view class="title" style="font-size:30rpx;margin-left:20rpx">新的名片</view>
+    </view>
+    <view class="tip" wx:if="{{newNum>0}}">{{newNum}}</view>
+  </view> -->
+</view>
+
+<navigator url="/pages/account/newCards" style='margin-top:55rpx'>
   <view class="new-cards row-between size-1 border" hover-class="hover">
     <view class="row">
       <view class="iconfont icon-newcards"></view>
@@ -46,6 +56,7 @@
     </view>
   </view>
 </navigator>
+
 
 
 <view 

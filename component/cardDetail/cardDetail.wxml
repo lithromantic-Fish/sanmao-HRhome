@@ -1,13 +1,13 @@
 <wxs src="../../pages/filter.wxs" module="filter" />
-<view class="column card-detail size-1" wx:if="{{card}}">
+<view class="column card-detail size-1" wx:if="{{card.length!=0}}">
   <view class="row-between">
     <view class="row row-1">
-      <view class="title" style='max-width:300rpx;'>{{card.nickname}}</view>
+      <view class="title" style='max-width:350rpx;white-space:nowrap;'>{{card.nickname}}</view>
       <view class="iconfont icon-{{card.gender==2?'female':'male'}}"></view>
     </view>
     <image src='{{filter.formatAvatar(card.photo)}}' mode='aspectFill' class="avatar" bindtap='preImage'></image>
   </view>
-  <view class="column column-bottom">
+  <view class="column column-bottom" >
     <view class="row">
       <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/phone.png" mode="aspectFill" class="icon-cards-detail"></image>
       <view class="row" wx:if="{{card.change_status==2}}" bindtap='call'>
@@ -44,7 +44,7 @@
   </view>
 </view>
 
-<view class="column-center card-detail-nocard size-1" wx:if="{{!card}}">
+<view class="column-center card-detail-nocard size-1" wx:if="{{card.length==0}}">
   <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/no-card.png" mode="aspectFill" class="no-card"></image>
-  <view>您还暂时没有名片哦</view>
+  <view>你还没有名片，赶紧来做一张吧</view>
 </view>
