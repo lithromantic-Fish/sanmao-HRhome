@@ -137,6 +137,8 @@ Page({
 
     // }
     const params = {
+      showLoading: true,
+
       "card_id": card_id,
       "reasons": reason,
       "content": self.data.content,

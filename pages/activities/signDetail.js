@@ -25,6 +25,8 @@ Page({
   getData(){
 
     const parms = {
+      showLoading: true,
+
       apply_id: ApplyId
 
     }

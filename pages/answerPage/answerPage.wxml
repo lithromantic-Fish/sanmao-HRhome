@@ -2,15 +2,15 @@
     <view class='up_info'>
       <image class='avator_top' src='{{master.photo}}'></image>
       <view>
-        <view>
+        <view style='display:flex;flex-direction:column'>
           <text class='master_name'>{{master.nickname}}</text>
           <text class='master_duty'>{{master.duty}}</text>
+        </view>
           <view style='display:flex;padding-top:15rpx;padding-bottom:30rpx'>
             <view wx:for="{{master.cate_name}}">
               <text class='master_tabs'>{{item}}</text>
             </view>
           </view>
-        </view>
       </view>
     </view> 
     <view style='height:20rpx;background-color:#f3f4f5'></view>

@@ -33,12 +33,21 @@ Page({
     this.setData({
       master_status: options.master_status,
       inputVal:'@'+options.name+':',
+      initVal: '@' + options.name + ':',
       tid:options.tid,
       pid:options.pid,
       topid: options.topid ? options.topid :0
     })
   },
+  //提交评论
   formSubmit(e) {
+    if (this.data.inputVal == this.data.initVal){
+      wx.showToast({
+        title: '提交内容不能为空',
+        icon:'none'
+      })  
+      return
+    }
     let formId = e.detail.formId
     wx.showLoading({
       title: '加载中...',

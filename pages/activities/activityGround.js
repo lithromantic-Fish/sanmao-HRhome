@@ -75,7 +75,9 @@ Page({
 
     const parms = {
       page,
-      name
+      name,
+      showLoading: true,
+
     }
 
     ActivityList.create(parms).then(res => {
@@ -106,11 +108,27 @@ Page({
             activities: [...self.data.activities, ...data]
           })
         }
+      }else if(res.result==999){
+        self.updataApi()
+
       }
 
     })
   },
+  //更新登录过期
+  updataApi() {
+    const that = this
+    console.log("更新登录页")
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          that.getActiveInfo()
+          that.getBanner()
+        })
 
+      }
+    })
+  },
   // getActivities() {
   //   ActivityGround.find().then(res => {
   //     console.log(res.list)
@@ -142,7 +160,10 @@ Page({
   //   // })      
   // },
   getBanner() {
-    BannerList.find().then(res => {
+
+    BannerList.find({
+      showLoading: true,
+    }).then(res => {
       console.log(res)
       this.setData({
         imgUrls: res.data

@@ -20,4 +20,4 @@
 <view class="modal-box column-center" wx:if="{{!userInfo}}">
   <authorize bind:getInfo='getInfo'></authorize>
 </view> -->
-<view class="mask" wx:if="{{!userInfo}}"></view>
+<!-- <view class="mask" wx:if="{{!userInfo}}"></view> -->

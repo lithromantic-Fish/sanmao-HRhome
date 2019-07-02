@@ -212,7 +212,9 @@ Page({
 
     let prams = {
       group_id: groupId,
-      idlist: choodesCards
+      idlist: choodesCards,
+      showLoading: true
+
     }
 
     SaveFormID.find({

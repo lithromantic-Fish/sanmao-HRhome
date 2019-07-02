@@ -104,6 +104,8 @@ this.getQuiz()
           const aac =app.globalData.uploadUrl+ res.filename
           that.setData({ file: aac,tempFilePath:tempFilePath})
           const data = {
+            showLoading: true,
+
             "AnsName":app.globalData.card.BusName,
             "OpenId":app.globalData.openid,
             "AnsContents":res.filename,
@@ -158,6 +160,8 @@ this.getQuiz()
         success: res => {
           if (res.confirm) {
             const data = {
+              showLoading: true,
+
               QskPrice: Number((1 - app.globalData.AskPrice).toFixed(2)),
               AskPrice: app.globalData.AskPrice,
               OpenId: app.globalData.openid,

@@ -149,6 +149,8 @@ Page({
           success:res=>{
             if(res.confirm){
               const data = {
+                showLoading: true,
+
                 "QuizName": app.globalData.card.BusName,
                 "QuizOpenId": app.globalData.openid,
                 "QuizContents": this.data.content,

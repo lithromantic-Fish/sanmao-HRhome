@@ -54,6 +54,8 @@ Page({
   //获取评论列表
   getComments(args){
     const parms = {
+      showLoading: true,
+
       page: this.data.page,
       activity_id: this.data.activeId
     }
@@ -130,6 +132,8 @@ Page({
       //   this.getComments()
       // })
       const parms = {
+        showLoading: true,
+
         text: this.data.content,
         activity_id:this.data.activeId
       }
@@ -184,6 +188,8 @@ Page({
       success:res=>{
         if(res.confirm){
           const parms = {
+            showLoading: true,
+
             plid: plid
           }
           DelActivityPL.create(parms).then(res=>{

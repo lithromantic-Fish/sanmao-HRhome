@@ -24,6 +24,14 @@ page{
     /* border-left:.1rpx solid #dcdde3; */
     border-radius: 7rpx
 }
+.editName{
+  font-size:28rpx;
+font-family:PingFang-SC-Medium;
+font-weight:500;
+color:rgba(153,153,153,1);
+line-height:40rpx;
+
+}
 .getcode{
   width:59%;
 }

@@ -19,11 +19,21 @@
         <text class='text_context'>{{answerInfo.intro}}</text>
       </view>
       <view class='wrap_btn'>
-        <view class="{{answerInfo.status!=0?'btn_applyStatus':'btn_applyStatus_toApply'}}">
-          <text wx:if="{{answerInfo.status==0}}" catchtap='toApply'>去申请</text>
-          <text wx:if="{{answerInfo.status==1}}" catchtap='giveUp'>放弃申请</text>
-          <text wx:if="{{answerInfo.status==2}}">申请成功</text>
-          <text wx:if="{{answerInfo.status==3}}" catchtap='toApply'>申请失败，再次申请？</text>
+
+        <view  wx:if="{{answerInfo.status==0}}"  catchtap='toApply' class="{{answerInfo.status!=0?'btn_applyStatus':'btn_applyStatus_toApply'}}">
+          <text>去申请</text>
+        </view>
+
+         <view   wx:if="{{answerInfo.status==1}}" catchtap='giveUp'  class="{{answerInfo.status!=0?'btn_applyStatus':'btn_applyStatus_toApply'}}">
+          <text >放弃申请</text>
+        </view>
+
+        <view wx:if="{{answerInfo.status==2}}" class="{{answerInfo.status!=0?'btn_applyStatus':'btn_applyStatus_toApply'}}">
+          <text >申请成功</text>
+        </view>
+
+        <view  wx:if="{{answerInfo.status==3}}" catchtap='toApply' class="{{answerInfo.status!=0?'btn_applyStatus':'btn_applyStatus_toApply'}}">
+          <text >申请失败，再次申请？</text>
         </view>
       </view>
 

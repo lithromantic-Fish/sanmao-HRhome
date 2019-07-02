@@ -16,7 +16,7 @@
       <view class="image-box-button" hover-class="hover-none">
         <!-- <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/fbhd.png" mode="aspectFill" ></image> -->
       </view>
-        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/fbhd.png" mode="aspectFill" ></image>
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_publish.png" mode="aspectFill" ></image>
       <!-- <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/fbhd2.png" mode="aspectFill" ></image> -->
       <text>发布活动</text>
     </view>
@@ -25,7 +25,7 @@
       <view class="image-box-button" hover-class="hover-none" >
         <!-- <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/jxhd.png" mode="aspectFill" ></image> -->
       </view>
-        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/jxhd.png"  mode="aspectFill" ></image>
+        <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_activeC.png"  mode="aspectFill" ></image>
       <!-- <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/jxhd2.png" mode="aspectFill" ></image> -->
       <text>精选活动</text>
     </view>

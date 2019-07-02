@@ -39,6 +39,13 @@ Page({
   },
 //答主申请
   submit(e){
+    if (!this.data.publishContent) {
+      wx.showToast({
+        title: '提交内容不能为空',
+        icon:'none'
+      })
+      return
+    }
     if (this.data.hasSelectedList) {
       this.data.hasSelectedList.forEach((ele, idx) => {
         this.data.idList.push(ele.id)
@@ -49,6 +56,8 @@ Page({
     }
 
     const parms = {
+      showLoading: true,
+
       catid: id,
       intro: this.data.publishContent
     }
@@ -80,13 +89,13 @@ Page({
           icon: 'none',
           duration: 1500
         })
-        setTimeout(() => {
-          // wx.navigateBack({
-          // })
-          wx.navigateTo({
-            url: '/pages/account/applyAnswer',
-          })
-        }, 1500)
+        // setTimeout(() => {
+        //   // wx.navigateBack({
+        //   // })
+        //   wx.navigateTo({
+        //     url: '/pages/account/applyAnswer',
+        //   })
+        // }, 1500)
       } else {
         console.log("申请不成功返回",res)
         wx.showToast({

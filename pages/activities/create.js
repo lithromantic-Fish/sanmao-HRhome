@@ -1,5 +1,7 @@
 const app = getApp()
 // const debug = require('../../utils/debug')
+const login = require('../../utils/login.js')
+
 const eventBus = require('../../utils/eventbus')
 // const moment = require('../../vendors/moment.min.js')
 const {
@@ -50,6 +52,7 @@ Page({
     activity_icon: '',// 活动图片
     imgs: [], //活动详情图片
     diasbled: true,
+    formId:null,
     // images: [],
     // descImages: [],
     price: 5
@@ -578,18 +581,56 @@ Page({
   //   }
   // },
   // 提交/预览
-  confirm(e) {
-    let {
-      formId,
-      target
-    } = e.detail
+  confirm(e,btntype) {
+    console.log('e',e)
 
-    let {
-      btn_type
-    } = target.dataset
+    var formId;
+    var btn_type;
 
-    //保存formid
-    SaveFormID.find({formId:formId})
+    // if (e.detail.formId){
+    //   formId = e.detail.formId
+    //   //保存formid
+    //   SaveFormID.find({ formId: formId })
+
+    // }else{
+    //   SaveFormID.find({ formId: this.data.formId })
+
+    // }
+    // if (e.detail.target.dataset.btn_type){
+    //   btn_type = e.detail.target.dataset.btn_type
+
+    // }else{
+    //   btn_type = btn_type
+    // }
+    if(btntype){
+      btn_type = e.detail.target.dataset.btn_type
+      formId = e.detail.formId
+      //保存formid
+      SaveFormID.find({ formId: formId })
+    }else{
+      formId = e
+      btn_type = btntype
+      
+    }
+  
+
+
+   
+
+      // let {
+      //   formId,
+      //   target
+      // } = e.detail
+
+
+
+
+    
+   
+
+
+
+
 
     let {
       options,
@@ -701,6 +742,8 @@ Page({
     }
 
     let prams = {
+      showLoading: true,
+
       banner_img: banner_img, //上传活动图片
       identity: identity, //我的发布身份 2,个人 3,机构
       certificates: certificates,// 资质身份图片
@@ -746,14 +789,25 @@ Page({
           icon: "success"
         })
         if (options) {
-          wx.navigateBack()
+          setTimeout(() => {
+            wx.navigateBack()
+
+          },1500)
+          
         } else {
           wx.redirectTo({
             url: '/pages/account/myActivities?type=2',
           })
         }
-      } else {
-        wx.showToast({
+      } else  if(res.result==999){
+        this.updataApi(formId,btn_type)
+
+        // wx.showToast({
+        //   title: res.msg,
+        //   icon:"none"
+        // })
+      }else{
+            wx.showToast({
           title: res.msg,
           icon:"none"
         })
@@ -761,6 +815,18 @@ Page({
       loading = false
     })
 
+  },
+  updataApi(formId, btntype) {
+    const that = this
+    console.log("更新登录页")
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          that.confirm(formId, btntype)                    
+        })
+
+      }
+    })
   },
   //提交
   // confirm(e) {

@@ -88,6 +88,8 @@ Page({
     if(file){
       const duration = this.data.tempFilePath.duration / 1000
       const data = {
+        showLoading: true,
+        
         Answer: fileData,
         Duration: duration.toFixed(2),
         QuizId: this.data.answer.QuizId,

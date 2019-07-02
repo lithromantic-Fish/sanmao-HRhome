@@ -1,13 +1,13 @@
 <wxs src="../../pages/filter.wxs" module="filter" />
 <view style="background:#fff">
-  <navigator url='myCardDetail' hover-class="none" wx:if="{{card}}" class='navBack'>
-    <view style='padding:30rpx !important'>
+  <view wx:if="{{card}}" class='navBack'>
+    <view style='padding:30rpx !important' catchtap="toMyCardDetail">
       <view class="row-between card-box-item" style='padding:30rpx 40rpx !important'>
         <view class="row" >
         
         <view class="image-box">
           <image class="avatar" src="{{filter.formatImage(card.photo)}}" mode="aspectFill"></image>
-          <image  wx:if="{{card.v_status!=3}}" class="vip" src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/jiaV.png" ></image>
+          <image  wx:if="{{card.v_status==3}}" class="vip" src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_vip.png" ></image>
         </view>
 
 
@@ -16,8 +16,8 @@
             <view class="gray">人气值：
               <text class="num">{{card.popularity}}</text>
             </view>
-            <!-- vip状态  -->
-            <view style='display:flex; align-items:center' wx:if="{{card.v_status==3}}">
+            <!-- vip状态 1.未申请 2.申请审核中 3.审核通过 4.未通过 -->
+            <view style='display:flex; align-items:center' wx:if="{{card.v_status!=3}}">
             
               <image style='width:26rpx;height:26rpx;padding-right:6rpx;' src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/apply_vip.png"></image>
               <text style='font-size:26rpx;color:#fb4c4d'  catchtap='getVip'>申请成为加V用户</text>
@@ -42,13 +42,20 @@
           <image src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/myActivite.png'></image>
           <text>我的活动</text>
         </view>
-        <view class='mytab' catchtap='toanswer'>
+        <view class='mytab' catchtap='toanswer' wx:if="{{isLogin}}">
           <!-- <view class='redDos'>{{allData.}}</view> -->
           <image src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_myQuestion.png'></image>
           <text>我的问答</text>
         </view>
+        <button class='mytab' hover-class="none"  open-type='getPhoneNumber' bindgetphonenumber="_getPhoneNumber"  wx:if="{{!isLogin}}">
+          <!-- <view class='redDos'>{{allData.}}</view> -->
+          <image src='https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_myQuestion.png'></image>
+          <text style="color:#666666">我的问答</text>
+        </button>
     </view>
-  </navigator>
+  </view>
+
+
   <navigator url='/pages/cards/makeCard' hover-class="none" wx:if="{{!card&&isLogin}}">
     <view class="size-1">
       <view class="row-between sky_2 card-box-item">
@@ -99,7 +106,7 @@
 <view class="column-bottom sky_1" style="margin-top:20rpx;" wx:if="{{!isLogin}}">
 
 <button style='text-align:left' open-type='getPhoneNumber' bindgetphonenumber="_getPhoneNumber" >
-  <row type='消息'  red_point="{{allData.msgCount}}" icon='msg' pathUrl="/pages/account/myMessage" hover='hover'></row>
+  <row type='消息'  red_point="{{msgCount}}" isVip="{{isVip}}" icon='msg' pathUrl="/pages/account/myMessage" hover='hover'></row>
   <row wx:if="{{master_status==0}}" type='答主申请' icon='ic_answerApply' pathUrl="/pages/applyAnswer/applyAnswer" hover='hover'></row>
   <row wx:if="{{master_status==1}}" type='答主申请' icon='ic_answerApply' pathUrl="/pages/account/applyAnswer" hover='hover'></row>
   <!-- <row type='我的活动' icon='myActivities' pathUrl="/pages/account/myActivities" hover='hover'></row> -->
@@ -115,7 +122,8 @@
 </view>
 
 <view class="column-bottom sky_1" style="margin-top:20rpx;" wx:if="{{isLogin}}">
-  <row type='消息' icon='msg' pathUrl="/pages/account/myMessage" hover='hover'></row>
+  
+  <row type='消息' msgCount="{{msgCount}}"  icon='msg' pathUrl="/pages/account/myMessage" hover='hover'></row>
   <row wx:if="{{master_status==0}}" type='答主申请' icon='ic_answerApply' pathUrl="/pages/applyAnswer/applyAnswer" hover='hover'></row>
   <row wx:if="{{master_status==1}}" type='答主申请' icon='ic_answerApply' pathUrl="/pages/account/applyAnswer" hover='hover'></row>
 
@@ -129,7 +137,11 @@
   <row type='关于我们' icon='hr' pathUrl="/pages/account/about" hover='hover'></row>
 </view>
 
+<view class="modal-box column-center" wx:if="{{!isLogin&&handleError}}">
+  <authorizePhone bind:getPhoneInfo='getPhoneInfo'></authorizePhone>
+</view>
+
 <view class="modal-box column-center" wx:if="{{!userInfo}}">
   <authorize bind:getInfo='getInfo'></authorize>
 </view>
-<view class="mask" wx:if="{{!userInfo}}"></view>
+<view class="mask" wx:if="{{!userInfo||(!isLogin&&handleError)}}"></view>

@@ -142,7 +142,9 @@ Component({
         success(res) {
           if (res.confirm) {
             const parms = {
-              plid: id
+              plid: id,
+              showLoading: true
+
             }
             Payfor_answer.create(parms).then(res => {
               if (res.result == 0) {

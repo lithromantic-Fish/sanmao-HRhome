@@ -1,6 +1,8 @@
 const {
   ViewList,
 } = require('../../utils/Class')
+const login = require('../../utils/login.js')
+
 // const debug = require('../../utils/debug')
 const navs = ['谁看过我', '我看过谁']
 const app = getApp()
@@ -67,6 +69,9 @@ Page({
             cards: [...self.data.cards, ...data.data]
           })
         }  
+      }else if(res.result==999){
+        self.updataApi()
+
       }
     })
     // if (selectedTab === '谁看过我') {
@@ -88,6 +93,19 @@ Page({
     //     }
     //   })
     // }
+  },
+  //更新登录过期
+  updataApi() {
+    const that = this
+    console.log("更新登录页")
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          that.getCards()                    
+        })
+
+      }
+    })
   },
   // tab
   changeStatus(e) {

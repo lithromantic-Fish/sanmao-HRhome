@@ -19,7 +19,10 @@
             <text class='redDos'  wx:if="{{view_point!=0}}">{{view_point}}</text>
           </view>
         </navigator>
-        <button style='width:230rpx;height:90rpx' class="button-item button-1" open-type='share'>分享名片</button>
+
+
+        <navigator url='/pages/account/cardCode' style='width:169rpx;height:90rpx' class="button-item" hover-class="none">名片码</navigator>
+
       </view>
       <view class="column-center">
         <navigator url='favorMe' hover-class="none">
@@ -32,7 +35,12 @@
           </view>
         </navigator>
         <!-- <view style='width:230rpx;height:90rpx;' class="button-item" bindtap='editor' bindtap='gotoEditor'>编辑名片</view> -->
+       
+       
         <navigator url='/pages/cards/makeCard' style='width:169rpx;height:90rpx' class="button-item" hover-class="none">编辑名片</navigator>
+
+
+
       </view>
       <view class="column-center">
         <navigator url='likeMe' hover-class="none">
@@ -45,7 +53,11 @@
           </view>
         </navigator>
         <!-- <view  style='width:169rpx;height:90rpx' class="button-item" bindtap='cardCode'>名片码</view> -->
-        <navigator url='/pages/account/cardCode' style='width:169rpx;height:90rpx' class="button-item" hover-class="none">名片码</navigator>
+
+
+
+        <button style='width:230rpx;height:90rpx' class="button-item button-1" open-type='share'>分享名片</button>
+
       </view>
     </view>
 
@@ -70,7 +82,7 @@
       status='{{item.change_status}}' 
       bus='{{item.v_status}}' 
       pathUrl="/pages/cards/cardDetail?card_id={{item.id}}" 
-      image="{{item.photo}}" 
+      image="{{item.photo}}"
       home="true" >
     </cardListItem>
     <!-- <view class="column" wx:if="{{cards.length>0}}">

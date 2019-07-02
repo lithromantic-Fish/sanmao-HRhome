@@ -1,6 +1,8 @@
 const {
   ZanList
 } = require('../../utils/Class')
+const login = require('../../utils/login.js')
+
 const app = getApp()
 // const debug = require('../../utils/debug')
 
@@ -88,6 +90,21 @@ Page({
             cards: [...self.data.cards, ...data.data]
           })
         }
+      } else if (res.result == 999) {
+        //更新登录过期
+        self.updataApi()
+      }
+    })
+  },
+  updataApi() {
+    const that = this
+    console.log("更新登录页")
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          that.getCards()
+        })
+
       }
     })
   },

@@ -1503,6 +1503,9 @@ function handleErrApi(result, res, options = {}, recall) {
     _setStorageSync('isLogin', 0);
     _setStorageSync('isBindSanMao', 0);
     console.log("未登录")
+    // wx.switchTab({
+    //   url: '/pages/cardPage/cardPage',
+    // })
     return;
   }
 

@@ -3,6 +3,8 @@
   <view class="row-between">
     <view class="row row-1">
       <view class="title" style='max-width:350rpx;white-space:nowrap;'>{{card.nickname}}</view>
+      <image wx:if="{{card.v_status==3}}"  class="vip_icon" src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_vip.png" ></image>
+
       <view class="iconfont icon-{{card.gender==2?'female':'male'}}"></view>
     </view>
     <image src='{{filter.formatAvatar(card.photo)}}' mode='aspectFill' class="avatar" bindtap='preImage'></image>

@@ -1,4 +1,5 @@
 const app = getApp()
+const login = require('../../utils/login.js')
 
 
 const {
@@ -162,7 +163,8 @@ Page({
     } = self.data
 
     let params = {
-      card_id: card_id
+      card_id: card_id,
+      showLoading:true
     }
     CardDetail.find(params).then(res => {
       if (res && res.result === 0) {
@@ -235,14 +237,31 @@ Page({
         if (card.change_status == 2) {
           self.getMoreCards()
         }
-      } else {
-        res.result != 100 && wx.showToast({
-          title: res.msg,
-          icon: 'none',
-          duration: 2000
-        }) && setTimeout(function() {
-          wx.navigateBack()
-        }, 2000)
+      } else if (res.result == 999 || res.result == 100){
+         self.updataApi()
+        
+      }
+      // else {
+      //   res.result != 100 && wx.showToast({
+      //     title: res.msg,
+      //     icon: 'none',
+      //     duration: 2000
+      //   }) && setTimeout(function() {
+      //     wx.navigateBack()
+      //   }, 2000)
+      // }
+    })
+  },
+  updataApi() {
+    const that = this
+    console.log("更新登录页")
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          that.getCardInfo()                    //我的名片详情
+          // that.getMoreCards()                       //猜你认识
+        })
+
       }
     })
   },
@@ -304,6 +323,8 @@ Page({
         })
       } else {
         const data = {
+          showLoading: true,
+
           card_id: card.id
         }
         // console.info(data)
@@ -319,6 +340,25 @@ Page({
               'card.change_status': 1
             })
             self.getMoreCards()
+          }else if(res.result==88){
+            console.log("没创建名片")
+            wx.showModal({
+              title: '提示',
+              content: '您还没有名片，是否立即前往',//已埋登录
+              success: res => {
+                if (res.confirm) {
+                  wx.navigateTo({
+                    url: '/pages/cards/makeCard',
+                  })
+                }
+              }
+            })
+          }else{
+            wx.showToast({
+              title: res.msg,
+              icon:'none'
+            })
+            console.log("交换名片错误",res)
           }
         })
         return
@@ -419,6 +459,8 @@ Page({
   createTips(e) {
     // console.log(e.detail)
     const data = {
+      showLoading: true,
+
       "remark": e.detail.value,
       "bopenid": this.data.card.openid,
     }
@@ -480,6 +522,8 @@ Page({
     //   })
     // } else {
     FavCard.create({
+      showLoading: true,
+
       card_id: card.id
     }).then(res => {
       if (res && res.result === 0) {

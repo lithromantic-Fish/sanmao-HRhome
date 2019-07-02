@@ -1,6 +1,8 @@
 // pages/myFollowQuestion/myFollowQuestion.js
 
 
+let myCard = ''
+const app = getApp()
 
 Component({
   properties: {
@@ -25,10 +27,27 @@ Component({
   methods:{
     toPublish(e) {
       console.log('e', e)
+      myCard = wx.getStorageSync('card') || app.globalData.card
+      console.log("mycard",myCard)
+      if (!myCard) {
+        wx.showModal({
+          title: '提示',
+          content: '您还没有名片，是否立即前往',  //已埋登录
+          success: res => {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: '/pages/cards/makeCard',
+              })
+            }
+          }
+        })
+        return
+      }
       let d = e.currentTarget.dataset.item
       wx.navigateTo({
         url: '/pages/answerPage/answerPage?openid=' + d.openid,
       })
+      
     }
   },
  
@@ -117,7 +136,6 @@ Component({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getPageData()
 
   },
 

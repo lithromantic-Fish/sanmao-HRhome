@@ -1,17 +1,37 @@
-<view  wx:for="{{recommendList}}" class='wrap' >
-<view catchtap='toActivity' data-id='{{item.id}}'>
-  <image class='gridItem' src='{{item.activity_icon}}'></image>
-    <view class='wrap_textarea'>
-      <text class='title'>【{{item.city}}】{{item.name}}</text>
-      <view class='text_adT'>
-        <text class='address'>{{item.city}}</text>
-        <text class='time'>{{item.starttime}}</text>
+<view class='dca'>
+  <view style='display:flex;align-items:center'>
+      <view class='left_blue'>
       </view>
-      <!-- <view class='text_gz'>
-        <text class="text_gz" style="color:#4C89FB">3</text>
-        <text class='text_gz'>个好友关注</text>
-      </view> -->
-    </view>
-</view>
 
+      <view class='flex'  >
+        <text class='font_recomond'>活动推荐</text>
+      </view>
+  </view>
+
+  <view class='flex' catchtap='toMore'>
+    <text style='margin-right:12rpx' class='text_more'>查看更多</text>
+    <image style='width:28rpx;height:28rpx' src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_go.png" mode="aspectFill"></image>
+  </view>
+
+</view>
+<view class='wrap_few'>
+
+
+
+  <view wx:for="{{recommendList}}" class='wrap'>
+    <view catchtap='toActivity' data-id='{{item.id}}'>
+      <image class='gridItem' src='{{item.activity_icon}}'></image>
+      <view class='wrap_textarea'>
+        <text class='title'>【{{item.city}}】{{item.name}}</text>
+        <view class='text_adT'>
+          <text class='address'>{{item.city}}</text>
+          <text class='time'>{{item.starttime}}</text>
+        </view>
+        <!-- <view class='text_gz'>
+          <text class="text_gz" style="color:#4C89FB">3</text>
+          <text class='text_gz'>个好友关注</text>
+        </view> -->
+      </view>
+    </view>
+  </view>
 </view>

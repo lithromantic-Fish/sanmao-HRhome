@@ -47,6 +47,8 @@ Page({
 //获取enter页面数据
 getEnterInfo(id){
   const parms = {
+    showLoading: true,
+
     // identity: this.data.activity.identity,
     activity_id: id
   }

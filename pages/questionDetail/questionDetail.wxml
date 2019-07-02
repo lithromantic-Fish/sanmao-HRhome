@@ -81,11 +81,10 @@
       </view>
     </button>
   </block>
-
-
   <text class='text_view'>已有{{thread.view_count}}人围观</text>
 </view>
-<view>
+<view style="padding-bottom:98rpx;">
+
   <!-- 评论数组 -->
   <qListDetail bind:updateDetailData="_updateDetailData" bind:getVoiceStatus="_getVoiceStatus"  isSelf="{{isSelf}}" isLogin="{{isLogin}}" plList="{{plList}}" master_status="{{master_status}}" questesId="{{questesId}}" ></qListDetail>
 <!-- 
@@ -102,3 +101,15 @@
    -->
 </view>
 <empty wx:if="{{!plList||plList.length==0}}" title="没有更多数据了"></empty>
+
+<view class="wrap_fix">
+  <view class="left_fix" style="padding-left:30rpx; background-color:white" catchtap="toIndex">
+    <image class="icon_img" src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_toHome.png"></image>
+    <text>首页</text>
+  </view>
+  
+  <button class="right_fix" open-type="share" catchtap="toShare">
+    <text>转发</text>
+    <image class="icon_img" src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_toShare.png"></image>
+  </button>
+</view>

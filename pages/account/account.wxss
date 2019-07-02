@@ -36,12 +36,12 @@
   right:-10rpx  !important;
 }
 .vip{
-  width:20rpx;
-  height:20rpx;
+  width:36rpx;
+  height:36rpx;
   display: flex;
   position: absolute;
-  right:0;
-  bottom:0
+  right:20rpx;
+  bottom:10rpx;
 }
 .image-box{
   position: relative;

@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 56,
+			"current": 58,
 			"list": [
 				{
 					"id": 0,
@@ -447,6 +447,19 @@
 					"name": "我的名片",
 					"pathName": "pages/account/myCards",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "问题详情",
+					"pathName": "pages/questionDetail/questionDetail",
+					"query": "id=4988052",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "hd",
+					"pathName": "pages/account/myActivities",
 					"scene": null
 				}
 			]

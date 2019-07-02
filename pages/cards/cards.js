@@ -43,6 +43,18 @@ Page({
     query.page = 1
     this.getCards();
   },
+  updataApi() {
+    const that = this
+    console.log("更新登录页")
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          that.getCards()
+        })
+
+      }
+    })
+  },
 
   // refreshCards() {
   //   query.page = 1
@@ -51,7 +63,7 @@ Page({
   //初始化页面数据 获取名片列表
   getCards() {
     let self = this
-
+    query.showLoading = true
     if (self.data.loadAll) return false;
 
     return Card.find(query).then(res => {
@@ -78,9 +90,10 @@ Page({
             cards: [...self.data.cards, ...data.data]
           })
         }  
-      } else {
+      } else if(res.result==999){
         // 当result的值不为0，为其他情况时
-        console.log(res.msg)
+        // console.log(res.msg)
+        self.updataApi()
       }
     })
   },

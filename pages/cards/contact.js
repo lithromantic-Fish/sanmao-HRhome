@@ -63,6 +63,8 @@ Page({
       openid:app.globalData.openid
     })
    const data = {
+     showLoading: true,
+
     BusId:options.BusId,
     "OpenId": app.globalData.openid,
     "YOpenId": options.openid,
@@ -199,6 +201,8 @@ Page({
        }).exec() 
        if(data.type==='save') {
          const message = {
+           showLoading: true,
+
           "MOpenId":app.globalData.openid,
           "MName":app.globalData.card.BusName,
           "YOpenId":data.YOpenId,

@@ -26,6 +26,11 @@ Component({
       wx.navigateTo({
         url: '/pages/activities/activityDetail?id=' + id
       })
+    },
+    toMore(){
+      wx.navigateTo({
+        url: '/pages/activities/activities?isAll='+true,
+      })
     }
   }
 })

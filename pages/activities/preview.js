@@ -97,6 +97,8 @@ Page({
     console.log("1111", wx.getStorageSync('hrhome_token')) 
     const  hrToken = wx.getStorageSync('hrhome_token')
     const parms = {
+      showLoading: true,
+
       activity_id: this.data.activity.id
     }
     ExportApplylist.create(parms).then(res=>{
@@ -168,7 +170,9 @@ Page({
       title: '请稍后',
     })
 
-    let prams = {}
+    let prams = {
+      
+    }
     let _data = self.data.activity
 
     for (let k in _data) {

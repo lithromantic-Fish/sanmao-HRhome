@@ -1,4 +1,4 @@
-// const login = require('../../utils/login.js')
+const login = require('../../utils/login.js')
 
 const app = getApp()
 const {
@@ -126,6 +126,23 @@ Page({
           fav_point: res.data.fav_point,
           zan_point: res.data.zan_point
         })
+      }else if(res.result==999){
+        self.updataApi()
+      }
+    })
+  },
+
+  updataApi() {
+    const that = this
+    console.log("更新登录页")
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          that.getMyCardDetail()
+          that.getMoreCards()
+
+        })
+
       }
     })
   },

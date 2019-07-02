@@ -87,6 +87,8 @@ Page({
         success: res => {
           if (res.confirm) {
             const data = {
+              showLoading: true,
+
               VideoId: this.data.lesson.VideoId,
               OpenId: app.globalData.openid,
               AskPrice: this.data.lesson.VideoPrice
@@ -157,6 +159,8 @@ gotoHome(){
     }else{
       const {lesson} = this.data
       const data= {
+        showLoading: true,
+
         "VideoId":lesson.VideoId,
         "OpenId":app.globalData.openid
       }

@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "活动广场",
+  "navigationBarTitleText": "三茅百万HR通讯录",
   "enablePullDownRefresh": true,
   "usingComponents": {
     "search": "/component/search/search",

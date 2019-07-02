@@ -7,6 +7,8 @@ const QR = require('../../utils/qrcode.js')
 const base64src = require('../../utils/base64src .js')
 let util = require('../../utils/util_wenda');
 let config = require('../../config');
+const login = require('../../utils/login.js')
+
 const {
   ActivityDetailData,
   CheckApply,
@@ -138,7 +140,7 @@ Page({
     this.setData({
       isLogin: util._getStorageSync('isLogin') == 1 ? true : false
     })
-    // this.getActivity();
+    this.getActivity();
   },
 
   //拉起手机授权
@@ -208,7 +210,9 @@ Page({
       this.noCard()
     } else {
       const parms = {
-        activity_id: this.data.activityId
+        activity_id: this.data.activityId,
+        showLoading: true
+
       }
       ExportApplylist.create(parms).then(res => {
         console.log(res)
@@ -236,6 +240,8 @@ Page({
   getActivity() {
     const parms = {
       sign: this.data.sign,
+      showLoading: true,
+
       id: this.data.activityId
     }
 
@@ -259,6 +265,22 @@ Page({
             applys: res.data.applys
           })
         }
+      }else if(res.result==999){
+        this.updataApiActive()
+        
+      }
+    })
+  },
+  //更新登录过期
+  updataApiActive() {
+    const that = this
+    console.log("更新登录页")
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          that.getActivity()
+        })
+
       }
     })
   },
@@ -271,11 +293,17 @@ Page({
   },
   //去活动详情页面
   toMore() {
-    console.log("111111111111111", this.data)
-    console.log(this.data.activity.imgs)
-    wx.navigateTo({
-      url: 'detail?images=' + JSON.stringify(this.data.activity.imgs) + '&id=' + this.data.activity.id
-    })
+    if (!this.data.card) {
+      console.log('没有名片')
+      this.noCard()
+      return
+    }else{
+      console.log("111111111111111", this.data)
+      console.log(this.data.activity.imgs)
+      wx.navigateTo({
+        url: 'detail?images=' + JSON.stringify(this.data.activity.imgs) + '&id=' + this.data.activity.id
+      })
+    }
   },
   // getActivity(id){
   //   const that = this
@@ -381,6 +409,8 @@ Page({
     if (this.data.card) {
       console.log(this.data.activity)
       const parms = {
+        showLoading: true,
+
         activity_id: this.data.activity.id
       }
       FavActivity.create(parms).then(res => {
@@ -391,6 +421,9 @@ Page({
           }
           this.getActivity();
 
+        }else if(res.result==999){
+          const type = 'favor'
+          this.updataApi(e,type)
         }
       })
       // if (!iscollect){
@@ -444,7 +477,7 @@ Page({
     }
   },
 
-  sharePYQ() {
+  sharePYQ(e) {
     const that = this;
     this.setData({
       // fullMask :true,
@@ -459,7 +492,7 @@ Page({
       that.getSharePost();
     }, 1000)
   },
-  getSharePost() {
+  getSharePost(e) {
     wx.showLoading({
       title: '正佳加载',
     })
@@ -471,6 +504,8 @@ Page({
     //   avatarUrl: formatAvatar(activity.ActivityPhoto)
     // }
     const parms = {
+      showLoading: true,
+
       activity_id: this.data.activity.id
     }
 
@@ -481,6 +516,9 @@ Page({
           shareImage: res.data,
           fullMask: true
         })
+      }else if(res.result==999){
+        const type = 'shareImage'
+        this.updataApi(e, type)
       }
       // let shareImage = 'data:image/jpeg;base64,' + res.data
       // base64src.base64src(shareImage, res => {
@@ -597,14 +635,23 @@ Page({
       const that = this
       console.log(this.data.activity)
       const parms = {
+        showLoading: true,
+
         activity_id: this.data.activity.id
       }
       ZanActivity.create(parms).then(res => {
-        if (e.detail.formId) {
-          this.collectFormID(e.detail.formId)
+        if(res.result==0){
+
+          if (e.detail.formId) {
+            this.collectFormID(e.detail.formId)
+
+          }
+          this.getActivity();
+        }else if(res.result==999){
+          const type = 'isLike'
+          this.updataApi(e, type)
 
         }
-        this.getActivity();
       })
 
       // const data = {
@@ -710,6 +757,8 @@ Page({
       this.noCard()
     } else {
       const parms = {
+        showLoading: true,
+
         // identity: this.data.activity.identity,
         activity_id: this.data.activity.id
       }
@@ -731,12 +780,18 @@ Page({
             url: 'enter?id='+this.data.activity.id,
           })
           console.log('obj', obj)
-        } else {
-          wx.showToast({
-            icon: 'none',
-            title: res.msg,
-          })
-        }
+        }else if(res.result==999){
+          const type = 'isEnter'
+          // console.log("res", res)
+          this.updataApi(e, type)
+
+        } 
+        // else {
+        //   wx.showToast({
+        //     icon: 'none',
+        //     title: res.msg,
+        //   })
+        // }
       })
       // Apply.get(`${app.globalData.openid}/${activity.ActivityId}`).then(res=>{
       // debug.log(res)
@@ -746,12 +801,48 @@ Page({
 
     }
   },
+
+  //更新登录过期
+  updataApi(e,type) {
+    const that = this
+    console.log("更新登录页")
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          console.log("type",type)
+          // that.enter(e)
+          switch (type) {
+            case 'isEnter':
+              this.enter(e)
+              break;
+            case 'isLike':
+              this.like(e)
+              break;
+            case 'cancle':
+              this.canclEnter(e)
+              break;
+            case 'shareImage':
+              this.getSharePost(e)
+              break;
+            case 'favor':
+              this.favor(e)
+              break;
+            default:
+          } 
+        })
+
+      }
+    })
+  },
+
   //取消报名
-  canclEnter() {
+  canclEnter(e) {
     if (!this.data.card) {
       this.noCard()
     } else {
       const parms = {
+        showLoading: true,
+
         activity_id: this.data.activity.id
       }
       CancelApply.create(parms).then(res => {
@@ -762,7 +853,11 @@ Page({
             duration: 2000
           })
           this.getActivity()
-        } else {
+        }else if(res.result==999){
+          const type = 'cancle'
+          this.updataApi(e,type)
+        }
+         else {
           wx.showToast({
             title: "取消失败",
             icon: 'none'

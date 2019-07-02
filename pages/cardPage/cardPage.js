@@ -1,4 +1,5 @@
 const login = require('../../utils/login.js')
+const util = require('../../utils/util_wenda');
 
 const app = getApp()
 const {
@@ -21,7 +22,7 @@ const navs = [{
 ]
 let selectedTab = navs[0]
 
-let self = {}
+// let self = {}
 
 let query = {
   page: 1
@@ -39,9 +40,10 @@ Page({
     cards: [], //猜你认识的人
     notify: false, //是否有未读系统消息
     userInfo: '',
-    cardAllInfo:{},
-    expired:false,
-
+    cardAllInfo: {},
+    expired: false,
+    isLogin:false,
+    handleError:false //是否报100未登录标识
   },
 
   /**
@@ -50,123 +52,90 @@ Page({
   onLoad: function (options) {
     // selectedTab = navs[0]
     self = this
-    // self.getMyCardDetail() //我的名片详情
-    // this.getMoreCards() //猜你 认识
+    let userinfo = wx.getStorageSync('userInfo')
+ 
+    if (userinfo) {
+      self.setData({
+        userInfo: userinfo
+      })
+      // self.getMoreCards() //猜你认识
+      // self.getMyCardDetail() //我的名片详情
+    }
+    console.log("self",self.data.userInfo)
+
   },
 
   onShow() {
-
     let userinfo = wx.getStorageSync('userInfo')
-    if (userinfo) {
-      this.setData({
-        userInfo: userinfo
-      })
-      self = this
-      self.getMyCardDetail() //我的名片详情
-      self.getMoreCards() //我的名片详情
-      self.setData({
-        expired: wx.getStorageSync("expired")||'',
-      })
-      if (self.data.expired) {
-        const that = self
-        that.getInfo(that.data.userInfo)
-
-        // wx.showModal({
-        //   title: '提示',
-        //   content: '登录过期，请重新登录',
-        //   showCancel:false,
-        //   success(res) {
-        //     if (res.confirm) {
-
-        //        that.getInfo(that.data.userInfo)
-        //     } else if (res.cancel) {
-        //     }
-        //   }
-        // })
-        // this.getInfo(this.data.userInfo)
-      }else{
-        const that = self
-        wx.login({
-          success: res => {
-            login.login(res.code, self.data.userInfo).then(res => {
-              this.setData({
-                userInfo: self.data.userInfo
-              })
-              // wx.setStorageSync('userInfo', res.data)
-              query.page = 1
-              self.getMyCardDetail()                    //我的名片详情
-              self.getMoreCards()                       //猜你认识
-              wx.setStorageSync("expired", false)
-              that.setData({
-                expired: wx.getStorageSync("expired")
-              })
-            })
-          }
-        })
-
-      }
+    
+    self = this
+    self.getMyCardDetail() //我的名片详情
+    if (!self.data.cards || self.data.cards.length==0){
+      console.log("走了这")
+      self.getMoreCards() //猜你认识
     }
 
-
+    self.setData({
+      userInfo: userinfo,
+      isLogin: util._getStorageSync('isLogin') == 1 ? true : false
+    })
+    
   },
-  //获取手机号码信息
-  // getPhoneInfo(){
-
-  // },
+  getPhoneInfo(e){
+    if (e.detail.isLogin){
+      this.setData({
+        isLogin:e.detail.isLogin
+      })
+    }
+  },
   //获取用户信息
   getInfo(e) {
-    // this.setData({
-    //   userInfo: e.detail.userInfo
-    // })
     let that = this
-    // wx.setStorageSync("expired", true)
-
     //若是登录过期
-    if (this.data.expired) {
-      wx.setStorageSync('userInfo', e)
-      app.globalData.userInfo = e
-      wx.login({
-        success: res => {
-          login.login(res.code, e).then(res => {
-            this.setData({
-              userInfo: e
-            })
-            // wx.setStorageSync('userInfo', res.data)
-            query.page = 1
-            self.getMyCardDetail()                    //我的名片详情
-            self.getMoreCards()                       //猜你认识
-            wx.setStorageSync("expired", false)
-            that.setData({
-              expired: wx.getStorageSync("expired")
-            })
-          })
-        }
-      })
-    }else{
+    // if (this.data.expired) {
+    //   console.log("e",e)
+    //   wx.setStorageSync('userInfo', e)
+    //   app.globalData.userInfo = e
+    //   wx.login({
+    //     success: res => {
+    //       login.login(res.code, e).then(res => {
+    //         console.log("我的登录", res)
+    //         this.setData({
+    //           userInfo: e,
+    //         })
+    //         // wx.setStorageSync('userInfo', res.data)
+    //         query.page = 1
+    //         that.getMyCardDetail()                    //我的名片详情
+    //         that.getMoreCards()                       //猜你认识
+    //       })
+    //     }
+    //   })
+    // }else{
+    //   console.log("e", e)
       wx.setStorageSync('userInfo', e.detail.userInfo)
       app.globalData.userInfo = e.detail.userInfo
       wx.login({
         success: res => {
           login.login(res.code, e.detail.userInfo).then(res => {
+            console.log("我的登录",res)
             this.setData({
-              userInfo: e.detail.userInfo
+              userInfo: e.detail.userInfo,
             })
             // wx.setStorageSync('userInfo', res.data)
             query.page = 1
-            self.getMyCardDetail()                    //我的名片详情
-            self.getMoreCards()                       //猜你认识
+            that.getMyCardDetail()                    //我的名片详情
+            that.getMoreCards()                       //猜你认识
 
           })
-          wx.setStorageSync("expired", false)
           wx.setStorageSync('userInfo', e.detail.userInfo)
           that.setData({
-            expired: wx.getStorageSync("expired")
+            isLogin: util._getStorageSync('isLogin') == 1 ? true : false
           })
         }
       })
-    }
+    // }
 
-
+    //  wx.setStorageSync("expired", false)
 
   },
   //分享
@@ -178,13 +147,16 @@ Page({
   },
   //猜你认识
   getMoreCards(opts) {
-
+    const that = this
     let prams = {
-      rand: 1
+      rand: 1,
+      // showLoading:true
     }
     let args = Object.assign(prams, opts)
+    console.log(args)
 
     Card.find(args).then(res => {
+      console.log("授权",res)
       if (res && res.result === 0 && res.data) {
         let {
           data
@@ -192,14 +164,24 @@ Page({
         this.setData({
           cards: data.data
         })
+      } else if (res.result == 999 ) {
+        that.updataApi()
+        // let userinfo = wx.getStorageSync('userInfo')
+        // that.getInfo(userinfo)
+      }else if(res.result ==100){
+        that.setData({
+          isLogin:false,
+          handleError:true        //假如是接口报100，才调用获取手机号接口
+        })
       }
     })
   },
   // 猜你认识 tab
   changeTab(e) {
+    const that = this
     let {
       card
-    } = self.data
+    } = that.data
     // console.info('changeTab e ', e, card)
     if (e.detail.tab !== selectedTab.title) {
       let opts = {}
@@ -209,13 +191,13 @@ Page({
         return item.title === e.detail.tab
       })
       //同行
-      if (self.data.nav[1] == e.detail.tab) {
+      if (that.data.nav[1] == e.detail.tab) {
         opts = {
           industry: card.industry
         }
       }
       //同城
-      else if (self.data.nav[2] == e.detail.tab) {
+      else if (that.data.nav[2] == e.detail.tab) {
         opts = {
           city: card.city
         }
@@ -223,24 +205,114 @@ Page({
       this.getMoreCards(opts)
     }
   },
+  //拉起手机授权
+  _getPhoneNumber: function (res) {
+    let data = res.detail
+    if (data.encryptedData && data.iv) {
+      this._confirmEvent(data)
+    } else {
+      util.gotoPage({
+        url: '/pages/login/login'
+      })
+    }
+
+  },
+
+  /**
+   * 获取手机号码回调
+   */
+  _confirmEvent: function (opts) {
+    let self = this
+    let data = {}
+    console.log("opts", opts)
+    if (opts.currentTarget) {
+      data = arguments[0].detail.getPhoneNumberData
+    } else {
+      data = {
+        encryptedData: opts.encryptedData,
+        iv: opts.iv
+      }
+    }
+
+    util.request({
+      url: config.apiUrl + '/hr/special/wxapp/autoRegister',
+      data: data,
+      autoHideLoading: false,
+      method: "POST",
+      withSessionKey: true
+    }).then(res => {
+      console.log("resfagewa",res)
+      if (res.result == 0) {
+        console.log("res.dta",res)
+        util._setStorageSync('isLogin', 1)
+        self.setData({
+          isLogin: true,
+          handleError:false
+        })
+        console.log("isLogin",self.data.isLogin)
+        //授权后重新获取详情页数据
+        self.getMyCardDetail()                    //我的名片详情
+        self.getMoreCards()                       //猜你认识
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+
+    })
+  },
 
   //获取我的名片详情
   getMyCardDetail() {
+    const that = this
     MyCardDetail.find().then(res => {
       if (res && res.result === 0 && res.data) {
         let {
           card_info,
           notify
         } = res.data
-        self.setData({
+        console.info(res.data)
+        that.setData({
           card: card_info,
           notify: notify,
-          cardAllInfo:res.data
+          cardAllInfo: res.data
         })
-      }else if(res.result==88){
-        self.setData({
-          card:[]
+        console.log("this.data.da", that.data)
+      } else if (res.result == 88) {
+        that.setData({
+          card: []
         })
+      } else if (res.result == 999) {
+        that.updataApi()
+        // wx.setStorageSync("expired", true)
+        // that.setData({
+        //   expired: true
+        // })
+        // let userinfo = wx.getStorageSync('userInfo')
+        // console.log("userinfo",userinfo)
+        // that.getInfo(userinfo)
+      } else if (res.result == 100) {
+        that.setData({
+          isLogin: false,
+          handleError: true        //假如是接口报100，才调用获取手机号接口
+
+        })
+      }
+    })
+  
+  },
+  //更新登录过期
+  updataApi() {
+    const that = this
+    console.log("更新登录页")
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          that.getMyCardDetail()                    //我的名片详情
+          that.getMoreCards()                       //猜你认识
+        })
+
       }
     })
   },

@@ -32,6 +32,10 @@ Component({
     red_point:{
       type:Number,
       value:null
+    },
+    msgCount:{
+      type:Number,
+      value:null
     }
 
   },

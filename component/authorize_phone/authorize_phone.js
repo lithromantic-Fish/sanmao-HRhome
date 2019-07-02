@@ -66,20 +66,21 @@ Component({
 
         if (res.result == 0) {
           util._setStorageSync('isLogin', 1)
-          // self.setData({
-          //   ['isLogin']: true
-          // })
+          self.triggerEvent('getPhoneInfo', {
+            isLogin: true
+          })
           //授权后重新获取详情页数据
           // this.getCommentList();
           // this.getIndexData();
           // util.runFn(self.getInitData)
         } else {
-          this.triggerEvent('getPhoneInfo')
           wx.showToast({
             title: res.msg,
             icon: 'none'
           })
         }
+     
+
 
       })
     },

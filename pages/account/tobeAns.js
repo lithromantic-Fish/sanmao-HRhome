@@ -21,7 +21,9 @@ const that =this
         debug.log(res.code)
         const data = {
           code:res.code,
-          userinfo:app.globalData.userInfo
+          userinfo:app.globalData.userInfo,
+          showLoading: true
+
         }
         Openid.create(data).then(res => {
           app.globalData.user = res.list[0],

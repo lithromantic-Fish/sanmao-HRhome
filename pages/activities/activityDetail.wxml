@@ -251,6 +251,10 @@
     <view class="sign-button" bindtap="canclEnter" wx:if="{{activity.apply_status==2&&activity.apply_identity!=1}}">取消报名</view>
   </view>
 </view>
+
+
+
+
  <view class="fix">
     <view class="back-button" bindtap='goHome'>首页</view>
   </view>

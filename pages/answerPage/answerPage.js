@@ -1,5 +1,7 @@
 let util = require('../../utils/util_wenda');
 let config = require('../../config');
+const login = require('../../utils/login.js')
+
 const {
   Master_page,
   SaveFormID
@@ -21,7 +23,7 @@ Page({
     page:1,
     pages:null,
     openid:null,
-    answerCount:null
+    answerCount:0
   },
 
   /**
@@ -40,12 +42,27 @@ Page({
     this.getLabelList()
   },
   
+  //更新登录过期
+  updataApi() {
+    const that = this
+    console.log("更新登录页")
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          that.getMasterList(that.data.openid)                       //猜你认识
+          
+        })
 
+      }
+    })
+  },
 
   //获取答主页面数据
   getMasterList(openid){
     let self = this
     const parms = {
+      showLoading: true,
+
       bopenid : openid,
       page:this.data.page
     }
@@ -78,6 +95,9 @@ Page({
             plList: [...self.data.plList, ...pls.data]
           })
         }
+      }else if(res.result==999){
+        //更新登录过期
+        self.updataApi() 
       }
 
     })

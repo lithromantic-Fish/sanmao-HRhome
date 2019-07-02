@@ -30,7 +30,12 @@
 }
 .text_duty{
   font-size: 28rpx;
-  color: #666
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 240rpx;
+
 }
 
 .tip {
@@ -111,6 +116,11 @@ scroll-view{
   padding:0 65rpx 0 25rpx;
   font-size: 30rpx;
   font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 170rpx;
+
 }
 .icon-contract{
   margin-left:auto;

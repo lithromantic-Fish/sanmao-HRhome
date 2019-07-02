@@ -4,9 +4,9 @@
         <image src="{{comment.photo}}" class="avatar" mode="aspectFill"></image>
     </view>
     <view class="column" style="width:85%">
-        <view class="row-between">
+        <view class="row-between" style="flex-direction:column;align-items:flex-start">
             <view class="title">{{comment.nickname}}</view>
-            <view class="time">{{comment.dateline}}</view>
+            <view class="time" style="padding-top:20rpx;font-size:24rpx">{{comment.dateline}}</view>
         </view>
         <view class="content">{{comment.text}}</view>
     </view>

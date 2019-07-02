@@ -87,6 +87,7 @@ search .weizhi{
   padding-bottom:16rpx;
 }
 .component_grid{
+  margin-top:20rpx;
   display: flex;
   height: auto;
   width: 92%;

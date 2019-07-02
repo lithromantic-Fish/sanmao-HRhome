@@ -3,7 +3,9 @@
 const util = require('./util.js')
 const app = getApp()
 const constant = require('./constant.js')
-
+const {
+  Login,
+} = require('Class.js')
 const HOST = "https://www.hrloo.com"
 // const HOST = "http://www.chengp.top"
 
@@ -85,23 +87,46 @@ function parseQueryString(url) {
 
 // 999  调用login.login
 // 100  调用autoRegister
-function get(url, params = {}) {
+function get(url, params = {}, recall) {
   params.hrhome_token = wx.getStorageSync('hrhome_token') || ''
   params.session_key = wx.getStorageSync('hrhome_token') || ''
   params.mintype = 5
   params.is_mina = 1
 
   return new Promise((resolve, reject) => {
+    if (params.showLoading) {
+      wx.showLoading()
+    }
     wx.request({
       url: getUrl(url, params),
       method: 'GET',
       data: params,
       header: getHeader(params),
       success: function(res) {
+        console.log('res',res)
         if (res.data.result == 999 || res.data.result == 100 ) {
-          console.log("get等于999了，token过期返回expired为true")
-          wx.setStorageSync('expired', true)
+
+          // wx.showModal({
+          //   title: '提示',
+          //   content: '登录过期，请重新登录',
+          //   success(res) {
+          //     if (res.confirm) {
+          //       wx.navigateTo({
+          //         url: '/pages/login/login',
+          //       })
+          //       console.log('用户点击确定')
+          //     } else if (res.cancel) {
+          //       console.log('用户点击取消')
+          //     }
+          //   }
+          // })
+          // console.log("get等于999了，token过期返回expired为true")
+          // let userinfo = wx.getStorageSync('userInfo')
+
+            // wx.setStorageSync('expired', true)
+            // console.log("userinfo", userinfo)
         }
+
         //  else if (res.data.result == 100){
         //   console.log("http检测没有登录")
         //   wx.setStorageSync('isLogin', false)
@@ -113,6 +138,11 @@ function get(url, params = {}) {
       fail: function(err) {
         reject(err)
         // debug.log(err)
+      },
+       complete() {
+         if (params.showLoading) {
+          wx.hideLoading()
+        }
       }
     })
   })
@@ -125,6 +155,7 @@ function post(url, data, params = {}) {
   // debug.log('params', params)
   // debug.log('data333', data)
   let _data = data || {};
+  
   // console.info(typeof (_data))
   Object.assign(_data, {
     'hrhome_token': wx.getStorageSync('hrhome_token') || '',
@@ -135,16 +166,23 @@ function post(url, data, params = {}) {
   });
   // data.hrhome_token = wx.getStorageSync('hrhome_token') || ''
   return new Promise((resolve, reject) => {
-    wx.showLoading()
+    if (_data.showLoading){
+      wx.showLoading()
+    }
+    console.log("params",params)
+    console.log("_data",_data)
     wx.request({
       url: getUrl(url, params),
       method: 'POST',
       data: _data,
       header: getHeader(params),
       success: function(res) {
-        if (res.data.result == 999 || res.data.result == 100){
-          console.log("post等于999了，token过期返回expired为true")
-          wx.setStorageSync('expired',true)
+        console.log('res',res)
+        if (res.data.result == 999){
+          // console.log("post等于999了，token过期返回expired为true")
+          // let userinfo = wx.getStorageSync('userInfo')
+          // console.log("userInfo",userinfo)
+          // wx.setStorageSync('expired',true)
         }
         //  else if (res.data.result == 100) {
         //   console.log("http检测没有登录")
@@ -158,7 +196,9 @@ function post(url, data, params = {}) {
         // debug.log(err)
       },
       complete() {
-        wx.hideLoading()
+        if (_data.showLoading) {
+          wx.hideLoading()
+        }
       }
     })
   })

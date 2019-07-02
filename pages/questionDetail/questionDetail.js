@@ -3,6 +3,7 @@ let util = require('../../utils/util_wenda');
 let config = require('../../config');
 // WxParse
 var WxParse = require('../../wxParse/wxParse.js');
+const login = require('../../utils/login.js')
 
 Page({
 
@@ -70,7 +71,20 @@ Page({
       })
     })
   },
+  //更新登录过期
+  updataApi() {
+    const that = this
+    console.log("更新登录页")
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          that.getIndexData()                       //猜你认识
 
+        })
+
+      }
+    })
+  },
   //取消关注
   followC(e) {
     console.log(e)
@@ -130,6 +144,16 @@ Page({
         url: '/pages/login/login'
       })
     }
+
+  },
+  //回到首页
+  toIndex(){
+    wx.switchTab({
+      url: '/pages/cardPage/cardPage',
+    })
+  },
+  //去分享
+  toShare(){
 
   },
 
@@ -214,7 +238,9 @@ Page({
           thread: res.data.thread,
           master_status: res.data.is_master
         })
-      } else {
+      }else if(res.result==999){
+        that.updataApi();
+      }else {
         wx.showToast({
           title: res.msg,
           icon: 'none'

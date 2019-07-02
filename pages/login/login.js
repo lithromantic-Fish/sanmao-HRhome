@@ -338,12 +338,68 @@ Page({
         })
         return
       }
-
+   
       postData = {
         username: self.data.username,
         password: self.data.password,
-        login_tp: 1
+        login_tp: 1,
       }
+      wx.login({
+        success(res) {
+          if (res.code) {
+            postData.code = res.code
+            util.request({
+              // url: config.apiUrl + '/hr/special/wxapp/login',
+              url: 'https://www.hrloo.com/hr/hrhome/hrcard/login',
+              data: postData,
+              method: "POST",
+              withSessionKey: true
+            }).then(res => {
+              let data = res.data
+              if (res.result === 0) {
+                //   wx.setStorageSync('isLogin', false)
+                console.log("res", res.data.hrhome_token)
+                // util._setStorageSync('isLogin', 1);
+                // util._setStorageSync('sessionKey', data.session_key);
+                // wx.setStorageSync('hrhome_token', data)
+                wx.setStorageSync('hrhome_token', res.data.hrhome_token)
+                wx.setStorageSync('session_key', res.data.hrhome_token)
+                util.showToast({
+                  title: '登录成功',
+                  duration: 1500
+                })
+                setTimeout(function () {
+                  wx.navigateBack()
+                }, 1500);
+
+                let pages = getCurrentPages(); // 获取页面栈
+                let currPage = pages[pages.length - 1]; // 当前页面
+                let prevPage = pages[pages.length - 2]; // 上一个页面
+                prevPage.setData({
+                  prevPageData: { loginState: true }
+                })
+
+              } else if (res.result === 2) {
+                //账号不存在 去注册
+                setTimeout(function () {
+                  util.runFn(self._Register)
+                }, 300)
+              } else if (res.result === 3) {
+                self._showTips({
+                  text: '图形验证码输入有误'
+                })
+              } else {
+                self._showTips({
+                  text: res.msg
+                })
+              }
+
+            })
+          } else {
+            console.log('登录失败！' + res.errMsg)
+          }
+        }
+      })
     }
 
     wx.showLoading({
@@ -351,49 +407,7 @@ Page({
       mask: true
     })
 
-    util.request({
-      url: config.apiUrl + '/hr/special/wxapp/login',
-      data: postData,
-      method: "POST",
-      withSessionKey: true
-    }).then(res => {
-      let data = res.data
-      if (res.result === 0) {
 
-        util._setStorageSync('isLogin', 1);
-        util._setStorageSync('sessionKey', data.session_key);
-
-        util.showToast({
-          title: '登录成功',
-          duration: 1500
-        })
-        setTimeout(function () {
-          wx.navigateBack()
-        }, 1500);
-
-        let pages = getCurrentPages(); // 获取页面栈
-        let currPage = pages[pages.length - 1]; // 当前页面
-        let prevPage = pages[pages.length - 2]; // 上一个页面
-        prevPage.setData({
-          prevPageData: { loginState: true }
-        })
-
-      } else if (res.result === 2) {
-        //账号不存在 去注册
-        setTimeout(function () {
-          util.runFn(self._Register)
-        }, 300)
-      } else if (res.result === 3) {
-        self._showTips({
-          text: '图形验证码输入有误'
-        })
-      } else {
-        self._showTips({
-          text: res.msg
-        })
-      }
-
-    })
   },
   /**
    * 注册

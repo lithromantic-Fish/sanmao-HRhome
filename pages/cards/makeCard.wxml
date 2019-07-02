@@ -23,13 +23,13 @@
       <view class="column title-column">
         <view class="row size-row section" >
           <input 
-            style='width:300rpx;'
+            style='width:241rpx;'
             value="{{nickname}}" 
             name="nickname" 
             maxlength='10'
             placeholder='请输入姓名' 
             class="input-text"></input>
-            <text style='font-size:21rpx'>(请手动添加真实姓名)</text>
+            <text class="editName">(请手动添加真实姓名)</text>
         </view>
         <view class="row  size-row section">
           <input 
@@ -92,7 +92,7 @@
         <text>*</text>
       </view>
       <input 
-        maxlength='20'
+        maxlength='30'
         name="company" 
         bindinput="bindKeyInput" 
         value="{{company}}" 

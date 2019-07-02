@@ -26,8 +26,9 @@ Page({
     red_point:'',
     isLogin: false,
     allData:{},
-    master_status:null
-
+    msgCount:null,
+    master_status:null,
+    handleError:false
   },
 
   /**
@@ -64,22 +65,55 @@ Page({
     MyCard.find().then(res => {
       if (res && res.result === 0) {
         console.log('我的名片信息',res)
-        self.setData({
-          master_status: res.data.master_status,
-          allData:res.data
-        })
-
         let {
           data
         } = res.data
-        console.log("data.red_point", data)
         self.setData({
           card: data,
+          allData:res.data,
+          msgCount: res.data.msgCount,
           red_point: res.data.red_point,
+          master_status: res.data.master_status,
+        })
+        console.log("allData", this.data.allData)
+      }else if(res.result==999){
+        self.updataApi()
+          
+      }else if(res.result==100){
+        self.setData({
+          isLogin:false,
+          handleError:true
         })
       }
     })
 
+  },
+  //去详情页
+  toMyCardDetail(){
+    wx.navigateTo({
+      url: '/pages/account/myCardDetail',
+    })
+  },
+  getPhoneInfo(e) {
+    console.log('e', e.detail.isLogin)
+    if (e.detail.isLogin) {
+      this.setData({
+        isLogin: e.detail.isLogin
+      })
+    }
+  },
+  //更新登录过期
+  updataApi() {
+    const that = this
+    console.log("更新登录页")
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          that.getMyCardInfo()                       
+        })
+
+      }
+    })
   },
   tocard(){
     wx.navigateTo({
@@ -87,9 +121,16 @@ Page({
     })
   },
   toactive(){
-    wx.navigateTo({
-      url: '/pages/account/myActivities',
-    })
+    if (this.data.allData.activity_red!=0){
+      wx.navigateTo({
+        url: '/pages/account/myActivities?tab=2',
+      })
+    }else{
+      wx.navigateTo({
+        url: '/pages/account/myActivities',
+      })
+    }
+  
   },
   toanswer(){
     wx.navigateTo({
@@ -163,7 +204,8 @@ _getPhoneNumber: function (res) {
         console.log("res",res)
         util._setStorageSync('isLogin', 1)
         self.setData({
-          ['isLogin']: true
+          ['isLogin']: true,
+          handleError: false
         })
 
         // util.runFn(self.getInitData)

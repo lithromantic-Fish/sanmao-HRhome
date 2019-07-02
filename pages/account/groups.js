@@ -155,7 +155,9 @@ Page({
       // 编辑分组
       let prams = {
         name: e.detail.groupName,
-        group_id: choosedGroup.id
+        group_id: choosedGroup.id,
+        showLoading: true
+
       }
       //console.info('编辑分组', data)
      

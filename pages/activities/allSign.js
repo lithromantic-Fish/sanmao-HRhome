@@ -39,6 +39,8 @@ Page({
   },
   getApplyList() {
     const parms = {
+      showLoading: true,
+
       activity_id: this.data.activity_id,
       page: this.data.currentPage
     }

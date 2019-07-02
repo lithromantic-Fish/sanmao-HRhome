@@ -29,7 +29,11 @@ Page({
   },
   //申请答主信息
   getAnswerInfo(){
-    ApplyInfo.create().then(res=>{
+    const parms = {
+      showLoading: true
+
+    }
+    ApplyInfo.create(parms).then(res=>{
       if(res.result==0){
         console.log('res',res)
         this.setData({
@@ -46,7 +50,11 @@ Page({
     })
   },
   giveUp(){
-    Give_up_apply.create().then(res=>{
+    const parms = {
+      showLoading: true
+
+    }
+    Give_up_apply.create(parms).then(res=>{
       if (res.result == 0) {
         wx.showToast({
           title: '放弃成功',

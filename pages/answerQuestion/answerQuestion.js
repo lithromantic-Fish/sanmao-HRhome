@@ -3,6 +3,8 @@ const {
   Master_list,
   Quest_list
 } = require('../../utils/Class')
+const login = require('../../utils/login.js')
+
 Page({
 
   /**
@@ -21,9 +23,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // myCard = wx.getStorageSync('card') || app.globalData.card
   },
 
+//   else if(res.result== 88){
+
+// }
   //切换tab
   changeTabs(e){
     console.log('1',e)
@@ -49,6 +54,7 @@ Page({
     const self = this
     const page = this.data.page
     const parms = {
+      showLoading:true,
       page:page
     }
     Master_list.create(parms).then(res => {
@@ -85,6 +91,8 @@ Page({
             answerList: [...self.data.answerList, ...data]
           })
         }
+      } else if (res.result == 999) {
+        self.updataApi()
       }
 
     })
@@ -126,11 +134,26 @@ Page({
              questList: [...self.data.questList, ...data]
            })
          }
+       }else if(res.result==999){
+         self.updataApi()
        }
 
      })
    },
+  updataApi() {
+    const that = this
+    console.log("更新登录页")
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          that.getQuestionList()
+          that.getAnswerList()
 
+        })
+
+      }
+    })
+  },
   //申请答主
   applyAnswer(){
     wx.navigateTo({

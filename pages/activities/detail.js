@@ -1,5 +1,6 @@
 const data = require('../../mock/index.js')
 const app = getApp()
+const login = require('../../utils/login.js')
 const { Referral, DetailContext} = require('../../utils/Class.js')
 const debug = require('../../utils/debug.js')
 const WxParse = require('../../vendors/wxParse/wxParse.js');
@@ -45,6 +46,19 @@ Page({
     //   })
     // })
   },
+  //更新登录过期
+  updataApi(id) {
+    const that = this
+    console.log("更新登录页")
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          that.getContext(id)
+        })
+
+      }
+    })
+  },
   getContext(id){
     const parms = {
       id :id
@@ -55,10 +69,12 @@ Page({
         this.setData({
           detail: res.data.desc
         })
+      }else if(res.result==999){
+        this.updataApi(id)
       }
-      else{
-        console.log('result不为0',res)
-      }
+      // else{
+      //   console.log('result',res)
+      // }
       })
   },
   previewImage(e) {

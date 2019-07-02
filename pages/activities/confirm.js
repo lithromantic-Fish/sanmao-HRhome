@@ -94,6 +94,8 @@ Page({
   //获取confirm页面数据
   getEnterInfo(id) {
     const parms = {
+      showLoading: true,
+
       // identity: this.data.activity.identity,
       activity_id: id
     }
@@ -123,6 +125,8 @@ Page({
     }
     console.log(this.data.intro)
     if (this.data.intro) {
+      showLoading: true,
+
       parms.intro = this.data.intro
     }
     Apply.create(parms).then(res => {

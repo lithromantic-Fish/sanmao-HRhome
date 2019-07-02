@@ -2,7 +2,7 @@ const app = getApp()
 const moment = require('../../vendors/moment.min')
 // const debug = require('../../utils/debug')
 const eventBus = require('../../utils/eventbus')
-
+const login = require('../../utils/login.js')
 const upload = require('../../utils/upload.js')
 const {
   Card,
@@ -223,8 +223,8 @@ Page({
   // },
 
   save(e) { //保存
-
-    SaveFormID.find({ formId : e.detail.formId})
+  console.log('e',e)
+    // SaveFormID.find({ formId : e.detail.formId})
 
     if (loading) {
       return
@@ -490,6 +490,8 @@ Page({
     // 修改名片
     let self = this
     let prams = Object.assign(data, {
+      showLoading: true,
+
       'dosubmit': 1,
       'industry': self.getIndustryResult(data.industry)
     })
@@ -510,10 +512,14 @@ Page({
         }, 2000)
         wx.hideLoading()
         loading = false
-      } else {
+      }else if(res.result==999){
+        self.updataApiSave(data);
+      }
+      else {
         wx.hideLoading()
         wx.showToast({
           title: '操作失败，请重试',
+          icon:'none',
           duration: 2000,
         })
         loading = false
@@ -521,6 +527,32 @@ Page({
     })
     // }
 
+  },
+  updataApiSave(e){
+    const that = this
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          this.post(e)
+        })
+
+      }
+    })
+  },
+  updataApi() {
+    const that = this
+    console.log("更新登录页")
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          const userInfo = wx.getStorageSync("userInfo")
+          that.setData({
+            mobile: userInfo.mobile
+          })
+        })
+
+      }
+    })
   },
   //selectRow的值
   getChangeValue(e){
@@ -589,16 +621,20 @@ Page({
         } = res.data
         let o = JSON.parse(data)
         self.setData({
-          mobile: o.phoneNumber
+          mobile: o.phoneNumber,
         })
+        console.log("mobile", self.data.mobile)
         app.globalData.mobile = o.phoneNumber
         wx.setStorageSync('mobile', o.phoneNumber)
-      } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
+      } else if (res.result == 999) {
+        self.updataApi()
       }
+      // else {
+      //   wx.showToast({
+      //     title: res.msg,
+      //     icon: 'none'
+      //   })
+      // }
 
     })
   },
@@ -625,9 +661,10 @@ Page({
   //   }
   // },
   getCodeNum(e) {
+  
     // debug.log(e.detail.value)
     this.setData({
-      code: e.detail.value
+      code: e.detail.value,
     })
   },
   // 输入手机号码

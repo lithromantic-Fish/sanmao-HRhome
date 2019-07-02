@@ -29,8 +29,10 @@ Page({
     page: 1,
     name: '',
     imgUrls: [],
-    recommendList:[]
+    recommendList:[],
+    handleError: false //是否报100未登录标识
 
+    // hasClick:false
   },
 
   /**
@@ -39,9 +41,7 @@ Page({
   onLoad: function (options) {
     self = this
     activities = [];
-
     code = null
-
     location.getLocation(selectedCityInfo => {
       app.globalData.selectedCityInfo = selectedCityInfo
       notice.postNotificationName('Addcity', selectedCityInfo)
@@ -54,17 +54,52 @@ Page({
     }, () => {
       code = '110000'
     })
-    let userInfo = wx.getStorageSync('userInfo')
     myCard = wx.getStorageSync('card')
+    console.log("myCard",myCard)
 
-    if (userInfo) {
-      this.setData({
-        userInfo,
-      })
-    }
-  
+    // let userInfo = wx.getStorageSync('userInfo')
+
+    // if (userInfo) {
+    //     this.getRecommend()
+    //     this.getBanner()
+    // }
   },
 
+  onShow: function () {
+ 
+    // wx.getSetting({
+    //   success: res => {
+    //     if (res.authSetting['scope.userInfo']) {
+    //       wx.getUserInfo({
+    //         success: res => {
+    //           this.getRecommend()
+    //           this.getBanner()
+    //         }
+    //       })
+    //     }
+    //   }
+    // })
+    let that = this
+    let userInfo = wx.getStorageSync('userInfo')      //为了去掉蒙层
+    that.setData({
+      userInfo,
+      isLogin: util._getStorageSync('isLogin') == 1 ? true : false
+    })
+    if (userInfo){
+      this.getRecommend()
+      this.getBanner()
+
+    }
+  },
+
+  getPhoneInfo(e) {
+    console.log('e', e.detail.isLogin)
+    if (e.detail.isLogin) {
+      this.setData({
+        isLogin: e.detail.isLogin
+      })
+    }
+  },
   //拉起手机授权
   _getPhoneNumber: function (res) {
     let data = res.detail
@@ -106,11 +141,13 @@ Page({
       if (res.result == 0) {
         util._setStorageSync('isLogin', 1)
         self.setData({
-          ['isLogin']: true
+          isLogin: true,
+          handleError: false
+
         })
         //授权后重新获取详情页数据
-        this.getCommentList();
-        this.getIndexData();
+        self.getRecommend()
+        self.getBanner()
         util.runFn(self.getInitData)
       } else {
         wx.showToast({
@@ -132,9 +169,11 @@ Page({
     } = self.data
 
     const parms = {
-      page,
+      // page,
+    
     }
     RecommendList.create(parms).then(res => {
+      console.log("parms", parms)
       if (res && res.result === 0) {
         self.setData({
           recommendList:res.data,
@@ -151,6 +190,18 @@ Page({
         //     recommendList: [...self.data.recommendList, ...data]
         //   })
         // }
+      }else if(res.result==999){
+        
+        let userinfo = wx.getStorageSync('userInfo')
+        self.getInfo(userinfo)
+        // this.setData({
+        //   noUserInfo: true
+        // })
+      } else if (res.result == 100) {
+        self.setData({
+          isLogin: false,
+          handleError:true
+        })
       }
 
     })
@@ -158,10 +209,23 @@ Page({
 
 //获取首页轮播
   getBanner() {
-    BannerList.find().then(res => {
+    BannerList.create().then(res => {
+      console.log("轮播res", res)
+      if(res&&res.result==0){
       this.setData({
         imgUrls: res.data
       })
+      } 
+      else if (res.result == 999 ) {
+        let userinfo = wx.getStorageSync('userInfo')
+        self.getInfo(userinfo)
+      }else if(res.result==100){
+        self.setData({
+          isLogin:false,
+          handleError: true
+        })
+      }
+
     })
 
   },
@@ -182,8 +246,11 @@ Page({
     // app.globalData.userInfo = e.detail.userInfo
     wx.login({
       success: res => {
-        login.login(res.code, userinfo).then(res => {
+        login.login(res.code, userinfo).then(res => { 
           // debug.log(res)
+          // this.setData({
+          //   hasClick:true
+          // })
           wx.setStorageSync("expired", false)
           this.getRecommend()
           this.getBanner()
@@ -213,56 +280,7 @@ Page({
     // })
   },
 
-  onShow: function () {
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          wx.getUserInfo({
-            success: res => {
-              this.getRecommend()
-              this.getBanner()
-            }
-          })
-        } else {
 
-        }
-
-      }      
-    })
-    self = this
-    
-    self.setData({
-      isLogin: util._getStorageSync('isLogin') == 1 ? true : false
-    })
-    let userinfo = wx.getStorageSync('userInfo')
-    if (userinfo) {
-      self.setData({
-        userInfo: userinfo
-      })
-      console.log("userinfo", userinfo)
-      self.setData({
-        expired: wx.getStorageSync("expired") || ''
-      })
-      
-      if (self.data.expired) {
-        const that = self
-        that.getInfo(that.data.userInfo)
-        // wx.showModal({
-        //   title: '提示',
-        //   content: '登录过期，请重新登录',
-        //   showCancel: false,
-        //   success(res) {
-        //     if (res.confirm) {
-        //       that.getInfo(that.data.userInfo)
-        //     } else if (res.cancel) {
-        //     }
-        //   }
-        // })
-        // this.getInfo(this.data.userInfo)
-      }
-    }
- 
-  },
 
   /**
    * 生命周期函数--监听页面隐藏

@@ -6,7 +6,7 @@
   <button form-type="submit" class="card size-2 row  card-item" hover-class="hover">
     <view class="image-box">
       <image src="{{filter.formatAvatar(image)}}" mode='aspectFill' class="avatar"></image>
-      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/jiaV.png" class="vip" wx:if="{{bus==3}}"></image>
+      <image src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/ic_vip.png" class="vip" wx:if="{{bus==3}}"></image>
     </view>
     <view class="row-between card-right">
       <view class="column"  style='width:360rpx'>

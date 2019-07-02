@@ -1,4 +1,5 @@
 const app = getApp()
+const login = require('../../utils/login.js')
 const {
   MyActivity
 } = require('../../utils/Class')
@@ -38,8 +39,12 @@ Page({
 
   onLoad: function(options) {
     self = this
+    if(options.tab==2){
+      selectedTab = tabs[1];
 
-    selectedTab = tabs[0];
+    }else{
+      selectedTab = tabs[0];
+    }
 
     self.getActivities(); //to do
   },
@@ -102,6 +107,8 @@ Page({
             activities: [...self.data.activities, ...data]
           })
         }
+      }else if(res.result==999){
+        self.updataApi()
       }
     })
 
@@ -118,6 +125,19 @@ Page({
     // if(res.data.length===0){
     //   this.setData({loadAll:true})
     // }
+  },
+  updataApi() {
+    const that = this
+    console.log("更新登录页")
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          that.getActivities()
+
+        })
+
+      }
+    })
   },
   //下拉刷新
   onPullDownRefresh: function() {
@@ -144,8 +164,9 @@ Page({
     }
   },
   goHome() {
-    wx.switchTab({
-      url: '../activities/activityGround',
+    console.log("11111111")
+    wx.redirectTo({
+      url: '/pages/activities/activityGround',
     })
   }
 

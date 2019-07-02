@@ -1,6 +1,8 @@
 const app = getApp();
 let util = require('../../utils/util_wenda');
 let config = require('../../config');
+const login = require('../../utils/login.js')
+
 const {
   Card,
   DelSearch,
@@ -218,15 +220,20 @@ Page({
             noResult: true
           })
         }
+      }else if(res.result==999){
+        const type = "people"
+        this.updataApi(prams,type)
       }
     })
   },
 
   //搜索答主
-  getAnswerList() {
+  getAnswerList(e) {
     const self = this
     const page = this.data.page
     const parms = {
+      showLoading: true,
+
       page: page,
       nickname: this.data.content
     }
@@ -271,7 +278,7 @@ Page({
         }
       //  type区别不同搜索, 1,搜索名片 4,搜索答主 5搜索问答
 
-        if (self.data.type == 4 && self.answerList.length==0){
+        if (self.data.type == 4 && self.data.answerList.length==0){
              self.setData({
               loadAll: true,
               noResult: true
@@ -285,8 +292,27 @@ Page({
         //   })
 
 
+      }else if(res.result==999){
+        const type='answer'
+        this.updataApi(e,type)
       }
 
+    })
+  },
+  updataApi(prams,type) {
+    const that = this
+    console.log("更新登录页")
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          if (type =='people'){
+            that.getCardList(prams)
+          }else{
+            that.getAnswerList()                  
+          }
+        })
+
+      }
     })
   },
 

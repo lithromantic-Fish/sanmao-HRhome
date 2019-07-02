@@ -3,6 +3,7 @@
 <image class="icon-account " src="https://static.hrloo.com/hrloo56/hrhomeminiapp/img/{{icon}}.png" wx:if="{{icon}}" mode="aspectFill"></image>
     <!-- <view class="iconfont icon-{{icon}}" ></view> -->
     <text class='redDos_row' wx:if="{{isVip&&red_point!=0}}">{{red_point}}</text>
+    <text class='redDos_row' style='left:160rpx;' wx:if="{{msgCount&&msgCount!=0}}">{{msgCount}}</text>
     <view class="type">{{type}}</view>
     
     <view class="content" wx:if="{{content}}">{{content}}</view>

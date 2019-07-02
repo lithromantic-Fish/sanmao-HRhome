@@ -35,6 +35,20 @@ Page({
     }
   },
 
+  //更新登录过期
+  // updataApi() {
+  //   const that = this
+  //   console.log("更新登录页")
+  //   wx.login({
+  //     success: res => {
+  //       login.login(res.code).then(res => {
+  //         that.getPageData()
+
+  //       })
+
+  //     }
+  //   })
+  // },
   //切换tab
   changeTabs(e) {
     console.log('1', e)

@@ -10,7 +10,7 @@
   height: 420rpx;
   width: 100%;
   padding-top: 24rpx;
-  padding-left: 49rpx;
+  /* padding-left: 49rpx; */
 }
 
 .p_text {
@@ -28,7 +28,7 @@
   border-radius: 10px;
   margin-top: 58rpx;
   display: flex;
-  justify-content: center;
+  justify-content: center;  
   align-items: center;
   font-size: 32rpx;
   font-family: PingFang-SC-Medium;

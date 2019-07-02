@@ -83,28 +83,37 @@ Page({
 
     }
     )
-    if (app.globalData.selectedCityInfo){
-      this.setData({
-        selectTab: 2,
-      })
-      city = app.globalData.selectedCityInfo.city
-    }else{
+    if (options.isAll){
       this.setData({
         selectTab: 1,
+      })
+    }else{
 
-      })
-      city = ''
+       if (app.globalData.selectedCityInfo){
+          this.setData({
+            selectTab: 2,
+          })
+          city = app.globalData.selectedCityInfo.city
+        }else{
+          this.setData({
+            selectTab: 1,
+
+          })
+          city = ''
+        }
     }
-    this.getActivity(this.data.selectTab, city, name)
-    notice.addNotification('city', that.changeCities, that)
-    notice.addNotification('getCity', that.getNewCities, that)
-    if (app.globalData.userInfo) {
-      userInfo = app.globalData.userInfo
-      this.setData({
-        userInfo,
-        // selectedTab
-      })
-    }
+
+        this.getActivity(this.data.selectTab, city, name)
+        notice.addNotification('city', that.changeCities, that)
+        notice.addNotification('getCity', that.getNewCities, that)
+        if (app.globalData.userInfo) {
+          userInfo = app.globalData.userInfo
+          this.setData({
+            userInfo,
+            // selectedTab
+          })
+        }
+
   },
 onShow(){
   if(app.globalData.userInfo){
@@ -178,10 +187,14 @@ onShow(){
           tab: tabNum,
           city: city,
           name: name,
+          showLoading: true,
+
           page: tabNum==1?this.data.allActivityPage:this.data.nearActivityPage
         }
  
         HotActivity.create(parms).then(res => {
+          if(res.result==0){
+
           let activeList = res.data.data
 
           if(res.data.data){
@@ -206,8 +219,26 @@ onShow(){
               activities: []
             })
           }
+
+          }else if(res.result==999){
+            this.updataApi()
+          }
+
         })
 
+  },
+  updataApi(){
+    const that = this
+    console.log("更新登录页")
+    var name = ''
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          that.getActivity(that.data.selectTab, that.data.city, name)
+        })
+
+      }
+    })
   },
 
   //下拉刷新

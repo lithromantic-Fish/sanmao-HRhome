@@ -14,6 +14,7 @@ function login(code, userinfo) {
   //   code, userinfo
   // }
   const data = Object.assign({
+    showLoading:true,
     code: code
   }, userinfo)
 
@@ -22,9 +23,11 @@ function login(code, userinfo) {
     // console.log('=22222')
     // console.log('11111',res)
     // openid = res.result.openid
-    console.log("用户登录状态 0 未登录，1 已登录======",res.data.isLogin)
+    // console.log("用户登录状态 0 未登录，1 已登录======",res.data.isLogin)
+    
+    //将返回的登录状态存入缓存
     util._setStorageSync('isLogin', res.data.isLogin)
-
+  
     hrhome_token = res.data.hrhome_token
     app.globalData.hrhome_token = res.data.hrhome_token
     // console.log(app.globalData.hrhome_toekn)
@@ -34,7 +37,7 @@ function login(code, userinfo) {
     // app.globalData.user = res.list[0]
     // wx.setStorageSync('user', res.list[0])
     app.globalData.userInfo = res.data.userinfo
-    wx.setStorageSync('userInfo', res.data.userinfo)
+    // wx.setStorageSync('userInfo', res.data.userinfo)
     // app.globalData.AskPrice = res.AskPrice
     // wx.setStorageSync('AskPrice', res.AskPrice)
     // app.globalData.APriceDivide = res.APriceDivide
