@@ -10,7 +10,7 @@ const app = getApp()
 
 let emptyArr = [],
   emptyObj = {},
-  noop = function() {};
+  noop = function () { };
 
 let core_slice = emptyArr.slice,
   toString = emptyObj.toString,
@@ -56,7 +56,7 @@ function trim(str) {
  * @param {*} obj 
  */
 function isPlainObject(obj) {
-  if (type(obj) !== "object" /* || obj.nodeType || obj.window === obj */ ) {
+  if (type(obj) !== "object" /* || obj.nodeType || obj.window === obj */) {
     return false;
   }
 
@@ -216,7 +216,7 @@ function hijackLogMethods(enableLog = true) {
     //   // console[tmp] = noop;
     // }
 
-    console[tmp] = function() {
+    console[tmp] = function () {
       if (enableLog) {
         _method.apply(null, arguments);
       }
@@ -282,22 +282,22 @@ function checkInput(val, rules, val2) {
           results[prop] = +val >= tmpRule;
           break;
 
-          //　不超过最大值
+        //　不超过最大值
         case 'max':
           results[prop] = +val <= tmpRule;
           break;
 
-          // 最小长度限制
+        // 最小长度限制
         case 'minlength':
           results[prop] = len(val) >= tmpRule;
           break;
 
-          // 最大长度限制
+        // 最大长度限制
         case 'maxlength':
           results[prop] = len(val) <= tmpRule;
           break;
 
-          // required
+        // required
         case 'required':
           if (type(tmpRule) === 'boolean') {
             results[prop] = true;
@@ -306,21 +306,21 @@ function checkInput(val, rules, val2) {
           }
           break;
 
-          // 手机号
+        // 手机号
         case 'phone':
           results[prop] = /^1[34578]\d{9}$/.test(val);
           break;
 
-          // 验证两个输入框的内容是否相同, 规则
-          // equalTo: [val1, val2]
+        // 验证两个输入框的内容是否相同, 规则
+        // equalTo: [val1, val2]
         case 'equalTo':
           results[prop] = val === val2;
           break;
 
-          // range: [min, max], 用一个数组指定区间
-          // case 'range':
-          //   results[prop] = len(val) >= tmpRule[0] && len(val) <= tmpRule[0];
-          //   break;
+        // range: [min, max], 用一个数组指定区间
+        // case 'range':
+        //   results[prop] = len(val) >= tmpRule[0] && len(val) <= tmpRule[0];
+        //   break;
 
         default:
           break;
@@ -361,7 +361,7 @@ function isAllPropTrue(obj) {
  * 校验多个输入框
  * @param {*} valRuleArr 
  */
-function checkInputs(valRuleArr /*  = [[val, rules, val2]] */ ) {
+function checkInputs(valRuleArr /*  = [[val, rules, val2]] */) {
 
   if (!isArray(valRuleArr)) {
     throwError('checkInputs, arg must be an array!');
@@ -720,18 +720,18 @@ function promisify(wxApi, options = {}, defaults = {}) {
     // 这三个函数的this暂时指定为wx, 以后看情况可以改, TODO
     let _success = res => {
 
-        let successRet = runFn(success, wx, res);
+      let successRet = runFn(success, wx, res);
 
-        // 如果自定义回调success返回false, 意味着api调用成功, 但是结果不是预期的, 如res.result不为0
-        // 这样可以根据具体业务来指定success的处理, 灵活
-        if (successRet === false) {
+      // 如果自定义回调success返回false, 意味着api调用成功, 但是结果不是预期的, 如res.result不为0
+      // 这样可以根据具体业务来指定success的处理, 灵活
+      if (successRet === false) {
 
-          // 正常的话, 数据先由自己指定的success处理一遍
-          reject(res, beforeRet);
-        } else {
-          resolve(res, successRet, beforeRet);
-        }
-      },
+        // 正常的话, 数据先由自己指定的success处理一遍
+        reject(res, beforeRet);
+      } else {
+        resolve(res, successRet, beforeRet);
+      }
+    },
       _fail = err => {
         runFn(fail, wx, err);
         reject(err);
@@ -756,7 +756,7 @@ function promisify(wxApi, options = {}, defaults = {}) {
  * wx.request封装
  * @param {*} options 
  */
-function request(options, recall) {
+function request(options, recall,e) {
 
   let defaults = {
     data: {},
@@ -813,10 +813,10 @@ function request(options, recall) {
 
         wx.hideNavigationBarLoading(); //完成停止加载
         wx.stopPullDownRefresh(); //停止下拉刷新
-      } catch (e) {}
+      } catch (e) { }
     },
 
-    fail: err => {},
+    fail: err => { },
 
     /**
      * res.result为0是成功, 否则为失败
@@ -888,12 +888,12 @@ function request(options, recall) {
 
         let data = res.data;
         // 这里要看数据格式
-        // if (typeof data.result === 'boolean' && data.result !== true) {
-        if (data.result === 999 || data.result === 100) {
+        if (data.result != 0) {
+          // if (typeof data.result === 'boolean' && data.result !== true) {
           console.warn('request, result !== true to handleErrApi ->', options.url, data);
-          handleErrApi(data.result, res, options, recall);
+          handleErrApi(data.result, res, options, recall,e);
         }
-        
+
         let successRet = runFn(options.success, wx, res);
 
         // 如果自定义回调success返回false, 意味着api调用成功, 但是结果不是预期的, 如res.result不为0
@@ -952,16 +952,28 @@ function request(options, recall) {
  * @param {boolean} autoSaveSessionKey 获取到sessionKey后要不要存储, 默认为true
  */
 function _getSessionKeyByApi(code, autoSaveSessionKey = true) {
-
+  //换个接口
+  console.log('autoSaveSessionKey', autoSaveSessionKey)
+  // return request({
+  //   url: config.apiUrl + '/hr/special/wxapp/init',
+  //   data: {
+  //     code: code
+  //   },
+  //   method: "POST",
+  //   withSessionKey: false
+  // }).then(res => {
   return request({
-    url: config.apiUrl + '/hr/special/wxapp/init',
+    url: config.hrlooUrl + 'hr/hrhome/hrcard/login',
     data: {
       code: code
     },
     method: "POST",
     withSessionKey: false
   }).then(res => {
-    
+
+
+
+
     // console.warn('_getSessionKeyByApi ->>>', res)
 
     // //后端未上线时的处理/上线后可删除
@@ -973,11 +985,14 @@ function _getSessionKeyByApi(code, autoSaveSessionKey = true) {
 
     //绑定了三茅账号
     if (res.result === 0) {
-
+          console.log("res",res)
+      console.log("autoSaveSessionKey", autoSaveSessionKey)
       if (autoSaveSessionKey) {
-        _setStorageSync('hauth', res.data.hauth);
-        _setStorageSync('sessionKey', res.data.session_key);
-        _setStorageSync('isLogin', 1);
+        // _setStorageSync('hauth', res.data.hauth);
+        _setStorageSync('session_key', res.data.hrhome_token);
+        _setStorageSync('hrhome_token', res.data.hrhome_token);
+
+        _setStorageSync('isLogin', res.data.isLogin);
         _setStorageSync('isBindSanMao', 1);
         // console.log('绑定了三茅账号')
         // console.info('sessionKey save done')
@@ -993,9 +1008,9 @@ function _getSessionKeyByApi(code, autoSaveSessionKey = true) {
       console.warn('_getSessionKeyByApi(), code is invalid: ', res);
       return Promise.reject(res);
     } else if (res.result === 2) {
-        
+
       _setStorageSync('hauth', res.data.hauth);
-      _setStorageSync('sessionKey', res.data.session_key);
+      _setStorageSync('session_key', res.data.session_key);
       _setStorageSync('isLogin', 0);
       _setStorageSync('isBindSanMao', 0);
       console.log('11111111', _getStorageSync())
@@ -1053,7 +1068,7 @@ function updateSessionKeyApi() {
   }
 
   return _getCode().then(code => {
-    return _getSessionKeyByApi(code, _authinfo);
+    return _getSessionKeyByApi(code);
   });
 }
 /**
@@ -1112,7 +1127,7 @@ function _uploadFiles(files = [], options, customResolve) {
     },
     formData: {
       session_key: _getStorageSync(),
-      is_mina : 1,
+      is_mina: 1,
       mintype: 2
     },
     filePath: ''
@@ -1230,16 +1245,16 @@ function uploadSink(sinkFilePath) {
       filePath: sinkFilePath,
       name: 'voice',
       formData: {
-        is_mina:1,
-        mintype:5,
-        hrhome_token : wx.getStorageSync('hrhome_token') || '',
-        session_key : wx.getStorageSync('hrhome_token') || ''
+        is_mina: 1,
+        mintype: 5,
+        hrhome_token: wx.getStorageSync('hrhome_token') || '',
+        session_key: wx.getStorageSync('hrhome_token') || ''
         // session_key: _getStorageSync()
       },
-      success: function(res) {
+      success: function (res) {
         console.log('uploadSink', res);
         console.log('_getStorageSync()', _getStorageSync())
-      
+
         let d = res.data;
         d = JSON.parse(d);
 
@@ -1248,7 +1263,7 @@ function uploadSink(sinkFilePath) {
         if (d.result === 0) {
           resolve(d.data);
         } else {
-          console.log('上传失败res',res)
+          console.log('上传失败res', res)
           wx.hideLoading()
           wx.showToast({
             title: '上传失败,请重试',
@@ -1260,7 +1275,7 @@ function uploadSink(sinkFilePath) {
           });
         }
       },
-      fail: function(err) {
+      fail: function (err) {
         console.log('skin upload failed', err);
         reject(err);
       }
@@ -1356,7 +1371,7 @@ function subString(str, len, preStr) {
  * 生成GUID
  */
 function guid() {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
     var r = Math.random() * 16 | 0,
       v = c == 'x' ? r : (r & 0x3 | 0x8);
     return v.toString(16);
@@ -1367,7 +1382,7 @@ function guid() {
  * 同步获取storage
  * @param {*} key storage的key, 默认是sessionKey
  */
-function _getStorageSync(key = 'sessionKey') {
+function _getStorageSync(key = 'session_key') {
   try {
     let value = wx.getStorageSync(key);
     if (value) {
@@ -1398,7 +1413,7 @@ function _setStorageSync(key, val) {
  * 获取生成小程序二维码需要的scene
  * @param {*} path 页面路径, 可带参数, 路径任意
  */
-function saveSceneApi(path = '' /*, params */ ) {
+function saveSceneApi(path = '' /*, params */) {
 
   if (!path) {
     throwError('saveSceneApi, path can not be null');
@@ -1485,8 +1500,7 @@ function getSharePathByScene(scene) {
  * @param {*} res 
  * @param {*} options 
  */
-function handleErrApi(result, res, options = {}, recall) {
-
+function handleErrApi(result, res, options = {}, recall,e) {
   // console.info('handleErrApi-result-res-options->', result, res, options)
 
   // 错误码映射
@@ -1503,45 +1517,81 @@ function handleErrApi(result, res, options = {}, recall) {
     _setStorageSync('isLogin', 0);
     _setStorageSync('isBindSanMao', 0);
     console.log("未登录")
-    // wx.switchTab({
-    //   url: '/pages/cardPage/cardPage',
+    // wx.navigateTo({
+    //   url: '/pages/authPhone/authPhone',
     // })
+    // 默认更新sessionKey
+    return updateSessionKeyApi().then(res => {
+      //更新重调 参数 sessionKey
+      // return promisify(wx.showModal, {
+      //   title: '您还未登录,请授权登录',
+      //   // content: '您还没有登录'
+      // }).then(res => {
+
+      //   if (options.url.indexOf(config.authorizationURL) >= 0) {
+      //     console.warn('now you are at auth page');
+      //   } else {
+      //     //去登陆页面
+      //     let authUrl = addParam2url(config.authPhoneURL, 'back', '1');
+      //     gotoPage({
+      //       url: authUrl,
+      //       openType: 'navigateTo'
+      //     });
+      //   }
+      // });
+      wx.showModal({
+        title: '您还未登录,请授权登录',
+        success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+           let authUrl = addParam2url(config.authPhoneURL, 'back', '1');
+          gotoPage({
+            url: authUrl,
+            openType: 'navigateTo'
+          });
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    })
     return;
   }
 
   // SESSION_KEY_EXPIRED 999 sessionKey 已经过期
   if (result === config.ERR_MAPPING.SESSION_KEY_EXPIRED) {
-    //console.info('updateSessionKeyApi')
-    //默认更新sessionKey
-    // return updateSessionKeyApi().then(res => {
-    //   //更新重调 参数 sessionKey
-    //   options.session_key = _getStorageSync()
-    //   //执行重调 
-    //   if (isFunction(recall)) {
-    //     return runFn(recall)
-    //   } else {
-    //     console.warn('warn -> recall is not function')
-    //     return;
-    //   }
-    // })
-    return promisify(wx.showModal, {
-      title: '登录已经过期,请重新登陆',
-      // content: '您还没有登录'
-    }).then(res => {
-
-      if (options.url.indexOf(config.authorizationURL) >= 0) {
-        console.warn('now you are at auth page');
+    console.info('updateSessionKeyApi')
+    // 默认更新sessionKey
+    return updateSessionKeyApi().then(res => {
+      //更新重调 参数 sessionKey
+      options.session_key = _getStorageSync()
+      //执行重调 
+      if (isFunction(recall)) {
+        console.log("options", options)
+        return runFn(recall(e))
       } else {
-        //去登陆页面
-        let authUrl = addParam2url(config.authorizationURL, 'back', '1');
-        gotoPage({
-          url: authUrl,
-          openType: 'navigateTo'
-        });
+        console.warn('warn -> recall is not function')
+        return;
       }
-    });
+    })
+    // return promisify(wx.showModal, {
+    //   title: '登录已经过期,请重新登陆',
+    //   // content: '您还没有登录'
+    // }).then(res => {
 
-    
+    //   if (options.url.indexOf(config.authorizationURL) >= 0) {
+    //     console.warn('now you are at auth page');
+    //   } else {
+    //     //去登陆页面
+    //     let authUrl = addParam2url(config.authorizationURL, 'back', '1');
+    //     gotoPage({
+    //       url: authUrl,
+    //       openType: 'navigateTo'
+    //     });
+    //   }
+    // });
+
+
 
     // options.url = options.url || '';
     // var currPages = getCurrentPages(),
@@ -1594,7 +1644,7 @@ function gotoPage(options) {
     delta: 1,
 
     // 超出页面栈限制, 如何处理看产品
-    fail: function(err) {
+    fail: function (err) {
       console.log('超出页面栈!', err, getCurrentPages());
     }
   };
@@ -2357,11 +2407,11 @@ function getRect(eleSel, callback) {
     query = wx.createSelectorQuery().select(eleSel).boundingClientRect();
   }
 
-  query.exec(function(rect) {
+  query.exec(function (rect) {
     let r0 = rect[0];
 
     if (!r0 || !r0.height) {
-      setTimeout(function() {
+      setTimeout(function () {
         getRect.t += delay;
 
         if (getRect.t > 1000) {
@@ -2464,7 +2514,7 @@ function getBGAudioState() {
   // });
   // status	播放状态（2：没有音乐在播放，1：播放中，0：暂停中）
   wx.getBackgroundAudioPlayerState({
-    success: function(res) {
+    success: function (res) {
       console.log(res);
       // var status = res.status
       // var dataUrl = res.dataUrl
@@ -2489,7 +2539,7 @@ function getBGAudioState() {
 function wxStopPullDownRefresh(delay, callback) {
 
   if (delay) {
-    setTimeout(function() {
+    setTimeout(function () {
       wx.stopPullDownRefresh();
       runFn(callback);
     }, delay);
@@ -2500,7 +2550,7 @@ function wxStopPullDownRefresh(delay, callback) {
 }
 
 function wxStopRecord() {
-  setTimeout(function() {
+  setTimeout(function () {
     wx.stopRecord();
   }, 100);
 }
@@ -2576,8 +2626,8 @@ function wxSaveImageToPhotosAlbum(tempFilePath) {
   // });
 
   return promisify(wx.saveImageToPhotosAlbum, {
-      filePath: tempFilePath
-    })
+    filePath: tempFilePath
+  })
 
     .then(res2 => {
       return Promise.resolve(res2);
@@ -2609,7 +2659,7 @@ function wxSaveImageToPhotosAlbum(tempFilePath) {
 function delay(delayTime = 500) {
 
   return new Promise((resolve, reject) => {
-    setTimeout(function() {
+    setTimeout(function () {
       resolve();
     }, delayTime);
   });
@@ -2701,13 +2751,13 @@ function wxRequestPayment(options) {
     package: '',
     signType: '',
     paySign: '',
-    success: function(res) {
+    success: function (res) {
       // success
     },
-    fail: function() {
+    fail: function () {
       // fail
     },
-    complete: function() {
+    complete: function () {
       // complete
     }
   };
@@ -2812,11 +2862,11 @@ function delaySync(n, startCallback, endCallback) {
  * @param {*} n 
  */
 function fixShare(n = 200) {
-  delaySync(n, function() {
+  delaySync(n, function () {
     // showToast({
     //   icon: 'loading'
     // });
-  }, function() {
+  }, function () {
     // hideToast();
   })
 }
@@ -3022,7 +3072,7 @@ function raf(callback) {
   } else if (typeof mozRequestAnimationFrame !== 'undefined') {
     return mozRequestAnimationFrame
   } else {
-    return function(callback) {
+    return function (callback) {
       return setTimeout(callback, 17); //不支持requestAnimationFrame 的补救措施
     };
   }
@@ -3045,7 +3095,7 @@ function craf(id) {
   } else if (typeof mozCancelAnimationFrame !== 'undefined') {
     return mozCancelAnimationFrame
   } else {
-    return function(id) {
+    return function (id) {
       clearTimeout(id);
     };
   }
@@ -3222,13 +3272,13 @@ function hrkingGetRoomId(hrking_id, is_pvp_left = 1) {
  */
 function hrkingRoomStatus(roomId, hrking_id) {
   return request({
-      url: config.apiUrl + '/hr/special/wxapp_hrking/roomStatus',
-      method: 'POST',
-      data: {
-        roomId: roomId,
-        hrking_id: hrking_id
-      }
-    })
+    url: config.apiUrl + '/hr/special/wxapp_hrking/roomStatus',
+    method: 'POST',
+    data: {
+      roomId: roomId,
+      hrking_id: hrking_id
+    }
+  })
 
     .then(res => {
       // return isApiOk(res) ? Promise.resolve(res.data) : Promise.reject()
@@ -3250,7 +3300,7 @@ function promisifyTime(time, asyncFn) {
   time = time || 300;
   return new Promise((resolve, reject) => {
     asyncFn();
-    setTimeout(function() {
+    setTimeout(function () {
       resolve();
     }, time);
   });
@@ -3417,11 +3467,11 @@ function registerSuccessTip() {
 function debounce(method, delay) {
   let timer = null
   let _delay = delay ? delay : 500
-  return function() {
+  return function () {
     let context = this,
       args = arguments;
     clearTimeout(timer);
-    timer = setTimeout(function() {
+    timer = setTimeout(function () {
       method.apply(context, args);
       // console.info(method, context, args)
     }, _delay)
@@ -3431,7 +3481,7 @@ function debounce(method, delay) {
 function throttle(method, duration) {
   let begin = new Date();
   let _duration = duration ? duration : 500
-  return function() {
+  return function () {
     let context = this,
       args = arguments,
       current = new Date();
@@ -3466,7 +3516,7 @@ function _switchFormSubmit(formId) {
     },
     method: "POST",
     withSessionKey: true
-  }).then(res => {});
+  }).then(res => { });
 }
 //判断用户是否授权
 function IsGetAuthinfo() {
@@ -3491,7 +3541,7 @@ function IsGetAuthinfo() {
         openType: 'reLaunch'
       })
 
-    },200)
+    }, 200)
     return false
   }
   return true
@@ -3506,12 +3556,12 @@ function setOperationRecord(v) {
   if (localData) {
     for (let k in localData) {
       if (localData[k] == v) {
-        isBE = true 
+        isBE = true
       }
       _k = Number(k)
     }
-    if (!isBE){
-      let __k = _k+1
+    if (!isBE) {
+      let __k = _k + 1
       var _v = '{"' + __k + '":"' + v + '"}'
       //如果不存在 就存起来
       var obj = Object.assign(localData, JSON.parse(_v))

@@ -1,6 +1,8 @@
 const {
   ZanList
 } = require('../../utils/Class')
+let config = require('../../config');
+const util_wenda = require('../../utils/util_wenda');
 const login = require('../../utils/login.js')
 
 const app = getApp()
@@ -64,8 +66,14 @@ Page({
       type,
       page
     }
-
-    ZanList.find(prams).then(res => {
+    util_wenda.request({
+      url: config.hrlooUrl + ZanList,
+      autoHideLoading: false,
+      data: prams,
+      method: "GET",
+      withSessionKey: true
+    }, this.getCards).then(res => {
+    // ZanList.find(prams).then(res => {
       if (res && res.result === 0) {
         let {
           data,
@@ -90,9 +98,6 @@ Page({
             cards: [...self.data.cards, ...data.data]
           })
         }
-      } else if (res.result == 999) {
-        //更新登录过期
-        self.updataApi()
       }
     })
   },

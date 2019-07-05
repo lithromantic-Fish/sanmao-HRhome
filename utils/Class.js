@@ -36,32 +36,36 @@ class Feathers {
   }
 }
 
-const Card = new Feathers('hr/hrhome/hrcard/card_list') // 名片广场
-const CardDetail = new Feathers('hr/hrhome/hrcard/card_info') // 名片详情
+const Card = '/hr/hrhome/hrcard/card_list' // 名片广场
+const CardDetail = '/hr/hrhome/hrcard/card_info' // 名片详情
+const BannerList = '/hr/hrhome/hractivity/banner'// 活动banner图数据
+const RecommendList = 'hr/hrhome/hractivity/home_recommend_activitys' //强力推荐
+const MyCardDetail = '/hr/hrhome/hrcard/my_info' // 我的名片详细信息
+const ActivityList = '/hr/hrhome/hractivity/activity_list'// 活动数据列表
+const ChangeCard = '/hr/hrhome/hrcard/card_change_apply' //名片交换申请
+const Report = '/hr/hrhome/hrcard/report' // 举报
+const DeleteCard = '/hr/hrhome/hrcard/del_card'//删除交换的名片
+const FavCard = '/hr/hrhome/hrcard/fav_ajax' //收藏名片
+const ActivityImgs = 'hr/hrhome/hractivity/activity_imgs'// 活动内页云相册
+const CheckApply = '/hr/hrhome/hractivity/check_apply'//检测是否可以报名
+const ViewList = 'hr/hrhome/hrcard/view_list'// 我看了谁/谁看了我 1,谁看我 2,我看谁
+const FavList = 'hr/hrhome/hrcard/fav_list'// 谁收藏我/我收藏了谁 1,谁收藏我 2,我收藏谁
+const ZanList = 'hr/hrhome/hrcard/zan_list'// 谁赞了我/我赞了了谁 1,赞了我谁 2,我赞了谁
+const FavActivity = 'hr/hrhome/hractivity/collect'// 活动收藏
+const ZanActivity = 'hr/hrhome/hractivity/zan'// 给活动点赞
+const GetActivityPL ='hr/hrhome/hractivity/pl_list'// 获取活动评论列表
+const AddActivityPL ='hr/hrhome/hractivity/ajax_pl'//活动提交评论
+const DelActivityPL ='hr/hrhome/hractivity/del_pl'//活动提交评论
+
 const GetMobile = new Feathers('hr/hrhome/hrcard/get_mobile') //通过用户授权的参数获取编译后的手机号码 
-const ChangeCard = new Feathers('hr/hrhome/hrcard/card_change_apply') //名片交换申请
 const MyCard = new Feathers('hr/hrhome/hrcard/card_make') // 获取或者修改 我的名片信息
-const MyCardDetail = new Feathers('hr/hrhome/hrcard/my_info') // 我的名片详细信息
-const SaveFormID = new Feathers('hr/hrhome/hractivity/save_formid_cache') // 获取保存用户formid
-const Report = new Feathers('hr/hrhome/hrcard/report') // 举报
-const DeleteCard = new Feathers('hr/hrhome/hrcard/del_card') //删除交换的名片
-const FavCard = new Feathers('hr/hrhome/hrcard/fav_ajax') //收藏名片
+const SaveFormID = new Feathers('/hr/hrhome/hractivity/save_formid_cache') // 获取保存用户formid
 const DelSearch = new Feathers('hr/hrhome/hractivity/del_search') //删除搜索记录 参数type 名片-1  活动-2
-const ViewList = new Feathers('hr/hrhome/hrcard/view_list')// 我看了谁/谁看了我 1,谁看我 2,我看谁
-const FavList = new Feathers('hr/hrhome/hrcard/fav_list')// 谁收藏我/我收藏了谁 1,谁收藏我 2,我收藏谁
-const ZanList = new Feathers('hr/hrhome/hrcard/zan_list')// 谁赞了我/我赞了了谁 1,赞了我谁 2,我赞了谁
-const BannerList = new Feathers('hr/hrhome/hractivity/banner')// 活动banner图数据
-const ActivityList = new Feathers('hr/hrhome/hractivity/activity_list')// 活动数据列表
 const ActivityDetailData = new Feathers('hr/hrhome/hractivity/activity')// 活动内页数据
-const ActivityImgs = new Feathers('hr/hrhome/hractivity/activity_imgs')// 活动内页云相册
-const FavActivity = new Feathers('hr/hrhome/hractivity/collect')// 活动收藏
-const ZanActivity = new Feathers('hr/hrhome/hractivity/zan')// 给活动点赞
-const GetActivityPL = new Feathers('hr/hrhome/hractivity/pl_list')// 获取活动评论列表
-const AddActivityPL = new Feathers('hr/hrhome/hractivity/ajax_pl')//活动提交评论
-const DelActivityPL = new Feathers('hr/hrhome/hractivity/del_pl')//活动提交评论
+
+
 const MyActivity = new Feathers('hr/hrhome/hractivity/my_activity')//我的活动 type 1我参与的  2我发起的  3我收藏的
 const GetPageUrl = new Feathers('hr/hrhome/hrcard/get_scene')//根据scence获取page路径
-const CheckApply = new Feathers('hr/hrhome/hractivity/check_apply')//检测是否可以报名
 const Apply = new Feathers('hr/hrhome/hractivity/apply') //活动提交支付
 const CancelApply = new Feathers('hr/hrhome/hractivity/cancel_apply') //取消活动报名
 const AddActivity = new Feathers('hr/hrhome/hractivity/create_activity') //创建编辑活动
@@ -72,7 +76,7 @@ const ApplyDetail = new Feathers('hr/hrhome/hractivity/apply_detail') //活动�
 const SignImg = new Feathers('hr/hrhome/hractivity/sign_qbcode') //活动签到二维码
 const DetailContext = new Feathers('hr/hrhome/hractivity/activity_desc') //活动详情文字
 
-const CardImg = new Feathers('hr/hrhome/hrcard/card_img') // 本人名片码
+const CardImg = 'hr/hrhome/hrcard/card_img' // 本人名片码
 const NotifyList = new Feathers('hr/hrhome/hrcard/notify_list') // 系统消息列表
 const DelNotify = new Feathers('hr/hrhome/hrcard/notify_delete') // 删除系统消息
 const MyCardsHolder = new Feathers('hr/hrhome/hrcard/my_card') //我的名片夹列表
@@ -94,7 +98,6 @@ const Master_list = new Feathers('hr/hrhome/hrthread/master_list') //答主列�
 const Quest_list = new Feathers('hr/hrhome/hrthread/questions') //问题列表
 const Payfor_answer = new Feathers('hr/hrhome/hrthread/payfor_answer') //支付人气值查看回答
 const Master_apply = new Feathers('hr/hrhome/hrthread/master_apply') //答主申请
-const RecommendList = new Feathers('hr/hrhome/hractivity/home_recommend_activitys') //强力推荐
 const Master_page = new Feathers('hr/hrhome/hrthread/master_page') //答主提问
 const ApplyInfo = new Feathers('hr/hrhome/hrthread/apply_info') //申请答主信息
 const Give_up_apply = new Feathers('hr/hrhome/hrthread/give_up_apply') //放弃答主申请

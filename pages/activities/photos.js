@@ -3,7 +3,8 @@ const app = getApp()
 const { Photo, ActivityImgs} = require('../../utils/Class.js')
 const debug = require('../../utils/debug.js')
 const login = require('../../utils/login.js')
-
+const util = require('../../utils/util_wenda');
+let config = require('../../config');
 Page({
 
   data: {
@@ -19,13 +20,25 @@ Page({
     })
     this.getImage(this.data.id);
   },
+  
+
   getImage(id){
     const parms = {
       showLoading: true,
       id:id
     }
     // this.setData({photos:data.photos})
-    ActivityImgs.create(parms).then(res => {
+    // ActivityImgs.create(parms).then(res => {
+      
+    util.request({
+      url: config.hrlooUrl + ActivityImgs,
+      data: data,
+      autoHideLoading: false,
+      data:parms,
+      method: "POST",
+      withSessionKey: true
+    }, this.getImage, id).then(res => {
+      
       if (res.result == 0) {
 
         console.log('res', res.data)
@@ -38,9 +51,10 @@ Page({
             photos: res.data
           })
         }
-      } else if (res.result == 999) {
-        this.updataApi(id)
-      }
+      } 
+      // else if (res.result == 999) {
+      //   this.updataApi(id)
+      // }
     })
   },
 

@@ -87,7 +87,7 @@ function parseQueryString(url) {
 
 // 999  调用login.login
 // 100  调用autoRegister
-function get(url, params = {}, recall) {
+function get(url, params = {}) {
   params.hrhome_token = wx.getStorageSync('hrhome_token') || ''
   params.session_key = wx.getStorageSync('hrhome_token') || ''
   params.mintype = 5
@@ -103,41 +103,12 @@ function get(url, params = {}, recall) {
       data: params,
       header: getHeader(params),
       success: function(res) {
-        console.log('res',res)
-        if (res.data.result == 999 || res.data.result == 100 ) {
+        console.log('res', res)
 
-          // wx.showModal({
-          //   title: '提示',
-          //   content: '登录过期，请重新登录',
-          //   success(res) {
-          //     if (res.confirm) {
-          //       wx.navigateTo({
-          //         url: '/pages/login/login',
-          //       })
-          //       console.log('用户点击确定')
-          //     } else if (res.cancel) {
-          //       console.log('用户点击取消')
-          //     }
-          //   }
-          // })
-          // console.log("get等于999了，token过期返回expired为true")
-          // let userinfo = wx.getStorageSync('userInfo')
-
-            // wx.setStorageSync('expired', true)
-            // console.log("userinfo", userinfo)
-        }
-
-        //  else if (res.data.result == 100){
-        //   console.log("http检测没有登录")
-        //   wx.setStorageSync('isLogin', false)
-        // }
         resolve(wrap(res, params))
-
-        // debug.log(res)
       },
       fail: function(err) {
         reject(err)
-        // debug.log(err)
       },
        complete() {
          if (params.showLoading) {
@@ -164,36 +135,23 @@ function post(url, data, params = {}) {
      is_mina : 1
   
   });
-  // data.hrhome_token = wx.getStorageSync('hrhome_token') || ''
   return new Promise((resolve, reject) => {
     if (_data.showLoading){
       wx.showLoading()
     }
-    console.log("params",params)
-    console.log("_data",_data)
+
     wx.request({
       url: getUrl(url, params),
       method: 'POST',
       data: _data,
       header: getHeader(params),
       success: function(res) {
-        console.log('res',res)
-        if (res.data.result == 999){
-          // console.log("post等于999了，token过期返回expired为true")
-          // let userinfo = wx.getStorageSync('userInfo')
-          // console.log("userInfo",userinfo)
-          // wx.setStorageSync('expired',true)
-        }
-        //  else if (res.data.result == 100) {
-        //   console.log("http检测没有登录")
-        //   wx.setStorageSync('isLogin', false)
-        // }
+        console.log('res', res)
+
         resolve(wrap(res, params))
-        // debug.log('res', res)
       },
       fail: function(err) {
         reject(err)
-        // debug.log(err)
       },
       complete() {
         if (_data.showLoading) {
@@ -205,7 +163,6 @@ function post(url, data, params = {}) {
 }
 
 function put(url, data, params = {}) {
-  //debug.log(url, data, params)
   return new Promise((resolve, reject) => {
     data.hrhome_token = wx.getStorageSync('hrhome_token') || ''
     wx.request({
@@ -233,6 +190,7 @@ function remove(url, params = {}) {
       method: 'DELETE',
       header: getHeader(params),
       success: function(res) {
+
         resolve(wrap(res, params))
         // debug.log(res)
       },
@@ -251,29 +209,31 @@ function wrap(res, params) {
   const status = res.statusCode
   if (status >= 200 && status < 300) {
     res.ok = true
-  } else if (status >= 400 && status < 500) {
-    if (status === 401) {
-      wx.redirectTo({
-        url: '/pages/account/myClub'
-      })
-    } else {
-      if (!params.hideModal) {
-        wx.showModal({
-          title: '请求失败',
-          content: util.deepGet(res, 'data.message', constant.ERROR.REQUEST_FAILED),
-          showCancel: false
-        })
-      }
-    }
-  } else if (status >= 500 && status < 600) {
-    if (!params.hideToast) {
-      wx.showToast({
-        title: '服务器异常',
-        icon: 'none',
-        duration: 3000
-      })
-    }
   }
+
+  //  else if (status >= 400 && status < 500) {
+  //   if (status === 401) {
+  //     wx.redirectTo({
+  //       url: '/pages/account/myClub'
+  //     })
+  //   } else {
+  //     if (!params.hideModal) {
+  //       wx.showModal({
+  //         title: '请求失败',
+  //         content: util.deepGet(res, 'data.message', constant.ERROR.REQUEST_FAILED),
+  //         showCancel: false
+  //       })
+  //     }
+  //   }
+  // } else if (status >= 500 && status < 600) {
+  //   if (!params.hideToast) {
+  //     wx.showToast({
+  //       title: '服务器异常',
+  //       icon: 'none',
+  //       duration: 3000
+  //     })
+  //   }
+  // }
   return res
 };
 

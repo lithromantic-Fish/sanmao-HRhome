@@ -2,6 +2,8 @@ const {
   FavList
 } = require('../../utils/Class')
 const login = require('../../utils/login.js')
+let config = require('../../config');
+const util_wenda = require('../../utils/util_wenda');
 
 const app = getApp()
 const navs = ['谁收藏了我', '我收藏了谁']
@@ -67,7 +69,14 @@ Page({
       page
     }
 
-    FavList.find(prams).then(res => {
+    // FavList.find(prams).then(res => {
+    util_wenda.request({
+      url: config.hrlooUrl + FavList,
+      autoHideLoading: false,
+      data: prams,
+      method: "GET",
+      withSessionKey: true
+    }, this.getCards).then(res => {
       if (res && res.result === 0) {
         let {
           data,
@@ -90,9 +99,6 @@ Page({
             cards: [...self.data.cards, ...data.data]
           })
         }
-      }else if(res.result==999){
-        //更新登录过期
-        self.updataApi()
       }
     })
   },

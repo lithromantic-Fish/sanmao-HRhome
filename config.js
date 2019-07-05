@@ -1,6 +1,6 @@
 // api调用域名
 const apiUrl = 'https://wxapi.hrloo.com';
-
+const hrlooUrl = "https://www.hrloo.com/"
 // // 图片验证码地址
 // const captchaUrl = apiUrl + '/hrloo56.php?m=api&c=index&a=verifycode';
 
@@ -18,7 +18,7 @@ const wsUrl = 'wss://websocket.hrloo.com/chat';
 module.exports = {
 
   apiUrl: apiUrl,
-
+  hrlooUrl,
   // 三茅招聘小程序静态资源存储位置
   staticUrl: 'http://static.hrloo.com/hrloo56/wendaminiapp/img',
   // captchaUrl: captchaUrl,
@@ -110,5 +110,7 @@ module.exports = {
 
   // 获取用户信息后存储在storage中的key值
   authorizationURL: '/pages/login/login',
+  authPhoneURL: '/pages/authPhone/authPhone',
+
   userinfoRawDataKey: 'rawUser'
 };

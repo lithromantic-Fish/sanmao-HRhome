@@ -74,11 +74,11 @@ Page({
       })
     }
     else {
-      setTimeout(()=>{
+      // setTimeout(()=>{
         wx.switchTab({
           url: '../cardPage/cardPage'
         })
-      },3000)
+      // },3000)
     
     }
   }

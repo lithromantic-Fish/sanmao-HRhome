@@ -1,4 +1,6 @@
 const app = getApp();
+const util = require('../../utils/util_wenda');
+let config = require('../../config');
 
 const login = require('../../utils/login.js')
 const {
@@ -18,9 +20,9 @@ Page({
     userInfo: ''
   },
 
-  onLoad: function(options) {
-    query.page = 1
-    this.getCards();
+  onLoad: function (options) {
+    // query.page = 1
+    // this.getCards();
 
     // if (app.globalData.userInfo) {
     //   userInfo = app.globalData.userInfo
@@ -31,7 +33,7 @@ Page({
     // eventBus.on('delete', this.refreshCards)
   },
   onShow() {
-    
+
     let userinfo = wx.getStorageSync('userInfo')
     console.log("userInfo", userinfo)
     if (userinfo) {
@@ -66,8 +68,15 @@ Page({
     query.showLoading = true
     if (self.data.loadAll) return false;
 
-    return Card.find(query).then(res => {
-      if (res && res.result === 0) {
+    util.request({
+      url: config.hrlooUrl + Card,
+      autoHideLoading: false,
+      data: query,
+      method: "POST",
+      withSessionKey: true
+    }, self.getCards).then(res => {
+
+      if (res.result == 0) {
         let {
           data,
           pages,
@@ -90,15 +99,45 @@ Page({
             cards: [...self.data.cards, ...data.data]
           })
         }  
-      } else if(res.result==999){
-        // 当result的值不为0，为其他情况时
-        // console.log(res.msg)
-        self.updataApi()
       }
     })
+    // return Card.find(query).then(res => {
+    //   if (res && res.result === 0) {
+    //     let {
+    //       data,
+    //       pages,
+    //       pages_num
+    //     } = res.data
+
+    //     if (pages_num == 1 || pages_num == query.page) {
+    //       self.setData({
+    //         loadAll: true
+    //       })
+    //     }
+    //     //第一页
+    //     if (query.page == 1) {
+    //       self.setData({
+    //         cards: data.data
+    //       })
+    //     } else {
+    //       //分页
+    //       self.setData({
+    //         cards: [...self.data.cards, ...data.data]
+    //       })
+    //     }  
+    //   } else if(res.result==999){
+    //     // 当result的值不为0，为其他情况时
+    //     // console.log(res.msg)
+    //     self.updataApi()
+    //   }
+    // })
+
+
+
+
   },
   //下拉刷新
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     query.page = 1
     this.setData({
       loadAll: false
@@ -109,7 +148,7 @@ Page({
     })
   },
   //上拉加载更多
-  onReachBottom: function() {
+  onReachBottom: function () {
     const {
       loadAll
     } = this.data

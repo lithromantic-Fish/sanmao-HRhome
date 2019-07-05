@@ -94,12 +94,11 @@
     <!-- </view> -->
     <empty wx:if="{{cards.length==0}}"></empty>
   </view>
-
-  <view class="modal-box column-center" wx:if="{{!isLogin&&handleError}}">
+  <!-- <view class="modal-box column-center" wx:if="{{!isLogin&&handleError}}">
   <authorizePhone bind:getPhoneInfo='getPhoneInfo'></authorizePhone>
-</view>
+</view> -->
 
-  <view class="modal-box column-center" wx:if="{{!userInfo}}">
+<view class="modal-box column-center" wx:if="{{!userInfo}}">
   <authorize bind:getInfo='getInfo'></authorize>
 </view>
 

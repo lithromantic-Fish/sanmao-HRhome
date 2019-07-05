@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "授权手机号",
+  "usingComponents": {
+    "authorizePhone": "/component/authorize_phone/authorize_phone"
+    
+  }
+}

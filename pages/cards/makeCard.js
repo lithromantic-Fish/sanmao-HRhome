@@ -96,6 +96,8 @@ Page({
   getMyCard() {
     let self = this
     MyCard.find().then(_res => {
+      if (_res.result==0){
+
       let {
         data,
         industry
@@ -140,6 +142,23 @@ Page({
             nickname: userInfo.nickName
           })
         }
+      }
+
+    }else if(_res.result==999){
+        self.updataApiCard()
+    }
+   })
+
+  },
+  updataApiCard(){
+    const that = this
+    console.log("更新登录页")
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          that.getMyCard()
+        })
+
       }
     })
   },

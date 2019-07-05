@@ -55,7 +55,6 @@ Page({
       code = '110000'
     })
     myCard = wx.getStorageSync('card')
-    console.log("myCard",myCard)
 
     // let userInfo = wx.getStorageSync('userInfo')
 
@@ -66,7 +65,6 @@ Page({
   },
 
   onShow: function () {
- 
     // wx.getSetting({
     //   success: res => {
     //     if (res.authSetting['scope.userInfo']) {
@@ -81,6 +79,7 @@ Page({
     // })
     let that = this
     let userInfo = wx.getStorageSync('userInfo')      //为了去掉蒙层
+    console.log("recomond",userInfo)
     that.setData({
       userInfo,
       isLogin: util._getStorageSync('isLogin') == 1 ? true : false
@@ -93,7 +92,6 @@ Page({
   },
 
   getPhoneInfo(e) {
-    console.log('e', e.detail.isLogin)
     if (e.detail.isLogin) {
       this.setData({
         isLogin: e.detail.isLogin
@@ -163,7 +161,7 @@ Page({
   //强力推荐
 
   getRecommend(){
-    
+
     let {
       page,
     } = self.data
@@ -172,61 +170,96 @@ Page({
       // page,
     
     }
-    RecommendList.create(parms).then(res => {
-      console.log("parms", parms)
-      if (res && res.result === 0) {
+    console.log("RecommendList", RecommendList)
+
+    util.request({
+      url: config.hrlooUrl + RecommendList,
+      data: parms,
+      autoHideLoading: false,
+
+      method: "POST",
+      withSessionKey: true
+    }, self.getRecommend).then(res => {
+
+      if (res.result == 0) {
         self.setData({
-          recommendList:res.data,
-          loadAll:true
-        })
-        // //第一页
-        // if (page == 1) {
-        //   self.setData({
-        //     recommendList: data
-        //   })
-        // } else {
-        //   //分页
-        //   self.setData({
-        //     recommendList: [...self.data.recommendList, ...data]
-        //   })
-        // }
-      }else if(res.result==999){
-        
-        let userinfo = wx.getStorageSync('userInfo')
-        self.getInfo(userinfo)
-        // this.setData({
-        //   noUserInfo: true
-        // })
-      } else if (res.result == 100) {
-        self.setData({
-          isLogin: false,
-          handleError:true
+          recommendList: res.data,
+          loadAll: true
         })
       }
 
     })
+
+    // RecommendList.create(parms).then(res => {
+    //   if (res && res.result === 0) {
+    //     self.setData({
+    //       recommendList:res.data,
+    //       loadAll:true
+    //     })
+    //     // //第一页
+    //     // if (page == 1) {
+    //     //   self.setData({
+    //     //     recommendList: data
+    //     //   })
+    //     // } else {
+    //     //   //分页
+    //     //   self.setData({
+    //     //     recommendList: [...self.data.recommendList, ...data]
+    //     //   })
+    //     // }
+    //   }else if(res.result==999){
+        
+    //     let userinfo = wx.getStorageSync('userInfo')
+    //     self.getInfo(userinfo)
+    //     // this.setData({
+    //     //   noUserInfo: true
+    //     // })
+    //   } else if (res.result == 100) {
+    //     self.setData({
+    //       isLogin: false,
+    //       handleError:true
+    //     })
+    //   }
+
+    // })
   },
 
 //获取首页轮播
   getBanner() {
-    BannerList.create().then(res => {
-      console.log("轮播res", res)
-      if(res&&res.result==0){
-      this.setData({
-        imgUrls: res.data
-      })
-      } 
-      else if (res.result == 999 ) {
-        let userinfo = wx.getStorageSync('userInfo')
-        self.getInfo(userinfo)
-      }else if(res.result==100){
-        self.setData({
-          isLogin:false,
-          handleError: true
+
+    util.request({
+      url: config.hrlooUrl + BannerList,
+      autoHideLoading: false,
+
+      method: "POST",
+      withSessionKey: true
+    }, self.getBanner).then(res => {
+
+      if (res.result == 0) {
+        this.setData({
+          imgUrls: res.data
         })
       }
 
     })
+
+    // BannerList.create().then(res => {
+    //   if(res&&res.result==0){
+    //   this.setData({
+    //     imgUrls: res.data
+    //   })
+    //   } 
+      // else if (res.result == 999 ) {
+      //   let userinfo = wx.getStorageSync('userInfo')
+      //   self.getInfo(userinfo)
+      // }else if(res.result==100){
+      //   self.setData({
+      //     isLogin:false,
+      //     handleError: true
+      //   })
+      // }
+
+    // })
 
   },
 //轮播点击
@@ -251,7 +284,6 @@ Page({
           // this.setData({
           //   hasClick:true
           // })
-          wx.setStorageSync("expired", false)
           this.getRecommend()
           this.getBanner()
         })

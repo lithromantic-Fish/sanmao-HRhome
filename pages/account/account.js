@@ -40,16 +40,17 @@ Page({
 
     self = this
     // console.info('options',options)  
-    self.getMyCardInfo()  
 
     let userinfo = wx.getStorageSync('userInfo')
     if (userinfo) {
+      self.getMyCardInfo()  
       this.setData({
         userInfo: userinfo,
         isLogin: util._getStorageSync('isLogin') == 1 ? true : false
 
       })
     }
+    console.log("userinfo", userinfo)
   },
   onShareAppMessage() {
     let {
@@ -169,7 +170,10 @@ _getPhoneNumber: function (res) {
     console.log(res.detail.iv)
     let data = res.detail
     if (data.encryptedData && data.iv) {
+      // util.updateSessionKeyApi().then(result=>{
+
       this._confirmEvent(data)
+      // })
 
 
     } else {

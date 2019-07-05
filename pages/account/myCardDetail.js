@@ -1,4 +1,6 @@
 const login = require('../../utils/login.js')
+const util = require('../../utils/util_wenda');
+let config = require('../../config');
 
 const app = getApp()
 const {
@@ -70,13 +72,18 @@ Page({
     }
     let args = Object.assign(prams, opts)
 
-    Card.find(args).then(res => {
-      if (res && res.result === 0 && res.data) {
-        let {
-          data
-        } = res.data
+    util.request({
+      url: config.hrlooUrl + Card,
+      autoHideLoading: false,
+      data: args,
+      method: "GET",
+      withSessionKey: true
+    }, self.getMoreCards).then(res => {
+
+      if (res.result == 0) {
+        console.log("res.data.data", res.data.data.data)
         this.setData({
-          cards: data.data
+          cards: res.data.data.data
         })
       }
     })
@@ -112,24 +119,45 @@ Page({
 
   //获取我的名片详情
   getMyCardDetail() {
-    MyCardDetail.find().then(res => {
+
+    const that = this
+
+    util.request({
+      url: config.apiUrl + MyCardDetail,
+      // data: data,
+      autoHideLoading: false,
+      method: "GET",
+      withSessionKey: true
+    }, that.getMyCardDetail).then(res => {
+
+      // MyCardDetail.find().then(res => {
+
+
       if (res && res.result === 0 && res.data) {
         let {
           card_info,
           notify
         } = res.data
-        console.info(res.data)
-        self.setData({
+        that.setData({
           card: card_info,
           notify: notify,
-          view_point: res.data.view_point,
-          fav_point: res.data.fav_point,
-          zan_point: res.data.zan_point
+          cardAllInfo: res.data
         })
-      }else if(res.result==999){
-        self.updataApi()
+      } else if (res.result == 88) {
+        that.setData({
+          card: []
+        })
+      } else if (res.result == 999) {
+        that.updataApi()
+      } else if (res.result == 100) {
+        that.setData({
+          isLogin: false,
+          handleError: true        //假如是接口报100，才调用获取手机号接口
+        })
       }
     })
+
+
   },
 
   updataApi() {

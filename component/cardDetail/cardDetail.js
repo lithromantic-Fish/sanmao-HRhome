@@ -52,6 +52,30 @@ Component({
         url: '/pages/account/message',
       })
     },
+    deleteCards(){
+      let prams = {
+        card_id: self.data.card.id
+      }
+      util.request({
+        url: config.apiUrl + DeleteCard,
+        data: prams,
+        autoHideLoading: false,
+        method: "POST",
+        withSessionKey: true
+      }).then(res => {
+        wx.showToast({
+          title: '删除成功',
+          duration: 2000,
+          icon: 'success'
+        })
+        eventBus.emit('delete')
+        setTimeout(() => {
+          wx.navigateBack()
+        }, 2000);
+      })
+    },
+
+    
     tapMenu(e) {
       console.log(e)
       let self = this
@@ -62,20 +86,8 @@ Component({
           confirmColor: '#4c89fb',
           success: res => {
             if (res.confirm) {
-              let prams = {
-                card_id: self.data.card.id
-              }
-              DeleteCard.find(prams).then(res => {
-                wx.showToast({
-                  title: '删除成功',
-                  duration: 2000,
-                  icon: 'success'
-                })
-                eventBus.emit('delete')
-                setTimeout(() => {
-                  wx.navigateBack()
-                }, 2000);
-              })
+              self.deleteCards();
+    
               
               // const id = app.globalData.openid + '/' + this.data.card.BusId
               // DeleteCards.get(id).then(res => {

@@ -2,6 +2,9 @@ const app = getApp()
 const debug = require('../../utils/debug')
 const data = require('../../mock/index')
 const { Comment, AddComment, AddActivityPL, DeleteComment, ActComment, DelActivityPL, GetActivityPL, ActAddCom, ActDelCom} = require('../../utils/Class')
+let config = require('../../config');
+const util_wenda = require('../../utils/util_wenda');
+
 let id
 let type
 let url = Comment
@@ -60,7 +63,15 @@ Page({
       activity_id: this.data.activeId
     }
   
-    GetActivityPL.create(parms).then(res=>{
+    // GetActivityPL.create(parms).then(res=>{
+      util_wenda.request({
+        url: config.hrlooUrl + GetActivityPL,
+        autoHideLoading: false,
+        data: parms,
+        method: "POST",
+        withSessionKey: true
+      }, this.getComments, args).then(res => {
+
       if (this.data.page==1) {
         this.setData({
           totalPages: res.data.pages,
@@ -102,6 +113,7 @@ Page({
       wx.showToast({
         title:'您还没有输入内容哦',   
       })
+  
     }else{
       // let data
       // if(this.data.type){
@@ -137,16 +149,28 @@ Page({
         text: this.data.content,
         activity_id:this.data.activeId
       }
-      AddActivityPL.create(parms).then(res=>{
+      // AddActivityPL.create(parms).then(res=>{
+        util_wenda.request({
+          url: config.hrlooUrl + AddActivityPL,
+          autoHideLoading: false,
+          data: parms,
+          method: "POST",
+          withSessionKey: true
+        }, this.addComment).then(res => {
+          if(res.result==0){
+
         this.getComments()
            wx.showToast({
           title:'评论成功',
           icon:'success',
           duration:2000
         })
-           this.setData({
-          content:''
+        this.setData({
+          content: ''
         })
+     }
+
+    
       })
     }
   },
@@ -186,30 +210,11 @@ Page({
       content: '是否删除评论'+content.text,
       confirmColor: "#4c89fb",
       success:res=>{
+
         if(res.confirm){
-          const parms = {
-            showLoading: true,
+          this.deleteComments(plid)
 
-            plid: plid
-          }
-          DelActivityPL.create(parms).then(res=>{
-            if(res.result==0){
 
-            wx.showToast({
-                title:'删除成功',
-                icon:'success',
-                duration:2000
-              })
-            }
-            else{
-              wx.showToast({
-                icon:'info',
-                title: res.msg,
-                duration: 2000
-              })
-            }
-            this.getComments()
-          })
         }
       }
 
@@ -244,6 +249,41 @@ Page({
     //   }
     // })
 
+  },
+
+  deleteComments(plid){
+    const parms = {
+      showLoading: true,
+
+      plid: plid
+    }
+
+    util_wenda.request({
+      url: config.hrlooUrl + DelActivityPL,
+      autoHideLoading: false,
+      data: parms,
+      method: "POST",
+      withSessionKey: true
+    }, this.deleteComments, plid).then(res => {
+
+      // DelActivityPL.create(parms).then(res=>{
+      if (res.result == 0) {
+
+        wx.showToast({
+          title: '删除成功',
+          icon: 'success',
+          duration: 2000
+        })
+      }
+      // else {
+      //   wx.showToast({
+      //     icon: 'info',
+      //     title: res.msg,
+      //     duration: 2000
+      //   })
+      // }
+      this.getComments()
+    })
   },
   onReady: function () {
 

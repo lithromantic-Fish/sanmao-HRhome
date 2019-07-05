@@ -40,7 +40,12 @@ Component({
     master_status:{     //是否答主
       type:Number,
       value:null
+    },
+    myCard:{
+      type:Object,
+      value:{}
     }
+    
   },
  
   /**
@@ -52,7 +57,6 @@ Component({
     isLike: false,    //是否点赞
     noReplay: false,   //是否没有评论
     incontent: {}      //音频实例
-
   },
 
   /**
@@ -70,6 +74,22 @@ Component({
       }
 
     },
+  },
+  pageLifetimes: {
+    show: function () {
+      // 页面被展示
+      this.setData({
+
+      myCard: wx.getStorageSync('card') || app.globalData.card
+      })
+
+    },
+    hide: function () {
+      // 页面被隐藏
+    },
+    resize: function (size) {
+      // 页面尺寸变化
+    }
   },
   
   methods: {
@@ -131,6 +151,12 @@ Component({
 
     //支付人气值查看回答
     viewAnswer(e){
+      if (!this.data.myCard) {
+        console.log("没有名片")
+        this.noCard();
+        return
+
+      }
       let that = this
       let id = e.currentTarget.dataset.id
       let index = e.currentTarget.dataset.index  
@@ -181,6 +207,12 @@ Component({
 
     //播放语音
     playVoice(e) {
+      if (!this.data.myCard) {
+        console.log("没有名片")
+        this.noCard();
+        return
+
+      }
       wx.showLoading({
         title: '加载中...',
       })
@@ -358,6 +390,12 @@ Component({
 
     //回复评论
     replay(e) {
+      if (!this.data.myCard) {
+        console.log("没有名片")
+        this.noCard();
+        return
+
+      }
       console.log(e.currentTarget.dataset)
       let d = e.currentTarget.dataset
       let that = this
@@ -405,8 +443,29 @@ Component({
       }
     },
 
+    //没有名片
+    noCard() {
+      wx.showModal({
+        title: '提示',
+        content: '您还没有名片，是否立即前往',//已埋登录
+        success: res => {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../cards/makeCard',
+            })
+          }
+        }
+      })
+    },
+
     //点赞
     like: util.debounce(function (e) {
+      if (!this.data.myCard){
+        console.log("没有名片")
+        this.noCard();
+        return
+      }
+      
       let formId = e.detail.formId
 
       console.log('点赞的item' + e.currentTarget.dataset.item)

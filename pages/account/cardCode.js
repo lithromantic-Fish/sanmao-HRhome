@@ -1,4 +1,6 @@
 const app = getApp()
+let config = require('../../config');
+const util_wenda = require('../../utils/util_wenda');
 
 const {
   CardImg
@@ -19,16 +21,8 @@ Page({
     self.setData({
       card: card
     })
+    this.getCardImage()
 
-    CardImg.find().then(res => {
-      // console.info(res)
-      if (res && res.result === 0) {
-        let data = res.data
-        self.setData({
-          shareImage: data
-        })
-      }
-    })
 
     // const data = {
     //   scene: 'avatar',
@@ -43,6 +37,24 @@ Page({
     //     shareImage
     //   })
     // })
+  },
+  getCardImage(){
+    util_wenda.request({
+      url: config.hrlooUrl + CardImg,
+      autoHideLoading: false,
+      method: "GET",
+      withSessionKey: true
+    }, this.getCardImage).then(res => {
+      // CardImg.find().then(res => {
+      // console.info(res)
+      if (res && res.result === 0) {
+        let data = res.data
+        self.setData({
+          shareImage: data
+        })
+      }
+    })
+
   },
   save() {
     const file = wx.getFileSystemManager();

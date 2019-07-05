@@ -8,7 +8,8 @@ const {
   CheckApply,
   Apply
 } = require('../../utils/Class.js')
-
+let config = require('../../config');
+const util_wenda = require('../../utils/util_wenda');
 const http = require('../../utils/http.js')
 let activity = null;
 let order = null;
@@ -99,7 +100,15 @@ Page({
       // identity: this.data.activity.identity,
       activity_id: id
     }
-    CheckApply.create(parms).then(res => {
+    // CheckApply.create(parms).then(res => {
+    util_wenda.request({
+      url: config.hrlooUrl + CheckApply,
+      data: data,
+      autoHideLoading: false,
+      data: parms,
+      method: "POST",
+      withSessionKey: true
+    }, this.getEnterInfo, id).then(res => {
       if (res.result == 0) {
         console.log('res', res)
         this.setData({

@@ -3,6 +3,9 @@ const data = require('../../mock/index.js')
 const debug = require('../../utils/debug.js')
 const http = require('../../utils/http.js')
 const util = require('../../utils/util.js')
+let config = require('../../config');
+const util_wenda = require('../../utils/util_wenda');
+
 const { Apply, CheckApply, ActAddApply } = require('../../utils/Class.js')
 let activity = null;
 Page({
@@ -52,7 +55,15 @@ getEnterInfo(id){
     // identity: this.data.activity.identity,
     activity_id: id
   }
-  CheckApply.create(parms).then(res => {
+  // CheckApply.create(parms).then(res => {
+  util_wenda.request({
+    url: config.hrlooUrl + CheckApply,
+    data: data,
+    autoHideLoading: false,
+    data: parms,
+    method: "POST",
+    withSessionKey: true
+  }, this.getEnterInfo, id).then(res => {
     if (res.result == 0) {
         console.log('res',res)
         this.setData({

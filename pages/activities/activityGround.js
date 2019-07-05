@@ -1,4 +1,6 @@
 const app = getApp()
+let util = require('../../utils/util_wenda');
+let config = require('../../config');
 
 const login = require('../../utils/login.js')
 let activities
@@ -80,11 +82,16 @@ Page({
 
     }
 
-    ActivityList.create(parms).then(res => {
-      // console.log("res", res.data.data)
-      // this.activities = res.data.data
+    util.request({
+      url: config.hrlooUrl + ActivityList,
+      data: parms,
+      autoHideLoading: false,
 
-      if (res && res.result === 0) {
+      method: "POST",
+      withSessionKey: true
+    }, self.getActiveInfo).then(res => {
+
+      if (res.result == 0) {
         let {
           data,
           count,
@@ -108,11 +115,7 @@ Page({
             activities: [...self.data.activities, ...data]
           })
         }
-      }else if(res.result==999){
-        self.updataApi()
-
       }
-
     })
   },
   //更新登录过期
@@ -159,19 +162,56 @@ Page({
   //   //   })
   //   // })      
   // },
+  // getBanner() {
+
+  //   BannerList.find({
+  //     showLoading: true,
+  //   }).then(res => {
+  //     console.log(res)
+  //     this.setData({
+  //       imgUrls: res.data
+  //     })
+  //   })
+
+  // },
+//获取首页轮播
   getBanner() {
 
-    BannerList.find({
-      showLoading: true,
-    }).then(res => {
-      console.log(res)
-      this.setData({
-        imgUrls: res.data
-      })
+    util.request({
+      url: config.hrlooUrl + BannerList,
+      autoHideLoading: false,
+
+      method: "POST",
+      withSessionKey: true
+    }, self.getBanner).then(res => {
+
+      if (res.result == 0) {
+        this.setData({
+          imgUrls: res.data
+        })
+      }
+
     })
 
-  },
+    // BannerList.create().then(res => {
+    //   if(res&&res.result==0){
+    //   this.setData({
+    //     imgUrls: res.data
+    //   })
+    //   } 
+      // else if (res.result == 999 ) {
+      //   let userinfo = wx.getStorageSync('userInfo')
+      //   self.getInfo(userinfo)
+      // }else if(res.result==100){
+      //   self.setData({
+      //     isLogin:false,
+      //     handleError: true
+      //   })
+      // }
 
+    // })
+
+  },
   gotoWeb(e) {
     wx.navigateTo({
       url: e.currentTarget.dataset.image.BanUrl

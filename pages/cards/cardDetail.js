@@ -70,7 +70,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    
     self = this
+    myCard = wx.getStorageSync('card') || app.globalData.card
+    // myCard = app.globalData.card
+    console.log("myCard", myCard)
+    self.setData({
+      card_id: options.card_id ? options.card_id : '',
+      isLogin: util._getStorageSync('isLogin') == 1 ? true : false
+
+    })
     // aggress = false
     // console.log(options)
 
@@ -81,15 +90,11 @@ Page({
     console.log('1',wx.getStorageSync('card'))
     console.log('2', app.globalData.card)
 
-    myCard = wx.getStorageSync('card') || app.globalData.card
-    // myCard = app.globalData.card
-    console.log("myCard",myCard)
-    self.setData({
-      card_id: options.card_id ? options.card_id : '',
-      isLogin: util._getStorageSync('isLogin') == 1 ? true : false
-
-    })
+  
     self.getCardInfo()
+
+  },
+  onShow(){
 
   },
 
@@ -166,10 +171,17 @@ Page({
       card_id: card_id,
       showLoading:true
     }
-    CardDetail.find(params).then(res => {
-      if (res && res.result === 0) {
-    
+    util.request({
+      url: config.hrlooUrl + CardDetail,
+      autoHideLoading: false,
+      data: params,
+      method: "POST",
+      withSessionKey: true
+    }, self.getCardInfo).then(res => {
+    // CardDetail.find(params).then(res => {
 
+      if (res && res.result === 0) {
+ 
         if (res.data.myself) {
           wx.redirectTo({
             url: '/pages/account/myCardDetail',
@@ -237,7 +249,7 @@ Page({
         if (card.change_status == 2) {
           self.getMoreCards()
         }
-      } else if (res.result == 999 || res.result == 100){
+      } else if (res.result == 999){
          self.updataApi()
         
       }
@@ -251,6 +263,8 @@ Page({
       //   }, 2000)
       // }
     })
+
+
   },
   updataApi() {
     const that = this
@@ -328,7 +342,17 @@ Page({
           card_id: card.id
         }
         // console.info(data)
-        ChangeCard.create(data).then(res => {
+
+        // ChangeCard.create(data).then(res => {
+
+        util.request({
+          url: config.hrlooUrl + ChangeCard,
+          autoHideLoading: false,
+          data: data,
+          method: "POST",
+          withSessionKey: true
+        }).then(res => {
+
           console.info(res)
           if (res && res.result == 0) {
             wx.showToast({
@@ -353,7 +377,10 @@ Page({
                 }
               }
             })
-          }else{
+          }else if(res.result==999){
+            this.updataApiChange(e)
+          }
+          else{
             wx.showToast({
               title: res.msg,
               icon:'none'
@@ -381,6 +408,18 @@ Page({
       }
       // }
     }
+  },
+  updataApiChange(e){
+    const that = this
+    wx.login({
+      success: res => {
+        login.login(res.code).then(res => {
+          that.ChangeCard(e)
+      
+        })
+
+      }
+    })
   },
   allowChange() {
     wx.showModal({
@@ -521,11 +560,23 @@ Page({
     //     duration: 2000
     //   })
     // } else {
-    FavCard.create({
-      showLoading: true,
 
+    var parms = {
+      showLoading: true,
       card_id: card.id
-    }).then(res => {
+    }
+
+    util.request({
+      url: config.hrlooUrl + FavCard,
+      autoHideLoading: false,
+      data: parms,
+      method: "POST",
+      withSessionKey: true
+    }, self._favCard).then(res => {
+
+  
+    // FavCard.create(parms).then(res => {
+
       if (res && res.result === 0) {
         res.data && self.setData({
           'card.fav_status': res.data.status
@@ -537,6 +588,9 @@ Page({
         })
       }
     })
+
+
+    
     // let id = app.globalData.openid + '/' + this.data.card.id;
     // let starStatus = 'card.CardStatus';
     // if (this.data.card.CardStatus === 0) { // 未收藏 然后被收藏

@@ -1,4 +1,5 @@
 // const debug = require('utils/debug.js')
+//新版
 const {
   Openid
 } = require('utils/Class.js')

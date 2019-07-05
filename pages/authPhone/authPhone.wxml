@@ -1,0 +1,4 @@
+<!--pages/authPhone/authPhone.wxml-->
+<view style="diplay:flex;justify-content: center;margin-left:120rpx;">
+  <authorizePhone bind:getPhoneInfo='getPhoneInfo'></authorizePhone>
+</view>

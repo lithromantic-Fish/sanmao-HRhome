@@ -293,17 +293,17 @@ Page({
   },
   //去活动详情页面
   toMore() {
-    if (!this.data.card) {
-      console.log('没有名片')
-      this.noCard()
-      return
-    }else{
+    // if (!this.data.card) {
+    //   console.log('没有名片')
+    //   this.noCard()
+    //   return
+    // }else{
       console.log("111111111111111", this.data)
       console.log(this.data.activity.imgs)
       wx.navigateTo({
         url: 'detail?images=' + JSON.stringify(this.data.activity.imgs) + '&id=' + this.data.activity.id
       })
-    }
+    // }
   },
   // getActivity(id){
   //   const that = this
@@ -413,7 +413,17 @@ Page({
 
         activity_id: this.data.activity.id
       }
-      FavActivity.create(parms).then(res => {
+
+      // FavActivity.create(parms).then(res => {
+
+        util.request({
+          url: config.hrlooUrl + FavActivity,
+          autoHideLoading: false,
+          data: parms,
+          method: "POST",
+          withSessionKey: true
+        }, this.favor, e).then(res => {
+
         if (res.result == 0) {
           if (e.detail.formId) {
             this.collectFormID(e.detail.formId)
@@ -421,9 +431,6 @@ Page({
           }
           this.getActivity();
 
-        }else if(res.result==999){
-          const type = 'favor'
-          this.updataApi(e,type)
         }
       })
       // if (!iscollect){
@@ -639,7 +646,15 @@ Page({
 
         activity_id: this.data.activity.id
       }
-      ZanActivity.create(parms).then(res => {
+      util.request({
+        url: config.hrlooUrl + ZanActivity,
+        autoHideLoading: false,
+        data: parms,
+        method: "POST",
+        withSessionKey: true
+      }, this.like, e).then(res => {
+      // ZanActivity.create(parms).then(res => {
+
         if(res.result==0){
 
           if (e.detail.formId) {
@@ -647,10 +662,6 @@ Page({
 
           }
           this.getActivity();
-        }else if(res.result==999){
-          const type = 'isLike'
-          this.updataApi(e, type)
-
         }
       })
 
@@ -753,6 +764,7 @@ Page({
   },
   //立即报名
   enter(e) {
+    console.log(e)
     if (!this.data.card) {
       this.noCard()
     } else {
@@ -766,8 +778,22 @@ Page({
 
       }
       console.log(parms)
-      CheckApply.create(parms).then(res => {
-        if (res.result == 0) {
+      
+      // CheckApply.create(parms).then(res => {
+      //   if (res.result == 0) {
+
+
+          util.request({
+            url: config.hrlooUrl + CheckApply,
+            data: data,
+            autoHideLoading: false,
+            data: parms,
+            method: "POST",
+            withSessionKey: true
+          },this.enter,e).then(res => {
+
+            if (res.result == 0) {
+
           this.collectFormID(e.detail.formId)
           console.log(res)
           obj.activity = res.data.activity
@@ -780,12 +806,14 @@ Page({
             url: 'enter?id='+this.data.activity.id,
           })
           console.log('obj', obj)
-        }else if(res.result==999){
-          const type = 'isEnter'
-          // console.log("res", res)
-          this.updataApi(e, type)
+        }
 
-        } 
+        // else if(res.result==999){
+        //   const type = 'isEnter'
+        //   // console.log("res", res)
+        //   this.updataApi(e, type)
+
+        // } 
         // else {
         //   wx.showToast({
         //     icon: 'none',

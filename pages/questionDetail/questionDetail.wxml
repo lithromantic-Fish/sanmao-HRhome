@@ -86,7 +86,7 @@
 <view style="padding-bottom:98rpx;">
 
   <!-- 评论数组 -->
-  <qListDetail bind:updateDetailData="_updateDetailData" bind:getVoiceStatus="_getVoiceStatus"  isSelf="{{isSelf}}" isLogin="{{isLogin}}" plList="{{plList}}" master_status="{{master_status}}" questesId="{{questesId}}" ></qListDetail>
+  <qListDetail bind:updateDetailData="_updateDetailData" bind:getVoiceStatus="_getVoiceStatus"  isSelf="{{isSelf}}" isLogin="{{isLogin}}" plList="{{plList}}" master_status="{{master_status}}" questesId="{{questesId}}" myCard="{{myCard}}"></qListDetail>
 <!-- 
   <view>
     <view>

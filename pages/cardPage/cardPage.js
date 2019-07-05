@@ -1,5 +1,6 @@
 const login = require('../../utils/login.js')
 const util = require('../../utils/util_wenda');
+let config = require('../../config');
 
 const app = getApp()
 const {
@@ -41,9 +42,7 @@ Page({
     notify: false, //是否有未读系统消息
     userInfo: '',
     cardAllInfo: {},
-    expired: false,
     isLogin:false,
-    handleError:false //是否报100未登录标识
   },
 
   /**
@@ -51,36 +50,39 @@ Page({
    */
   onLoad: function (options) {
     // selectedTab = navs[0]
-    self = this
-    let userinfo = wx.getStorageSync('userInfo')
+    // self = this
+    // let userinfo = wx.getStorageSync('userInfo')
  
-    if (userinfo) {
-      self.setData({
-        userInfo: userinfo
-      })
-      // self.getMoreCards() //猜你认识
-      // self.getMyCardDetail() //我的名片详情
-    }
-    console.log("self",self.data.userInfo)
+    // if (userinfo) {
+    //   self.setData({
+    //     userInfo: userinfo
+    //   })
+    //   // self.getMoreCards() //猜你认识
+    //   // self.getMyCardDetail() //我的名片详情
+    // }
 
   },
 
   onShow() {
-    let userinfo = wx.getStorageSync('userInfo')
-    
     self = this
-    self.getMyCardDetail() //我的名片详情
-    if (!self.data.cards || self.data.cards.length==0){
-      console.log("走了这")
-      self.getMoreCards() //猜你认识
-    }
+    let userinfo = wx.getStorageSync('userInfo')
+    console.log("userInfo",userinfo)
+    if (userinfo){
 
+      self.getMyCardDetail() //我的名片详情
+
+      if (!self.data.cards || self.data.cards.length==0){
+        self.getMoreCards() //猜你认识
+      }
+    }
+    
     self.setData({
       userInfo: userinfo,
       isLogin: util._getStorageSync('isLogin') == 1 ? true : false
     })
     
   },
+  
   getPhoneInfo(e){
     if (e.detail.isLogin){
       this.setData({
@@ -117,7 +119,7 @@ Page({
       wx.login({
         success: res => {
           login.login(res.code, e.detail.userInfo).then(res => {
-            console.log("我的登录",res)
+         
             this.setData({
               userInfo: e.detail.userInfo,
             })
@@ -134,9 +136,6 @@ Page({
         }
       })
     // }
-
-    //  wx.setStorageSync("expired", false)
-
   },
   //分享
   onShareAppMessage() {
@@ -150,31 +149,49 @@ Page({
     const that = this
     let prams = {
       rand: 1,
+      // page:query.page
       // showLoading:true
     }
-    let args = Object.assign(prams, opts)
-    console.log(args)
+    let args = Object.assign(prams, opts,)
 
-    Card.find(args).then(res => {
-      console.log("授权",res)
-      if (res && res.result === 0 && res.data) {
-        let {
-          data
-        } = res.data
+
+    // Card.find(args).then(res => {
+    //   if (res && res.result === 0 && res.data) {
+    //     let {
+    //       data
+    //     } = res.data
+    //     this.setData({
+    //       cards: data.data
+    //     })
+    //   } else if (res.result == 999 ) {
+    //     that.updataApi()
+    //     // let userinfo = wx.getStorageSync('userInfo')
+    //     // that.getInfo(userinfo)
+    //   }else if(res.result ==100){
+    //     that.setData({
+    //       isLogin:false,
+    //       handleError:true        //假如是接口报100，才调用获取手机号接口
+    //     })
+    //   }
+    // })
+    util.request({
+      url: config.hrlooUrl + Card,
+      autoHideLoading: false,
+      data: args,
+      method: "GET",
+      withSessionKey: true
+    }, self.getMoreCards).then(res => {
+
+      if (res.result == 0) {
+        console.log("res.data.data", res.data.data.data)
         this.setData({
-          cards: data.data
-        })
-      } else if (res.result == 999 ) {
-        that.updataApi()
-        // let userinfo = wx.getStorageSync('userInfo')
-        // that.getInfo(userinfo)
-      }else if(res.result ==100){
-        that.setData({
-          isLogin:false,
-          handleError:true        //假如是接口报100，才调用获取手机号接口
+          cards: res.data.data.data
         })
       }
     })
+
+    
+
   },
   // 猜你认识 tab
   changeTab(e) {
@@ -182,11 +199,8 @@ Page({
     let {
       card
     } = that.data
-    // console.info('changeTab e ', e, card)
     if (e.detail.tab !== selectedTab.title) {
       let opts = {}
-      // console.info('e.detail.tab', e.detail.tab)
-      // console.info('self.data.nav', self.data.nav)
       selectedTab = navs.find(item => {
         return item.title === e.detail.tab
       })
@@ -224,7 +238,6 @@ Page({
   _confirmEvent: function (opts) {
     let self = this
     let data = {}
-    console.log("opts", opts)
     if (opts.currentTarget) {
       data = arguments[0].detail.getPhoneNumberData
     } else {
@@ -241,9 +254,7 @@ Page({
       method: "POST",
       withSessionKey: true
     }).then(res => {
-      console.log("resfagewa",res)
       if (res.result == 0) {
-        console.log("res.dta",res)
         util._setStorageSync('isLogin', 1)
         self.setData({
           isLogin: true,
@@ -265,47 +276,44 @@ Page({
 
   //获取我的名片详情
   getMyCardDetail() {
+
     const that = this
-    MyCardDetail.find().then(res => {
+
+    util.request({
+      url: config.apiUrl + MyCardDetail,
+      // data: data,
+      autoHideLoading: false,
+      method: "GET",
+      withSessionKey: true
+    }, that.getMyCardDetail).then(res => {
+
+    // MyCardDetail.find().then(res => {
+
+
       if (res && res.result === 0 && res.data) {
         let {
           card_info,
           notify
         } = res.data
-        console.info(res.data)
         that.setData({
           card: card_info,
           notify: notify,
           cardAllInfo: res.data
         })
-        console.log("this.data.da", that.data)
       } else if (res.result == 88) {
         that.setData({
           card: []
         })
       } else if (res.result == 999) {
         that.updataApi()
-        // wx.setStorageSync("expired", true)
-        // that.setData({
-        //   expired: true
-        // })
-        // let userinfo = wx.getStorageSync('userInfo')
-        // console.log("userinfo",userinfo)
-        // that.getInfo(userinfo)
-      } else if (res.result == 100) {
-        that.setData({
-          isLogin: false,
-          handleError: true        //假如是接口报100，才调用获取手机号接口
-
-        })
       }
     })
   
+
   },
   //更新登录过期
   updataApi() {
     const that = this
-    console.log("更新登录页")
     wx.login({
       success: res => {
         login.login(res.code).then(res => {
@@ -322,5 +330,15 @@ Page({
     //   wx.hideNavigationBarLoading()
     //   wx.stopPullDownRefresh()
     // })
+  },
+  //上拉加载更多
+  onReachBottom: function () {
+    // const {
+    //   loadAll
+    // } = this.data
+    // if (!loadAll) {
+    //   query.page++
+    //   this.getMoreCards()
+    // }
   },
 })

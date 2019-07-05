@@ -2,7 +2,8 @@ const {
   ViewList,
 } = require('../../utils/Class')
 const login = require('../../utils/login.js')
-
+let config = require('../../config');
+const util_wenda = require('../../utils/util_wenda');
 // const debug = require('../../utils/debug')
 const navs = ['谁看过我', '我看过谁']
 const app = getApp()
@@ -44,7 +45,16 @@ Page({
       page
     }
 
-    ViewList.find(prams).then(res=>{
+    util_wenda.request({
+      url: config.hrlooUrl + ViewList,
+      autoHideLoading: false,
+      data: prams,
+      method: "GET",
+      withSessionKey: true
+    }, this.getCards).then(res => {
+    // ViewList.find(prams).then(res=>{
+
+
       if (res && res.result === 0) {
         let {
           data,
@@ -69,9 +79,6 @@ Page({
             cards: [...self.data.cards, ...data.data]
           })
         }  
-      }else if(res.result==999){
-        self.updataApi()
-
       }
     })
     // if (selectedTab === '谁看过我') {

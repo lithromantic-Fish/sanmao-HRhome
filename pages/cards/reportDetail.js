@@ -2,6 +2,9 @@ let images = []
 const upload = require('../../utils/upload')
 const debug = require('../../utils/debug')
 const app = getApp()
+const util = require('../../utils/util_wenda');
+let config = require('../../config');
+
 const {
   Report
 } = require('../../utils/Class')
@@ -145,28 +148,46 @@ Page({
       "imglist": self.data.images
     }
     // console.info(params)
-    Report.create(params).then(res => {
+
+
+    util.request({
+      url: config.apiUrl + Report,
+      autoHideLoading: false,
+      data: params,
+      method: "POST",
+      withSessionKey: true
+    }, this.submit).then(res => {
+
+      // if (res.result == 0) {
+    // Report.create(params).then(res => {
       // console.info(res)
       if (res) {
         let _txt = ''
         let _icon = ''
         if (res.result == 0) {
-          _txt = '举报成功'
+          _txt = '举报成功' 
           _icon: 'success'
           setTimeout(() => {
             wx.navigateBack({
               delta: 2,
             });
           }, 2000);
-        } else {
-          _icon = 'none'
-          _txt = res.msg
-        }
         wx.showToast({
           title: _txt,
           icon: _icon,
           duration: 2000
         })
+        }else if(res.result==999){
+      
+        } else {
+          _icon = 'none'
+          _txt = res.msg
+          wx.showToast({
+            title: _txt,
+            icon: _icon,
+            duration: 2000
+          })
+        }
       } 
 
     })

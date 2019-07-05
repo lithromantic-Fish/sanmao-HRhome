@@ -53,36 +53,50 @@ Component({
           iv: opts.iv
         }
       }
+      wx.checkSession({
+        success() {
+          //session_key 未过期，并且在本生命周期一直有效
+          console.log("session未过期")
+
+          util.request({
+            url: config.apiUrl + '/hr/special/wxapp/autoRegister',
+            data: data,
+            autoHideLoading: false,
+
+            method: "POST",
+            withSessionKey: true
+          }).then(res => {
+
+            if (res.result == 0) {
+              util._setStorageSync('isLogin', 1)
+              self.triggerEvent('getPhoneInfo', {
+                isLogin: true
+              })
+              //授权后重新获取详情页数据
+              // this.getCommentList();
+              // this.getIndexData();
+              // util.runFn(self.getInitData)
+            } else {
+              wx.showToast({
+                title: res.msg,
+                icon: 'none'
+              })
+            }
+
+          })
+        },
+        fail() {
+          console.log("session过期")
+
+          util.updateSessionKeyApi().then(res=>{
+            this._confirmEvent()
+          })
+          // session_key 已经失效，需要重新执行登录流程
+          // wx.login() //重新登录
+        }
+      })
       // console.info('opts', opts)
 
-      util.request({
-        url: config.apiUrl + '/hr/special/wxapp/autoRegister',
-        data: data,
-        autoHideLoading: false,
-
-        method: "POST",
-        withSessionKey: true
-      }).then(res => {
-
-        if (res.result == 0) {
-          util._setStorageSync('isLogin', 1)
-          self.triggerEvent('getPhoneInfo', {
-            isLogin: true
-          })
-          //授权后重新获取详情页数据
-          // this.getCommentList();
-          // this.getIndexData();
-          // util.runFn(self.getInitData)
-        } else {
-          wx.showToast({
-            title: res.msg,
-            icon: 'none'
-          })
-        }
-     
-
-
-      })
     },
 
     onGotUserInfo(e) {//获取用户信息

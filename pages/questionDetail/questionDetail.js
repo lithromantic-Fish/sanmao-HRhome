@@ -4,6 +4,7 @@ let config = require('../../config');
 // WxParse
 var WxParse = require('../../wxParse/wxParse.js');
 const login = require('../../utils/login.js')
+const app = getApp()
 
 Page({
 
@@ -19,7 +20,7 @@ Page({
     questesId: null,     //问题id
     plList: [],          //评论数组
     voiceStatus: {},       //子组件传值---语音播放状态
-    master_status:null    //答主状态
+    master_status:null,    //答主状态
   },
 
   /**
@@ -34,11 +35,25 @@ Page({
     } else {
       console.log("请传入questionId")
     }
-    this.getIndexData()
-  },
 
+    this.getIndexData()
+
+  },
+  pageLifetimes: {
+    show: function () {
+      
+      // 页面被展示
+    },
+    hide: function () {
+      // 页面被隐藏
+    },
+    resize: function (size) {
+      // 页面尺寸变化
+    }
+  },
   //关注问题
   followQ(e) {
+  
     let start = e.currentTarget.dataset.start
     wx.showLoading({
       title: '加载中...',
@@ -125,7 +140,8 @@ Page({
    */
   onShow: function () {
     this.setData({
-      isLogin: util._getStorageSync('isLogin') == 1 ? true : false
+      isLogin: util._getStorageSync('isLogin') == 1 ? true : false,
+        myCard: wx.getStorageSync('card') || app.globalData.card
     })
     this.getCommentList();
     this.getIndexData();
@@ -144,7 +160,6 @@ Page({
         url: '/pages/login/login'
       })
     }
-
   },
   //回到首页
   toIndex(){
@@ -328,6 +343,12 @@ Page({
 
   //音频回答
   toVoiceAnswer() {
+    if (!this.data.myCard) {
+      console.log("没有名片")
+      this.noCard();
+      return
+
+    }
     wx.navigateTo({
       url: '/pages/answerQuesion/answerQuesion?questionId=' + this.data.questesId + '&view_count=' + this.data.thread.view_count + '&master_status=' + this.data.master_status,
     })
@@ -335,11 +356,30 @@ Page({
 
   //文字回答
   toTextAnswer() {
+    if (!this.data.myCard) {
+      console.log("没有名片")
+      this.noCard();
+      return
+
+    }
     wx.navigateTo({
       url: "/pages/answerQuesionText/answerQuesionText?questionId=" + this.data.questesId + '&master_status=' + this.data.master_status,
     })
   },
-
+  //没有名片
+  noCard() {
+    wx.showModal({
+      title: '提示',
+      content: '您还没有名片，是否立即前往',//已埋登录
+      success: res => {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: '../cards/makeCard',
+          })
+        }
+      }
+    })
+  },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
